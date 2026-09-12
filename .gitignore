@@ -1,0 +1,143 @@
+# ══════════════════════════════════════════════════════════════════
+# ECG Forecasting — .gitignore (Repositorio Principal / Raíz)
+# ══════════════════════════════════════════════════════════════════
+
+# ── Documentación, Artículos y Backups Markdown ──────────────────
+# Ignora todos los archivos .md (tesis, borradores, auditorías, notas) excepto el README principal
+*.md
+!README.md
+
+# ── Documentos Ofimáticos y Formatos de Texto ────────────────────
+*.docx
+*.doc
+*.docm
+*.dotx
+*.odt
+*.rtf
+*.pdf
+*.xlsx
+*.xls
+*.pptx
+*.ppt
+
+# Archivos temporales y de bloqueo de Microsoft Office
+~$*
+~WRL*.tmp
+*.tmp
+
+# ── Carpetas de Gestión y Documentos Específicos ─────────────────
+documentos/
+Documentos/
+reportes/
+Reportes/
+scripts/
+Scripts/
+
+# Inscripción / Semilleros (cubre variaciones con o sin tilde/mayúsculas/errores tipográficos)
+Inscripcion semilleros/
+inscripcion semilleros/
+incripcion semilleros/
+Inscripción semilleros/
+inscripción semilleros/
+incripción semilleros/
+
+# Correcciones y revisiones
+Correciones/
+correciones/
+correccion/
+correcciones/
+correcion/
+Correcciones/
+
+# ── Datos Médicos y Señales (Demasiado pesados para Git) ──────────
+# OJO: La carpeta local se llama "datos" (no solo data)
+datos/
+data/
+*.dat
+*.atr
+*.hea
+*.xws
+
+# Archivos comprimidos de datos o backups masivos
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.tar
+*.gz
+
+# ── Modelos Entrenados y Checkpoints (ML / DL) ───────────────────
+# Modelos pesados (.keras, .h5, .joblib, etc.)
+*.keras
+*.h5
+*.hdf5
+*.joblib
+*.pkl
+*.pickle
+*.pt
+*.pth
+*.onnx
+
+# Carpetas y checkpoints de resultados (la carpeta results de la raíz pesa ~3GB y no debe subirse a Git)
+/results/
+results/**/modelos/
+results/**/models/
+results/**/*.tar.gz
+results/**/checkpoint*.csv
+results/**/tensorboard/
+
+# ── Entornos Virtuales y Dependencias ────────────────────────────
+.venv/
+.venv*/
+venv/
+env/
+ENV/
+node_modules/
+.vite/
+.npm/
+
+# ── Python / Jupyter / Compilación ───────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Scripts auxiliares temporales
+_update_nbs.py
+_logo_b64.txt
+
+# ── Variables de Entorno y Secretos ──────────────────────────────
+.env
+.env.*
+*.pem
+*.key
+*.cert
+
+# ── Registros y Logs ─────────────────────────────────────────────
+*.log
+docker_logs.txt
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── IDEs, Editores y Asistentes IA ───────────────────────────────
+.vscode/
+.idea/
+.copilot/
+.claude/
+Skill/
+*.swp
+*.swo
+*~
+
+# ── Archivos del Sistema Operativo ───────────────────────────────
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini

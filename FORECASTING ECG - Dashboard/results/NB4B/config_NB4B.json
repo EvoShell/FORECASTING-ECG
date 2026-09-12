@@ -1,0 +1,55 @@
+{
+  "notebook": "04B_segmentos_60s.ipynb",
+  "fecha": "2026-03-26",
+  "seed": 42,
+  "fs": 360,
+  "duracion_seg": 60,
+  "beat_len": 256,
+  "n_lookback": 5,
+  "prop_train": 0.8,
+  "n_reps": 1,
+  "n_pacientes": 48,
+  "filtros": [
+    "F_N+PB+MED",
+    "F_N+MED",
+    "F_MED"
+  ],
+  "modelos_dl": [
+    "GRU",
+    "LSTM",
+    "CNN-LSTM",
+    "CNN-GRU"
+  ],
+  "modelos_trad": [
+    "RF",
+    "MLP"
+  ],
+  "dl_epochs": 100,
+  "dl_batch_size": 32,
+  "dl_lr": 0.001,
+  "dl_l2_reg": 0.0001,
+  "dl_dropout": 0.2,
+  "dl_patience_es": 15,
+  "rf_config": "n_estimators=30, max_depth=10, max_features=sqrt, min_samples_leaf=2 (idéntico a NB1)",
+  "mlp_config": "hidden_layer_sizes=(128,64), max_iter=300, early_stopping=True, validation_fraction=0.15 (idéntico a NB1)",
+  "nota_asesor": "El modelo no debe memorizar a un solo paciente, sino aprender patrones generales y robustos",
+  "enfoque": "Pool intra-paciente: split temporal 80/20 por paciente, todos contribuyen a train y test",
+  "inferencia": "Para usar modelos en nuevos pacientes: cargar modelo + norm_{filtro}.json (mu/std), aplicar mismo filtro y pipeline de latidos",
+  "criterio_modelos": {
+    "DL_top3_NB2": {
+      "GRU": 0.6603,
+      "LSTM": 0.6584,
+      "CNN-LSTM": 0.6559
+    },
+    "DL_4_NB2": {
+      "GRU": 0.6603,
+      "LSTM": 0.6584,
+      "CNN-LSTM": 0.6559,
+      "CNN-GRU": 0.6524
+    },
+    "Trad_2_NB1": {
+      "RF": 0.6264,
+      "MLP": "NB1"
+    }
+  }
+}

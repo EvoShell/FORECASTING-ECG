@@ -1,0 +1,134 @@
+====================================================
+  FORECASTING ECG — CÓMO EJECUTAR EL DASHBOARD
+====================================================
+
+Actualizado el 8 de septiembre de 2026, tras la revisión completa.
+Las instrucciones anteriores nombraban carpetas de modelos que no existen
+(results/NB4B/modelos y results/NB5B/modelos). La única que existe, y la que
+usa el sistema, es results/NB5/modelos.
+
+
+────────────────────────────────────────────────────
+  OPCIÓN 1 — SOLO EL FRONTEND  (lo más rápido)
+────────────────────────────────────────────────────
+
+Es lo que se necesita para revisar el dashboard. Todas las páginas salvo
+«Predicción LOPO» leen sus datos de archivos y no necesitan backend.
+
+    cd "D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react"
+    npm install          (solo la primera vez)
+    npm run dev
+
+Abrir:  http://localhost:5173
+
+La página de Predicción LOPO funcionará también, porque ecg-react\.env.local
+apunta al servicio ya desplegado. Ese servicio se duerme por inactividad: la
+primera petición puede tardar más de 25 segundos. Conviene despertarlo antes
+de una demostración abriendo esta dirección en el navegador:
+
+    https://evoshell-api-ecg-forecasting.hf.space/api/health
+
+Debe responder  {"status":"healthy","models_loaded":1}
+
+
+────────────────────────────────────────────────────
+  OPCIÓN 2 — TODO EN LOCAL CON DOCKER
+────────────────────────────────────────────────────
+
+Necesario solo si se quiere el backend corriendo en la propia máquina.
+
+  1. Comentar la primera línea de ecg-react\.env.local y descomentar la de
+     localhost, o dejar la variable sin definir (ver el propio archivo).
+
+  2. Levantar los dos servicios:
+
+        cd "D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg_forecast_api"
+        docker compose up --build
+
+     La primera vez tarda entre 5 y 10 minutos: descarga TensorFlow.
+
+  3. Esperar a ver en la terminal:
+
+        api-1  | INFO:  Uvicorn running on http://0.0.0.0:8000
+        api-1  | INFO:  Application startup complete.
+
+  4. Abrir  http://localhost   (el frontend va en el puerto 80)
+
+Para reconstruir solo una parte:
+
+    docker compose up frontend --build -d     (cambios en React)
+    docker compose up api --build -d          (cambios en Python)
+
+Para detener:  Ctrl+C, o bien  docker compose down
+
+
+────────────────────────────────────────────────────
+  COMPROBAR QUE TODO FUNCIONA
+────────────────────────────────────────────────────
+
+  http://localhost                     interfaz
+  http://localhost:8000/docs           documentación interactiva de la API
+  http://localhost:8000/api/health     debe responder {"status":"healthy",...}
+
+Recorrido corto de revisión, una vez abierta la interfaz:
+
+  Inicio            los hallazgos deben leerse; R² del modelo final = 0.6734
+  Modelos           ficha de CNN_GRU_ATTN con R² 0.6734 ± 0.2825
+  Experimentos      los títulos «Hallazgos Principales» deben verse
+  Cohorte y método  página nueva: dispersión de los 123 pacientes y NB7
+  Predicción LOPO   la demo en vivo; necesita el servicio despierto
+  Explorador        gráficas Plotly, que ya no dependen de internet
+
+
+────────────────────────────────────────────────────
+  REQUISITOS
+────────────────────────────────────────────────────
+
+Opción 1:  Node.js 20 o superior  (probado con Node 24.12 y npm 11.6)
+Opción 2:  Docker Desktop en ejecución, con WSL 2 en Windows.
+           Al menos 6 GB de RAM libres.
+
+
+────────────────────────────────────────────────────
+  ESTRUCTURA
+────────────────────────────────────────────────────
+
+  ecg-react/            frontend React     (dev: 5173, Docker: 80)
+  ecg-react/public/data CSV y figuras que consumen las páginas
+  ecg_forecast_api/     backend FastAPI    (8000)
+  results/NB5/modelos/  el modelo final CNN_GRU_ATTN, que monta Docker
+  datos/mit-bih/        registros MIT-BIH  (los usa el backend en caliente)
+  datos/incart/         registros INCART
+
+
+────────────────────────────────────────────────────
+  PROBLEMAS FRECUENTES
+────────────────────────────────────────────────────
+
+1. «Port 80 already in use»
+   Editar docker-compose.yml:  ports: - "80:80"  →  - "3000:80"
+   y abrir http://localhost:3000
+
+2. «Cannot connect to Docker daemon»
+   Docker Desktop no está iniciado.
+
+3. La página de Predicción LOPO da error de conexión
+   El servicio desplegado estaba dormido. Abrir la dirección /api/health,
+   esperar a que responda, y recargar.
+
+4. Una página muestra «El archivo … no existe»
+   Falta un CSV en ecg-react/public/data. El mensaje dice cuál. Antes esto
+   pasaba en silencio y se dibujaban datos inventados; ahora se avisa.
+
+5. Error 500 al predecir
+   Comprobar que existe results/NB5/modelos/CNN_GRU_ATTN_final_patched.keras
+
+
+────────────────────────────────────────────────────
+  PRUEBAS DEL BACKEND
+────────────────────────────────────────────────────
+
+Requieren TensorFlow, que no está en los entornos locales de este equipo.
+Dentro del contenedor:
+
+    docker compose exec api python -m pytest tests -q

@@ -1,0 +1,83 @@
+{
+  "version": "2.3",
+  "fecha": "2026-03-28T19:44:35.141734",
+  "notebook": "NB1_Tradicionales",
+  "formulacion_ExpA": {
+    "tipo": "multi-step-direct (Seq-to-Seq)",
+    "entrada_L_seg": 5,
+    "entrada_L_muestras": 1800,
+    "horizontes_seg": [
+      1,
+      3,
+      5
+    ],
+    "horizontes_muestras": [
+      360,
+      1080,
+      1800
+    ],
+    "nota": "Corregido de one-step-ahead (trivial) a multi-step (clínicamente útil)"
+  },
+  "formulacion_ExpB": {
+    "tipo": "one-beat-ahead",
+    "lookbacks": [
+      3,
+      5,
+      10
+    ],
+    "beat_len": 256
+  },
+  "guardado_modelos": {
+    "estrategia": "1 modelo por paciente (mejor R² entre filtros/horizontes/lookbacks)",
+    "formato": "joblib LZMA-3",
+    "patron_A": "ganador_A_pac{pid}_NB1.joblib",
+    "patron_B": "ganador_B_pac{pid}_NB1.joblib",
+    "patron_global": "ganador_ExpA_NB1.joblib / ganador_ExpB_NB1.joblib (para visualización)"
+  },
+  "correcciones": [
+    "Formulación multi-step directo Seq-to-Seq (corrige one-step-ahead)",
+    "R2_train y R2_test reportados",
+    "6 modelos: LinReg, DT, RF, SVR_rbf, MLP, ARIMA (sin Persistencia)",
+    "Media ± std en todas las tablas",
+    "Graficas de bigotes por modelo",
+    "Exp A (multi-step) + Exp B (latidos)",
+    "Visualizacion predicción multi-step: historia → futuro",
+    "48 pacientes MIT-BIH",
+    "1 modelo por paciente (científicamente válido) + 1 global (para visualización)",
+    "SVR envuelto en MultiOutputRegressor para multi-step",
+    "ARIMA multi-step: forecast H pasos directamente",
+    "zscore: std = max(std, 1e-8) para evitar división por cero",
+    "SVR_rbf en Exp B predice escalar (1 muestra), no vector 256 — no comparar con RF/DT/MLP"
+  ],
+  "ExpA": {
+    "mejor_filtro": "F_N+PB+MED",
+    "mejor_horizonte": 1,
+    "mejor_modelo": "RF",
+    "r2_test": 0.3471
+  },
+  "para_NB2": {
+    "filtros_a_usar": [
+      "F_N+MED",
+      "F_MED",
+      "F_N+PB+MED"
+    ],
+    "horizontes_a_usar": [
+      1,
+      3,
+      5
+    ],
+    "lookbacks_a_usar": [
+      3,
+      5,
+      10
+    ],
+    "beat_len": 256
+  },
+  "ExpB": {
+    "mejor_filtro": "F_N+MED",
+    "mejor_lookback": 3,
+    "mejor_modelo": "SVR_rbf",
+    "r2_test": 0.8413,
+    "nota": "SVR_rbf predice escalar (1 muestra); RF predice vector 256 — comparación justa solo entre RF/DT/MLP"
+  }
+}

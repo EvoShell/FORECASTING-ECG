@@ -1,0 +1,533 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Sistema de color — dashboard de tesis, predicción de arritmias en ECG.
+
+   Todos los ratios están verificados con la fórmula de luminancia relativa
+   de WCAG 2.1, no estimados. El mínimo del sistema es 5.15:1 en el tema
+   claro y 4.90:1 en el oscuro, medidos sobre la superficie más profunda en
+   la que cada color puede aparecer.
+
+   Criterios: neutros de matiz frío y saturación baja, para que no compitan
+   con el dato; UN SOLO acento institucional, que identifica pero no codifica
+   valor; semánticos con otro matiz, reservados a umbrales declarados en la
+   tesis; y serie categórica Okabe-Ito, diseñada para daltonismo.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Neutros ─────────────────────────────────────────────────────── */
+  --bg: #0E1116;
+  --surface: #161A20;
+  --surface-2: #1D222A;
+  --elevated: #1D222A;          /* alias heredado de --surface-2        */
+  --border: #2A303A;
+  --border-strong: #5B6673;     /* 3.24:1 — límites con significado     */
+
+  /* ── Texto: tres niveles, todos ≥ 4.5:1 sobre --surface-2 ────────── */
+  --text: #E6E9ED;              /* 15.53 */
+  --text-sub: #AEB6C0;          /*  9.23 */
+  --text-muted: #8C96A2;        /*  6.30 */
+
+  /* ── Acento institucional. Uno solo. ─────────────────────────────── */
+  --accent: #7CB3EC;            /*  8.57 */
+  --on-accent: #0B0E13;         /*  8.76 sobre --accent            */
+  --accent-bg: #202934;         /* --text encima = 12.07 */
+  --accent-tint: #202934;
+  --accent-border: #3E5F86;
+
+  /* ── Semánticos. Solo con umbral declarado. ──────────────────────── */
+  --ok: #5CC08B;                /*  8.44 */
+  --warn: #DDA83C;              /*  8.77 */
+  --crit: #F08A82;              /*  7.80 */
+  --alert: #F08A82;             /* alias heredado de --crit             */
+  --ok-tint: #16241D;
+  --warn-tint: #262016;
+  --crit-tint: #2A1A19;
+
+  /* ── Serie categórica: Okabe-Ito aclarado para fondo oscuro ──────── */
+  --cat-1: #4DA3DD;  --cat-2: #F2B03D;  --cat-3: #3FBE94;  --cat-4: #E39ABF;
+  --cat-5: #F0763A;  --cat-6: #7FC7F0;  --cat-7: #EDE05F;  --cat-8: #A0A6AD;
+  --serie-1: var(--cat-1);  --serie-2: var(--cat-2);
+  --serie-3: var(--cat-3);  --serie-4: var(--cat-4);
+  --serie-5: var(--cat-5);  --serie-6: var(--cat-6);
+  --serie-7: var(--cat-7);  --serie-8: var(--cat-8);
+
+  /* ── Roles de dominio, derivados de la serie. No se inventan colores. */
+  --signal: var(--cat-1);       /* señal observada     */
+  --prediction: var(--cat-2);   /* predicción          */
+  --qrs: var(--cat-5);          /* complejo QRS        */
+  --model-cnngru: var(--cat-1);
+  --model-gru: var(--cat-2);
+  --model-lstm: var(--cat-3);
+  --model-base: var(--cat-8);   /* persistencia        */
+
+  /* ── Geometría ───────────────────────────────────────────────────── */
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+
+  /* ── Espaciado: escala de 4 px, ocho pasos ───────────────────────── */
+  --sp-1: 4px;   --sp-2: 8px;   --sp-3: 12px;  --sp-4: 16px;
+  --sp-5: 24px;  --sp-6: 32px;  --sp-7: 48px;  --sp-8: 64px;
+
+  /* ── Tipografía ──────────────────────────────────────────────────── */
+  --font-display: 'Figtree', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-section: 'Figtree', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-body: 'Noto Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-data: 'DM Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
+
+  /* Escala de nueve pasos. Suelo duro de 11 px: por debajo no se lee
+     proyectado. Antes había 43 tamaños distintos en 577 usos. */
+  --fs-3xs: 0.6875rem;   /* 11 px — unidades, procedencia del dato      */
+  --fs-2xs: 0.75rem;     /* 12 px — pies, n, intervalos                 */
+  --fs-xs: 0.8125rem;    /* 13 px — celdas de tabla, dispersión         */
+  --fs-sm: 0.9375rem;    /* 15 px — texto corrido                       */
+  --fs-base: 1.0625rem;  /* 17 px — entradilla                          */
+  --fs-md: 1.125rem;     /* 18 px                                       */
+  --fs-lg: 1.375rem;     /* 22 px — cifra de métrica y título de sección */
+  --fs-xl: 1.75rem;      /* 28 px — título de página                    */
+  --fs-display: 2.25rem; /* 36 px — solo la portada                     */
+
+  --lh-tight: 1.15;
+  --lh-data: 1.3;
+  --lh-body: 1.6;
+  --measure: 68ch;
+
+  /* ── Sombra: una sola y mínima. Nada flota. ──────────────────────── */
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --glass-bg: var(--surface);
+  --glass-border: var(--border);
+  --glass-border-hover: var(--border-strong);
+  --glass-blur: none;
+  --glass-shadow: var(--shadow);
+  --pulse-color: rgba(124, 179, 236, 0.35);
+}
+
+:root[data-theme='light'] {
+  --bg: #FFFFFF;
+  --surface: #F6F7F9;
+  --surface-2: #EDEFF2;
+  --elevated: #EDEFF2;
+  --border: #DCE0E6;
+  --border-strong: #8A93A0;     /* 3.11:1 */
+
+  --text: #1A1D23;              /* 16.88 */
+  --text-sub: #3F4650;          /*  9.53 */
+  --text-muted: #5B6470;        /*  6.00 */
+
+  --accent: #12467F;            /*  9.51 */
+  --on-accent: #FFFFFF;         /*  9.51 sobre --accent            */
+  --accent-bg: #EAF1FA;
+  --accent-tint: #EAF1FA;
+  --accent-border: #9DBCE0;
+
+  --ok: #155F3E;                /*  7.67 */
+  --warn: #8A5A00;              /*  5.93 */
+  --crit: #A3231B;              /*  7.46 */
+  --alert: #A3231B;
+  --ok-tint: #E8F3EC;
+  --warn-tint: #F7F0E2;
+  --crit-tint: #F9EAE8;
+
+  /* Okabe-Ito oscurecido: el puro no llega a 3:1 sobre blanco
+     (naranja 2.25, cielo 2.31, amarillo 1.32). */
+  --cat-1: #005B8F;  --cat-2: #8A5F00;  --cat-3: #00795A;  --cat-4: #A85486;
+  --cat-5: #A84A00;  --cat-6: #1E6FA8;  --cat-7: #7A6A00;  --cat-8: #4D4D4D;
+
+  --shadow: 0 1px 2px rgba(26, 29, 35, 0.08);
+  --glass-shadow: var(--shadow);
+  --pulse-color: rgba(18, 70, 127, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  /* Animated-looking mesh gradient for a high-end feel */
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(6, 182, 212, 0.07) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.07) 0px, transparent 50%),
+    radial-gradient(rgba(59, 130, 246, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 28px 28px;
+  background-attachment: fixed;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+:root[data-theme='light'] body {
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(8, 145, 178, 0.04) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(37, 99, 235, 0.04) 0px, transparent 50%),
+    radial-gradient(rgba(37, 99, 235, 0.015) 1px, transparent 1px);
+}
+
+/* ─── Scrollbar ─────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ─── Card estándar (Glassmorphic) ──────────────── */
+.card, .glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--glass-shadow);
+  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover, .glass-card:hover {
+  border-color: var(--glass-border-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
+  background: rgba(16, 28, 54, 0.7);
+}
+
+:root[data-theme='light'] .card:hover,
+:root[data-theme='light'] .glass-card:hover {
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--glass-shadow);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+/* ─── Eyebrow label ─────────────────────────────── */
+.eyebrow {
+  font-family: var(--font-data);
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-sub);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.eyebrow::before,
+.eyebrow::after {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: currentColor;
+}
+
+/* ─── Indicadores de espera ───────────────── */
+/* Estas dos animaciones se usaban en Lopo y Experimentos sin estar definidas,
+   de modo que el anillo de carga no giraba y el punto de estado no parpadeaba:
+   la interfaz parecia congelada durante los hasta 40 s del tiempo de espera. */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.35; }
+}
+
+.loading-spinner {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  animation: spin 0.9s linear infinite;
+}
+
+/* Sin movimiento, un anillo detenido no informa de nada: se sustituye por un
+   latido de opacidad, que el ajuste de movimiento reducido tambien atenua pero
+   deja legible junto al texto «Cargando…». */
+@media (prefers-reduced-motion: reduce) {
+  .loading-spinner {
+    border-top-color: var(--border);
+    border-color: var(--accent);
+    opacity: 0.6;
+  }
+}
+
+/* ─── Pulse animation (Healthcare pulse) ───────── */
+@keyframes heart-pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 var(--pulse-color);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(6, 182, 212, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(6, 182, 212, 0);
+    opacity: 0.8;
+  }
+}
+
+.pulse-indicator {
+  animation: heart-pulse 2s infinite ease-in-out;
+}
+
+/* ─── Alert ring animation ──────────────────────── */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.alert-pulse {
+  position: relative;
+}
+
+.alert-pulse::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background: var(--alert);
+  animation: pulse-ring 1.8s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  z-index: -1;
+}
+
+/* ─── Metric counter animation ──────────────────── */
+@keyframes count-up {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── ECG line glow (Deep healthcare feel) ──────── */
+.ecg-glow-green {
+  filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.6));
+}
+
+.ecg-glow-blue {
+  filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.6));
+}
+
+/* ─── Responsive Utilities ──────────────────────── */
+.grid-layout-2,
+.grid-layout-3,
+.grid-layout-auto {
+  display: grid;
+  gap: 20px;
+}
+
+.grid-layout-2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid-layout-3 {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.grid-layout-auto {
+  grid-template-columns: 3fr 2fr;
+}
+
+.grid-layout-pred {
+  grid-template-columns: 1fr 340px;
+}
+
+.flex-row-responsive {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 900px) {
+  .grid-layout-pred {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-layout-2,
+  .grid-layout-3,
+  .grid-layout-auto {
+    grid-template-columns: 1fr;
+  }
+
+  .flex-row-responsive {
+    flex-direction: column;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Accesibilidad. Antes no habia ninguna regla de foco visible en todo el
+   proyecto, y ninguna consideracion de movimiento reducido pese a haber dos
+   shaders WebGL, seis textos animados y un lienzo corriendo a la vez.
+   ───────────────────────────────────────────────────────────────────────── */
+
+:where(a, button, [role="button"], input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent-border, var(--signal));
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Las tablas anchas se desplazan dentro de su contenedor; la pagina nunca
+   se desplaza en horizontal. */
+.tabla-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   Cifras tabulares en todo el documento: sin esto las columnas de
+   números no cuadran y la comparación visual falla.
+   ───────────────────────────────────────────────────────────────────── */
+table, .num, .kpi-value, code, kbd, samp, time, [data-num] {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+}
+
+/* Un jurado lo lee proyectado. A partir de 1600 px la raíz sube, y con
+   ella toda la escala, sin tocar un solo componente. */
+@media (min-width: 1600px) { :root { font-size: 17px; } }
+@media (min-width: 2200px) { :root { font-size: 18px; } }
+
+/* Ancho de línea del texto corrido. Más de 75 caracteres cansa. */
+.medida { max-width: var(--measure); }
+
+/* ─── Boton comun ─────────────────────────────── */
+/* Los estados viven aqui y no en el componente porque `:hover`, `:active` y
+   `:focus-visible` no se pueden expresar con estilos en linea. */
+
+.btn-app:not(:disabled):hover {
+  filter: brightness(1.08);
+}
+
+:root[data-theme='light'] .btn-app:not(:disabled):hover {
+  filter: brightness(0.94);
+}
+
+.btn-app[data-variante='sutil']:not(:disabled):hover {
+  background: var(--surface-2);
+  color: var(--text);
+  filter: none;
+}
+
+.btn-app:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+/* El anillo de foco solo aparece con teclado, que es donde hace falta. */
+.btn-app:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Indicador de espera dentro del boton. */
+.btn-anillo {
+  width: 0.95em;
+  height: 0.95em;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  animation: spin 0.8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-app:not(:disabled):active { transform: none; }
+}
+
+/* ─── Base comun de todos los botones ───────────────── */
+/* No todos los botones de la aplicacion pasan por el componente `Boton`: los de la
+   barra lateral, la galeria de imagenes y varias pestanas llevan un dibujo propio
+   justificado. Lo que si debe ser igual en todos es el comportamiento: el mismo
+   anillo de foco, la misma pulsacion, el mismo estado deshabilitado y la misma
+   familia tipografica. Eso se fija aqui, sin tocar sus colores. */
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease,
+              opacity 0.15s ease;
+  /* Area de pulsacion minima recomendada para raton y dedo. */
+  min-height: 30px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+button:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+/* Un solo anillo de foco en toda la aplicacion, y solo con teclado. */
+button:focus-visible,
+a:focus-visible,
+select:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Los campos de texto y los desplegables compartian el borde de reposo pero no
+   tenian ningun estado de foco propio: al tabular no se sabia donde se estaba. */
+input:focus,
+select:focus {
+  border-color: var(--accent-border);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button:not(:disabled):active { transform: none; }
+}

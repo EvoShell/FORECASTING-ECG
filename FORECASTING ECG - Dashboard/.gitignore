@@ -1,0 +1,67 @@
+# ══════════════════════════════════════════════════════════════════
+# ECG Forecasting — .gitignore
+# ══════════════════════════════════════════════════════════════════
+
+# ── Registros de PhysioNet (demasiado pesados para GitHub) ───────
+# OJO: la carpeta se llama "datos", no "data". La regla anterior decia data/
+# y nunca coincidio: 884 MB de senales acabaron versionados.
+datos/
+data/mit-bih/*.dat
+data/mit-bih/*.atr
+data/mit-bih/*.hea
+
+# ── Registros de ejecucion ───────────────────────────────────────
+*.log
+docker_logs.txt
+
+# ── PDFs ─────────────────────────────────────────────────────────
+docs/*.pdf
+
+# ── Modelos entrenados (.joblib / .h5 / .keras) ─────────────────
+results/**/modelos/
+results/**/models/
+*.joblib
+*.h5
+*.keras
+*.pkl
+
+# ── Comprimidos de modelos ───────────────────────────────────────
+results/**/*.tar.gz
+
+# ── Checkpoints intermedios ──────────────────────────────────────
+results/**/checkpoint*.csv
+
+# ── Legacy (versiones anteriores) ────────────────────────────────
+legacy/
+
+# ── Copilot / IDE ────────────────────────────────────────────────
+Skill/
+.copilot/
+.vscode/
+.idea/
+
+# ── Python / Jupyter ─────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+*.egg-info/
+dist/
+build/
+
+# ── Archivos temporales de scripts ───────────────────────────────
+_update_nbs.py
+_logo_b64.txt
+
+# ── OS ───────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+~$*
+~WRL*.tmp
+*.docx
+*.doc
+node_modules/
+dist/
+.venv*

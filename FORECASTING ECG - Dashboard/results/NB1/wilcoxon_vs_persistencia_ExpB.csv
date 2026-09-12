@@ -1,0 +1,6 @@
+Modelo,ΔR²_vs_Persistencia,W_stat,p_valor,Significativo
+DT,0.378,49.0,0.0,✓
+LinReg,-2963811249.7129,0.0,0.0,✓
+MLP,0.5089,9.0,0.0,✓
+RF,0.5524,5.0,0.0,✓
+SVR_rbf,0.5714,72.0,0.0,✓

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ECG Forecast Dashboard</title>
+
+    <!-- Tipografias.
+         Antes se pedian con @import desde el CSS critico, lo que encadenaba tres
+         viajes (CSS -> googleapis -> gstatic) ANTES del primer pixel: entre 300 y
+         800 ms de retraso. Ahora se preconecta y se cargan sin bloquear: la pagina
+         se pinta con las alternativas del sistema y cambia al llegar. Sin red,
+         sigue siendo legible. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" /></noscript>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      /* Plotly se carga por modulos para que el paquete pese 1160 KB en vez de 4604.
+         Esos modulos son CommonJS y algunos referencian `global`, que en el navegador
+         no existe: sin esta linea, cualquier grafica cartesiana lanza
+         `ReferenceError: global is not defined` y la pagina deja de dibujarse entera.
+         Va aqui, y no en la configuracion, porque tiene que existir antes de que se
+         evalue el primer modulo y porque asi vale igual en desarrollo y en produccion. */
+      window.global = window.global || window;
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

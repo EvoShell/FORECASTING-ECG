@@ -1,0 +1,5 @@
+Modelo,ΔR²_media,W_stat,p_valor,Significativo
+CNN-GRU,0.9729,0.0,0.0,✓
+CNN-LSTM,0.9727,0.0,0.0,✓
+GRU,0.9833,0.0,0.0,✓
+LSTM,0.9636,0.0,0.0,✓

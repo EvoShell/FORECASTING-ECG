@@ -1,0 +1,16 @@
+
+El modelo CNN_GRU_ATTN demuestra un desempeño promedio de R² = 0.6734,
+lo que indica un nivel de capacidad predictiva catalogado como: BUENO (usable clínicamente).
+
+El error RMSE promedio es 0.51395, lo que sugiere un nivel de precisión
+limitado en la reconstrucción de la señal ECG.
+
+La estabilidad entre pacientes muestra una desviación de 0.2825,
+lo que indica un comportamiento variable.
+
+En términos de forecasting temporal, el modelo presenta una degradación de -0.0857,
+lo cual indica un comportamiento estable a múltiples pasos.
+
+
+En conjunto, el sistema puede considerarse
+APTO SOLO para investigación.

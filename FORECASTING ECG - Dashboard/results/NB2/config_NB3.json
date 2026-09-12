@@ -1,0 +1,36 @@
+{
+  "version": "2.4",
+  "fecha": "2026-03-28T20:49:17.449215",
+  "notebook": "NB2_DeepLearning",
+  "modelos_dl": [
+    "LSTM",
+    "GRU",
+    "CNN-LSTM",
+    "CNN-GRU"
+  ],
+  "guardado_modelos": {
+    "estrategia": "1 modelo por paciente + 1 ganador global",
+    "formato": ".keras",
+    "patron_archivos": "ganador_{A|B}_pac{pid}_NB2.keras + _metadata.json",
+    "n_pac_A": 48,
+    "n_pac_B": 48
+  },
+  "correcciones": [
+    "R2_train y R2_test reportados por separado",
+    "Baseline Persistencia incluido como referencia naive en ambos experimentos",
+    "Wilcoxon vs Persistencia (validación estadística DL > baseline)",
+    "Guardado por paciente: 1 modelo ganador por paciente + 1 global",
+    "LSTM, GRU, CNN-LSTM, CNN-GRU (4 modelos DL) + Persistencia (baseline)",
+    "DTW corregido: promedio por secuencia individual",
+    "48 pacientes MIT-BIH",
+    "Celda de reconstrucción para re-entrenar modelos faltantes desde CSV"
+  ],
+  "mejor_modelo_DL_A": "GRU",
+  "mejor_r2_DL_A": 0.2371,
+  "ganador_A_global": "/content/drive/MyDrive/FORECASTING ECG/results/NB2/modelos/ganador_A_global_NB2.keras",
+  "ganador_A_config": {},
+  "mejor_modelo_DL_B": "GRU",
+  "mejor_r2_DL_B": 0.6592,
+  "ganador_B_global": "/content/drive/MyDrive/FORECASTING ECG/results/NB2/modelos/ganador_B_global_NB2.keras",
+  "ganador_B_config": {}
+}
