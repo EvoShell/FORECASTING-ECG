@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 220" width="100%" height="220" role="img" aria-label="Animación: barrido de un electrocardiograma con el historial de 5 latidos más intervalo RR, pasando por el modelo CNN-GRU con atención, hacia el pronóstico de los 3 latidos futuros." style="background:#ffffff; border-radius:14px; border:1px solid #e2e8f0; box-shadow:0 4px 14px rgba(15,23,42,0.06);">
+  <style>
+    @keyframes sweepIn { 0% { stroke-dashoffset: 900; } 100% { stroke-dashoffset: 0; } }
+    @keyframes marchOut { to { stroke-dashoffset: -28; } }
+    @keyframes fadeSoft { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+    .ecg-in { stroke-dasharray: 900; animation: sweepIn 3.5s linear infinite; }
+    .ecg-out { stroke-dasharray: 8 6; animation: marchOut 1s linear infinite; }
+    .live-dot { animation: fadeSoft 2.4s ease-in-out infinite; }
+  </style>
+
+  <rect width="900" height="220" rx="14" fill="#ffffff"/>
+  <g stroke="#f1f5f9" stroke-width="1">
+    <line x1="50" y1="0" x2="50" y2="220"/><line x1="150" y1="0" x2="150" y2="220"/>
+    <line x1="250" y1="0" x2="250" y2="220"/><line x1="350" y1="0" x2="350" y2="220"/>
+    <line x1="450" y1="0" x2="450" y2="220"/><line x1="550" y1="0" x2="550" y2="220"/>
+    <line x1="650" y1="0" x2="650" y2="220"/><line x1="750" y1="0" x2="750" y2="220"/>
+    <line x1="850" y1="0" x2="850" y2="220"/>
+    <line x1="0" y1="55" x2="900" y2="55"/><line x1="0" y1="110" x2="900" y2="110"/><line x1="0" y1="165" x2="900" y2="165"/>
+  </g>
+
+  <g font-family="Segoe UI, -apple-system, Arial, sans-serif">
+    <!-- kicker -->
+    <g transform="translate(30, 36)">
+      <circle cx="6" cy="6" r="4" fill="#16a34a" class="live-dot"/>
+      <text x="16" y="10" fill="#1e40af" font-size="11" font-weight="700" letter-spacing="1.5">PRONÓSTICO EN TIEMPO REAL</text>
+    </g>
+
+    <!-- Stage 1: Input -->
+    <g transform="translate(50, 85)">
+      <rect width="180" height="26" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+      <text x="90" y="17" text-anchor="middle" fill="#1e40af" font-size="11" font-weight="700">Historial L = 5 Latidos + RR</text>
+    </g>
+
+    <!-- Stage 2: Model -->
+    <g transform="translate(345, 125)">
+      <rect width="210" height="28" rx="6" fill="#eef2ff" stroke="#c7d2fe" stroke-width="1"/>
+      <text x="105" y="18" text-anchor="middle" fill="#4338ca" font-size="12" font-weight="700">CNN-GRU + Atención (LOPO)</text>
+    </g>
+
+    <!-- Stage 3: Output -->
+    <g transform="translate(670, 85)">
+      <rect width="180" height="26" rx="6" fill="#fff1f2" stroke="#fecdd3" stroke-width="1"/>
+      <text x="90" y="17" text-anchor="middle" fill="#be123c" font-size="11" font-weight="700">Futuro H = 3 Latidos (256m)</text>
+    </g>
+
+    <!-- Historical ECG trace (solid, sweeps in) -->
+    <path d="M 30,150 L 70,150 Q 80,147 85,150 L 95,150 Q 100,135 105,150 L 115,150 L 120,165 L 128,85 L 138,185 L 145,150 L 155,150 Q 165,130 175,150 L 210,150 Q 220,147 225,150 L 235,150 Q 240,135 245,150 L 255,150 L 260,165 L 268,85 L 278,185 L 285,150 L 295,150 Q 305,130 315,150 L 350,150"
+        fill="none" stroke="#1d4ed8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ecg-in"/>
+
+    <!-- transition arrows -->
+    <g transform="translate(555, 140)" stroke="#94a3b8" stroke-width="2" fill="none" stroke-linecap="round">
+      <path d="M 0,0 L 40,0 M 32,-5 L 40,0 L 32,5"/>
+      <path d="M 0,0 L 75,0 M 67,-5 L 75,0 L 67,5" opacity="0.6"/>
+    </g>
+
+    <!-- Forecast ECG trace (dashed, marches forward) -->
+    <path d="M 640,150 L 665,150 Q 672,147 676,150 L 684,150 Q 688,137 692,150 L 700,150 L 704,163 L 711,92 L 719,180 L 725,150 L 733,150 Q 741,133 749,150 L 775,150 Q 782,147 786,150 L 794,150 Q 798,137 802,150 L 810,150 L 814,163 L 821,92 L 829,180 L 835,150 L 843,150 Q 851,133 859,150 L 870,150"
+        fill="none" stroke="#e11d48" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ecg-out"/>
+
+    <!-- footer captions -->
+    <g transform="translate(30, 200)">
+      <text x="0" y="8" fill="#64748b" font-size="9.5">Entrada: 5 latidos segmentados (256 muestras) + RR normalizado</text>
+      <text x="840" y="8" text-anchor="end" fill="#64748b" font-size="9.5">Pronóstico morfológico multi-step (H = 3)</text>
+    </g>
+  </g>
+</svg>

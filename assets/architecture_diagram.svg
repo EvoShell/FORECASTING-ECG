@@ -1,0 +1,199 @@
+<svg viewBox="0 0 1160 760" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arquitectura: el repositorio principal contiene notebooks, requirements y el dashboard. El dashboard es orquestado por Docker Compose, que levanta un backend FastAPI y un frontend React; el frontend llama al backend mediante peticiones HTTP a la ruta /api.">
+  <defs>
+    <filter id="ad-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="2.5" flood-color="#0f172a" flood-opacity="0.10"/>
+    </filter>
+    <marker id="ad-arrowNeutral" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="ad-arrowMuted" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="ad-arrowAmber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#d97706"/>
+    </marker>
+    <symbol id="ad-i-folder" viewBox="0 0 24 24">
+      <path d="M2,6.5 A2,2 0 0 1 4,4.5 H9.5 L11.7,7 H20 A2,2 0 0 1 22,9 V17.5 A2,2 0 0 1 20,19.5 H4 A2,2 0 0 1 2,17.5 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="ad-i-doc" viewBox="0 0 24 24">
+      <rect x="4" y="2" width="16" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M8,8 H16 M8,12 H16 M8,16 H13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ad-i-rocket" viewBox="0 0 24 24">
+      <path d="M12,2 C15.5,5.5 17,10.5 14.5,16.5 L9.5,16.5 C7,10.5 8.5,5.5 12,2 Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M9,14.5 L4.8,19.2 L9.3,17.3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+      <path d="M15,14.5 L19.2,19.2 L14.7,17.3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+      <circle cx="12" cy="9" r="1.9" fill="currentColor"/>
+    </symbol>
+    <symbol id="ad-i-container" viewBox="0 0 24 24">
+      <polygon points="12,2 21,7 21,17 12,22 3,17 3,7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M12,2 L12,22 M3,7 L12,12 L21,7" stroke="currentColor" stroke-width="1.1" fill="none"/>
+    </symbol>
+    <symbol id="ad-i-bolt" viewBox="0 0 24 24">
+      <polygon points="13,2 4,14 11,14 9,22 20,9 12,9" fill="currentColor"/>
+    </symbol>
+    <symbol id="ad-i-window" viewBox="0 0 24 24">
+      <rect x="2" y="4" width="20" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M2,9 H22" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="5.2" cy="6.5" r="0.8" fill="currentColor"/>
+      <circle cx="7.6" cy="6.5" r="0.8" fill="currentColor"/>
+      <circle cx="10" cy="6.5" r="0.8" fill="currentColor"/>
+    </symbol>
+    <symbol id="ad-i-layers" viewBox="0 0 24 24">
+      <rect x="4" y="4" width="16" height="4" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <rect x="4" y="10" width="16" height="4" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <rect x="4" y="16" width="16" height="4" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+    </symbol>
+    <symbol id="ad-i-route" viewBox="0 0 24 24">
+      <circle cx="4" cy="12" r="2" fill="currentColor"/>
+      <path d="M6,12 H12 M12,12 L18,5 M12,12 L18,12 M12,12 L18,19" stroke="currentColor" stroke-width="1.3" fill="none"/>
+      <circle cx="18" cy="5" r="1.6" fill="currentColor"/>
+      <circle cx="18" cy="12" r="1.6" fill="currentColor"/>
+      <circle cx="18" cy="19" r="1.6" fill="currentColor"/>
+    </symbol>
+    <symbol id="ad-i-check" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M8,12.5 L11,15.5 L16,9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="ad-i-chart" viewBox="0 0 24 24">
+      <path d="M2,21 L2,3 M2,21 L22,21" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      <polyline points="4,17 9,13 13,15 18,6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="18" cy="6" r="1.8" fill="currentColor"/>
+    </symbol>
+  </defs>
+
+  <rect x="1" y="1" width="1158" height="758" rx="20" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <g font-family="Segoe UI, -apple-system, Arial, sans-serif">
+    <rect x="36" y="24" width="290" height="24" rx="12" fill="#eff6ff" stroke="#bfdbfe"/>
+    <circle cx="52" cy="36" r="3.5" fill="#2563eb"/>
+    <text x="64" y="40" font-size="10.5" letter-spacing="1.5" fill="#1e40af">ECG FORECASTING · ARQUITECTURA</text>
+
+    <!-- Repo container -->
+    <g transform="translate(60,66)">
+      <rect width="1040" height="138" rx="14" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 4"/>
+      <circle cx="37" cy="35" r="17" fill="#eff6ff"/>
+      <use href="#ad-i-folder" x="26" y="24" width="22" height="22" color="#2563eb"/>
+      <text x="66" y="35" font-size="13" font-weight="700" fill="#0f172a">FORECASTING ECG</text>
+      <text x="66" y="51" font-size="10.5" fill="#64748b">Repositorio principal · Investigación (Git)</text>
+
+      <g filter="url(#ad-shadow)">
+        <rect x="20" y="76" width="320" height="46" rx="10" fill="#ffffff" stroke="#e2e8f0"/>
+        <use href="#ad-i-layers" x="32" y="88" width="20" height="20" color="#2563eb"/>
+        <text x="62" y="96" font-size="10.8" font-weight="700" fill="#0f172a" font-family="Consolas, Menlo, monospace">notebooks/</text>
+        <text x="62" y="111" font-size="9.2" fill="#64748b">NB1–NB8 · fases de investigación</text>
+
+        <rect x="360" y="76" width="320" height="46" rx="10" fill="#ffffff" stroke="#e2e8f0"/>
+        <use href="#ad-i-doc" x="372" y="88" width="20" height="20" color="#2563eb"/>
+        <text x="402" y="96" font-size="10.8" font-weight="700" fill="#0f172a" font-family="Consolas, Menlo, monospace">requirements.txt</text>
+        <text x="402" y="111" font-size="9.2" fill="#64748b">Dependencias Python</text>
+
+        <rect x="700" y="76" width="320" height="46" rx="10" fill="#ffffff" stroke="#e2e8f0"/>
+        <use href="#ad-i-doc" x="712" y="88" width="20" height="20" color="#2563eb"/>
+        <text x="742" y="96" font-size="10.8" font-weight="700" fill="#0f172a" font-family="Consolas, Menlo, monospace">README.md</text>
+        <text x="742" y="111" font-size="9.2" fill="#64748b">Documentación central</text>
+      </g>
+    </g>
+
+    <line x1="580" y1="204" x2="580" y2="242" stroke="#94a3b8" stroke-width="1.75" marker-end="url(#ad-arrowNeutral)"/>
+    <text x="598" y="228" font-size="9" font-style="italic" fill="#64748b">subcarpeta del repositorio</text>
+
+    <!-- Dashboard frame -->
+    <g transform="translate(60,246)">
+      <rect width="1040" height="480" rx="16" fill="#ffffff" stroke="#4f46e5" stroke-width="1.75"/>
+      <circle cx="37" cy="35" r="17" fill="#eef2ff"/>
+      <use href="#ad-i-rocket" x="26" y="24" width="22" height="22" color="#4338ca"/>
+      <text x="66" y="35" font-size="13.5" font-weight="700" fill="#0f172a">FORECASTING ECG — DASHBOARD</text>
+      <text x="66" y="52" font-size="10.5" fill="#4338ca">Aplicativo web interactivo · Análisis clínico en tiempo real</text>
+
+      <!-- Docker compose pill -->
+      <g filter="url(#ad-shadow)">
+        <rect x="350" y="78" width="340" height="54" rx="27" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+        <circle cx="381" cy="105" r="19" fill="#dbeafe"/>
+        <use href="#ad-i-container" x="369" y="93" width="24" height="24" color="#1d4ed8"/>
+        <text x="412" y="104" font-size="11.5" font-weight="700" fill="#1e3a8a" font-family="Consolas, Menlo, monospace">docker-compose.yml</text>
+        <text x="412" y="120" font-size="9.2" fill="#3b82f6">Orquestación multi-contenedor · puertos 80 / 8000</text>
+      </g>
+
+      <!-- orchestration connectors (global coords within this translated group) -->
+      <path d="M430,132 C370,148 340,148 315,154" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ad-arrowMuted)"/>
+      <path d="M610,132 C670,148 700,148 725,154" fill="none" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ad-arrowMuted)"/>
+      <text x="520" y="146" font-size="9" font-style="italic" fill="#64748b" text-anchor="middle">orquesta ambos servicios</text>
+
+      <!-- Backend panel -->
+      <g transform="translate(30,154)" filter="url(#ad-shadow)">
+        <rect width="450" height="290" rx="14" fill="#ffffff" stroke="#0891b2" stroke-width="1.5"/>
+        <circle cx="37" cy="35" r="17" fill="#ecfeff"/>
+        <use href="#ad-i-bolt" x="27" y="25" width="20" height="20" color="#0e7490"/>
+        <text x="66" y="35" font-size="12.5" font-weight="700" fill="#0f172a" font-family="Consolas, Menlo, monospace">ecg_forecast_api</text>
+        <text x="66" y="51" font-size="10" fill="#0e7490">Backend · FastAPI + TensorFlow 2.15</text>
+
+        <g>
+          <rect x="20" y="72" width="410" height="46" rx="10" fill="#f0fdff" stroke="#cffafe"/>
+          <use href="#ad-i-doc" x="32" y="84" width="20" height="20" color="#0891b2"/>
+          <text x="64" y="92" font-size="10.5" font-weight="700" fill="#0f172a" font-family="Consolas, Menlo, monospace">app/main.py</text>
+          <text x="64" y="108" font-size="9" fill="#64748b">Servidor &amp; precarga de modelos Keras</text>
+
+          <rect x="20" y="126" width="410" height="46" rx="10" fill="#f0fdff" stroke="#cffafe"/>
+          <use href="#ad-i-route" x="32" y="138" width="20" height="20" color="#0891b2"/>
+          <text x="64" y="146" font-size="10.5" font-weight="700" fill="#0f172a" font-family="Consolas, Menlo, monospace">api/routes/</text>
+          <text x="64" y="162" font-size="9" fill="#64748b">predict · process · models · patients · explainability</text>
+
+          <rect x="20" y="180" width="410" height="46" rx="10" fill="#f0fdff" stroke="#cffafe"/>
+          <use href="#ad-i-layers" x="32" y="192" width="20" height="20" color="#0891b2"/>
+          <text x="64" y="200" font-size="10.5" font-weight="700" fill="#0f172a" font-family="Consolas, Menlo, monospace">core/</text>
+          <text x="64" y="216" font-size="9" fill="#64748b">Filtros · segmentación · inferencia LOPO</text>
+
+          <rect x="20" y="234" width="410" height="46" rx="10" fill="#f0fdff" stroke="#cffafe"/>
+          <use href="#ad-i-check" x="32" y="246" width="20" height="20" color="#0891b2"/>
+          <text x="64" y="254" font-size="10.5" font-weight="700" fill="#0f172a" font-family="Consolas, Menlo, monospace">tests/</text>
+          <text x="64" y="270" font-size="9" fill="#64748b">Validación continua · pytest + httpx</text>
+        </g>
+      </g>
+
+      <!-- Frontend panel -->
+      <g transform="translate(560,154)" filter="url(#ad-shadow)">
+        <rect width="450" height="290" rx="14" fill="#ffffff" stroke="#6366f1" stroke-width="1.5"/>
+        <circle cx="37" cy="35" r="17" fill="#eef2ff"/>
+        <use href="#ad-i-window" x="27" y="25" width="20" height="20" color="#4338ca"/>
+        <text x="66" y="35" font-size="12.5" font-weight="700" fill="#0f172a" font-family="Consolas, Menlo, monospace">ecg-react</text>
+        <text x="66" y="51" font-size="10" fill="#4338ca">Frontend · React 19 + TypeScript + Vite</text>
+
+        <g>
+          <rect x="20" y="72" width="410" height="46" rx="10" fill="#f5f5ff" stroke="#e0e7ff"/>
+          <use href="#ad-i-window" x="32" y="84" width="20" height="20" color="#4f46e5"/>
+          <text x="64" y="92" font-size="10.5" font-weight="700" fill="#0f172a" font-family="Consolas, Menlo, monospace">src/pages/</text>
+          <text x="64" y="108" font-size="9" fill="#64748b">Home · Modelos · Experimentos · LOPO · Explorador</text>
+
+          <rect x="20" y="126" width="410" height="46" rx="10" fill="#f5f5ff" stroke="#e0e7ff"/>
+          <use href="#ad-i-chart" x="32" y="138" width="20" height="20" color="#4f46e5"/>
+          <text x="64" y="146" font-size="10.5" font-weight="700" fill="#0f172a" font-family="Consolas, Menlo, monospace">src/components/</text>
+          <text x="64" y="162" font-size="9" fill="#64748b">Visualizadores ECG (Plotly) · KPIs clínicos</text>
+
+          <rect x="20" y="180" width="410" height="46" rx="10" fill="#f5f5ff" stroke="#e0e7ff"/>
+          <use href="#ad-i-layers" x="32" y="192" width="20" height="20" color="#4f46e5"/>
+          <text x="64" y="200" font-size="10.5" font-weight="700" fill="#0f172a" font-family="Consolas, Menlo, monospace">src/store/ · styles/</text>
+          <text x="64" y="216" font-size="9" fill="#64748b">Estado Zustand · design system Tailwind</text>
+
+          <rect x="20" y="234" width="410" height="46" rx="10" fill="#f5f5ff" stroke="#e0e7ff"/>
+          <use href="#ad-i-doc" x="32" y="246" width="20" height="20" color="#4f46e5"/>
+          <text x="64" y="254" font-size="10.5" font-weight="700" fill="#0f172a" font-family="Consolas, Menlo, monospace">public/data/</text>
+          <text x="64" y="270" font-size="9" fill="#64748b">Checkpoints &amp; resultados estadísticos curados</text>
+        </g>
+      </g>
+
+      <!-- HTTP arrow between panels -->
+      <line x1="560" y1="299" x2="485" y2="299" stroke="#d97706" stroke-width="2.5" marker-end="url(#ad-arrowAmber)"/>
+      <text x="522" y="289" font-size="10" font-weight="700" fill="#b45309" text-anchor="middle">HTTP /api</text>
+      <text x="522" y="316" font-size="8.3" fill="#64748b" text-anchor="middle">Nginx (prod) · Vite (dev)</text>
+
+      <!-- legend -->
+      <line x1="700" y1="456" x2="722" y2="456" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="5 4"/>
+      <text x="728" y="459" font-size="8.5" fill="#64748b">orquesta (Compose)</text>
+      <line x1="850" y1="456" x2="872" y2="456" stroke="#d97706" stroke-width="2"/>
+      <text x="878" y="459" font-size="8.5" fill="#64748b">tráfico HTTP</text>
+    </g>
+
+    <text x="1120" y="742" font-size="9" letter-spacing="1.5" fill="#cbd5e1" text-anchor="end">ECG FORECASTING</text>
+  </g>
+</svg>
