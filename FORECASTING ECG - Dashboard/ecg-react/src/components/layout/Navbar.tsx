@@ -1,3 +1,28 @@
+/**
+ * Barra lateral.
+ *
+ * Lo que se corrigió respecto de la versión anterior, y por qué:
+ *
+ * 1. **Los colores eran fijos y suponían tema oscuro.** El fondo del hover era
+ *    `rgba(255,255,255,0.04)` y el acento `rgba(6,182,212,…)`. Un blanco al 4 %
+ *    sobre fondo blanco no se ve: en tema claro el hover no existía. Además ese
+ *    cian no estaba en el sistema de tokens, así que la barra era la única pieza
+ *    del tablero con su propia paleta. Ahora todo sale de los tokens.
+ *
+ * 2. **Los estados vivían en JavaScript.** Había ocho `onMouseEnter`/`onMouseLeave`
+ *    que reescribían estilos a mano. Ahora están en CSS (`.barra-lateral-*`), que
+ *    además da `:focus-visible` para quien navega con teclado, cosa que antes no
+ *    existía.
+ *
+ * 3. **El logotipo era un PNG con sombra cian.** Ahora se usa el SVG de marca
+ *    `logo-mono.svg`, cuyo relleno es `currentColor`, pintado por máscara CSS: un
+ *    solo archivo que se adapta al tema y escala sin pérdida a cualquier tamaño.
+ *
+ * 4. **Los resplandores no encajaban.** El punto activo con `box-shadow` difuso y
+ *    la pestaña circular brillante venían de otro lenguaje visual. La página
+ *    activa se marca ahora con una franja de 2 px a la izquierda, la misma
+ *    convención que usan los avisos del resto del tablero.
+ */
 import { NavLink, useLocation } from 'react-router-dom';
 import {
   Home, Brain, Zap,
@@ -18,6 +43,9 @@ const getRoutes = (t: TFn) => [
   { path: '/glosario',      label: t('Glosario', 'Glossary'),       icon: BookText },
 ];
 
+/** Ruta del logotipo de marca. La variante `mono` hereda el color del texto. */
+const LOGO = '/brand/svg/logo-mono.svg';
+
 export function Navbar({ isMobile }: { isMobile?: boolean }) {
   const location = useLocation();
   const theme = useECGStore((s) => s.theme);
@@ -26,33 +54,36 @@ export function Navbar({ isMobile }: { isMobile?: boolean }) {
   const toggleSidebar = useECGStore((s) => s.toggleSidebar);
   const { t, lang, setLang } = useLang();
   const routes = getRoutes(t);
-  
-  // Floating width calculation
-  const width = isMobile ? '280px' : isSidebarOpen ? '220px' : '72px';
-  // Offscreen placement on mobile if sidebar is closed
+
+  /** Desplegada en móvil y cuando el usuario la abre; si no, solo iconos. */
+  const amplia = Boolean(isMobile) || isSidebarOpen;
+  const width = isMobile ? '280px' : isSidebarOpen ? '224px' : '68px';
   const offset = isMobile && !isSidebarOpen ? '-320px' : '0';
+  // El trazado del logotipo mide 480 × 408: la altura es el 85 % del ancho.
+  const logoAncho = amplia ? 92 : 38;
+  const logoAlto = Math.round(logoAncho * 408 / 480);
 
   return (
     <>
-      {/* Mobile Backdrop */}
       {isMobile && isSidebarOpen && (
-        <div 
+        <div
           onClick={toggleSidebar}
+          aria-hidden
           style={{
             position: 'fixed',
             inset: 0,
             zIndex: 95,
-            background: 'rgba(3, 7, 18, 0.4)',
-            backdropFilter: 'blur(4px)',
+            background: 'color-mix(in srgb, var(--bg) 72%, transparent)',
           }}
         />
       )}
 
       <nav
+        aria-label={t('Navegación principal', 'Main navigation')}
         style={{
           width,
           minWidth: width,
-          transition: 'width 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          transition: 'width 0.24s ease, transform 0.24s ease',
           transform: `translateX(${offset})`,
           background: 'var(--surface)',
           backdropFilter: 'var(--glass-blur)',
@@ -60,158 +91,149 @@ export function Navbar({ isMobile }: { isMobile?: boolean }) {
           border: '1px solid var(--border)',
           display: 'flex',
           flexDirection: 'column',
-          padding: '24px 0',
+          padding: '20px 0',
           position: 'fixed',
           top: '16px',
           left: '16px',
           height: 'calc(100vh - 32px)',
           borderRadius: 'var(--radius-lg)',
           zIndex: 100,
-          overflowY: 'auto',
-          overflowX: 'visible',
+          // La barra NO recorta ni se desplaza: eso lo hace la lista de páginas.
+          //
+          // Antes aquí ponía `overflowY: auto` con `overflowX: visible`, y esa
+          // pareja no existe: cuando un eje es `visible` y el otro no, el CSS
+          // obliga a que el `visible` compute a `auto`. El resultado medido eran
+          // 11 px de desplazamiento horizontal en las tres rutas, plegada y
+          // desplegada. Los 11 px son exactamente lo que sobresale la pestaña de
+          // plegar, que vive en `right: -11px`.
+          //
+          // Con `visible` en los dos ejes la pestaña deja de recortarse y no hay
+          // nada que desplazar. El desplazamiento vertical, que sí hace falta
+          // cuando la ventana es baja, se traslada a la lista de páginas.
+          overflow: 'visible',
           boxShadow: 'var(--glass-shadow)',
         }}
       >
-        {/* Sidebar collapse/expand tab — centered on right edge */}
+        {/* Pestaña para plegar y desplegar. Antes era un círculo cian con halo;
+            ahora es una pastilla de la misma superficie y borde que la barra. */}
         {!isMobile && (
           <button
             onClick={toggleSidebar}
-            aria-label={isSidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
+            className="barra-lateral-boton"
+            aria-label={isSidebarOpen
+              ? t('Plegar la barra lateral', 'Collapse sidebar')
+              : t('Desplegar la barra lateral', 'Expand sidebar')}
+            aria-expanded={isSidebarOpen}
             style={{
               position: 'absolute',
-              right: '-15px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              width: '30px',
-              height: '30px',
-              background: 'var(--signal)',
-              border: '3px solid var(--bg)',
-              borderRadius: '50%',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              right: '-11px',
+              top: '46px',
+              width: '22px',
+              height: '34px',
               padding: 0,
+              background: 'var(--surface)',
               zIndex: 101,
-              transition: 'background 0.2s, box-shadow 0.2s, border-color 0.3s',
-              boxShadow: '0 2px 8px rgba(6,182,212,0.35)',
-            }}
-            onMouseEnter={e => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.background = 'var(--prediction)';
-              el.style.boxShadow = '0 2px 14px rgba(6,182,212,0.55)';
-            }}
-            onMouseLeave={e => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.background = 'var(--signal)';
-              el.style.boxShadow = '0 2px 8px rgba(6,182,212,0.35)';
             }}
           >
-            {isSidebarOpen ? (
-              <ChevronLeft size={14} strokeWidth={2.5} color="#fff" />
-            ) : (
-              <ChevronRight size={14} strokeWidth={2.5} color="#fff" />
-            )}
+            <span style={{ display: 'flex' }}>
+              {isSidebarOpen
+                ? <ChevronLeft size={13} strokeWidth={2.25} aria-hidden />
+                : <ChevronRight size={13} strokeWidth={2.25} aria-hidden />}
+            </span>
           </button>
         )}
 
-        {/* Header / Brand */}
-        <div style={{ 
-          padding: isMobile || isSidebarOpen ? '0 20px 20px' : '0 8px 20px', 
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center', 
-          gap: '0',
-          position: 'relative',
-        }}>
-          {/* Logo + Title block */}
-          <div style={{
+        {/* Marca */}
+        <div
+          style={{
+            padding: amplia ? '0 18px 18px' : '0 8px 18px',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: isMobile || isSidebarOpen ? '10px' : '6px',
-            width: '100%',
-          }}>
-            <img loading="lazy" decoding="async"
-              src="/img/logoECGF.png"
-              alt="ECG Forecasting"
-              style={{
-                width: isMobile || isSidebarOpen ? '72px' : '40px',
-                height: isMobile || isSidebarOpen ? '72px' : '40px',
-                flexShrink: 0,
-                borderRadius: '12px',
-                objectFit: 'contain',
-                filter: 'drop-shadow(0 4px 12px rgba(6,182,212,0.25))',
-                transition: 'width 0.3s, height 0.3s',
-              }}
-            />
-            <div style={{ 
-              opacity: isMobile || isSidebarOpen ? 1 : 0, 
-              maxHeight: isMobile || isSidebarOpen ? '50px' : '0',
-              overflow: 'hidden',
-              transition: 'opacity 0.25s, max-height 0.3s',
-              textAlign: 'center',
-            }}>
-              <p style={{
-                fontFamily: 'var(--font-display)', fontWeight: 800,
-                fontSize: 'var(--fs-sm)', color: 'var(--text)', lineHeight: 1.15,
-                letterSpacing: '1.2px', margin: 0,
-              }}>ECG FORECASTING</p>
-              <p style={{
-                fontFamily: 'var(--font-data)', fontSize: 'var(--fs-3xs)',
-                color: 'var(--text-sub)', letterSpacing: '1.5px',
-                marginTop: '3px',
-              }}>CESMAG · 2025</p>
-            </div>
-          </div>
+            gap: amplia ? '10px' : '0',
+            position: 'relative',
+          }}
+        >
+          <span
+            className="barra-lateral-logo"
+            role="img"
+            aria-label={t('Logotipo de ECG Forecasting', 'ECG Forecasting logo')}
+            style={{
+              width: logoAncho,
+              height: logoAlto,
+              // El acento del tablero, no un cian suelto. Al ser máscara, este
+              // color es el que pinta el trazado entero.
+              color: 'var(--accent)',
+            }}
+          />
 
-          {/* Mobile close button */}
-          {isMobile && (
-            <button 
-              onClick={toggleSidebar}
-              aria-label="Close sidebar"
+          <div
+            style={{
+              opacity: amplia ? 1 : 0,
+              maxHeight: amplia ? '52px' : 0,
+              overflow: 'hidden',
+              transition: 'opacity 0.2s ease, max-height 0.24s ease',
+              textAlign: 'center',
+            }}
+          >
+            <p
               style={{
-                position: 'absolute',
-                top: '4px',
-                right: '16px',
-                width: '28px',
-                height: '28px',
-                background: 'var(--elevated)',
-                border: '1px solid var(--border)',
-                borderRadius: 'var(--radius-sm)',
-                cursor: 'pointer',
-                color: 'var(--text-sub)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: 0,
-                transition: 'background 0.2s, color 0.2s',
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.background = 'rgba(6,182,212,0.1)';
-                (e.currentTarget as HTMLElement).style.color = 'var(--prediction)';
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.background = 'var(--elevated)';
-                (e.currentTarget as HTMLElement).style.color = 'var(--text-sub)';
+                fontFamily: 'var(--font-display)',
+                fontWeight: 700,
+                fontSize: 'var(--fs-sm)',
+                color: 'var(--text)',
+                lineHeight: 1.2,
+                letterSpacing: '0.08em',
+                margin: 0,
               }}
             >
-              <ChevronLeft size={15} strokeWidth={2.5} />
+              ECG FORECASTING
+            </p>
+            <p
+              style={{
+                fontFamily: 'var(--font-data)',
+                fontSize: 'var(--fs-3xs)',
+                color: 'var(--text-muted)',
+                letterSpacing: '0.1em',
+                margin: '3px 0 0',
+              }}
+            >
+              CESMAG · 2025
+            </p>
+          </div>
+
+          {isMobile && (
+            <button
+              onClick={toggleSidebar}
+              className="barra-lateral-boton"
+              aria-label={t('Cerrar la barra lateral', 'Close sidebar')}
+              style={{ position: 'absolute', top: 0, right: '14px', width: '26px', height: '26px', padding: 0 }}
+            >
+              <span style={{ display: 'flex' }}>
+                <ChevronLeft size={14} strokeWidth={2.25} aria-hidden />
+              </span>
             </button>
           )}
         </div>
 
-        {/* Divider */}
-        <div style={{ 
-          height: '1px', 
-          background: 'var(--border)', 
-          margin: isMobile || isSidebarOpen ? '0 20px 16px' : '0 12px 16px' 
-        }} />
+        <div style={{ height: '1px', background: 'var(--border)', margin: amplia ? '0 18px 14px' : '0 12px 14px' }} />
 
-        {/* Nav items */}
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '6px', padding: '0 12px' }}>
+        {/* Páginas.
+            Aquí es donde se desplaza, y solo en vertical. `minHeight: 0` no es
+            decorativo: sin él, un hijo de una caja flexible no se encoge por
+            debajo de su contenido y el desplazamiento nunca llega a activarse. */}
+        <div style={{
+          flex: 1,
+          minHeight: 0,
+          overflowY: 'auto',
+          overflowX: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '3px',
+          padding: '0 10px',
+        }}>
           {routes.map(({ path, label, icon: Icon }) => {
-            const isActive = path === '/'
+            const activa = path === '/'
               ? location.pathname === '/'
               : location.pathname.startsWith(path);
 
@@ -219,152 +241,84 @@ export function Navbar({ isMobile }: { isMobile?: boolean }) {
               <NavLink
                 key={path}
                 to={path}
-                onClick={() => { if(isMobile) toggleSidebar(); }}
-                title={!isMobile && !isSidebarOpen ? label : undefined}
+                className="barra-lateral-enlace"
+                data-activo={activa ? 'si' : 'no'}
+                aria-current={activa ? 'page' : undefined}
+                onClick={() => { if (isMobile) toggleSidebar(); }}
+                title={!amplia ? label : undefined}
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '12px',
-                  padding: isMobile || isSidebarOpen ? '10px 16px' : '12px',
-                  justifyContent: isMobile || isSidebarOpen ? 'flex-start' : 'center',
-                  borderRadius: 'var(--radius-md)',
-                  textDecoration: 'none',
-                  fontFamily: 'var(--font-body)',
-                  fontSize: 'var(--fs-sm)',
-                  fontWeight: isActive ? 600 : 400,
-                  color: isActive ? 'var(--text)' : 'var(--text-sub)',
-                  background: isActive ? 'rgba(6, 182, 212, 0.12)' : 'transparent',
-                  border: isActive ? '1px solid rgba(6, 182, 212, 0.25)' : '1px solid transparent',
-                  transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-                  boxShadow: isActive ? '0 0 12px rgba(6, 182, 212, 0.1)' : 'none',
-                }}
-                onMouseEnter={e => {
-                  if (!isActive) {
-                    (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.04)';
-                    (e.currentTarget as HTMLElement).style.color = 'var(--text)';
-                    (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255, 255, 255, 0.06)';
-                  }
-                }}
-                onMouseLeave={e => {
-                  if (!isActive) {
-                    (e.currentTarget as HTMLElement).style.background = 'transparent';
-                    (e.currentTarget as HTMLElement).style.color = 'var(--text-sub)';
-                    (e.currentTarget as HTMLElement).style.borderColor = 'transparent';
-                  }
+                  padding: amplia ? '9px 13px' : '10px 0',
+                  justifyContent: amplia ? 'flex-start' : 'center',
                 }}
               >
                 <Icon
-                  size={isMobile || isSidebarOpen ? 16 : 18}
-                  color={isActive ? 'var(--prediction)' : 'currentColor'}
-                  strokeWidth={isActive ? 2.5 : 2}
+                  size={17}
+                  color={activa ? 'var(--accent)' : 'currentColor'}
+                  strokeWidth={activa ? 2.25 : 1.9}
+                  aria-hidden
                   style={{ flexShrink: 0 }}
                 />
-                
-                <span style={{ 
-                  opacity: isMobile || isSidebarOpen ? 1 : 0, 
-                  width: isMobile || isSidebarOpen ? 'auto' : 0,
-                  display: isMobile || isSidebarOpen ? 'block' : 'none',
-                  whiteSpace: 'nowrap',
-                  transition: 'opacity 0.2s',
-                }}>
-                  {label}
-                </span>
-
-                {isActive && (isMobile || isSidebarOpen) && (
-                  <div style={{
-                    marginLeft: 'auto',
-                    width: '6px', height: '6px',
-                    borderRadius: '50%',
-                    background: 'var(--prediction)',
-                    boxShadow: '0 0 8px var(--prediction)',
-                  }} />
-                )}
+                {amplia && <span style={{ whiteSpace: 'nowrap' }}>{label}</span>}
               </NavLink>
             );
           })}
         </div>
 
-        {/* Footer */}
-        <div style={{ 
-          padding: isMobile || isSidebarOpen ? '16px 20px 0' : '16px 0 0', 
-          borderTop: '1px solid var(--border)', 
-          marginTop: '16px' 
-        }}>
-          <div style={{ 
-            display: 'flex', 
-            flexDirection: isMobile || isSidebarOpen ? 'row' : 'column',
-            alignItems: 'center', 
-            justifyContent: isMobile || isSidebarOpen ? 'space-between' : 'center',
-            gap: isMobile || isSidebarOpen ? '8px' : '12px',
-            flexWrap: 'wrap',
-          }}>
-            {(isMobile || isSidebarOpen) && (
-              <div style={{
-                display: 'flex', alignItems: 'center', gap: '6px',
-                fontFamily: 'var(--font-data)', fontSize: 'var(--fs-3xs)',
-                color: 'var(--text-sub)', letterSpacing: '1px',
-              }}>
-                <div className="pulse-indicator" style={{
-                  width: '6px', height: '6px', borderRadius: '50%',
-                  background: 'var(--signal)',
-                }} />
-                MIT-BIH
-              </div>
-            )}
-            
-            <div style={{
+        {/* Pie: base de datos, tema e idioma */}
+        <div
+          style={{
+            padding: amplia ? '14px 18px 0' : '14px 0 0',
+            borderTop: '1px solid var(--border)',
+            marginTop: '14px',
+          }}
+        >
+          <div
+            style={{
               display: 'flex',
-              flexDirection: isMobile || isSidebarOpen ? 'row' : 'column',
-              gap: '8px',
-              alignItems: 'center'
-            }}>
+              flexDirection: amplia ? 'row' : 'column',
+              alignItems: 'center',
+              justifyContent: amplia ? 'space-between' : 'center',
+              gap: amplia ? '8px' : '10px',
+              flexWrap: 'wrap',
+            }}
+          >
+            {amplia && (
+              <span
+                style={{
+                  fontFamily: 'var(--font-data)',
+                  fontSize: 'var(--fs-3xs)',
+                  color: 'var(--text-muted)',
+                  letterSpacing: '0.08em',
+                }}
+              >
+                MIT-BIH · INCART
+              </span>
+            )}
+
+            <div style={{ display: 'flex', flexDirection: amplia ? 'row' : 'column', gap: '6px', alignItems: 'center' }}>
               <button
                 onClick={toggleTheme}
-                title={t(`Cambiar a modo ${theme === 'dark' ? 'claro' : 'oscuro'}`, `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`)}
-                style={{
-                  background: 'rgba(255, 255, 255, 0.04)', border: '1px solid rgba(255, 255, 255, 0.08)', cursor: 'pointer',
-                  color: 'var(--text-sub)', padding: '8px', display: 'flex',
-                  alignItems: 'center', justifyContent: 'center',
-                  borderRadius: 'var(--radius-md)', transition: 'all 0.2s',
-                }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.background = 'rgba(6, 182, 212, 0.1)';
-                  (e.currentTarget as HTMLElement).style.color = 'var(--text)';
-                  (e.currentTarget as HTMLElement).style.borderColor = 'rgba(6, 182, 212, 0.3)';
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.04)';
-                  (e.currentTarget as HTMLElement).style.color = 'var(--text-sub)';
-                  (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255, 255, 255, 0.08)';
-                }}
+                className="barra-lateral-boton"
+                aria-label={theme === 'dark'
+                  ? t('Cambiar a tema claro', 'Switch to light theme')
+                  : t('Cambiar a tema oscuro', 'Switch to dark theme')}
+                style={{ width: '30px', height: '28px', padding: 0 }}
               >
-                {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
+                <span style={{ display: 'flex' }}>
+                  {theme === 'dark' ? <Sun size={14} aria-hidden /> : <Moon size={14} aria-hidden />}
+                </span>
               </button>
-              
+
               <button
                 onClick={() => setLang(lang === 'es' ? 'en' : 'es')}
-                title={lang === 'es' ? 'Switch to English' : 'Cambiar a Español'}
-                style={{
-                  background: 'rgba(255, 255, 255, 0.04)', border: '1px solid rgba(255, 255, 255, 0.08)', cursor: 'pointer',
-                  color: 'var(--text-sub)', padding: '6px 9px', display: 'flex',
-                  alignItems: 'center', justifyContent: 'center', gap: '4px',
-                  borderRadius: 'var(--radius-md)', transition: 'all 0.2s',
-                  fontFamily: 'var(--font-data)', fontSize: 'var(--fs-3xs)', fontWeight: 700,
-                  letterSpacing: '0.5px',
-                }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.background = 'rgba(6, 182, 212, 0.1)';
-                  (e.currentTarget as HTMLElement).style.color = 'var(--text)';
-                  (e.currentTarget as HTMLElement).style.borderColor = 'rgba(6, 182, 212, 0.3)';
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.background = 'rgba(255, 255, 255, 0.04)';
-                  (e.currentTarget as HTMLElement).style.color = 'var(--text-sub)';
-                  (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255, 255, 255, 0.08)';
-                }}
+                className="barra-lateral-boton"
+                aria-label={lang === 'es' ? 'Switch to English' : 'Cambiar a español'}
+                style={{ height: '28px', padding: '0 8px' }}
               >
-                <Globe size={12} />
-                {lang === 'es' ? 'EN' : 'ES'}
+                <span style={{ display: 'flex' }}>
+                  <Globe size={12} aria-hidden />
+                </span>
+                <span>{lang === 'es' ? 'EN' : 'ES'}</span>
               </button>
             </div>
           </div>

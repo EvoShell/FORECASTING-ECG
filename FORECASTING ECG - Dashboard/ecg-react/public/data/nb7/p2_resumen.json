@@ -1,0 +1,111 @@
+{
+  "n_pacientes": 123,
+  "n_pacientes_mitbih": 48,
+  "n_pacientes_incart": 75,
+  "n_latidos_total": 285401,
+  "pct_normales": 85.601,
+  "pct_ectopicos": 14.399,
+  "razon_desbalance_N_vs_resto": 5.95,
+  "distribucion": [
+    {
+      "base": "MIT-BIH",
+      "clase": "N",
+      "n_latidos": 90631,
+      "pct": 82.7726
+    },
+    {
+      "base": "MIT-BIH",
+      "clase": "SVEB",
+      "n_latidos": 2781,
+      "pct": 2.5399
+    },
+    {
+      "base": "MIT-BIH",
+      "clase": "VEB",
+      "n_latidos": 7236,
+      "pct": 6.6086
+    },
+    {
+      "base": "MIT-BIH",
+      "clase": "F",
+      "n_latidos": 803,
+      "pct": 0.7334
+    },
+    {
+      "base": "MIT-BIH",
+      "clase": "Q",
+      "n_latidos": 8043,
+      "pct": 7.3456
+    },
+    {
+      "base": "INCART",
+      "clase": "N",
+      "n_latidos": 153676,
+      "pct": 87.3621
+    },
+    {
+      "base": "INCART",
+      "clase": "SVEB",
+      "n_latidos": 1960,
+      "pct": 1.1142
+    },
+    {
+      "base": "INCART",
+      "clase": "VEB",
+      "n_latidos": 20013,
+      "pct": 11.377
+    },
+    {
+      "base": "INCART",
+      "clase": "F",
+      "n_latidos": 219,
+      "pct": 0.1245
+    },
+    {
+      "base": "INCART",
+      "clase": "Q",
+      "n_latidos": 39,
+      "pct": 0.0222
+    },
+    {
+      "base": "CONJUNTO",
+      "clase": "N",
+      "n_latidos": 244307,
+      "pct": 85.6013
+    },
+    {
+      "base": "CONJUNTO",
+      "clase": "SVEB",
+      "n_latidos": 4741,
+      "pct": 1.6612
+    },
+    {
+      "base": "CONJUNTO",
+      "clase": "VEB",
+      "n_latidos": 27249,
+      "pct": 9.5476
+    },
+    {
+      "base": "CONJUNTO",
+      "clase": "F",
+      "n_latidos": 1022,
+      "pct": 0.3581
+    },
+    {
+      "base": "CONJUNTO",
+      "clase": "Q",
+      "n_latidos": 8082,
+      "pct": 2.8318
+    }
+  ],
+  "rr_global_media_s": 0.811,
+  "rr_global_std_s": 0.1712,
+  "fc_global_media_lpm": 77.33,
+  "correlacion_ectopicos_vs_R2": {
+    "n": 123,
+    "pearson_r": -0.3245,
+    "pearson_p": 0.00025,
+    "spearman_rho": -0.5755,
+    "spearman_p": 3.35e-12
+  }
+}

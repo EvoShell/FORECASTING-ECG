@@ -113,7 +113,7 @@ export function ECGPredictionChart({
     const windowSamples = Math.round(6 * fs); // 6 s
     const center = nowIdx ?? Math.floor(realSignal.length / 2);
     let wStart = Math.max(0, center - Math.floor(windowSamples * 0.4));
-    let wEnd = Math.min(realSignal.length - 1, wStart + windowSamples);
+    const wEnd = Math.min(realSignal.length - 1, wStart + windowSamples);
     wStart = Math.max(0, wEnd - windowSamples);
 
     const slice = realSignal.slice(wStart, wEnd + 1);

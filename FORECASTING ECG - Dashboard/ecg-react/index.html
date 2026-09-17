@@ -2,9 +2,37 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ECG Forecast Dashboard</title>
+    <title>ECG Forecasting · Universidad CESMAG</title>
+
+    <!-- Icono de la pestana. Se declaran varios formatos a proposito, porque no
+         todos los sitios donde aparece el icono leen lo mismo:
+           · el SVG lo usan los navegadores modernos y escala a cualquier tamano;
+           · el .ico es el respaldo de los que no leen SVG, y es el que Windows
+             toma para un acceso directo al escritorio;
+           · los PNG de 16/32/48 los usa la pestana y el historial en Windows;
+           · el apple-touch-icon es el que iOS pone en la pantalla de inicio, que
+             no lee ni SVG ni .ico.
+         Todos salen de /brand/favicon, el kit de marca. -->
+    <link rel="icon" type="image/svg+xml" href="/brand/favicon/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/brand/favicon/favicon-48.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/brand/favicon/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/brand/favicon/favicon-16.png" />
+    <link rel="alternate icon" href="/brand/favicon/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/brand/favicon/apple-touch-icon-180.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Color de la barra del navegador en movil, uno por tema. -->
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0E1116" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF" />
+
+    <!-- Tarjeta al compartir el enlace. -->
+    <meta name="description" content="Predicción de la morfología de señales ECG con modelos de forecasting. Trabajo de grado, Universidad CESMAG." />
+    <meta property="og:title" content="ECG Forecasting · Universidad CESMAG" />
+    <meta property="og:description" content="Predicción de la morfología de señales ECG con modelos de forecasting. Trabajo de grado, Universidad CESMAG." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/brand/social/og-1200x630.png" />
+    <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Tipografias.
          Antes se pedian con @import desde el CSS critico, lo que encadenaba tres

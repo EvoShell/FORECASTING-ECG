@@ -7,24 +7,35 @@ import numpy as np
 import wfdb
 from fastapi import APIRouter, HTTPException, Query
 
+from app.config import clase_aami
+
 router = APIRouter()
 
 
 def _find_data_dir(folder_name: str) -> Path:
-    """Locate data directory (mit-bih or incart)."""
+    """Localiza la carpeta de registros (mit-bih o incart).
+
+    El orden importa: variable de entorno, ruta de Docker y, por ultimo, subir por los
+    directorios padre buscando `datos/<folder_name>`.
+
+    Ese ultimo paso recorre TODOS los padres a proposito. La version anterior probaba
+    seis niveles y acertaba justo en el sexto —`FORECASTING ECG - Dashboard/datos/`—,
+    de modo que un nivel mas de anidamiento la habria roto en silencio; y la copia de
+    los registros que hay en la raiz del proyecto, un nivel mas arriba, quedaba fuera
+    de alcance. Recorrer la cadena completa cuesta lo mismo y no tiene ese borde.
+    """
     env_var = folder_name.upper().replace("-", "") + "_DIR"
     if os.getenv(env_var):
         return Path(os.getenv(env_var))
     docker_path = Path(f"/app/{folder_name}")
     if docker_path.exists():
         return docker_path
-    
+
     here = Path(__file__).resolve()
-    for _ in range(6):
-        candidate = here / "datos" / folder_name
+    for parent in here.parents:
+        candidate = parent / "datos" / folder_name
         if candidate.exists():
             return candidate
-        here = here.parent
     return Path(f"/app/{folder_name}")  # fallback
 
 MITBIH_DIR = _find_data_dir("mit-bih")
@@ -42,6 +53,33 @@ INCART_PATIENTS = [f"I{i:02d}" for i in range(1, 76)]
 
 DEMO_PATIENTS = MITBIH_PATIENTS + INCART_PATIENTS
 
+#: Conjunto para la comprobacion de pertenencia. Con 123 elementos la diferencia de
+#: velocidad frente a la lista es irrelevante; lo que importa es que la intencion
+#: quede clara en el punto de uso.
+PACIENTES_VALIDOS = frozenset(DEMO_PATIENTS)
+
+
+def _validar_paciente(patientId: str) -> str:
+    """Comprueba que el identificador es uno de los 123 conocidos.
+
+    Antes de esto, `patientId` entraba tal cual en `data_dir / patientId`. Con
+    `pathlib`, un operando absoluto DESCARTA la base —`Path("/app/mit-bih") / "/etc/x"`
+    es `/etc/x`— y los `..` ni se resuelven ni se rechazan. Quedaba un oraculo de
+    existencia de archivos para cualquier ruta terminada en `.hea`, y lectura de
+    cualquier registro WFDB del contenedor.
+
+    La lista blanca ya estaba escrita unas lineas mas arriba; solo se usaba para el
+    listado. Comprobar contra ella es la correccion completa: no hace falta sanear
+    nada, porque solo se aceptan 123 cadenas conocidas.
+
+    El mensaje de error NO repite lo que se pidio: devolver la cadena del atacante
+    confirma que la peticion llego al punto de decision, y ademas se reflejaria en la
+    pantalla del usuario, que la muestra tal cual.
+    """
+    if patientId not in PACIENTES_VALIDOS:
+        raise HTTPException(status_code=404, detail="Paciente no encontrado")
+    return patientId
+
 # Beat annotation symbols used in all notebooks (NB1–NB5).
 # Non-beat symbols (+, ~, [, ], etc.) are NOT R-peaks.
 BEAT_TYPES = set("NLRBVAFaJfEjeSe/")
@@ -52,22 +90,35 @@ _SEGMENT_SEC = 60
 _SEGMENT_SAMPLES = _SEGMENT_SEC * _FS  # 21 600
 
 
+def _aplicar_mascara(labels: list[str] | None, mask: np.ndarray) -> list[str]:
+    """Recorta las etiquetas con la misma mascara booleana que los picos."""
+    if labels is None:
+        return []
+    return [s for s, keep in zip(labels, mask.tolist()) if keep]
+
+
 def _best_60s_window(
-    signal: np.ndarray, r_peaks: np.ndarray
-) -> tuple[np.ndarray, list[int]]:
+    signal: np.ndarray, r_peaks: np.ndarray, labels: list[str] | None = None
+) -> tuple[np.ndarray, list[int], list[str]]:
     """Return the 60-second window with highest R-peak density.
 
     Matches ``extraer_segmento_60s()`` in 04_compuesta multi-sujeto.ipynb:
         - Sliding window of DURACION_MUES samples, step = FS (1 s)
         - Pick window with most R-peaks
         - Return cropped signal and *relative* R-peak positions
+
     If signal < 60 s, return the whole signal unchanged.
+
+    `labels` lleva una etiqueta por pico y se recorta con la MISMA mascara que los
+    picos: aqui tambien se descartan picos, y filtrar las etiquetas fuera dejaria las
+    de la ventana anterior.
     """
     sig_len = len(signal)
 
     if sig_len <= _SEGMENT_SAMPLES:
         mask = r_peaks < sig_len
-        return signal, r_peaks[mask].tolist()
+        etiquetas = _aplicar_mascara(labels, mask)
+        return signal, r_peaks[mask].tolist(), etiquetas
 
     best_start, best_count = 0, 0
     for start in range(0, sig_len - _SEGMENT_SAMPLES + 1, _FS):
@@ -82,7 +133,7 @@ def _best_60s_window(
     rp_rel = (r_peaks[mask] - best_start).tolist()
     sig_window = signal[best_start:end]
 
-    return sig_window, rp_rel
+    return sig_window, rp_rel, _aplicar_mascara(labels, mask)
 
 
 @router.get("/patients")
@@ -101,6 +152,7 @@ async def get_signal(
     ),
 ):
     """Get ECG signal for a patient."""
+    _validar_paciente(patientId)
     try:
         is_incart = patientId.startswith("I")
         data_dir = INCART_DIR if is_incart else MITBIH_DIR
@@ -109,7 +161,7 @@ async def get_signal(
 
         if not hea_file.exists():
             raise HTTPException(
-                status_code=404, detail=f"Patient {patientId} not found in {data_dir.name}"
+                status_code=404, detail="Paciente no encontrado"
             )
 
         record = wfdb.rdrecord(str(record_path), channels=[0])
@@ -119,23 +171,33 @@ async def get_signal(
         # Filter only true beat annotations — matches all notebooks
         beat_mask = [s in BEAT_TYPES for s in ann.symbol]
         r_peaks_all = ann.sample[beat_mask]
+        # El simbolo de cada pico conservado, en el mismo orden que r_peaks_all.
+        simbolos_all = [s for s, keep in zip(ann.symbol, beat_mask) if keep]
 
         if segment_60s:
             # For INCART (FS=257 Hz approx), using _best_60s_window which assumes FS=360 is slightly off format, 
             # but we keep NB4B consistency. _best_60s_window uses `_FS` = 360 and `_SEGMENT_SAMPLES`.
             # To be strictly correct across FS, we could dynamically adapt.
             # But the models expect length anyway. We will just use the pre-configured NB4B logic.
-            sig_out, rp_out = _best_60s_window(full_signal, r_peaks_all)
+            sig_out, rp_out, simbolos = _best_60s_window(
+                full_signal, r_peaks_all, simbolos_all
+            )
         else:
             # NB5B / general: full signal
             sig_out = full_signal
             rp_out = r_peaks_all.tolist()
+            simbolos = simbolos_all
 
         return {
             "patientId": patientId,
             "lead": lead,
             "signal": sig_out.tolist() if isinstance(sig_out, np.ndarray) else sig_out,
             "r_peaks": rp_out,
+            # Un simbolo y una clase AAMI por pico de r_peaks, en el mismo orden. Aqui
+            # no hay segmentacion, asi que la correspondencia es directa. Son las
+            # anotaciones del registro, no una salida del modelo.
+            "symbols": simbolos,
+            "aami_classes": [clase_aami(x) for x in simbolos],
             "fs": int(record.fs),
             "length": len(sig_out),
         }
@@ -255,6 +317,8 @@ async def process_patient(
     Avoids sending 650K+ samples as JSON over the wire. Returns the same
     fields as /process_signal plus patientId and r_peaks (sample indices).
     """
+    _validar_paciente(patientId)
+
     from app.core.preprocessing import preprocess_signal
 
     start_time = time.perf_counter()
@@ -266,7 +330,7 @@ async def process_patient(
         hea_file = data_dir / f"{patientId}.hea"
 
         if not hea_file.exists():
-            raise HTTPException(status_code=404, detail=f"Patient {patientId} not found")
+            raise HTTPException(status_code=404, detail="Paciente no encontrado")
 
         record = wfdb.rdrecord(str(record_path), channels=[0])
         full_signal = record.p_signal[:, 0].astype(np.float32)
@@ -275,6 +339,7 @@ async def process_patient(
         ann = wfdb.rdann(str(record_path), "atr")
         beat_mask = [s in BEAT_TYPES for s in ann.symbol]
         r_peaks_all = ann.sample[beat_mask]
+        simbolos_all = [s for s, keep in zip(ann.symbol, beat_mask) if keep]
 
         result = preprocess_signal(
             full_signal,
@@ -283,7 +348,22 @@ async def process_patient(
             detect_peaks=True,
             r_peaks_hint=r_peaks_all.tolist(),
             normalize_global=normalize_global,
+            # Los simbolos entran con los picos para que la segmentacion los filtre a
+            # la vez que los latidos. Anadirlos a la respuesta ya segmentada los
+            # dejaria corridos: el segmentador descarta los latidos cuya ventana se
+            # sale de la senal.
+            beat_labels=simbolos_all,
         )
+
+        simbolos = result.get("beat_symbols") or []
+        if simbolos and len(simbolos) != result["num_beats"]:
+            # No deberia ocurrir; si ocurre, es preferible no servir una etiqueta
+            # desplazada que serviria de base a una lectura clinica equivocada.
+            raise HTTPException(
+                status_code=500,
+                detail="Etiquetas desalineadas: %d simbolos para %d latidos"
+                % (len(simbolos), result["num_beats"]),
+            )
 
         processing_time = (time.perf_counter() - start_time) * 1000
 
@@ -300,6 +380,11 @@ async def process_patient(
             "beat_mu": result["beat_mu"],
             "beat_std": result["beat_std"],
             "rr_per_beat": result["rr_per_beat"],
+            # Un simbolo y una clase AAMI por latido de "beats", en el mismo orden.
+            # Anotacion del cardiologo que marco el registro: el modelo predice
+            # morfologia y no clasifica el evento.
+            "beat_symbols": simbolos,
+            "beat_classes": [clase_aami(x) for x in simbolos],
             "processing_time_ms": processing_time,
         }
     except HTTPException:

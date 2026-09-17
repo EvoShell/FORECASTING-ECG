@@ -5,9 +5,12 @@ import { lazy, Suspense } from 'react';
 import { useECGStore } from '@/store/useECGStore';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { useEffect } from 'react';
-import { Menu } from 'lucide-react';
+import { Menu, Home, ArrowLeft } from 'lucide-react';
 import { ErrorBoundary } from '@/components/common/ErrorBoundary';
 import { Boton } from '@/components/ui/Boton';
+import { Cargando } from '@/components/ui/Cargando';
+import { PaginaDeError } from '@/components/ui/PaginaDeError';
+import { useLang } from '@/i18n';
 
 const HomePage = lazy(() => import('@/pages/Home').then(m => ({ default: m.HomePage })));
 const ModelosPage = lazy(() => import('@/pages/Modelos').then(m => ({ default: m.ModelosPage })));
@@ -30,37 +33,57 @@ const ROTULOS: Record<string, string> = {
   '/cohorte': 'la caracterizacion de la cohorte',
 };
 
+/**
+ * Aviso mientras llega el codigo de la vista.
+ *
+ * Antes era la palabra «Cargando...» centrada y nada mas. Ahora es el latido que
+ * se traza, con el retardo y el ciclo ajustados a los tiempos que se midieron
+ * sobre la compilacion de produccion. El detalle esta en `Cargando.tsx`.
+ */
 function PageFallback() {
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh', color: 'var(--text-muted)', fontSize: 'var(--fs-sm)' }}>
-      Cargando...
-    </div>
-  );
+  return <Cargando />;
 }
 
 /** Ruta inexistente. Antes no habia ninguna y la pagina se quedaba en blanco. */
 function NotFoundPage() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useLang();
+
   return (
-    <div style={{
-      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-      minHeight: '60vh', gap: '14px', padding: '32px', textAlign: 'center',
-    }}>
-      <p style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-xs)', letterSpacing: '2px', color: 'var(--text-muted)' }}>
-        ERROR 404
-      </p>
-      <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--fs-lg)', color: 'var(--text)', margin: 0 }}>
-        Esta pagina no existe
-      </h1>
-      <p style={{ color: 'var(--text-sub)', maxWidth: '46ch', margin: 0 }}>
-        No hay ninguna vista en <code style={{ fontFamily: 'var(--font-data)' }}>{location.pathname}</code>.
-        Usa el menu lateral o vuelve al inicio.
-      </p>
-      <Boton onClick={() => navigate('/')} variante="primario" style={{ marginTop: 8 }}>
-        Volver al inicio
-      </Boton>
-    </div>
+    <PaginaDeError
+      variante="no-encontrada"
+      codigo={t('Error 404 · Ruta no encontrada', 'Error 404 · Route not found')}
+      titulo={t('Esta página no existe', 'This page does not exist')}
+      descripcion={
+        <>
+          {t('No hay ninguna vista en ', 'There is no view at ')}
+          <code style={{
+            fontFamily: 'var(--font-data)',
+            fontSize: 'var(--fs-xs)',
+            padding: '2px 6px',
+            borderRadius: 'var(--radius-sm)',
+            background: 'var(--surface-2)',
+            border: '1px solid var(--border)',
+            color: 'var(--text)',
+          }}>
+            {location.pathname}
+          </code>
+          {t('. Puede que el enlace esté mal escrito o que la dirección haya cambiado. Use el menú lateral para ir a cualquiera de las ocho vistas del tablero.',
+             '. The link may be misspelled, or the address may have changed. Use the sidebar to reach any of the eight views.')}
+        </>
+      }
+      acciones={
+        <>
+          <Boton onClick={() => navigate('/')} variante="primario" icono={<Home size={15} aria-hidden />}>
+            {t('Volver al inicio', 'Back to home')}
+          </Boton>
+          <Boton onClick={() => navigate(-1)} variante="sutil" icono={<ArrowLeft size={15} aria-hidden />}>
+            {t('Volver atrás', 'Go back')}
+          </Boton>
+        </>
+      }
+    />
   );
 }
 
@@ -139,7 +162,14 @@ export default function App() {
               zIndex: 90,
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <img loading="lazy" decoding="async" src="/img/logoECGF.png" alt="ECG Forecasting" style={{ width: '28px', height: '28px', borderRadius: '6px', objectFit: 'contain' }} />
+                {/* Mismo logotipo de marca que la barra lateral, por mascara CSS:
+                    hereda el color del tema y escala sin perdida. */}
+                <span
+                  className="barra-lateral-logo"
+                  role="img"
+                  aria-label="ECG Forecasting"
+                  style={{ width: '30px', height: '26px', color: 'var(--accent)' }}
+                />
                 <span style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: 'var(--fs-xs)', color: 'var(--text)', letterSpacing: '0.5px' }}>ECG FORECASTING</span>
               </div>
               <button

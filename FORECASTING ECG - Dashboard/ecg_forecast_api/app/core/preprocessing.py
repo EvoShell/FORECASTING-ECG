@@ -19,6 +19,7 @@ def preprocess_signal(
     r_peaks_hint: list[int] | None = None,
     normalize_global: bool = True,
     use_fixed_window: bool = False,
+    beat_labels: list[str] | None = None,
 ) -> dict:
     """
     normalize_global=True  → NB4B global stats from norm_{filter}.json (use for NB4B models).
@@ -30,6 +31,14 @@ def preprocess_signal(
                              NB6 (CNN_GRU_ATTN) training pipeline (extraer_latidos_v3).
                              Auto-enabled when filter_type contains 'NB6'.
     use_fixed_window=False → Midpoint-to-midpoint + FFT resample (NB4B / NB5B pipeline).
+
+    beat_labels → una etiqueta por pico de `r_peaks_hint`, en el mismo orden (el simbolo
+                  de la anotacion del cardiologo, por ejemplo). Se entrega al segmentador
+                  para que la filtre junto con los latidos, y vuelve en
+                  result["beat_symbols"] alineada uno a uno con result["beats"].
+                  Solo se propaga si los picos anotados son los que se usaron: si se cae
+                  a la deteccion algoritmica, las etiquetas no corresponden a nada y se
+                  descartan.
     """
     from app.config import BEAT_LEN, FS, NB4B_NORM
     from app.core.filtering import apply_filter
@@ -70,18 +79,26 @@ def preprocess_signal(
     if detect_peaks:
         # Prefer pre-annotated peaks (from wfdb .atr) over algorithmic detection.
         # Training used annotated peaks — using them here matches the training distribution.
+        etiquetas: list[str] | None = None
         if r_peaks_hint and len(r_peaks_hint) > 3:
             r_peaks = np.array(r_peaks_hint, dtype=int)
+            # Las etiquetas describen los picos anotados; solo valen si son esos los
+            # que se segmentan. El remuestreo a 360 Hz reescala los picos pero no
+            # cambia su numero ni su orden, asi que la correspondencia se mantiene.
+            if beat_labels is not None and len(beat_labels) == len(r_peaks):
+                etiquetas = list(beat_labels)
         else:
             r_peaks = detect_r_peaks(sig_filtered, fs)
         if _use_fixed_window:
             # NB6 (CNN_GRU_ATTN) pipeline: fixed centered window, per-beat z-score + clip
-            raw_beats, rr_per_beat_sec = segment_beats_fixed_window(
-                sig_filtered, r_peaks, BEAT_LEN
+            raw_beats, rr_per_beat_sec, etiquetas_latido = segment_beats_fixed_window(
+                sig_filtered, r_peaks, BEAT_LEN, etiquetas
             )
         else:
             # NB4B / NB5B pipeline: midpoint-to-midpoint + FFT resample
-            raw_beats, rr_per_beat_sec = segment_beats(sig_filtered, r_peaks, BEAT_LEN)
+            raw_beats, rr_per_beat_sec, etiquetas_latido = segment_beats(
+                sig_filtered, r_peaks, BEAT_LEN, etiquetas
+            )
         rr_intervals = np.diff(r_peaks).tolist() if len(r_peaks) > 1 else []
 
         if len(raw_beats) > 0:
@@ -122,5 +139,8 @@ def preprocess_signal(
         result["rr_per_beat"] = (
             rr_per_beat_sec  # raw RR in seconds — needed by NB5B LOPO (feat_dim=257)
         )
+        if etiquetas is not None:
+            # Una etiqueta por latido servido, ya filtrada por el segmentador.
+            result["beat_symbols"] = etiquetas_latido
 
     return result

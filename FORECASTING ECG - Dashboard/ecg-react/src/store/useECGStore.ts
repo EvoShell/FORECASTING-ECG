@@ -203,7 +203,6 @@ export const useECGStore = create<ECGStore>()(
 );
 
 async function loadNB1Data(): Promise<void> {
-  console.log('[Store] loadNB1Data() called');
   const store = useECGStore.getState();
   store.setLoadingExperiment('nb1', true);
   store.setErrorExperiment('nb1', null);
@@ -239,7 +238,6 @@ async function loadNB1Data(): Promise<void> {
       overfitA: overfitA as unknown as NB1Data['overfitA'],
       overfitB: overfitB as unknown as NB1Data['overfitB'],
     });
-    console.log('[Store] NB1 data loaded successfully');
   } catch (error) {
     console.error('[Store] Error loading NB1:', error);
     store.setErrorExperiment('nb1', error instanceof Error ? error.message : 'Error loading NB1 data');

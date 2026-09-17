@@ -3,8 +3,11 @@ from scipy import signal as spsig
 
 
 def segment_beats(
-    sig: np.ndarray, r_peaks: np.ndarray, beat_len: int = 256
-) -> tuple[list[np.ndarray], list[float]]:
+    sig: np.ndarray,
+    r_peaks: np.ndarray,
+    beat_len: int = 256,
+    labels: list[str] | None = None,
+) -> tuple[list[np.ndarray], list[float], list[str]]:
     """Segment beats using midpoint-to-midpoint window and FFT-based resampling.
 
     Matches the training pipeline in all notebooks:
@@ -14,18 +17,36 @@ def segment_beats(
 
     Requires at least 3 R-peaks to produce any beat.
 
+    Parameters
+    ----------
+    labels : list of str, optional
+        Una etiqueta por pico R (el simbolo de la anotacion, por ejemplo). Si se pasa,
+        viaja DENTRO del bucle: este descarta latidos, y pegar las etiquetas despues
+        correria todas las posteriores a cada descarte.
+
     Returns
     -------
     beats : list of np.ndarray, each shape (beat_len,)
     rr_per_beat : list of float — forward RR interval in seconds for each beat:
         rr[b] = (r_peaks[i+1] - r_peaks[i]) / 360.0
         This is the interval needed by the NB5B LOPO model (feat_dim=257).
+    kept_labels : list of str — la etiqueta de cada latido que sobrevivio al bucle.
+        Vacia si no se paso `labels`.
     """
+    if labels is not None and len(labels) != len(r_peaks):
+        # Un desajuste aqui no se nota en la respuesta: produce etiquetas creibles
+        # pero corridas. Preferimos que reviente.
+        raise ValueError(
+            "labels y r_peaks deben tener la misma longitud: %d != %d"
+            % (len(labels), len(r_peaks))
+        )
+
     if len(r_peaks) < 3:
-        return [], []
+        return [], [], []
 
     beats: list[np.ndarray] = []
     rr_per_beat: list[float] = []
+    kept_labels: list[str] = []
 
     for i in range(1, len(r_peaks) - 1):
         start = int((r_peaks[i - 1] + r_peaks[i]) // 2)
@@ -47,14 +68,18 @@ def segment_beats(
         rr_sec = float((r_peaks[i + 1] - r_peaks[i]) / 360.0)
         rr_per_beat.append(rr_sec)
 
-    return beats, rr_per_beat
+        if labels is not None:
+            kept_labels.append(labels[i])
+
+    return beats, rr_per_beat, kept_labels
 
 
 def segment_beats_fixed_window(
     sig: np.ndarray,
     r_peaks: np.ndarray,
     beat_len: int = 256,
-) -> tuple[list[np.ndarray], list[float]]:
+    labels: list[str] | None = None,
+) -> tuple[list[np.ndarray], list[float], list[str]]:
     """Fixed-window segmentation centered on R-peak — matches NB6 training (extraer_latidos_v3).
 
     Window layout (no resampling — exactly beat_len samples):
@@ -82,21 +107,34 @@ def segment_beats_fixed_window(
         Array of R-peak sample indices (integer).
     beat_len : int
         Target beat length in samples (default 256).
+    labels : list of str, optional
+        Una etiqueta por pico R. Se filtra aqui dentro por el mismo motivo que en
+        segment_beats(): el bucle descarta los latidos cuya ventana se sale de la
+        senal, y una etiqueta anadida a posteriori quedaria desplazada.
 
     Returns
     -------
     beats : list of np.ndarray, each shape (beat_len,) — per-beat z-scored and clipped.
     rr_per_beat : list of float — BACKWARD RR interval in seconds per beat:
         rr[b] = (r_peaks[i] - r_peaks[i-1]) / 360.0, clipped [0.3, 2.0]
+    kept_labels : list of str — la etiqueta de cada latido que sobrevivio al bucle.
+        Vacia si no se paso `labels`.
     """
+    if labels is not None and len(labels) != len(r_peaks):
+        raise ValueError(
+            "labels y r_peaks deben tener la misma longitud: %d != %d"
+            % (len(labels), len(r_peaks))
+        )
+
     if len(r_peaks) < 3:
-        return [], []
+        return [], [], []
 
     PRE_R = beat_len * 36 // 100  # 92 samples before R-peak  (36 %)
     POST_R = beat_len - PRE_R  # 164 samples after R-peak  (64 %)
 
     beats: list[np.ndarray] = []
     rr_per_beat: list[float] = []
+    kept_labels: list[str] = []
 
     for i in range(1, len(r_peaks) - 1):
         r = int(r_peaks[i])
@@ -123,7 +161,10 @@ def segment_beats_fixed_window(
         rr_sec = float((r_peaks[i] - r_peaks[i - 1]) / 360.0)
         rr_per_beat.append(float(np.clip(rr_sec, 0.3, 2.0)))
 
-    return beats, rr_per_beat
+        if labels is not None:
+            kept_labels.append(labels[i])
+
+    return beats, rr_per_beat, kept_labels
 
 
 def normalize_beats(beats: list[np.ndarray]) -> tuple[np.ndarray, float, float]:

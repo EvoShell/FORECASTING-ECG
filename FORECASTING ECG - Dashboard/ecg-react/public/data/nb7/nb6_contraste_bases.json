@@ -1,0 +1,25 @@
+{
+  "prueba": "Mann-Whitney U bilateral",
+  "variable": "R2_total por paciente (modelo CNN_GRU_ATTN, LOPO)",
+  "grupo_1": {
+    "nombre": "MIT-BIH",
+    "n": 48,
+    "mediana": 0.8382,
+    "media": 0.789585,
+    "std": 0.192498
+  },
+  "grupo_2": {
+    "nombre": "INCART",
+    "n": 75,
+    "mediana": 0.6972,
+    "media": 0.599025,
+    "std": 0.306064
+  },
+  "U": 2593.0,
+  "p_valor": 3.974776584611632e-05,
+  "rango_biserial": -0.4406,
+  "interpretacion_efecto": "mediano",
+  "fuente": "/data/nb5/resultados_lopo.csv",
+  "calculado": "2026-09-09",
+  "script": "scratchpad/mannwhitney_cohorte.py"
+}

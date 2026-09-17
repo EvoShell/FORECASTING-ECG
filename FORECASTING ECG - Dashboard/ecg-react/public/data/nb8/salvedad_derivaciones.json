@@ -1,0 +1,23 @@
+[
+ {
+  "paciente": "102",
+  "canales": [
+   "V5",
+   "V2"
+  ]
+ },
+ {
+  "paciente": "104",
+  "canales": [
+   "V5",
+   "V2"
+  ]
+ },
+ {
+  "paciente": "114",
+  "canales": [
+   "V5",
+   "MLII"
+  ]
+ }
+]

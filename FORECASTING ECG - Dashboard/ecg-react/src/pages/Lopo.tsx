@@ -11,7 +11,7 @@ import { PlotlyChart } from "@/components/charts/PlotlyChart";
 import {
   Activity,
   AlertTriangle,
-  Bell,
+  CheckCircle2,
   Info,
   Pause,
   Play,
@@ -25,8 +25,29 @@ import {
   Target,
 } from "lucide-react";
 import { useLang } from "@/i18n";
+import { useSearchParams } from "react-router-dom";
+import { MetricStat, MetricGrid } from "@/components/metrics/MetricStat";
+import { DataTable } from "@/components/data/DataTable";
+import { useReferenciaNB6, FUENTE_LOPO } from "@/hooks/useReferenciaNB6";
+import { useUmbralDeteccion, FUENTE_DETECCION_P4, FUENTE_RESUMEN_P4 } from "@/hooks/useUmbralDeteccion";
+import {
+  useAnotaciones,
+  alinearEtiquetas,
+  esEctopica,
+  DIR_ANOTACIONES,
+  type ClaseAAMI,
+} from "@/hooks/useAnotaciones";
 
-// ── NB6 Model Configuration ────────────────────────────────────────
+// ── Configuracion del modelo NB6 ──────────────────────────
+//
+// Lo que queda aqui son PARAMETROS del modelo (forma de la entrada, horizonte,
+// estadisticos de normalizacion): cosas que el codigo necesita para construir la
+// peticion y que no cambian si se recalculan los resultados.
+//
+// Las METRICAS que antes tambien vivian aqui —R2, IC95, los tres horizontes, Shape
+// Corr, Forecast Score, el gap— se leen ahora de `useReferenciaNB6`, que las saca de
+// resultados_lopo.csv. Se conservan como respaldo para el primer fotograma, mientras
+// el archivo carga, y nada mas. Si divergen del CSV, manda el CSV.──────
 // Filter pipeline from filtro_completo() in 06_Cross_patient_MultiStep.ipynb:
 // 1. iirnotch(60 Hz, Q=30) + filtfilt
 // 2. butter(4, 0.5-40 Hz, 'sos') + sosfiltfilt
@@ -41,7 +62,7 @@ const NB6_CONFIG = {
   beatLen: 256,
   featDim: 257,
   r2Medio: 0.6734,
-  ic95: [0.6237, 0.7231] as [number, number],
+  ic95: [0.6235, 0.7233] as [number, number],
   nPacientes: 123,
   rrMuGlobal: 0.7758458256721497,
   rrStdGlobal: 0.23085200786590576,
@@ -49,7 +70,7 @@ const NB6_CONFIG = {
   shapeCorr: 0.8383,
   forecastScore: 0.7073,
   gapTrainTest: 0.0956,
-  // Intervalo RR medio de la cohorte, de results/NB7/p2_resumen.json (0.811 s).
+  // Intervalo RR medio de la cohorte, de /data/nb7/p2_resumen.json (0.811 s).
   // Es la referencia que importa: la prediccion debe estar lista antes del
   // siguiente latido. Comparar contra 0 ms no significaba nada.
   rrMedioMs: 811,
@@ -123,7 +144,6 @@ const H_FILL = [
 ] as const;
 
 // ── Types ────────────────────────────────────────
-type PredictionMode = "prospectivo" | "futuro";
 type PatientGroup = "MITBIH" | "INCART";
 
 interface LopoMetrics {
@@ -145,13 +165,93 @@ interface LopoMetrics {
   inferenceMs: number | null; // solo la pasada del modelo
 }
 
-interface ClinicalAlert {
-  beatIdx: number;
-  timeSec: number;
-  type: "morphology" | "flatline" | "amplitude" | "rhythm";
-  severity: "critical" | "warning";
-  message: string;
-  value: number;
+/**
+ * Un latido evaluado en vivo.
+ *
+ * Sustituye a `ClinicalAlert`, que declaraba severidades «critical» y «warning» y
+ * nunca llego a construirse: el panel que lo pintaba era inalcanzable porque el
+ * estado solo se vaciaba, jamas se llenaba. Prometia deteccion clinica y no
+ * entregaba ninguna.
+ *
+ * Esto es lo que de verdad se puede afirmar: el error de prediccion de este latido,
+ * si supera el umbral del experimento 8, y —cuando hay anotacion— que clase le
+ * asigno el cardiologo. Con esas tres cosas se puede decir si la marca acerto.
+ */
+interface LatidoEvaluado {
+  /** Indice del latido dentro de la senal segmentada. */
+  indice: number;
+  /** Horizonte al que se predijo: 0 es t+1. */
+  horizonte: number;
+  /** Error cuadratico medio entre el latido real y el predicho. */
+  mse: number;
+  /** El MSE supera el umbral de deteccion. */
+  marcado: boolean;
+  /** Clase AAMI anotada, o null si no hay verdad de terreno para este latido. */
+  clase: ClaseAAMI | null;
+  /** Verdadero si la clase es ectopica; null si no se sabe o si esta excluido. */
+  ectopico: boolean | null;
+  /** Latido de clase Q: queda fuera de la evaluacion, como en el experimento 8. */
+  excluido?: boolean;
+}
+
+/**
+ * Guarda la tabla de analisis como CSV.
+ *
+ * La sesion se pierde al recargar, y lo que se mira en una defensa conviene poder
+ * llevarselo. Se escribe con `;` porque es lo que Excel espera en configuracion
+ * regional espanola, y con BOM para que no destroce los acentos.
+ */
+function descargarCsv(filas: PasoAnalisis[]) {
+  const cab = ["paso", "latido_inicial", "segundo", "error_maximo", "umbral",
+               "alarma", "clases", "veredicto", "r2"];
+  const cuerpo = filas.map((f) => [
+    f.paso,
+    f.indiceInicial,
+    f.segundo === null ? "" : f.segundo.toFixed(3),
+    f.mseMax.toFixed(6),
+    f.umbral === null ? "" : f.umbral.toFixed(6),
+    f.alarma ? "si" : "no",
+    f.clases.map((c) => c ?? "?").join("|"),
+    f.veredicto,
+    f.r2.toFixed(4),
+  ].join(";"));
+  const texto = "\uFEFF" + [cab.join(";"), ...cuerpo].join("\n");
+  const url = URL.createObjectURL(new Blob([texto], { type: "text/csv;charset=utf-8" }));
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "analisis_lopo.csv";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+/**
+ * Un analisis completo: cinco latidos de contexto, tres predichos, y el veredicto.
+ *
+ * El bucle anterior corria sin parar hasta que alguien lo detenia, y con eso no se
+ * puede examinar nada: cuando querias mirar una alarma, ya iba por el marco siguiente.
+ * Ahora cada analisis es una unidad que se cierra: predice, evalua, deja su fila en la
+ * tabla y se detiene. En modo continuo sigue encadenando, pero **se para solo en cuanto
+ * encuentra una alarma**, que es el momento en que hay algo que mirar.
+ */
+interface PasoAnalisis {
+  /** Numero de analisis dentro de la sesion, empezando en 1. */
+  paso: number;
+  /** Indice del primer latido predicho dentro de la senal segmentada. */
+  indiceInicial: number;
+  /** Segundo del registro en que ocurre, si se conocen los picos R. */
+  segundo: number | null;
+  /** El mayor error de los tres latidos predichos: el que dispara la alarma. */
+  mseMax: number;
+  /** Umbral aplicado. */
+  umbral: number | null;
+  /** Alguno de los tres latidos supero el umbral. */
+  alarma: boolean;
+  /** Clases AAMI anotadas de los tres latidos, en orden. */
+  clases: (ClaseAAMI | null)[];
+  /** Que fue de la alarma frente a la anotacion del cardiologo. */
+  veredicto: "VP" | "FP" | "FN" | "VN" | "sin etiqueta";
+  /** R2 medio del analisis. */
+  r2: number;
 }
 
 // ======================================================================
@@ -560,6 +660,36 @@ export function LopoPage() {
   const setSignalStore = useECGStore((s) => s.setSignal);
   const { t } = useLang();
 
+  // Las cifras de referencia salen de resultados_lopo.csv, no de una constante.
+  const referencia = useReferenciaNB6();
+  // El umbral de deteccion de latido ectopico y su procedencia.
+  const deteccion = useUmbralDeteccion();
+
+  // Se usa el modelo BASE, no el calibrado, y la razon importa: el archivo que la API
+  // sirve es `CNN_GRU_ATTN_final_patched.keras`, que es el base. Ensenar al lado las
+  // referencias del calibrado —que la tesis publica como resultado del proyecto, 0.6797—
+  // seria comparar las predicciones de un modelo con las metricas de otro. La cifra del
+  // calibrado se declara aparte, en el pie, para que no se pierda.
+  const R = referencia.base;
+
+
+
+  /** Referencia con respaldo: lo leido del archivo, y la constante solo mientras carga. */
+  const ref = useMemo(() => ({
+    r2: R?.r2 ?? NB6_CONFIG.r2Medio,
+    ic95: R?.ic95 ?? NB6_CONFIG.ic95,
+    r2PorHorizonte: R?.r2PorHorizonte ?? NB6_CONFIG.r2ByHorizon,
+    shapeCorr: R?.shapeCorr ?? NB6_CONFIG.shapeCorr,
+    forecastScore: R?.forecastScore ?? NB6_CONFIG.forecastScore,
+    gap: R?.gapTrainTest ?? NB6_CONFIG.gapTrainTest,
+    rmse: R?.rmse ?? 0.5139,
+    mae: R?.mae ?? 0.3178,
+    slopeMse: R?.slopeMse ?? 0.0223,
+    ampError: R?.ampError ?? 0.5653,
+    n: R?.n ?? NB6_CONFIG.nPacientes,
+    leido: R !== null,
+  }), [R]);
+
   // ,, API connection status ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
   // null = checking, true = online, false = offline
   const [apiOnline, setApiOnline] = useState<boolean | null>(null);
@@ -612,12 +742,38 @@ export function LopoPage() {
   // ,, Source & patient ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
   // Signal source is determined by patient group: MIT-BIH uses API when available,
   // INCART always uses synthetic signal.
-  const [patientGroup, setPatientGroup] = useState<PatientGroup>("MITBIH");
-  const [demoPatient, setDemoPatient] = useState("100");
+  // El paciente vive en la direccion: `/lopo?paciente=208`. Asi se puede enviar un
+  // caso concreto al asesor, y la pagina vuelve a el al recargar.
+  const [params, setParams] = useSearchParams();
+  const pacienteUrl = params.get("paciente");
+  const [patientGroup, setPatientGroup] = useState<PatientGroup>(
+    pacienteUrl && /^I/i.test(pacienteUrl) ? "INCART" : "MITBIH",
+  );
+  const [demoPatient, setDemoPatient] = useState(pacienteUrl ?? "100");
+
+  // El servicio ignora el parametro `lead` que se le envia y toma siempre el canal 0
+  // del registro. Segun el propio `salvedad_derivaciones.json` del proyecto, en 102,
+  // 104 y 114 ese canal no es MLII; y en los 75 registros de INCART tampoco. Declarar
+  // «MLII» sin matices era falso para 78 de los 123 pacientes seleccionables.
+  const derivacionReal =
+    patientGroup === "INCART" || ["102", "104", "114"].includes(demoPatient)
+      ? "canal 0"
+      : "MLII";
+
+  // Un paciente que no existe en la lista se ignora sin romper nada.
+  useEffect(() => {
+    const actual = params.get("paciente");
+    if (actual !== demoPatient) {
+      const p = new URLSearchParams(params);
+      p.set("paciente", demoPatient);
+      setParams(p, { replace: true });
+    }
+    // Solo al cambiar de paciente: `params` cambia de identidad en cada render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [demoPatient]);
   const [patientExpanded, setPatientExpanded] = useState(false);
 
   // ,, Mode & playback ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-  const [mode, setMode] = useState<PredictionMode>("prospectivo");
   const [speed, setSpeed] = useState(0.5);
 
   /**
@@ -637,6 +793,10 @@ export function LopoPage() {
 
   // ,, Signal state ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
   const [normalizedBeats, setNormalizedBeats] = useState<number[][]>([]);
+  // Los picos R que el servicio uso. No se guardaban en ninguna parte, y sin ellos
+  // no hay forma de saber que latido de la anotacion corresponde a cada latido
+  // segmentado, ni por tanto de contrastar una marca contra la verdad del cardiologo.
+  const [rPeaksSenal, setRPeaksSenal] = useState<number[]>([]);
   const [rrPerBeat, setRrPerBeat] = useState<number[]>([]);
   const [beatMu, setBeatMu] = useState(0);
   const [beatStd, setBeatStd] = useState(1);
@@ -650,34 +810,86 @@ export function LopoPage() {
   const [currentCtxBeats, setCurrentCtxBeats] = useState<number[][]>([]);
   const [currentRealFuture, setCurrentRealFuture] = useState<number[][]>([]);
   const [useSimMode, setUseSimMode] = useState(false);
-  const [showHolterGT, setShowHolterGT] = useState(true);
 
-  // ,, Live Holter (Futuro) ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-  const [liveStatus, setLiveStatus] = useState<"idle" | "real_playing" | "predicting" | "done">("idle");
-  const [liveTimeSec, setLiveTimeSec] = useState(0);
-  const [livePredSamples, setLivePredSamples] = useState<number[]>([]);
-  const [liveStopSec, setLiveStopSec] = useState<number | null>(null);
 
-  const [futureAlerts, setFutureAlerts] = useState<ClinicalAlert[]>([]);
-  const [futureMetrics, setFutureMetrics] = useState<{
- morphR2: number[];
- dtw: number[];
- rmse: number[];
- forecastScore: number[];
- totalBeats: number;
- totalDuration: number;
-  } | null>(null);
+  // Los latidos evaluados en la sesion. A diferencia del vector de alertas que
+  // sustituye, este si se llena: una entrada por latido y horizonte comparado.
+  const [evaluados, setEvaluados] = useState<LatidoEvaluado[]>([]);
 
+  // ── El analisis, paso a paso ────────────────────────────────────────────
+  /** `paso` analiza uno y se detiene; `serie` encadena y se para en la alarma. */
+  const [modoAnalisis, setModoAnalisis] = useState<"paso" | "serie">("paso");
+  /** Una fila por analisis. Es la tabla que queda para revisar y exportar. */
+  const [pasos, setPasos] = useState<PasoAnalisis[]>([]);
+  /** Los tres latidos del analisis que se esta viendo, con su veredicto. */
+  const [latidosMarco, setLatidosMarco] = useState<LatidoEvaluado[]>([]);
+  /** Se detuvo por haber encontrado una alarma, no por haber terminado. */
+  const [paradoPorAlarma, setParadoPorAlarma] = useState(false);
+
+  // ── Deteccion sobre el residuo ──────────────────────────────────────────
+  // Las etiquetas del cardiologo para el paciente que se esta viendo.
+  const anotaciones = useAnotaciones(demoPatient);
+
+  // La alineacion entre latido segmentado y latido anotado. Si no cuadra, devuelve
+  // el motivo y la pagina lo dice en lugar de pintar etiquetas desplazadas.
+  const { clases: clasesPorLatido, motivo: motivoEtiquetas } = useMemo(
+    () => alinearEtiquetas(anotaciones.datos, rPeaksSenal, normalizedBeats.length),
+    [anotaciones.datos, rPeaksSenal, normalizedBeats.length],
+  );
+
+  /** Lo que el experimento 8 midio para este paciente, si estuvo en su cohorte. */
+  const refPaciente = deteccion.porPaciente[demoPatient] ?? null;
+
+  /**
+   * El umbral que se aplica. Se prefiere el del propio paciente cuando existe; si no,
+   * la mediana de los 46 pliegues, que en la practica es un umbral global porque 41 de
+   * ellos comparten el mismo valor.
+   */
+  const umbralUsado = refPaciente?.umbral ?? deteccion.umbralGlobal;
+
+  /** Recuento de la sesion: la matriz de confusion que se va llenando en vivo. */
+  // El bucle de prediccion vive en un efecto que NO depende del umbral ni de las
+  // etiquetas: anadirlos como dependencia lo reiniciaria a mitad de sesion y se
+  // perderia el historico. Se leen por referencia, que siempre tiene el valor vigente.
+  const modoRef = useRef<"paso" | "serie">("paso");
+  /** Por donde va el analisis. El bucle reanuda aqui en vez de volver al principio. */
+  const marcoRef = useRef(0);
+  const picosRef = useRef<number[]>([]);
+  const umbralRef = useRef<number | null>(null);
+  const clasesRef = useRef<(ClaseAAMI | null)[]>([]);
+  useEffect(() => { modoRef.current = modoAnalisis; }, [modoAnalisis]);
+  useEffect(() => { picosRef.current = rPeaksSenal; }, [rPeaksSenal]);
+  useEffect(() => { umbralRef.current = umbralUsado; }, [umbralUsado]);
+  useEffect(() => { clasesRef.current = clasesPorLatido; }, [clasesPorLatido]);
+
+  const conteo = useMemo(() => {
+    let vp = 0, fp = 0, fn = 0, vn = 0, marcados = 0, conVerdad = 0, excluidos = 0;
+    for (const e of evaluados) {
+      if (e.excluido) { excluidos++; continue; }
+      if (e.marcado) marcados++;
+      if (e.ectopico === null) continue;
+      conVerdad++;
+      if (e.marcado && e.ectopico) vp++;
+      else if (e.marcado && !e.ectopico) fp++;
+      else if (!e.marcado && e.ectopico) fn++;
+      else vn++;
+    }
+    return {
+      total: evaluados.length - excluidos,
+      excluidos,
+      marcados,
+      conVerdad,
+      vp, fp, fn, vn,
+      // Se devuelven nulos y no ceros: sin marcas no hay precision que calcular, y un
+      // cero se leeria como «acierta el 0 %», que es una afirmacion distinta.
+      precision: vp + fp > 0 ? vp / (vp + fp) : null,
+      exhaustividad: vp + fn > 0 ? vp / (vp + fn) : null,
+    };
+  }, [evaluados]);
+
+  // Un unico bucle: el del analisis prospectivo. El segundo, el del generador
+  // autoregresivo, se retiro junto con el modo Futuro.
   const animationRef = useRef<number | ReturnType<typeof setTimeout>>(0);
-  const holterRef = useRef({
- active: false,
- lastT: 0,
- timeSec: 0,
- stopSec: 0,
- predicting: false,
- ctxBeats: [] as number[][],
- generatedBeats: [] as number[][],
-  });
 
   // ── Theme ─────────────────────────────────────────────────────────────
   const storeTheme = useECGStore((s) => s.theme);
@@ -715,13 +927,9 @@ export function LopoPage() {
  // pertenecer al paciente nuevo.
  setCurrentCtxBeats([]);
  setCurrentRealFuture([]);
- setFutureAlerts([]);
- setFutureMetrics(null);
- setLiveStatus("idle");
- setLiveTimeSec(0);
- setLivePredSamples([]);
- setLiveStopSec(null);
- holterRef.current.active = false;
+ setEvaluados([]);
+ setBeatsLoaded(0);
+ setRPeaksSenal([]);
  if (animationRef.current) {
  clearTimeout(animationRef.current as number);
  cancelAnimationFrame(animationRef.current as number);
@@ -751,6 +959,7 @@ export function LopoPage() {
           proc.beats.length >= NB6_CONFIG.lookback + NB6_CONFIG.horizon
         ) {
           setNormalizedBeats(proc.beats);
+          setRPeaksSenal(proc.r_peaks ?? []);
           setRrPerBeat(proc.rr_per_beat ?? []);
           setBeatMu(proc.beat_mu ?? 0);
           setBeatStd(proc.beat_std ?? 1);
@@ -769,8 +978,15 @@ export function LopoPage() {
           setUseSimMode(false);
           usedApi = true;
         }
-      } catch {
+      } catch (e) {
         if (!vigente()) return;
+        // Antes esto solo apagaba la insignia y caia a simulacion. El banner de
+        // error existia y era practicamente inalcanzable.
+        setLopoError(
+          `${t("El servicio no respondió", "The service did not respond")}: ${
+            e instanceof Error ? e.message : String(e)
+          }`,
+        );
         setApiOnline(false);
       }
     }
@@ -807,6 +1023,7 @@ export function LopoPage() {
         proc.beats.length >= NB6_CONFIG.lookback + NB6_CONFIG.horizon
       ) {
         setNormalizedBeats(proc.beats);
+        setRPeaksSenal(proc.r_peaks ?? []);
         setRrPerBeat(proc.rr_per_beat ?? []);
         setBeatMu(proc.beat_mu ?? 0);
         setBeatStd(proc.beat_std ?? 1);
@@ -822,8 +1039,15 @@ export function LopoPage() {
         setUseSimMode(false);
         return;
       }
-    } catch {
+      } catch (e) {
       if (!vigente()) return;
+      // Antes esto solo apagaba la insignia y caia a simulacion. El banner de
+      // error existia y era practicamente inalcanzable.
+      setLopoError(
+      `${t("El servicio no respondió", "The service did not respond")}: ${
+        e instanceof Error ? e.message : String(e)
+      }`,
+      );
       setApiOnline(false);
     }
 
@@ -850,6 +1074,7 @@ export function LopoPage() {
  }
 
  setNormalizedBeats(finalBeats);
+ setRPeaksSenal(rPeaks);
  setRrPerBeat(finalRR);
  setBeatsLoaded(finalBeats.length);
  setBeatMu(0);
@@ -888,21 +1113,36 @@ export function LopoPage() {
  }
   }, []);
 
+  /** Continua el analisis desde donde se quedo. No borra nada: para eso esta reiniciar. */
   const startPrediction = useCallback(() => {
  if (normalizedBeats.length < NB6_CONFIG.lookback + NB6_CONFIG.horizon + 2)
  return;
+ setParadoPorAlarma(false);
+ setLopoError(null);
  setIsRunning(true);
+  }, [normalizedBeats]);
+
+  /** Vuelve al principio del registro y vacia la tabla. */
+  const reiniciarAnalisis = useCallback(() => {
+ setIsRunning(false);
+ marcoRef.current = 0;
  setCurrentFrame(0);
  setMetricsHistory([]);
  setR2ByStep([[], [], []]);
+ setEvaluados([]);
+ setPasos([]);
+ setLatidosMarco([]);
+ setParadoPorAlarma(false);
  setLopoError(null);
-  }, [normalizedBeats]);
+  }, []);
 
   // Animation loop — advances HORIZON=3 positions per frame
   useEffect(() => {
  if (!isRunning || normalizedBeats.length === 0) return;
 
- let frame = 0;
+ // Reanuda donde se quedo. Antes empezaba siempre en cero, asi que «continuar»
+ // volvia a analizar los mismos latidos.
+ let frame = marcoRef.current;
  let active = true;
  // El indicador de simulacion se enganchaba: bastaba un fallo puntual para que
  // toda la sesion siguiera rotulada como «simulacion local» aunque las cifras
@@ -914,6 +1154,8 @@ export function LopoPage() {
 
  const frameInterval = async () => {
  if (!active) return;
+ // Se declara aqui para que el final de la pasada sepa si hubo alarma.
+ let hayAlarma = false;
 
  // Max frames so we don't go past end of signal
  const maxFrames = Math.floor(
@@ -1035,6 +1277,63 @@ export function LopoPage() {
  ampError: avg(ampArr),
  forecastScore: forecastScoreVal,
  };
+ // ── Deteccion: el residuo de cada latido frente al umbral ──────────
+ // El MSE es el RMSE al cuadrado; no hace falta recorrer las muestras otra vez.
+ // El latido comparado en el horizonte h es el de indice ctxStart + LB + h, y esa
+ // es la clave para buscar su etiqueta.
+ if (umbralRef.current !== null) {
+ const nuevos: LatidoEvaluado[] = [];
+ for (let h = 0; h < nCmp; h++) {
+ const indice = ctxStart + LB + h;
+ const mse = rmse_t[h] * rmse_t[h];
+ const clase = clasesRef.current[indice] ?? null;
+ // La clase Q —marcapasos o no clasificable— queda fuera de la evaluacion,
+ // como en el experimento 8. No es ni normal ni ectopica: contarla como
+ // normal dispara los falsos positivos en los registros marcapaseados, que
+ // son justo donde la pagina imprime al lado la referencia del experimento.
+ const evaluable = clase !== null && clase !== "Q";
+ nuevos.push({
+ indice,
+ horizonte: h,
+ mse,
+ marcado: mse >= umbralRef.current,
+ clase,
+ ectopico: evaluable ? esEctopica(clase) : null,
+ excluido: clase === "Q",
+ });
+ }
+ setEvaluados((prev) => [...prev, ...nuevos]);
+ setLatidosMarco(nuevos);
+
+ // ¿Hubo alarma en ESTE analisis? Es lo que decide si se sigue o se para.
+ hayAlarma = nuevos.some((x) => x.marcado && !x.excluido);
+
+ // La fila de la tabla. Un analisis, una fila.
+ const evaluables = nuevos.filter((x) => !x.excluido);
+ const ectopico = evaluables.some((x) => x.ectopico === true);
+ const conEtiqueta = evaluables.some((x) => x.ectopico !== null);
+ const veredicto: PasoAnalisis["veredicto"] = !conEtiqueta
+ ? "sin etiqueta"
+ : hayAlarma && ectopico ? "VP"
+ : hayAlarma && !ectopico ? "FP"
+ : !hayAlarma && ectopico ? "FN"
+ : "VN";
+ // El pico R del primer latido predicho da el segundo del registro. El
+ // desfase de 1 es el latido guarda que la segmentacion descarta al principio.
+ const pico = picosRef.current[ctxStart + LB + 1];
+ setPasos((prev) => [...prev, {
+ paso: prev.length + 1,
+ indiceInicial: ctxStart + LB,
+ segundo: pico === undefined ? null : pico / 360,
+ mseMax: Math.max(...nuevos.map((x) => x.mse)),
+ umbral: umbralRef.current,
+ alarma: hayAlarma,
+ clases: nuevos.map((x) => x.clase),
+ veredicto,
+ r2: avg(r2_t),
+ }]);
+ }
+
  setMetricsHistory((prev) => [...prev, newMetric]);
  setR2ByStep((prev) => {
  const combined = prev.map((a) => [...a]);
@@ -1051,8 +1350,20 @@ export function LopoPage() {
  setCurrentRealFuture([...realFuture]);
 
  frame += 1;
+ marcoRef.current = frame;
  setCurrentFrame(frame);
  if (!active) return;
+
+ // Aqui esta el cambio de fondo: el bucle ya no encadena a ciegas.
+ //  - En modo «paso» se detiene siempre: un analisis y para.
+ //  - En modo «serie» encadena, pero se para en cuanto hay una alarma, que
+ //    es justo el momento en que hay algo que mirar.
+ if (modoRef.current === "paso" || hayAlarma) {
+ setIsRunning(false);
+ setParadoPorAlarma(hayAlarma);
+ return;
+ }
+
  const vel = speedRef.current;
  if (autoAnimate && vel > 0) {
  animationRef.current = window.setTimeout(
@@ -1073,136 +1384,6 @@ export function LopoPage() {
  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isRunning, normalizedBeats]);
 
-  // 
-  // Live Holter Generation
-  // 
-  const startHolter = useCallback(() => {
- if (!signalStore?.values || signalStore?.values.length === 0) return;
- setLiveStatus("real_playing");
- setLiveTimeSec(0);
- setLiveStopSec(null);
- setLivePredSamples([]);
- setFutureAlerts([]);
- 
- holterRef.current = {
- active: true,
- lastT: performance.now(),
- timeSec: 0,
- stopSec: 0,
- predicting: false,
- ctxBeats: [],
- generatedBeats: [],
- };
-
- const loop = (t: number) => {
- if (!holterRef.current.active) return;
- const dt = (t - holterRef.current.lastT) / 1000;
- holterRef.current.lastT = t;
- 
- let nextTime = holterRef.current.timeSec + dt;
- 
- // If predicting, don't advance past what's generated
- if (holterRef.current.predicting) {
- const FS = 360;
- const genTime = holterRef.current.stopSec + ((holterRef.current.generatedBeats.length * Math.round(NB6_CONFIG.rrMuGlobal * FS)) / FS);
- if (nextTime > genTime) {
- nextTime = genTime; // wait for model
- }
- } else {
- // Stop if we reach the end of real signal
- if (nextTime > signalStore?.values!.length / 360) {
- nextTime = signalStore?.values!.length / 360;
- holterRef.current.active = false;
- setLiveStatus("idle");
- }
- }
- 
- holterRef.current.timeSec = nextTime;
- setLiveTimeSec(nextTime);
- 
- if (holterRef.current.active) {
- animationRef.current = requestAnimationFrame(loop);
- }
- };
- 
- animationRef.current = requestAnimationFrame(loop);
-  }, [signalStore?.values]);
-
-  const stopAndPredict = useCallback(async () => {
- if (liveStatus !== "real_playing" || !signalStore?.values) return;
- setLiveStatus("predicting");
- const stopSec = holterRef.current.timeSec;
- setLiveStopSec(stopSec);
- holterRef.current.stopSec = stopSec;
- holterRef.current.predicting = true;
-
- // Find closest context beats in normalizedBeats
- let accum = 0;
- let bIdx = 0;
- while (bIdx < rrPerBeat.length && accum + rrPerBeat[bIdx] < stopSec) {
- accum += rrPerBeat[bIdx];
- bIdx++;
- }
- const lookback = NB6_CONFIG.lookback;
- bIdx = Math.max(lookback, bIdx);
- 
- let ctx = [...normalizedBeats.slice(bIdx - lookback, bIdx)];
- holterRef.current.ctxBeats = ctx;
-
- const maxGenBeats = 100; // Generate roughly ~1 min ahead
- let generated: number[][] = []
- // El indicador de simulacion se enganchaba: bastaba un fallo puntual para que
- // toda la sesion siguiera rotulada como «simulacion local» aunque las cifras
- // vinieran del modelo real. Si el servicio respondio al cargar la senal, cada
- // pasada vuelve a intentarlo; solo si falla otra vez se cae a la simulacion.
- let simMode = useSimMode && apiOnline !== true;
- 
- try {
- while (holterRef.current.active && holterRef.current.predicting && generated.length < maxGenBeats) {
- let batch: number[][] = [];
- const HORIZON = NB6_CONFIG.horizon;
- const batchSize = Math.min(HORIZON, maxGenBeats - generated.length);
- 
- if (!simMode) {
- try {
- const rrCtx = ctx.map((_, j) => {
- const idx = bIdx - lookback + j + generated.length;
- return idx < rrPerBeat.length ? rrPerBeat[idx] : NB6_CONFIG.rrMuGlobal;
- });
- const result = await api.predictLopo({
- beats: ctx.slice(-lookback),
- lookback,
- beat_mu: beatMu ?? null,
- beat_std: beatStd ?? null,
- rr_per_beat: rrCtx,
- });
- batch = result.predicted_beats?.length > 0 ? result.predicted_beats.slice(0, batchSize) : [result.predicted_beat];
- } catch {
- batch = simulateNB6(ctx, batchSize);
- simMode = true;
- setUseSimMode(true);
- }
- } else {
- batch = simulateNB6(ctx, batchSize);
- }
- 
- for (let b = 0; b < batch.length; b++) {
- generated.push(batch[b]);
- ctx = [...ctx.slice(1), batch[b]];
- }
- 
- holterRef.current.generatedBeats = [...generated];
- 
- // Trigger an update so the overlap-add hook runs
- setLivePredSamples([...generated].flat()); // Temp array trigger
- 
- // Artificial delay for smooth generation effect in sim mode or to yield event loop
- await new Promise(r => setTimeout(r, simMode ? 300 : 0));
- }
- } catch (e) {
- console.error("Holter Prediction Error", e);
- }
-  }, [liveStatus, normalizedBeats, rrPerBeat, beatMu, beatStd, signalStore?.values, useSimMode]);
 
   // 
   // Computed chart data
@@ -1246,168 +1427,7 @@ export function LopoPage() {
  return { ctxSamples, ctxTime, predTraces, realFutureTraces };
   }, [currentCtxBeats, currentPredBeats, currentRealFuture, normalizedBeats]);
 
-  const holterData = useMemo(() => {
- if (mode !== "futuro" || !signalStore?.values) return null;
- const FS = 360;
- const WINDOW_SEC = 10;
- const windowSamples = WINDOW_SEC * FS;
- 
- // 1. Real trace
- const endRealSample = Math.floor((liveStopSec ?? liveTimeSec) * FS);
- const startRealSample = Math.max(0, endRealSample - windowSamples);
- 
- const realSamples = signalStore?.values.slice(startRealSample, endRealSample);
- const realTimes = Array.from({ length: realSamples.length }, (_, i) => (startRealSample + i) / FS);
- 
- // 2. Predicted trace
- let predTimes: number[] = [];
- let predSamples: number[] = [];
- let gtSamples: number[] = [];
- let gtTimes: number[] = [];
- 
- if ((liveStatus === "predicting" || liveStatus === "done") && liveStopSec !== null && holterRef.current.generatedBeats.length > 0) {
- const genBeats = holterRef.current.generatedBeats;
- const beatLen = 256;
- const step = beatLen; // Continuous concatenation matches Prospective mode without dropping to zero
- const totalLen = (genBeats.length - 1) * step + beatLen;
- 
- const samplesArr = new Float32Array(totalLen);
- const weights = new Float32Array(totalLen);
 
- for (let i = 0; i < genBeats.length; i++) {
- const beat = genBeats[i];
- const startIdx = i * step;
-
- for (let j = 0; j < beatLen; j++) {
- samplesArr[startIdx + j] += beat[j];
- weights[startIdx + j] += 1;
- }
- }
-
- const finalSamples = new Array(totalLen);
- for (let i = 0; i < totalLen; i++) {
- finalSamples[i] = weights[i] > 0 ? samplesArr[i] / weights[i] : 0;
- }
- 
- // Only show up to current liveTimeSec
- const maxPredSampleIdx = Math.floor((liveTimeSec - liveStopSec) * FS);
- predSamples = finalSamples.slice(0, maxPredSampleIdx);
- predTimes = predSamples.map((_, i) => liveStopSec + (i / FS));
-
- // 3. Ground Truth comparison (Original signal in parallel)
- if (liveStatus === "predicting" || liveStatus === "done") {
- // We need to construct the GT from normalized beats using overlap-add
- // Find the starting beat index corresponding to liveStopSec
- let gtAccum = 0;
- let bIdx = 0;
- while (bIdx < rrPerBeat.length && gtAccum + rrPerBeat[bIdx] < liveStopSec!) {
- gtAccum += rrPerBeat[bIdx];
- bIdx++;
- }
- 
- // Grab the actual future normalized beats
- const numGenBeats = holterRef.current.generatedBeats.length;
- const gtBeatsToUse = normalizedBeats.slice(bIdx, bIdx + numGenBeats);
- 
- if (gtBeatsToUse.length > 0) {
- const gtTotalLen = (gtBeatsToUse.length - 1) * step + beatLen;
- 
- const gtSamplesArr = new Float32Array(gtTotalLen);
- const gtWeights = new Float32Array(gtTotalLen);
- 
- for (let i = 0; i < gtBeatsToUse.length; i++) {
- const beat = gtBeatsToUse[i];
- const startIdx = i * step;
- 
- for (let j = 0; j < beatLen; j++) {
- gtSamplesArr[startIdx + j] += beat[j];
- gtWeights[startIdx + j] += 1;
- }
- }
- 
- const gtFinalSamples = new Array(gtTotalLen);
- for (let i = 0; i < gtTotalLen; i++) {
- gtFinalSamples[i] = gtWeights[i] > 0 ? gtSamplesArr[i] / gtWeights[i] : 0;
- }
- 
- const maxGTSampleIdx = Math.floor((liveTimeSec - liveStopSec!) * FS);
- gtSamples = gtFinalSamples.slice(0, maxGTSampleIdx);
- gtTimes = [...predTimes].slice(0, gtSamples.length);
- }
- }
- }
- 
- // Combine arrays to respect the 10-second rolling window
- const totalVisibleSamples = realSamples.length + predSamples.length;
- if (totalVisibleSamples > windowSamples) {
- const overflow = totalVisibleSamples - windowSamples;
- if (overflow < realSamples.length) {
- realSamples.splice(0, overflow);
- realTimes.splice(0, overflow);
- } else {
- const origLen = realSamples.length;
- realSamples.splice(0, origLen);
- realTimes.splice(0, origLen);
- const predOverflow = overflow - origLen;
- predSamples.splice(0, predOverflow);
- predTimes.splice(0, predOverflow);
- // Adjust GT as well if needed
- if (gtSamples.length > 0) {
- gtSamples.splice(0, predOverflow);
- gtTimes.splice(0, predOverflow);
- }
- }
- }
- 
- return { realTimes, realSamples, predTimes, predSamples, gtTimes, gtSamples };
-  }, [mode, liveTimeSec, liveStatus, liveStopSec, livePredSamples, signalStore?.values, normalizedBeats]);
-
-  // ,, Metrics Calculation for Holter ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-  useEffect(() => {
- if (mode === "futuro" && (liveStatus === "predicting" || liveStatus === "done") && holterData && holterData.predSamples.length > 30) {
- const { predSamples, gtSamples } = holterData;
- 
- // We only calculate if we have corresponding GT
- if (gtSamples.length > 10) {
- const r2 = r2Score(gtSamples, predSamples);
- // Este calculo recorria `gtSamples` entero indexando `predSamples`, que por
- // construccion tiene otra longitud: en cuanto el real era mas largo, el termino
- // sobrante restaba `undefined` y el RMSE salia NaN en pantalla. `rmseScore`, que
- // ya existia unas lineas mas arriba, recorta al minimo de las dos longitudes.
- const rmse = rmseScore(gtSamples, predSamples);
- 
- // DTW is expensive, calculate on a window for performance
- let dtw = 0;
- const dtwWindow = 256;
- if (predSamples.length >= dtwWindow) {
- dtw = dtwDistance(
- gtSamples.slice(-dtwWindow),
- predSamples.slice(-dtwWindow)
- );
- }
-
- setFutureMetrics(prev => {
- const totalBeats = holterRef.current.generatedBeats.length;
- const totalDuration = liveTimeSec - (liveStopSec ?? 0);
- 
- const newR2 = [...(prev?.morphR2 || []), r2].slice(-100);
- const newDTW = [...(prev?.dtw || []), dtw].slice(-100);
- const newRMSE = [...(prev?.rmse || []), rmse].slice(-100);
- 
- return {
- morphR2: newR2,
- dtw: newDTW,
- rmse: newRMSE,
- forecastScore: newR2, // placeholder or logic
- totalBeats,
- totalDuration
- };
- });
- }
- } else if (liveStatus === "idle") {
- setFutureMetrics(null);
- }
-  }, [mode, liveStatus, holterData?.predSamples.length]);
 
   const r2HistData = useMemo(
  () => ({
@@ -1427,10 +1447,6 @@ export function LopoPage() {
   const avgR2 =
  metricsHistory.length > 0
  ? metricsHistory.reduce((s, m) => s + m.r2, 0) / metricsHistory.length
- : null;
-  const avgDtw =
- metricsHistory.length > 0
- ? metricsHistory.reduce((s, m) => s + m.dtw, 0) / metricsHistory.length
  : null;
 
   const hasPred = currentPredBeats.length > 0;
@@ -1529,7 +1545,7 @@ export function LopoPage() {
  >
  {[
  { label: "CNN_GRU_ATTN", color: "var(--ok)" },
- { label: "R²=0.6734", color: "var(--accent)" },
+ { label: `R²=${ref.r2.toFixed(4)}`, color: "var(--accent)" },
  { label: "DTW Priority", color: "var(--cat-4)" },
  { label: "NB6", color: "var(--crit)" },
  ].map((b) => (
@@ -1629,7 +1645,7 @@ export function LopoPage() {
  alignItems: "flex-start",
  }}
  >
- <span style={{ fontSize: 20 }}>🔴</span>
+ <AlertTriangle size={18} aria-hidden style={{ color: "var(--alert)", flex: "none" }} />
  <div>
  <div
  style={{
@@ -1639,7 +1655,7 @@ export function LopoPage() {
  marginBottom: 4,
  }}
  >
- API Backend no disponible — Modo demo local activo
+ API Backend no disponible, Modo demo local activo
  </div>
  <div style={{ color: textSec, fontSize: 12, lineHeight: 1.6 }}>
  Las señales se generan sintéticamente y las predicciones usan
@@ -1669,136 +1685,36 @@ export function LopoPage() {
  </div>
  )}
 
- {/* ,, Duración Status ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, */}
- {(avgR2 !== null || futureMetrics !== null) && (
- <div
- style={{
- padding: "8px 14px",
- borderRadius: 8,
- marginBottom: 14,
- background: "rgba(142,68,173,0.08)",
- border: "1px solid rgba(142,68,173,0.25)",
- display: "flex",
- gap: 10,
- alignItems: "center",
- fontSize: 12,
- }}
- >
- <span style={{ fontSize: 16 }}>⏱</span>
- <span style={{ color: "var(--cat-4)", fontWeight: 700 }}>
- {mode === "prospectivo" 
- ? `Predicción simulada por ${(currentFrame * NB6_CONFIG.rrMuGlobal).toFixed(2)} segundos (${currentFrame} saltos)`
- : futureMetrics 
- ? `Señal generada: ${(futureMetrics.totalDuration / 60).toFixed(2)} mins (${futureMetrics.totalBeats} latidos)`
- : "Simulando..."}
- </span>
- </div>
- )}
-
- {/* ,, Beats loaded indicator */}
- {beatsLoaded > 0 && (
- <div
- style={{
- padding: "8px 14px",
- borderRadius: 8,
- marginBottom: 14,
- background: "rgba(39,174,96,0.08)",
- border: "1px solid rgba(39,174,96,0.25)",
- display: "flex",
- gap: 10,
- alignItems: "center",
- fontSize: 12,
- }}
- >
- <span style={{ fontSize: 16 }}>✓</span>
- <span style={{ color: "var(--ok)", fontWeight: 700 }}>
- {beatsLoaded} latidos cargados
- </span>
- <span style={{ color: textSec }}>
- · Paciente {demoPatient} · {patientGroup} · Preprocesamiento:{" "}
- {apiOnline
- ? "API (F_NB6 backend)"
- : "JS local (Notch+BP+Detrend+Znorm)"}
- </span>
- </div>
- )}
-
  {/* ,, Quick Stats Row ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, */}
- <div
- style={{
- display: "grid",
- gridTemplateColumns: "repeat(auto-fit,minmax(140px,1fr))",
- gap: 10,
- marginBottom: 20,
- }}
- >
- {[
- {
-    label: "R² Medio LOPO",
-    value: "0.6734",
-    sub: "IC95: [0.624, 0.723]",
- color: "var(--ok)",
- },
- {
- label: "Horizonte",
- value: "3 latidos",
- sub: "t+1  t+2  t+3",
- color: "var(--accent)",
- },
- {
- label: "Pacientes",
- value: "123",
- sub: "48 MIT-BIH + 75 INCART",
- color: "var(--cat-4)",
- },
- {
- label: "Gap train-test",
-    value: "0.0956",
-    sub: "Mejor del proyecto",
- color: "var(--ok)",
- },
- {
- label: "Shape Corr",
-    value: "0.8383",
- sub: "Fidelidad morfológica",
- color: "var(--ok)",
- },
- {
- label: "Forecast Score",
-    value: "0.7073",
- sub: "Métrica compuesta",
- color: "var(--warn)",
- },
- ].map((s) => (
- <div
- key={s.label}
- style={{
- background: cardBg,
- border: `1px solid ${border}`,
- borderRadius: 10,
- padding: "12px 14px",
- }}
- >
- <div
- style={{
- fontSize: 10,
- color: textSec,
- textTransform: "uppercase",
- letterSpacing: "0.8px",
- marginBottom: 4,
- }}
- >
- {s.label}
- </div>
- <div style={{ fontSize: 20, fontWeight: 800, color: s.color }}>
- {s.value}
- </div>
- <div style={{ fontSize: 10, color: textSec, marginTop: 2 }}>
- {s.sub}
- </div>
- </div>
- ))}
- </div>
+        {/* Alcance del sistema. Va antes que ninguna cifra, a proposito. */}
+        <div
+          role="note"
+          style={{
+            display: "flex",
+            gap: 10,
+            alignItems: "flex-start",
+            background: "var(--surface)",
+            border: "1px solid var(--border)",
+            borderLeft: "3px solid var(--warn)",
+            borderRadius: "var(--radius-sm)",
+            padding: "12px 14px",
+            marginBottom: 16,
+          }}
+        >
+          <Info size={15} aria-hidden style={{ color: "var(--warn)", flex: "none", marginTop: 2 }} />
+          <div style={{ fontSize: "var(--fs-xs)", lineHeight: 1.6, color: "var(--text-sub)" }}>
+            <strong style={{ color: "var(--text)" }}>
+              {t(
+                "Este sistema predice la morfología de la señal; no clasifica el evento arrítmico.",
+                "This system predicts signal morphology; it does not classify the arrhythmic event.",
+              )}
+            </strong>{" "}
+            {t(
+              "Lo que se marca abajo como latido sospechoso sale de comparar el error de predicción con un umbral, no de un clasificador entrenado con etiquetas. Y lo que detecta es, sobre todo, ectopia VENTRICULAR: su error medio es 3.42 veces el de un latido normal, mientras que el de la supraventricular es 1.19 veces, casi invisible, porque ese latido usa la vía de conducción normal y apenas cambia de forma. No es un detector de uso clínico: su precisión mediana entre pacientes es 0.3123 y varía mucho de uno a otro.",
+              "What is flagged below as a suspicious beat comes from comparing the prediction error against a threshold, not from a classifier trained on labels. And what it detects is mostly VENTRICULAR ectopy: its mean error is 3.42 times that of a normal beat, while supraventricular ectopy is 1.19 times, nearly invisible, because that beat uses the normal conduction pathway and barely changes shape. It is not a clinical detector: its median precision across patients is 0.3123 and varies widely.",
+            )}
+          </div>
+        </div>
 
  {/* ,, Patient Selector ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, */}
  <div
@@ -1819,6 +1735,18 @@ export function LopoPage() {
  marginBottom: patientExpanded ? 12 : 0,
  }}
  onClick={() => setPatientExpanded((p) => !p)}
+ onKeyDown={(e) => {
+ // Era un <div onClick> sin papel ni foco: no habia forma de abrir el
+ // selector con el teclado, y es el control principal de la pagina.
+ if (e.key === "Enter" || e.key === " ") {
+ e.preventDefault();
+ setPatientExpanded((v) => !v);
+ }
+ }}
+ role="button"
+ tabIndex={0}
+ aria-expanded={patientExpanded}
+ aria-label={t("Seleccionar paciente", "Select patient")}
  >
  <div
  style={{
@@ -1831,7 +1759,7 @@ export function LopoPage() {
  }}
  >
  <Users size={15} />
- {t("Selección de Paciente", "Patient Selection")} —&nbsp;
+ {t("Selección de Paciente", "Patient Selection")}, &nbsp;
  <span
  style={{
  color: patientGroup === "MITBIH" ? "var(--accent)" : "var(--cat-4)",
@@ -1840,11 +1768,16 @@ export function LopoPage() {
  {patientGroup} · {demoPatient}
  </span>
  </div>
+ {/* Este chevron es hermano del titulo del panel y esta pegado al
+ AnimatePresence que abre y cierra la lista: justo el sitio donde el
+ intercambio de tipos es mas delicado. Envoltorio fijo. */}
+ <span style={{ display: "flex" }}>
  {patientExpanded ? (
  <ChevronUp size={16} color={textSec} />
  ) : (
  <ChevronDown size={16} color={textSec} />
  )}
+ </span>
  </div>
 
  <AnimatePresence>
@@ -1863,24 +1796,19 @@ export function LopoPage() {
  setPatientGroup(g);
  setDemoPatient(g === "MITBIH" ? "100" : "I01");
  }}
+ aria-pressed={g === patientGroup}
  style={{
+ // El seleccionado pintaba el fondo y el texto DEL MISMO color, asi que
+ // el nombre de la base desaparecia. Ahora el fondo es la tinta suave del
+ // acento y el texto conserva el color de lectura, como en el resto del
+ // tablero.
  padding: "6px 16px",
- borderRadius: 6,
- border: `1px solid ${g === patientGroup ? (g === "MITBIH" ? "var(--accent)" : "var(--cat-4)") : border}`,
- background:
- g === patientGroup
- ? g === "MITBIH"
- ? "var(--accent)"
- : "var(--cat-4)"
- : "transparent",
- color:
- g === patientGroup
- ? g === "MITBIH"
- ? "var(--accent)"
- : "var(--cat-4)"
- : textSec,
+ borderRadius: "var(--radius-sm)",
+ border: `1px solid ${g === patientGroup ? "var(--accent-border)" : border}`,
+ background: g === patientGroup ? "var(--accent-bg)" : "transparent",
+ color: g === patientGroup ? "var(--text)" : textSec,
  cursor: "pointer",
- fontWeight: 600,
+ fontWeight: g === patientGroup ? 600 : 500,
  fontSize: 12,
  }}
  >
@@ -1984,7 +1912,7 @@ export function LopoPage() {
  marginRight: 4,
  }}
  />
- INCART (demo)
+ INCART
  </span>
  </div>
 
@@ -2007,8 +1935,14 @@ export function LopoPage() {
  gap: 8,
  }}
  >
+ {/* Tercer sitio con el mismo defecto: aqui el «icono» es el <span> que gira,
+ no un icono de lucide, y por eso la primera busqueda no lo encontro. Al
+ cambiar de paciente, isLoading intercambiaba <Signal> por <span> en la misma
+ posicion de un fragmento sin key; React concilia por indice y tiene que
+ insertar el elemento nuevo DELANTE del texto hermano. Envoltorio fijo: los
+ hijos del boton son siempre dos y no hay hermano de referencia. */}
+ <span style={{ display: "flex", width: 14, height: 14 }}>
  {isLoading ? (
- <>
  <span
  style={{
  width: 14,
@@ -2019,14 +1953,11 @@ export function LopoPage() {
  animation: "spin 0.8s linear infinite",
  }}
  />
- {t("Cargando...", "Loading...")}
- </>
  ) : (
- <>
  <Signal size={14} />
- {t("Cargar Señal", "Load Signal")}
- </>
  )}
+ </span>
+ <span>{isLoading ? t("Cargando...", "Loading...") : t("Cargar Señal", "Load Signal")}</span>
  </button>
  </motion.div>
  )}
@@ -2043,44 +1974,7 @@ export function LopoPage() {
  alignItems: "center",
  }}
  >
- {/* Mode toggle */}
- {(["prospectivo", "futuro"] as PredictionMode[]).map((m) => (
- <button
- key={m}
- onClick={() => {
- setMode(m);
- stopPrediction();
- }}
- style={{
- padding: "7px 18px",
- borderRadius: 8,
- border: `1px solid ${mode === m ? "var(--ok)" : border}`,
- background: mode === m ? "var(--ok-tint)" : "transparent",
- color: mode === m ? "var(--ok)" : textSec,
- cursor: "pointer",
- fontWeight: 600,
- fontSize: 12,
- display: "flex",
- alignItems: "center",
- gap: 6,
- }}
- >
- {m === "prospectivo" ? (
- <>
- <TrendingUp size={13} />
- {t("Prospectivo", "Prospective")}
- </>
- ) : (
- <>
- <Zap size={13} />
- {t("Futuro", "Future")}
- </>
- )}
- </button>
- ))}
 
- {/* Speed (prospectivo only) */}
- {mode === "prospectivo" && (
  <div
  style={{
  display: "flex",
@@ -2093,6 +1987,7 @@ export function LopoPage() {
  <span>{t("Velocidad", "Speed")}:</span>
  <input
  type="range"
+ aria-label={t("Velocidad de reproducción, segundos por marco", "Playback speed, seconds per frame")}
  min={0.1}
  max={3}
  step={0.1}
@@ -2104,35 +1999,43 @@ export function LopoPage() {
  {speed.toFixed(1)}s
  </span>
  </div>
- )}
 
- {/* Future mode status (Holter) */}
- {mode === "futuro" && (
- <div
- style={{
- display: "flex",
- alignItems: "center",
- gap: 8,
- fontSize: 12,
- color: textSec,
- }}
- >
- <span>{t("Estado", "Status")}:</span>
- <span style={{ 
- color: liveStatus === "predicting" ? "var(--cat-4)" : liveStatus === "real_playing" ? "var(--ok)" : textSec, 
- fontWeight: 600 
- }}>
- {liveStatus === "idle" ? t("Listo", "Ready") : 
- liveStatus === "real_playing" ? t("Señal Real", "Real Signal") : 
- t("Prediciendo", "Predicting")}
- </span>
- </div>
- )}
 
  {/* Play / Stop */}
- <div style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
- {mode === "prospectivo" ? (
- <>
+ <div style={{ marginLeft: "auto", display: "flex", gap: 8, alignItems: "center" }}>
+ <div
+ role="group"
+ aria-label={t("Modo de análisis", "Analysis mode")}
+ style={{ display: "flex", gap: 4, marginRight: 4 }}
+ >
+ {([
+ ["paso", t("Uno a uno", "One by one")],
+ ["serie", t("Hasta la alarma", "Until alarm")],
+ ] as const).map(([k, etiqueta]) => (
+ <button
+ key={k}
+ onClick={() => setModoAnalisis(k)}
+ aria-pressed={modoAnalisis === k}
+ title={k === "paso"
+ ? t("Cada pulsación analiza un latido y se detiene",
+ "Each click analyses one beat and stops")
+ : t("Encadena análisis y se detiene en cuanto hay una alarma",
+ "Chains analyses and stops as soon as there is an alarm")}
+ style={{
+ padding: "6px 12px",
+ borderRadius: "var(--radius-sm)",
+ border: `1px solid ${modoAnalisis === k ? "var(--accent-border)" : border}`,
+ background: modoAnalisis === k ? "var(--accent-bg)" : "transparent",
+ color: modoAnalisis === k ? "var(--text)" : textSec,
+ fontSize: 12,
+ fontWeight: modoAnalisis === k ? 600 : 500,
+ cursor: "pointer",
+ }}
+ >
+ {etiqueta}
+ </button>
+ ))}
+ </div>
  <button
  onClick={isRunning ? stopPrediction : startPrediction}
  disabled={!hasSignal || isLoading}
@@ -2155,26 +2058,26 @@ export function LopoPage() {
  gap: 8,
  }}
  >
- {isRunning ? (
- <>
- <Pause size={14} />
- {t("Detener", "Stop")}
- </>
- ) : (
- <>
- <Play size={14} />
- {t("Iniciar Predicción", "Start Prediction")}
- </>
- )}
+ {/* Mismo motivo que arriba: envoltorio fijo para el icono. Este era el
+ boton donde el fallo se disparaba de verdad (Lopo.tsx:2520, <Pause>). */}
+ <span style={{ display: "flex" }}>
+ {isRunning ? <Pause size={14} /> : <Play size={14} />}
+ </span>
+ <span>
+ {isRunning
+ ? t("Detener", "Stop")
+ : modoAnalisis === "paso"
+ ? t("Analizar un latido", "Analyse one beat")
+ : t("Analizar hasta la alarma", "Analyse until alarm")}
+ </span>
  </button>
  <button
  onClick={() => {
- stopPrediction();
- setMetricsHistory([]);
- setR2ByStep([[], [], []]);
- setCurrentFrame(0);
+ reiniciarAnalisis();
  setCurrentPredBeats([]);
  }}
+ aria-label={t("Reiniciar el análisis desde el principio", "Restart the analysis from the beginning")}
+ title={t("Reiniciar el análisis desde el principio", "Restart the analysis from the beginning")}
  style={{
  padding: "8px 14px",
  borderRadius: 8,
@@ -2184,117 +2087,8 @@ export function LopoPage() {
  cursor: "pointer",
  }}
  >
- <RotateCcw size={14} />
+ <RotateCcw size={14} aria-hidden />
  </button>
- </>
- ) : (
- <>
- {liveStatus === "idle" && (
- <button
- onClick={startHolter}
- disabled={!hasSignal || isLoading}
- style={{
- padding: "8px 20px",
- borderRadius: 8,
- border: "none",
- background: !hasSignal || isLoading ? "#444" : "var(--ok)",
- color: "#fff",
- cursor: !hasSignal || isLoading ? "not-allowed" : "pointer",
- fontWeight: 700,
- fontSize: 13,
- display: "flex",
- alignItems: "center",
- gap: 8,
- }}
- >
- <Play size={14} />
- {t("Iniciar Holter", "Start Holter")}
- </button>
- )}
-
- {liveStatus === "real_playing" && (
- <button
- onClick={stopAndPredict}
- style={{
- padding: "8px 20px",
- borderRadius: 8,
- border: "none",
- background: "var(--crit)",
- color: "#fff",
- cursor: "pointer",
- fontWeight: 700,
- fontSize: 13,
- display: "flex",
- alignItems: "center",
- gap: 8,
- }}
- >
- <Pause size={14} />
- {t("Detener y Predecir", "Stop & Predict")}
- </button>
- )}
-
- {liveStatus === "predicting" && (
- <button
- onClick={() => {
- holterRef.current.predicting = false;
- holterRef.current.active = false;
- setLiveStatus("done");
- }}
- style={{
- padding: "8px 20px",
- borderRadius: 8,
- border: "none",
- background: "var(--warn)",
- color: "#fff",
- cursor: "pointer",
- fontWeight: 700,
- fontSize: 13,
- display: "flex",
- alignItems: "center",
- gap: 8,
- }}
- >
- <Pause size={14} />
- {t("Detener Generacion", "Stop Generation")}
- </button>
- )}
-
- {mode === "futuro" && (liveStatus === "predicting" || liveStatus === "real_playing" || liveStatus === "done") && (
- <label style={{ display: "flex", alignItems: "center", gap: 6, cursor: "pointer", fontSize: 12, color: textSec }}>
- <input 
- type="checkbox" 
- checked={showHolterGT} 
- onChange={e => setShowHolterGT(e.target.checked)} 
- />
- {t("Mostrar Original (GT)", "Show Original (GT)")}
- </label>
- )}
-
- {(liveStatus === "real_playing" || liveStatus === "predicting" || liveStatus === "done") && (
- <button
- onClick={() => {
- holterRef.current.active = false;
- setLiveStatus("idle");
- setLiveTimeSec(0);
- setLiveStopSec(null);
- setLivePredSamples([]);
- setFutureMetrics(null);
- }}
- style={{
- padding: "8px 14px",
- borderRadius: 8,
- border: `1px solid ${border}`,
- background: "transparent",
- color: textSec,
- cursor: "pointer",
- }}
- >
- <RotateCcw size={14} />
- </button>
- )}
- </>
- )}
  </div>
  </div>
 
@@ -2321,8 +2115,43 @@ export function LopoPage() {
  {/* 
  PROSPECTIVO mode
  */}
- {mode === "prospectivo" && (
  <>
+        {/* Se detuvo porque encontro una alarma: se dice y se senala. */}
+        {paradoPorAlarma && !isRunning && (
+          <div
+            role="status"
+            style={{
+              display: "flex",
+              gap: 10,
+              alignItems: "flex-start",
+              background: "var(--surface)",
+              border: "1px solid var(--border)",
+              borderLeft: "3px solid var(--alert)",
+              borderRadius: "var(--radius-sm)",
+              padding: "12px 14px",
+              marginBottom: 14,
+            }}
+          >
+            <AlertTriangle size={16} aria-hidden style={{ color: "var(--alert)", flex: "none", marginTop: 2 }} />
+            <div style={{ fontSize: "var(--fs-xs)", lineHeight: 1.6, color: "var(--text-sub)" }}>
+              <strong style={{ color: "var(--text)" }}>
+                {t("El análisis se detuvo: hay una alarma.", "The analysis stopped: there is an alarm.")}
+              </strong>{" "}
+              {t(
+                "El latido que la disparó está en rojo sobre la gráfica, con su error y su clase al pasar el ratón. Debajo, la fila de esta sesión.",
+                "The beat that triggered it is in red on the chart, with its error and class on hover. Below, this session's row.",
+              )}{" "}
+              {latidosMarco.filter((x) => x.marcado && !x.excluido).map((x) => (
+                <span key={x.indice} style={{ fontFamily: "var(--font-data)", color: "var(--text)" }}>
+                  {t("latido", "beat")} #{x.indice} · t+{x.horizonte + 1} · MSE {x.mse.toFixed(4)}
+                  {umbralUsado !== null ? ` ≥ ${umbralUsado.toFixed(4)}` : ""} ·{" "}
+                  {t("clase anotada", "annotated class")}: {x.clase ?? t("sin etiqueta", "unlabelled")}{" "}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
  {/* ,, Live ECG Chart: context + 3 predicted beats ,,,,,,,,, */}
  <div
  style={{
@@ -2347,8 +2176,8 @@ export function LopoPage() {
  style={{ fontWeight: 700, fontSize: 14, color: textPri }}
  >
  {t(
- "ECG en Vivo — Predicción Multi-Horizonte",
- "Live ECG — Multi-Horizon Prediction",
+ "ECG en Vivo · Predicción Multi-Horizonte",
+ "Live ECG · Multi-Horizon Prediction",
  )}
  </span>
  {isRunning && (
@@ -2431,7 +2260,12 @@ export function LopoPage() {
  fontSize: 13,
  }}
   >
- {t("Cargando señal...", "Loading signal...")}
+ {isLoading
+ ? t("Cargando señal…", "Loading signal…")
+ : t(
+ "No hay suficientes latidos para predecir. Prueba con otro paciente o vuelve a cargar la señal.",
+ "Not enough beats to predict. Try another patient or reload the signal.",
+ )}
   </div>
 ) : liveChartData.ctxSamples.length > 0 ? (
   <PlotlyChart
@@ -2453,11 +2287,22 @@ export function LopoPage() {
  mode: "lines",
  x: tr.x,
  y: tr.y,
- name: H_LABELS[h],
+ name: latidosMarco[h]?.marcado
+ ? `${H_LABELS[h]} · ${t("ALARMA", "ALARM")}`
+ : H_LABELS[h],
  fill: "tozeroy" as const,
- fillcolor: tr.fill,
- line: { color: tr.color, width: 2 - h * 0.3 },
- hovertemplate: `t=%{x:.3f}s  v=%{y:.3f}<extra>${H_LABELS[h]}</extra>`,
+ // El latido que supero el umbral se pinta en rojo y con relleno propio:
+ // es lo que hay que poder senalar cuando alguien pregunta «¿cual fue?».
+ fillcolor: latidosMarco[h]?.marcado ? "rgba(240,138,130,0.22)" : tr.fill,
+ line: {
+ color: latidosMarco[h]?.marcado ? "var(--alert)" : tr.color,
+ width: latidosMarco[h]?.marcado ? 3.2 : 2 - h * 0.3,
+ },
+ hovertemplate: latidosMarco[h]
+ ? `t=%{x:.3f}s  v=%{y:.3f}<extra>${H_LABELS[h]}<br>MSE ${latidosMarco[h].mse.toFixed(4)}`
+ + `<br>${latidosMarco[h].marcado ? t("ALARMA", "ALARM") : t("sin alarma", "no alarm")}`
+ + `<br>${t("clase", "class")}: ${latidosMarco[h].clase ?? "?"}</extra>`
+ : `t=%{x:.3f}s  v=%{y:.3f}<extra>${H_LABELS[h]}</extra>`,
  })),
  // Real future (ground truth)
  ...liveChartData.realFutureTraces.map((tr, h) => ({
@@ -2475,7 +2320,7 @@ export function LopoPage() {
  })),
  ]}
  layout={{
- height: 240,
+ height: 420,
  paper_bgcolor: pBg,
  plot_bgcolor: pBg,
  margin: { l: 45, r: 12, t: 10, b: 36 },
@@ -2572,6 +2417,234 @@ export function LopoPage() {
  </div>
  </div>
 
+
+        {/* La tabla: un analisis, una fila. */}
+        {pasos.length > 0 && (
+          <div className="card" style={{ padding: "14px 16px", marginBottom: 14 }}>
+            <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 8 }}>
+              <h3
+                style={{
+                  margin: 0,
+                  fontFamily: "var(--font-display)",
+                  fontSize: "var(--fs-md)",
+                  fontWeight: 600,
+                  color: "var(--text)",
+                }}
+              >
+                {t("Análisis realizados", "Analyses performed")}
+              </h3>
+              <span style={{ fontFamily: "var(--font-data)", fontSize: "var(--fs-2xs)", color: "var(--text-muted)" }}>
+                {pasos.length} · {pasos.filter((x) => x.alarma).length} {t("con alarma", "with alarm")}
+              </span>
+              <button
+                onClick={() => descargarCsv(pasos)}
+                style={{
+                  marginLeft: "auto",
+                  padding: "5px 10px",
+                  borderRadius: "var(--radius-sm)",
+                  border: `1px solid ${border}`,
+                  background: "transparent",
+                  color: textSec,
+                  fontSize: 12,
+                  cursor: "pointer",
+                }}
+              >
+                {t("Descargar CSV", "Download CSV")}
+              </button>
+            </div>
+            <DataTable
+              fuente={`${DIR_ANOTACIONES}/${demoPatient}.json + ${FUENTE_DETECCION_P4}`}
+              caption={t(
+                "Cada fila es un análisis: cinco latidos de contexto y tres predichos. El error mostrado es el mayor de los tres.",
+                "Each row is one analysis: five context beats and three predicted. The error shown is the largest of the three.",
+              )}
+              maxHeight="320px"
+              data={[...pasos].reverse() as unknown as Record<string, unknown>[]}
+              columns={[
+                { key: "paso", label: "#", align: "right" },
+                { key: "indiceInicial", label: t("Latido", "Beat"), align: "right" },
+                {
+                  key: "segundo",
+                  label: t("Segundo", "Second"),
+                  align: "right",
+                  render: (v) => (typeof v === "number" ? v.toFixed(1) : "—"),
+                },
+                {
+                  key: "mseMax",
+                  label: t("Error máx.", "Max error"),
+                  align: "right",
+                  render: (v) => (typeof v === "number" ? v.toFixed(4) : "—"),
+                },
+                {
+                  key: "alarma",
+                  label: t("Alarma", "Alarm"),
+                  align: "center",
+                  render: (v) =>
+                    v ? (
+                      <span style={{ color: "var(--alert)", fontWeight: 700 }}>
+                        {t("SÍ", "YES")}
+                      </span>
+                    ) : (
+                      <span style={{ color: "var(--text-muted)" }}>—</span>
+                    ),
+                },
+                {
+                  key: "clases",
+                  label: t("Clases anotadas", "Annotated classes"),
+                  render: (v) =>
+                    Array.isArray(v) ? v.map((c) => c ?? "?").join(" · ") : "—",
+                },
+                {
+                  key: "veredicto",
+                  label: t("Veredicto", "Verdict"),
+                  align: "center",
+                  render: (v) => {
+                    const c = v === "VP" ? "var(--ok)"
+                      : v === "FP" ? "var(--warn)"
+                      : v === "FN" ? "var(--alert)"
+                      : "var(--text-muted)";
+                    return <span style={{ color: c, fontWeight: 600 }}>{String(v)}</span>;
+                  },
+                },
+                {
+                  key: "r2",
+                  label: "R²",
+                  align: "right",
+                  render: (v) => (typeof v === "number" ? v.toFixed(3) : "—"),
+                },
+              ]}
+            />
+          </div>
+        )}
+
+        {/* Deteccion sobre el residuo: lo que sustituye al panel de alertas muerto. */}
+        {evaluados.length > 0 && (
+          <div
+            className="card"
+            style={{ padding: "16px 18px", marginBottom: 16 }}
+          >
+            <h3
+              style={{
+                margin: "0 0 4px 0",
+                fontFamily: "var(--font-display)",
+                fontSize: "var(--fs-md)",
+                fontWeight: 600,
+                color: "var(--text)",
+              }}
+            >
+              {t("Latidos marcados por el residuo", "Beats flagged by the residual")}
+            </h3>
+            <p
+              style={{
+                margin: "0 0 12px 0",
+                fontSize: "var(--fs-xs)",
+                lineHeight: 1.6,
+                color: "var(--text-sub)",
+                maxWidth: "78ch",
+              }}
+            >
+              {t(
+                `Se marca un latido cuando el error cuadrático medio entre el latido real y el predicho supera ${umbralUsado !== null ? umbralUsado.toFixed(4) : "—"}. Ese umbral sale del experimento 8, donde se calculó sobre los residuos de cincuenta modelos entrenados cada uno sin el paciente que evaluaban. El modelo que responde aquí vio a esos pacientes, así que sus errores son más bajos y el umbral marca de menos.`,
+                `A beat is flagged when the mean squared error between the real and predicted beat exceeds ${umbralUsado !== null ? umbralUsado.toFixed(4) : "—"}. That threshold comes from experiment 8, where it was computed over the residuals of fifty models each trained without the patient it evaluated. The model answering here did see those patients, so its errors are lower and the threshold under-flags.`,
+              )}
+            </p>
+
+            {/* Seis tarjetas en un solo renglon: rejilla de columnas fijas, no
+                `auto-fill`, que a 1280 px dejaba una tarjeta huerfana en la
+                segunda fila. Los cortes estan en globals.css (.kpi-fila). */}
+            <div className="kpi-fila">
+              <MetricStat
+                densa
+                etiqueta={t("Marcados", "Flagged")}
+                valor={conteo.marcados}
+                nota={t(
+                  `de ${conteo.total} evaluados · ${((100 * conteo.marcados) / Math.max(1, conteo.total)).toFixed(1)} %`,
+                  `of ${conteo.total} evaluated · ${((100 * conteo.marcados) / Math.max(1, conteo.total)).toFixed(1)} %`,
+                )}
+                n={conteo.total}
+              />
+              {conteo.conVerdad > 0 ? (
+                <>
+                  <MetricStat
+                    densa
+                    etiqueta={t("Aciertos (VP)", "Hits (TP)")}
+                    valor={conteo.vp}
+                    nota={t("ectópicos", "ectopic")}
+                    estado={conteo.vp > 0 ? "bueno" : "neutro"}
+                  />
+                  {/* «Falsas alarmas (FP)» medía 142 px en una caja de 125 y se
+                      cortaba: el componente pinta la etiqueta en una sola línea con
+                      overflow oculto. La nota carga el significado. */}
+                  <MetricStat
+                    densa
+                    etiqueta={t("Falsas (FP)", "False (FP)")}
+                    valor={conteo.fp}
+                    nota={t("normales marcados", "normal, flagged")}
+                    estado={conteo.fp > conteo.vp ? "atencion" : "neutro"}
+                  />
+                  <MetricStat
+                    densa
+                    etiqueta={t("Perdidos (FN)", "Missed (FN)")}
+                    valor={conteo.fn}
+                    nota={t("sin marcar", "not flagged")}
+                  />
+                  <MetricStat
+                    densa
+                    etiqueta={t("Precisión", "Precision")}
+                    valor={conteo.precision !== null ? conteo.precision.toFixed(3) : null}
+                    referencia={
+                      refPaciente
+                        ? `${t("exp. 8", "exp. 8")}: ${refPaciente.precision.toFixed(3)}`
+                        : undefined
+                    }
+                    n={conteo.marcados}
+                  />
+                  <MetricStat
+                    densa
+                    etiqueta={t("Exhaustividad", "Recall")}
+                    valor={conteo.exhaustividad !== null ? conteo.exhaustividad.toFixed(3) : null}
+                    referencia={
+                      refPaciente
+                        ? `${t("exp. 8", "exp. 8")}: ${refPaciente.exhaustividad.toFixed(3)}`
+                        : undefined
+                    }
+                    n={conteo.vp + conteo.fn}
+                  />
+                </>
+              ) : (
+                <MetricStat
+                  densa
+                  etiqueta={t("Verdad de terreno", "Ground truth")}
+                  valor={null}
+                  nota={motivoEtiquetas ?? t("no disponible", "unavailable")}
+                />
+              )}
+            </div>
+
+            <div
+              style={{
+                marginTop: 10,
+                fontFamily: "var(--font-data)",
+                fontSize: "var(--fs-3xs)",
+                color: "var(--text-muted)",
+              }}
+            >
+              {t("Umbral", "Threshold")}: {FUENTE_DETECCION_P4}
+              {" · "}
+              {t("etiquetas", "labels")}: {DIR_ANOTACIONES}/{demoPatient}.json
+              {refPaciente
+                ? ` · ${t("este paciente sí está en la cohorte del experimento 8", "this patient is in the experiment 8 cohort")}`
+                : ` · ${t("este paciente NO está entre los 46 con evidencia de detección", "this patient is NOT among the 46 with detection evidence")}`}
+              {/* La exclusión de la clase Q es una salvedad, no un indicador: su sitio
+                  es el pie, no una tarjeta que solo aparece en tres pacientes. */}
+              {conteo.excluidos > 0
+                ? ` · ${conteo.excluidos} ${t("latidos de clase Q excluidos de la evaluación (marcapasos o no clasificables), como en el experimento 8", "class Q beats excluded from the evaluation (paced or unclassifiable), as in experiment 8")}`
+                : ""}
+            </div>
+
+          </div>
+        )}
+
  {/* ,, Per-Horizon Metric Cards ,,,,,,,,,,,,,,,,,,,,,,,,,,,, */}
  <div
  style={{
@@ -2582,7 +2655,7 @@ export function LopoPage() {
  }}
  >
  {[0, 1, 2].map((h) => {
- const r2Ref = NB6_CONFIG.r2ByHorizon[h];
+ const r2Ref = ref.r2PorHorizonte[h];
  const r2Cur = lastMetric
  ? [lastMetric.r2_t1, lastMetric.r2_t2, lastMetric.r2_t3][h]
  : null;
@@ -2733,8 +2806,8 @@ export function LopoPage() {
  <Zap size={16} color="var(--cat-4)" />
  <span style={{ fontWeight: 700, fontSize: 14, color: textPri }}>
  {t(
- "DTW — Dynamic Time Warping (Prioridad)",
- "DTW — Dynamic Time Warping (Priority)",
+ "DTW · Dynamic Time Warping (Prioridad)",
+ "DTW · Dynamic Time Warping (Priority)",
  )}
  </span>
  <span style={{ fontSize: 11, color: textSec }}>
@@ -2793,22 +2866,6 @@ export function LopoPage() {
  </div>
  </div>
  ))}
- {/* Avg session DTW */}
- <div style={{ textAlign: "center" }}>
- <div
- style={{
- fontSize: 24,
- fontWeight: 800,
- color: dtwColor(avgDtw),
- lineHeight: 1,
- }}
- >
- {avgDtw !== null ? avgDtw.toFixed(4) : "—"}
- </div>
- <div style={{ fontSize: 11, color: textSec, marginTop: 4 }}>
- {t("DTW sesión promedio", "Session avg DTW")}
- </div>
- </div>
  </div>
 
  {/* DTW history chart */}
@@ -2863,7 +2920,7 @@ export function LopoPage() {
  {
  label: "Shape Corr",
  value: lastMetric?.shapeCorr ?? null,
- ref: NB6_CONFIG.shapeCorr,
+ ref: ref.shapeCorr,
  hi: true,
  fmt: (v: number) => v.toFixed(3),
  unit: "",
@@ -2887,7 +2944,7 @@ export function LopoPage() {
  {
  label: "Forecast Score",
  value: lastMetric?.forecastScore ?? null,
- ref: NB6_CONFIG.forecastScore,
+ ref: ref.forecastScore,
  hi: true,
  fmt: (v: number) => v.toFixed(3),
  unit: "",
@@ -2911,7 +2968,7 @@ export function LopoPage() {
  {
  label: "R² Global",
  value: avgR2,
- ref: NB6_CONFIG.r2Medio,
+ ref: ref.r2,
  hi: true,
  fmt: (v: number) => v.toFixed(3),
  unit: "",
@@ -3002,8 +3059,8 @@ export function LopoPage() {
  style={{ fontWeight: 700, fontSize: 13, color: textPri }}
  >
  {t(
- "R² por Horizonte — Historia de Sesión",
- "R² by Horizon — Session History",
+ "R² por Horizonte · Historia de Sesión",
+ "R² by Horizon · Session History",
  )}
  </span>
  </div>
@@ -3062,7 +3119,7 @@ export function LopoPage() {
  }}
  >
  {[0, 1, 2].map((h) => {
- const ref = NB6_CONFIG.r2ByHorizon[h];
+ const refH = ref.r2PorHorizonte[h];
  const avg =
  r2ByStep[h].length > 0
  ? r2ByStep[h].reduce((a, b) => a + b, 0) /
@@ -3073,16 +3130,16 @@ export function LopoPage() {
  <span style={{ color: H_COLORS[h], fontWeight: 700 }}>
  {H_LABELS[h]}
  </span>{" "}
- ref={ref.toFixed(3)} · sesión=
+ ref={refH.toFixed(3)} · sesión=
  {avg !== null ? avg.toFixed(3) : "—"}
  {avg !== null && (
  <span
  style={{
- color: avg >= ref ? "var(--ok)" : "var(--warn)",
+ color: avg >= refH ? "var(--ok)" : "var(--warn)",
  marginLeft: 4,
  }}
  >
- ({avg >= ref ? "✓" : "↑"})
+ ({avg >= refH ? t("cumple", "meets") : t("por debajo", "below")})
  </span>
  )}
  </div>
@@ -3092,391 +3149,8 @@ export function LopoPage() {
  </div>
  )}
 
- {/* ,, Beat shapes (current prediction vs real) ,,,,,,,,,,, */}
- {hasPred && (
- <div
- style={{
- background: cardBg,
- border: `1px solid ${border}`,
- borderRadius: 14,
- padding: 20,
- marginBottom: 18,
- }}
- >
- <div
- style={{
- fontWeight: 700,
- fontSize: 13,
- color: textPri,
- marginBottom: 12,
- }}
- >
- {t("Morfología por Horizonte", "Beat Morphology per Horizon")}
- </div>
- <div
- style={{
- display: "grid",
- gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
- gap: 14,
- }}
- >
- {[0, 1, 2].map((h) => {
- const pred = currentPredBeats[h] ?? [];
- const real = currentRealFuture[h] ?? [];
- const xs = Array.from(
- { length: NB6_CONFIG.beatLen },
- (_, i) => (i / 360) * 1000,
- );
- return (
- <div key={h}>
- <div
- style={{
- fontSize: 11,
- color: H_COLORS[h],
- fontWeight: 700,
- marginBottom: 6,
- }}
- >
- {H_LABELS[h]}
- </div>
- <PlotlyChart
- data={[
- ...(real.length > 0
- ? [
- {
- type: "scatter",
- mode: "lines",
- x: xs,
- y: real,
- name: t("Real", "Real"),
- line: { color: "var(--accent)", width: 1.5 },
- },
- ]
- : []),
- ...(pred.length > 0
- ? [
- {
- type: "scatter",
- mode: "lines",
- x: xs,
- y: pred,
- name: H_LABELS[h],
- line: { color: H_COLORS[h], width: 2 },
- fill: "tozeroy",
- fillcolor: H_FILL[h],
- },
- ]
- : []),
- ]}
- layout={{
- height: 130,
- paper_bgcolor: pBg,
- plot_bgcolor: pBg,
- margin: { l: 30, r: 6, t: 6, b: 24 },
- showlegend: false,
- xaxis: {
- gridcolor: pGrid,
- tickfont: { size: 8, color: pTick },
- title: {
- text: "ms",
- font: { size: 8, color: textSec },
- },
- },
- yaxis: {
- gridcolor: pGrid,
- tickfont: { size: 8, color: pTick },
- },
- }}
- config={{ displayModeBar: false, responsive: true }}
- />
- </div>
- );
- })}
- </div>
- </div>
- )}
  </>
- )}
 
- {/* 
- FUTURO mode
- */}
- {mode === "futuro" && (
- <>
-
- {/* Future holter chart */}
- <div key="future-holter-chart-wrapper">
- {holterData && (
- <div
- style={{
- background: cardBg,
- border: `1px solid ${border}`,
- borderRadius: 14,
- padding: 20,
- marginBottom: 18,
- }}
- >
- <div
- style={{
- display: "flex",
- alignItems: "center",
- gap: 8,
- marginBottom: 12,
- }}
- >
- <Activity size={15} color={liveStatus === "predicting" ? "var(--cat-4)" : "var(--ok)"} />
- <span
- style={{ fontWeight: 700, fontSize: 14, color: textPri }}
- >
- {liveStatus === "predicting" ? t("Holter Vivo — Predicción IA", "Live Holter — AI Prediction") : t("Holter Vivo — Señal Paciente", "Live Holter — Patient Signal")}
- </span>
- </div>
- <PlotlyChart
- data={[
- {
- type: "scatter",
- mode: "lines",
- x: holterData.realTimes,
- y: holterData.realSamples,
- name: t("Señal Real", "Real Signal"),
- line: { color: "var(--accent)", width: 1.2 },
- hovertemplate: "t=%{x:.1f}s  v=%{y:.3f}<extra></extra>",
- },
- {
- type: "scatter",
- mode: "lines",
- x: holterData.predTimes,
- y: holterData.predSamples,
- name: t("Predicción IA", "AI Prediction"),
- line: { color: "var(--cat-4)", width: 1.2 },
- hovertemplate: "t=%{x:.1f}s  v=%{y:.3f}<extra></extra>",
- },
- ...(showHolterGT && holterData.gtSamples.length > 0 ? [{
- type: "scatter" as const,
- mode: "lines" as const,
- x: holterData.gtTimes,
- y: holterData.gtSamples,
- name: t("Original (GT)", "Original (GT)"),
- line: { color: "var(--text-muted)", width: 1, dash: "dash" as const },
- hovertemplate: "t=%{x:.1f}s  v=%{y:.3f}<extra>GT</extra>",
- }] : []),
- ]}
- layout={{
- height: 250,
- paper_bgcolor: pBg,
- plot_bgcolor: pBg,
- margin: { l: 45, r: 12, t: 10, b: 36 },
- showlegend: true,
- legend: { orientation: "h", y: -0.2 },
- xaxis: {
- title: {
- text: t("Tiempo (segundos)", "Time (seconds)"),
- font: { size: 10, color: textSec },
- },
- gridcolor: pGrid,
- zerolinecolor: pGrid,
- tickfont: { color: pTick, size: 10 },
- range: [Math.max(0, liveTimeSec - 10), Math.max(10, liveTimeSec)],
- },
- yaxis: {
- gridcolor: pGrid,
- zerolinecolor: pGrid,
- tickfont: { color: pTick, size: 10 },
- },
- }}
- config={{ responsive: true, displayModeBar: false }}
- />
- </div>
- )}
- </div>
-
- {/* Holter Metrics Dashboard */}
- {futureMetrics && (
- <div style={{ marginTop: 18, marginBottom: 18 }}>
- <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
- <TrendingUp size={16} color="var(--ok)" />
- <span style={{ fontWeight: 700, fontSize: 14, color: textPri }}>
- {t("Métricas de Desempeño Holter", "Holter Performance Metrics")}
- </span>
- </div>
- <div
- style={{
- display: "grid",
- gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
- gap: 12,
- }}
- >
- {[
- {
- label: t("R² Morfología", "Morphology R²"),
- value: futureMetrics.morphR2.length > 0 
- ? (futureMetrics.morphR2.reduce((a,b)=>a+b)/futureMetrics.morphR2.length).toFixed(4)
- : "—",
- color: "var(--ok)",
- icon: <Target size={14} />
- },
- {
- label: "DTW (Distancia)",
- value: futureMetrics.dtw.length > 0
- ? (futureMetrics.dtw.reduce((a,b)=>a+b)/futureMetrics.dtw.length).toFixed(4)
- : "—",
- color: "var(--cat-4)",
- icon: <Activity size={14} />
- },
- {
- label: "RMSE",
- value: futureMetrics.rmse.length > 0
- ? (futureMetrics.rmse.reduce((a,b)=>a+b)/futureMetrics.rmse.length).toFixed(4)
- : "—",
- color: "var(--warn)",
- icon: <Zap size={14} />
- },
- {
- label: t("Tiempo Gen.", "Gen. Time"),
- value: `${futureMetrics.totalDuration.toFixed(1)}s`,
- color: "#3498DB",
- icon: <Info size={14} />
- }
- ].map((m) => (
- <div 
- key={m.label}
- style={{
- background: cardBg,
- border: `1px solid ${border}`,
- borderRadius: 12,
- padding: "12px 16px",
- display: "flex",
- flexDirection: "column",
- gap: 4
- }}
- >
- <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 10, color: textSec }}>
- {m.icon}
- <span>{m.label}</span>
- </div>
- <div style={{ fontSize: 18, fontWeight: 800, color: m.color }}>
- {m.value}
- </div>
- </div>
- ))}
- </div>
- </div>
- )}
-
- {/* Alerts panel */}
- {futureAlerts.length > 0 && (
- <div
- style={{
- background: cardBg,
- border: `1px solid ${border}`,
- borderRadius: 14,
- padding: 20,
- marginBottom: 18,
- }}
- >
- <div
- style={{
- display: "flex",
- alignItems: "center",
- gap: 8,
- marginBottom: 12,
- }}
- >
- <Bell size={15} color="var(--crit)" />
- <span
- style={{ fontWeight: 700, fontSize: 14, color: textPri }}
- >
- {t("Alertas Clínicas", "Clinical Alerts")} (
- {futureAlerts.length})
- </span>
- </div>
- <div style={{ maxHeight: 240, overflowY: "auto" }}>
- {futureAlerts
- .slice(-50)
- .reverse()
- .map((a, idx) => {
- const mins = Math.floor(a.timeSec / 60);
- const secs = Math.floor(a.timeSec % 60);
- const color =
- a.severity === "critical" ? "var(--crit)" : "var(--warn)";
- return (
- <div
- key={idx}
- style={{
- display: "flex",
- alignItems: "center",
- gap: 10,
- padding: "8px 12px",
- marginBottom: 4,
- borderRadius: 6,
- background: color + "11",
- borderLeft: `3px solid ${color}`,
- }}
- >
- <AlertTriangle size={12} color={color} />
- <span
- style={{
- fontSize: 10,
- color: textSec,
- minWidth: 48,
- }}
- >
- {mins}:{String(secs).padStart(2, "0")}
- </span>
- <span
- style={{
- padding: "2px 8px",
- borderRadius: 4,
- fontSize: 9,
- fontWeight: 700,
- background: color + "22",
- color,
- }}
- >
- {a.severity.toUpperCase()}
- </span>
- <span
- style={{ fontSize: 11, color: textPri, flex: 1 }}
- >
- {a.message}
- </span>
- </div>
- );
- })}
- </div>
- </div>
- )}
-
- {/* Empty state */}
- {liveStatus === "idle" && (
- <div
- style={{
- textAlign: "center",
- padding: "60px 20px",
- color: textSec,
- }}
- >
- <Activity
- size={40}
- color="var(--ok)"
- style={{ marginBottom: 16, opacity: 0.5 }}
- />
- <p style={{ fontSize: 14, marginBottom: 8 }}>
- {t(
- 'Presiona "Iniciar Holter" para visualizar la señal en vivo',
- 'Press "Start Holter" to view the live signal',
- )}
- </p>
- <p style={{ fontSize: 12, opacity: 0.7 }}>
- {t(
- "Podrás detener la señal en cualquier momento y dejar que el modelo prevea el futuro",
- "You can stop the signal at any time and let the model predict the future",
- )}
- </p>
- </div>
- )}
- </>
- )}
 
  {/* ,, Model Info Footer ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, */}
  <div
@@ -3510,36 +3184,41 @@ export function LopoPage() {
  >
  {[
  [
- "Arquitectura",
+ t("Arquitectura", "Architecture"),
  "CNN_GRU_ATTN (Conv1D dilat. + GRU + TemporalAttention + Residual)",
  ],
  [
- "Pérdida entrenamiento",
+ t("Pérdida de entrenamiento", "Training loss"),
  "ECGLoss = 0.5·MSE + 0.3·MAE + 0.2·SlopeMSE",
  ],
- ["Input shape", "(1, 5, 257) — 5 latidos x 256 ECG + 1 RR"],
- ["Output shape", "(1, 3, 256) — 3 latidos x 256 muestras"],
+ ["Input shape", t("(1, 5, 257) · 5 latidos × 256 ECG + 1 RR", "(1, 5, 257) · 5 beats × 256 ECG + 1 RR")],
+ ["Output shape", t("(1, 3, 256) · 3 latidos × 256 muestras", "(1, 3, 256) · 3 beats × 256 samples")],
  [
  "Dataset",
- "48 MIT-BIH (360Hz) + 75 INCART (257Hz) = 123 pacientes",
+ t("48 MIT-BIH (360 Hz) + 75 INCART (257 Hz) = 123 pacientes",
+ "48 MIT-BIH (360 Hz) + 75 INCART (257 Hz) = 123 patients"),
  ],
  [
- "Preprocesamiento de señal",
- "Notch 60 Hz -> Butterworth BP 0.5-40 Hz (SOS) -> Detrend lineal -> Z-score global",
+ t("Preprocesamiento de señal", "Signal preprocessing"),
+ t("Notch 60 Hz → Butterworth BP 0.5-40 Hz (SOS) → Detrend lineal → Z-score global",
+ "60 Hz notch → Butterworth BP 0.5-40 Hz (SOS) → linear detrend → global Z-score"),
  ],
  [
- "Norm. por latido",
- "Z-score per-beat: (beat - μ) / σ  +  clip(-5, 5)  — sin filtro mediana",
+ t("Norm. por latido", "Per-beat norm."),
+ t("Z-score por latido: (latido - μ) / σ  +  recorte(-5, 5)  · sin filtro de mediana",
+         "Z-score per beat: (beat - μ) / σ  +  clip(-5, 5)  · no median filter"),
  ],
  [
- "Segmentación",
- "Ventana fija centrada en R-peak (PRE=92, POST=164, sin resample)",
+ t("Segmentación", "Segmentation"),
+ t("Ventana fija centrada en el pico R (PRE=92, POST=164, sin remuestreo)",
+ "Fixed window centred on the R peak (PRE=92, POST=164, no resampling)"),
  ],
  [
- "Gap train-test",
- `${NB6_CONFIG.gapTrainTest} (menor del proyecto)`,
+ t("Gap train-test", "Train-test gap"),
+ t(`${ref.gap.toFixed(4)} · R² de entrenamiento menos el de prueba`,
+           `${ref.gap.toFixed(4)} · training R² minus test R²`),
  ],
- ["Tamaño modelo", "4.9 MB (desplegable en dispositivos médicos)"],
+ [t("Tamaño del modelo", "Model size"), "4.31 MB · CNN_GRU_ATTN_final_patched.keras"],
  ].map(([k, v]) => (
  <div key={k} style={{ fontSize: 11 }}>
  <span style={{ color: textSec }}>{k}: </span>

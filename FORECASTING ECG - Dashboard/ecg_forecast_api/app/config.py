@@ -21,6 +21,40 @@ NB4B_NORM: dict[str, dict[str, float]] = {
 
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Correspondencia simbolo PhysioNet -> clase AAMI (ANSI/AAMI EC57).
+#
+# Copiada del cuaderno 08 (celda 6) y de scripts/p2_analisis_exploratorio.py. Si
+# aqui difiriera, la clase que sirve la API no seria la misma con la que se midio
+# el error por clase en esa fase, y las dos cifras dejarian de ser comparables.
+#
+# La etiqueta es del cardiologo que anoto el registro, no del modelo: este predice
+# morfologia y no clasifica el evento.
+# ─────────────────────────────────────────────────────────────────────────────
+AAMI_POR_SIMBOLO: dict[str, str] = {}
+for _c in "NLRej":
+    AAMI_POR_SIMBOLO[_c] = "N"      # normal o de conduccion
+for _c in "AaJS":
+    AAMI_POR_SIMBOLO[_c] = "SVEB"   # ectopico supraventricular
+for _c in "VE":
+    AAMI_POR_SIMBOLO[_c] = "VEB"    # ectopico ventricular
+for _c in "F":
+    AAMI_POR_SIMBOLO[_c] = "F"      # fusion
+for _c in "/fQ":
+    AAMI_POR_SIMBOLO[_c] = "Q"      # no clasificable o estimulado
+
+CLASES_AAMI = ("N", "SVEB", "VEB", "F", "Q")
+
+
+def clase_aami(simbolo: str) -> str:
+    """Clase AAMI de un simbolo de latido.
+
+    'B' es un tipo de latido para PhysioNet pero no tiene clase en la norma; como en
+    el cuaderno 08, cae en Q (no clasificable) en vez de inventarle una.
+    """
+    return AAMI_POR_SIMBOLO.get(simbolo, "Q")
+
+
 # NB6 model: CNN_GRU_ATTN — multi-step forecaster (HORIZON=3), trained on 123 patients (MIT-BIH + INCART)
 # Source: results/NB5/modelos/CNN_GRU_ATTN_final.keras + CNN_GRU_ATTN_final_metadata.json
 #

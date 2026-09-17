@@ -3,6 +3,7 @@
  */
 
 import { useECGStore } from '@/store/useECGStore';
+import { useLang } from '@/i18n';
 import { PlotlyChart } from './PlotlyChart';
 import { tok } from '@/lib/tokens';
 
@@ -61,6 +62,8 @@ export function Heatmap({
   zMin,
   zMax,
 }: HeatmapProps) {
+  // Los rotulos de los ejes estaban escritos solo en espanol: no cambiaban con EN.
+  const { t } = useLang();
   const theme = useECGStore((s) => s.theme);
   const isDark = theme === 'dark';
   const colors = isDark ? CHART_COLORS.dark : CHART_COLORS.light;
@@ -128,7 +131,7 @@ export function Heatmap({
       : undefined,
     xaxis: {
       title: {
-        text: 'Horizonte de predicción',
+        text: t('Horizonte de predicción', 'Prediction horizon'),
         font: {
           family: 'Inter, system-ui, sans-serif',
           size: 12,
@@ -148,7 +151,7 @@ export function Heatmap({
     },
     yaxis: {
       title: {
-        text: 'Modelo',
+        text: t('Modelo', 'Model'),
         font: {
           family: 'Inter, system-ui, sans-serif',
           size: 12,

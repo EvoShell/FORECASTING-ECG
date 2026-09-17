@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+     fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
+     role="img" aria-label="Resumen">
+  <title>Resumen</title>
+  <style>
+    /* Paleta completa en la raiz: el bloque oscuro solo afina, nunca define. */
+    :root { --ic: #6b7785; }
+    @media (prefers-color-scheme: light) { :root { --ic: #57606a; } }
+    @media (prefers-color-scheme: dark)  { :root { --ic: #9198a1; } }
+    .t { stroke: var(--ic); }
+    .f { fill: var(--ic); stroke: none; }
+  </style>
+  <path class="t" d="M12 20.3S3.8 15.4 3.8 9.6a4.4 4.4 0 0 1 8.2-2.3 4.4 4.4 0 0 1 8.2 2.3c0 5.8-8.2 10.7-8.2 10.7z"/>
+  <path class="t" d="M5.8 12.1h3l1.4-3.2 1.9 6 1.5-2.8h2.6"/>
+</svg>

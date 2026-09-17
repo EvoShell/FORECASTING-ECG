@@ -1,6 +1,7 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
-import { AlertTriangle, RotateCcw, Home } from 'lucide-react';
+import { RotateCcw, Home } from 'lucide-react';
 import { Boton } from '@/components/ui/Boton';
+import { PaginaDeError } from '@/components/ui/PaginaDeError';
 
 /**
  * Barrera de error de toda la aplicacion.
@@ -62,45 +63,80 @@ ${error.stack ?? ''}
     window.location.href = '/';
   };
 
+  private recargar = () => {
+    window.location.reload();
+  };
+
   render() {
     const { error, intento } = this.state;
     if (!error) return <div key={intento}>{this.props.children}</div>;
 
     const ambito = this.props.ambito;
 
+    // Dos fallos que se ven igual desde aqui pero no son lo mismo, y que no
+    // merecen el mismo mensaje.
+    //
+    // Las vistas se cargan bajo demanda: si la descarga de ese trozo de codigo
+    // no llega —conexion caida, servidor que no responde, despliegue nuevo que
+    // invalido el nombre del archivo— el fallo sube por aqui igual que un error
+    // de dibujado. Pero decirle al usuario que «se interrumpio el dibujado»
+    // cuando lo que pasa es que no hay red le manda a buscar donde no es, y
+    // ademas el boton de reintentar no le va a servir: hay que recargar.
+    const mensaje = `${error.name}: ${error.message}`;
+    const esDeRed = /dynamically imported module|Importing a module script failed|Failed to fetch|NetworkError|ChunkLoadError/i
+      .test(mensaje) || !navigator.onLine;
+
+    if (esDeRed) {
+      return (
+        <PaginaDeError
+          variante="sin-conexion"
+          codigo="Sin señal · No se pudo cargar la vista"
+          titulo="No ha llegado el codigo de esta vista"
+          descripcion={
+            <>
+              Las vistas se descargan cuando se abren, y esta no ha llegado. Suele ser la
+              conexion, aunque tambien ocurre cuando se ha publicado una version nueva
+              mientras la pagina estaba abierta. Recargar resuelve los dos casos.
+              {!navigator.onLine && ' El navegador informa ademas de que no hay conexion.'}
+            </>
+          }
+          acciones={
+            <>
+              <Boton onClick={this.recargar} variante="primario" icono={<RotateCcw size={15} aria-hidden />}>
+                Recargar la pagina
+              </Boton>
+              <Boton onClick={this.volverAlInicio} variante="sutil" icono={<Home size={15} aria-hidden />}>
+                Volver al inicio
+              </Boton>
+            </>
+          }
+        />
+      );
+    }
+
     return (
-      <div
-        role="alert"
-        style={{
-          display: 'flex', flexDirection: 'column', alignItems: 'center',
-          justifyContent: 'center', minHeight: '60vh', gap: '16px',
-          padding: '32px', textAlign: 'center',
-        }}
-      >
-        <AlertTriangle size={36} style={{ color: 'var(--warn)' }} aria-hidden />
-
-        <h1 style={{
-          fontFamily: 'var(--font-display)', fontSize: 'var(--fs-lg)',
-          color: 'var(--text)', margin: 0,
-        }}>
-          {ambito ? `No se ha podido mostrar ${ambito}` : 'No se ha podido mostrar esta vista'}
-        </h1>
-
-        <p style={{ color: 'var(--text-sub)', maxWidth: '52ch', margin: 0, lineHeight: 1.6 }}>
-          Se ha interrumpido el dibujado de la pagina. El resto de la aplicacion sigue
-          funcionando: puedes reintentar, o volver al inicio y entrar por otra vista.
-        </p>
-
-        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' }}>
-          <Boton onClick={this.reintentar} variante="primario" icono={<RotateCcw size={15} aria-hidden />}>
-            Reintentar
-          </Boton>
-          <Boton onClick={this.volverAlInicio} variante="sutil" icono={<Home size={15} aria-hidden />}>
-            Volver al inicio
-          </Boton>
-        </div>
-
-        {import.meta.env.DEV && (
+      <PaginaDeError
+        variante="fallo"
+        codigo="Error de dibujado"
+        titulo={ambito ? `No se ha podido mostrar ${ambito}` : 'No se ha podido mostrar esta vista'}
+        descripcion={
+          <>
+            Se ha interrumpido el dibujado de la pagina. La señal llega, pero corrompida:
+            el resto de la aplicacion sigue funcionando, de modo que puedes reintentar el
+            dibujado o volver al inicio y entrar por otra vista.
+          </>
+        }
+        acciones={
+          <>
+            <Boton onClick={this.reintentar} variante="primario" icono={<RotateCcw size={15} aria-hidden />}>
+              Reintentar
+            </Boton>
+            <Boton onClick={this.volverAlInicio} variante="sutil" icono={<Home size={15} aria-hidden />}>
+              Volver al inicio
+            </Boton>
+          </>
+        }
+        pie={import.meta.env.DEV ? (
           <details style={{ marginTop: '8px', maxWidth: '80ch', textAlign: 'left' }}>
             <summary style={{
               cursor: 'pointer', color: 'var(--text-muted)',
@@ -119,8 +155,8 @@ ${error.stack ?? ''}
               {error.stack ? `\n\n${error.stack}` : ''}
             </pre>
           </details>
-        )}
-      </div>
+        ) : null}
+      />
     );
   }
 }

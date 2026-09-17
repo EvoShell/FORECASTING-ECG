@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+     fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
+     role="img" aria-label="Demostración">
+  <title>Demostración</title>
+  <style>
+    /* Paleta completa en la raiz: el bloque oscuro solo afina, nunca define. */
+    :root { --ic: #6b7785; }
+    @media (prefers-color-scheme: light) { :root { --ic: #57606a; } }
+    @media (prefers-color-scheme: dark)  { :root { --ic: #9198a1; } }
+    .t { stroke: var(--ic); }
+    .f { fill: var(--ic); stroke: none; }
+  </style>
+  <rect class="t" x="2.8" y="4.2" width="18.4" height="12.4" rx="1.8"/>
+  <path class="t" d="M8.6 20.4h6.8"/>
+  <path class="t" d="M12 16.6v3.8"/>
+  <path class="t" d="M10.4 8.2l4.2 2.2-4.2 2.2V8.2z"/>
+</svg>

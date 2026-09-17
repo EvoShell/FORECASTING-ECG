@@ -17,7 +17,6 @@ export function ExpandableSection({
   variant = 'default',
 }: ExpandableSectionProps) {
   const [isOpen, setIsOpen] = useState(defaultOpen);
-  const isDark = useIsDark();
 
   const variantStyles = {
     default: {
@@ -60,7 +59,11 @@ export function ExpandableSection({
         }}
       >
         <span>{title}</span>
-        {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+        {/* Envoltorio fijo: el chevron es hijo unico y se reemplaza a si mismo,
+            en vez de insertarse delante del <span> del titulo. */}
+        <span style={{ display: 'flex' }}>
+          {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+        </span>
       </button>
       <AnimatePresence>
         {isOpen && (

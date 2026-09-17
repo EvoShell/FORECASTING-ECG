@@ -16,7 +16,6 @@ interface ImageGalleryProps {
 
 export function ImageGallery({ images, columns = 3 }: ImageGalleryProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const isDark = useIsDark();
 
   const openLightbox = (index: number) => setLightboxIndex(index);
   const closeLightbox = () => setLightboxIndex(null);

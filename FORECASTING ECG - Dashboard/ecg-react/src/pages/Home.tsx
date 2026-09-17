@@ -1,11 +1,14 @@
 import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Database, Zap, FlaskConical, Brain, BarChart2, Activity, GitCompare, Search, BookOpen } from 'lucide-react';
+import { ArrowRight, Database, Zap, FlaskConical, Brain, BarChart2, Activity, GitCompare, Search, Info } from 'lucide-react';
 import { PageWrapper, containerVariants, itemVariants } from '@/components/layout/PageWrapper';
 import { useECGStore } from '@/store/useECGStore';
 import { useLang } from '@/i18n';
+import { MetricStat, MetricGrid } from '@/components/metrics/MetricStat';
+import { useReferenciaNB6, FUENTE_LOPO } from '@/hooks/useReferenciaNB6';
 import SoftAurora from '@/components/ui/SoftAurora';
+import { PapelECG } from '@/components/ui/PapelECG';
 import ShinyText from '@/components/ui/ShinyText';
 import { FindingCard } from '@/components/ui/FindingCard';
 
@@ -287,6 +290,15 @@ const itemAnim = itemVariants;
 
 export function HomePage() {
   const navigate = useNavigate();
+  // Las cifras del bloque de resultado se leen del archivo, no van escritas a mano.
+  const referencia = useReferenciaNB6();
+  const R = referencia.base;
+  const porBase = referencia.porBase['MIT-BIH'] && referencia.porBase['INCART']
+    ? {
+        mitbih: referencia.porBase['MIT-BIH'].media,
+        incart: referencia.porBase['INCART'].media,
+      }
+    : null;
   const theme = useECGStore((s) => s.theme);
   const { t, lang } = useLang();
 
@@ -338,7 +350,7 @@ export function HomePage() {
               onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
               style={{ width: '52px', height: '52px', objectFit: 'contain', flexShrink: 0 }}
             />
-          {t('Universidad CESMAG · Ingeniería de Sistemas · 2025 – 2026', 'CESMAG University · Systems Engineering · 2025 – 2026')}
+          {t('Universidad CESMAG · Ingeniería de Sistemas · Trabajo de grado · 2025 – 2026', 'CESMAG University · Systems Engineering · Undergraduate thesis · 2025 – 2026')}
         </motion.p>
           <motion.h1 variants={itemAnim} style={{
             fontFamily: 'var(--font-display)',
@@ -395,6 +407,7 @@ export function HomePage() {
               className={theme === 'dark' ? "drop-shadow-[0_0_24px_rgba(59,130,246,0.3)]" : "drop-shadow-sm font-black"}
             />
           </motion.h1>
+
         </motion.div>
 
         {/* Bottom: ECG canvas */}
@@ -465,13 +478,30 @@ export function HomePage() {
             <motion.div key={member.name} variants={itemAnim} className="card" style={{
               display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
               padding: '28px 20px 22px',
+                  // El fondo va detras, asi que la tarjeta pasa a ser su marco de
+                  // referencia y le recorta lo que sobresalga por las esquinas.
+                  position: 'relative', overflow: 'hidden',
             }}>
-              <img loading="lazy" decoding="async"
+                  <PapelECG />
+                  {/* El contenido va en su propia capa: sin `position` no se eleva
+                      sobre el fondo, que al estar posicionado se pinta despues y le
+                      cruzaba las lineas por encima a la fotografia. */}
+                  <div style={{
+                    position: 'relative', zIndex: 1, width: '100%',
+                    display: 'flex', flexDirection: 'column', alignItems: 'center',
+                  }}>
+              {/* Los originales son de 480 x 480: a 150 px siguen sobremuestreados mas de
+                  tres veces, asi que se ven nitidos tambien en pantalla de alta densidad.
+                  Se cargan con prioridad alta porque son contenido de la portada, no
+                  decoracion: `loading="lazy"` las dejaba en blanco al abrir. */}
+              <img decoding="async" fetchPriority="high"
                 src={member.img}
                 alt={member.name}
+                width={480}
+                height={480}
                 onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                 style={{
-                  width: '110px', height: '110px', borderRadius: '50%', 
+                  width: '150px', height: '150px', borderRadius: '50%',
                   objectFit: 'cover', objectPosition: 'center 15%',
                   border: `3px solid ${member.border}`,
                   boxShadow: `0 8px 16px rgba(0,0,0,0.15), 0 0 0 1px ${member.border}`,
@@ -488,6 +518,7 @@ export function HomePage() {
               <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--fs-xs)', color: 'var(--text-sub)', lineHeight: 1.6 }}>
                 {member.detail}
               </p>
+                  </div>
             </motion.div>
           ))}
         </div>
@@ -546,7 +577,7 @@ export function HomePage() {
             background: theme === 'dark' ? 'rgba(16,185,129,0.06)' : 'rgba(16,185,129,0.05)',
             border: theme === 'dark' ? '1px solid rgba(16,185,129,0.18)' : '1px solid rgba(16,185,129,0.15)',
           }}>
-            <p style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 'var(--fs-xs)', color: '#10b981', marginBottom: '4px' }}>LOPO</p>
+            <p style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 'var(--fs-xs)', color: 'var(--text)', marginBottom: '4px' }}>LOPO</p>
             <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--fs-xs)', color: 'var(--text-sub)', lineHeight: 1.5 }}>
               {t('Cross-patient', 'Cross-patient')}<br />{t('122 entrenan → 1 evalúa', '122 train → 1 evaluates')}
             </p>
@@ -556,7 +587,7 @@ export function HomePage() {
             background: theme === 'dark' ? 'rgba(139,92,246,0.06)' : 'rgba(139,92,246,0.05)',
             border: theme === 'dark' ? '1px solid rgba(139,92,246,0.18)' : '1px solid rgba(139,92,246,0.15)',
           }}>
-            <p style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 'var(--fs-xs)', color: '#8b5cf6', marginBottom: '4px' }}>{t('Multi-step', 'Multi-step')}</p>
+            <p style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 'var(--fs-xs)', color: 'var(--text)', marginBottom: '4px' }}>{t('Multi-step', 'Multi-step')}</p>
             <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--fs-xs)', color: 'var(--text-sub)', lineHeight: 1.5 }}>
               {t('3 latidos', '3 beats')}<br />{t('H=3 con atención temporal', 'H=3 with temporal attention')}
             </p>
@@ -653,14 +684,16 @@ export function HomePage() {
         display: 'flex', alignItems: 'center', gap: '0', flexWrap: 'wrap', justifyContent: 'center',
       }}>
       {[
-        { label: t('Comprensión', 'Business'), sub: t('del Negocio', 'Understanding'), icon: Search, detail: t('Predicción de arritmias', 'Arrhythmia prediction') },
-        { label: t('Comprensión', 'Data'), sub: t('de los Datos', 'Understanding'), icon: Database, detail: 'MIT-BIH + INCART' },
-        { label: t('Preparación', 'Data'), sub: t('de los Datos', 'Preparation'), icon: Zap, detail: t('7 pipelines · R-peak', '7 pipelines · R-peak') },
-        { label: t('Modelado', 'Modeling'), sub: 'ML + DL + LOPO', icon: Brain, detail: t('11 modelos · 6 notebooks', '11 models · 6 notebooks') },
-        { label: t('Evaluación', 'Evaluation'), sub: 'R² · RMSE · DTW', icon: BarChart2, detail: t('IC95 · Wilcoxon', 'IC95 · Wilcoxon') },
-        { label: t('Despliegue', 'Deployment'), sub: t('Dashboard', 'Dashboard'), icon: Activity, detail: 'FastAPI + React' },
+        { id: 'negocio', label: t('Comprensión', 'Business'), sub: t('del Negocio', 'Understanding'), icon: Search, detail: t('Predicción de morfología ECG', 'ECG morphology prediction') },
+        { id: 'datos', label: t('Comprensión', 'Data'), sub: t('de los Datos', 'Understanding'), icon: Database, detail: 'MIT-BIH + INCART' },
+        { id: 'preparacion', label: t('Preparación', 'Data'), sub: t('de los Datos', 'Preparation'), icon: Zap, detail: t('7 pipelines · R-peak', '7 pipelines · R-peak') },
+        { id: 'modelado', label: t('Modelado', 'Modeling'), sub: 'ML + DL + LOPO', icon: Brain, detail: t('11 modelos · 8 experimentos', '11 models · 8 experiments') },
+        { id: 'evaluacion', label: t('Evaluación', 'Evaluation'), sub: 'R² · RMSE · DTW', icon: BarChart2, detail: t('IC95 · Wilcoxon', 'IC95 · Wilcoxon') },
+        { id: 'despliegue', label: t('Despliegue', 'Deployment'), sub: t('Dashboard', 'Dashboard'), icon: Activity, detail: 'FastAPI + React' },
       ].map((step, i, arr) => (
-        <div key={step.label} style={{ display: 'flex', alignItems: 'center' }}>
+        // La clave era `step.label`, y en español dos fases se llaman «Comprensión»:
+        // React avisaba de claves duplicadas en cada carga de la portada.
+        <div key={step.id} style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{
             display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
             padding: '16px 18px', minWidth: '130px', maxWidth: '160px',
@@ -697,7 +730,7 @@ export function HomePage() {
             notebook="NB1"
             fuente="/data/nb1/resumen_ExpA.csv + resumen_ExpB.csv"
             title={t('Exp B supera 4× a Exp A (NB1)', 'Exp B outperforms Exp A by 4× (NB1)')}
-            description={lang === 'en' ? <>The beat-to-beat reformulation raised the best R² from <strong>0.1603</strong> (RF, Exp A) to <strong>0.6454</strong> (SVR, Exp B) — a 4× improvement. 4 of 5 models significantly beat Persistence (Wilcoxon p&lt;0.05).</> : <>La reformulación latido-a-latido elevó el R² máximo de <strong>0.1603</strong> (RF, Exp A) a <strong>0.6454</strong> (SVR, Exp B) — mejora de 4×. 4 de 5 modelos superan significativamente a Persistencia (Wilcoxon p&lt;0.05).</>}
+            description={lang === 'en' ? <>The beat-to-beat reformulation raised the best R² from <strong>0.1603</strong> (RF, Exp A) to <strong>0.6454</strong> (SVR, Exp B), a 4× improvement. 4 of 5 models significantly beat Persistence (Wilcoxon p&lt;0.05).</> : <>La reformulación latido-a-latido elevó el R² máximo de <strong>0.1603</strong> (RF, Exp A) a <strong>0.6454</strong> (SVR, Exp B), mejora de 4×. 4 de 5 modelos superan significativamente a Persistencia (Wilcoxon p&lt;0.05).</>}
             significance="high"
           />
           <FindingCard
@@ -742,7 +775,7 @@ export function HomePage() {
             notebook="NB6"
             fuente="/data/nb5/tabla_resumen.csv"
             title={t('CNN-GRU-ATTN LOPO: R² = 0.67 supera techo intra (NB6)', 'CNN-GRU-ATTN LOPO: R² = 0.67 beats intra ceiling (NB6)')}
-            description={lang === 'en' ? <>The LOPO model achieves <strong>R² = 0.6734</strong> without ever seeing the test patient, surpassing the intra-patient ceiling (0.6592). Train–test gap of only <strong>0.0956</strong>, the lowest in the project. Fine-tuning with 30 beats further improves per-patient metrics.</> : <>El modelo LOPO alcanza <strong>R² = 0.6734</strong> sin haber visto jamás al paciente de prueba, superando el techo intra-paciente (0.6592). Gap train–test de solo <strong>0.0956</strong>, el más bajo del proyecto. El fine-tuning con 30 latidos mejora las métricas por paciente.</>}
+            description={lang === 'en' ? <>The LOPO model achieves <strong>R² = 0.6734</strong> without ever seeing the test patient, surpassing the intra-patient ceiling (0.6592). Train-test gap of only <strong>0.0956</strong>, the lowest in the project. Fine-tuning with 30 beats further improves per-patient metrics.</> : <>El modelo LOPO alcanza <strong>R² = 0.6734</strong> sin haber visto jamás al paciente de prueba, superando el techo intra-paciente (0.6592). Gap train-test de solo <strong>0.0956</strong>, el más bajo del proyecto. El fine-tuning con 30 latidos mejora las métricas por paciente.</>}
             significance="high"
           />
           <FindingCard
@@ -769,7 +802,7 @@ export function HomePage() {
             notebook="NB7"
             fuente="/data/nb7/hp_dl_resumen.json"
             title={t('La búsqueda de hiperparámetros no mejoró al modelo final (NB7)', 'Hyperparameter search did not improve the final model (NB7)')}
-            description={lang === 'en' ? <>Twenty configurations per architecture over 10 LOPO folds. For CNN-GRU-ATTN the best configuration gains <strong>+0.0027</strong> R² (0.6438 → 0.6466, 0.42 % relative) and wins in <strong>5 of 10</strong> patients: Wilcoxon W = 27.0, <strong>p = 1.0000</strong>. Read the other way round, which is how it should be read: the published R² does not depend on a lucky configuration. The GRU does improve significantly (+0.0490, p = 0.00195), but three caveats keep it from replacing the final model — see Experiment 7.</> : <>Veinte configuraciones por arquitectura sobre 10 pliegues LOPO. Para CNN-GRU-ATTN la mejor configuración gana <strong>+0.0027</strong> de R² (0.6438 → 0.6466, 0.42 % relativo) y vence en <strong>5 de 10</strong> pacientes: Wilcoxon W = 27.0, <strong>p = 1.0000</strong>. Leído al revés, que es como hay que leerlo: el R² publicado no depende de una configuración afortunada. El GRU sí mejora de forma significativa (+0.0490, p = 0.00195), pero tres salvedades impiden que sustituya al modelo final — ver Experimento 7.</>}
+            description={lang === 'en' ? <>Twenty configurations per architecture over 10 LOPO folds. For CNN-GRU-ATTN the best configuration gains <strong>+0.0027</strong> R² (0.6438 → 0.6466, 0.42 % relative) and wins in <strong>5 of 10</strong> patients: Wilcoxon W = 27.0, <strong>p = 1.0000</strong>. Read the other way round, which is how it should be read: the published R² does not depend on a lucky configuration. The GRU does improve significantly (+0.0490, p = 0.00195), but three caveats keep it from replacing the final model, see Experiment 7.</> : <>Veinte configuraciones por arquitectura sobre 10 pliegues LOPO. Para CNN-GRU-ATTN la mejor configuración gana <strong>+0.0027</strong> de R² (0.6438 → 0.6466, 0.42 % relativo) y vence en <strong>5 de 10</strong> pacientes: Wilcoxon W = 27.0, <strong>p = 1.0000</strong>. Leído al revés, que es como hay que leerlo: el R² publicado no depende de una configuración afortunada. El GRU sí mejora de forma significativa (+0.0490, p = 0.00195), pero tres salvedades impiden que sustituya al modelo final, ver Experimento 7.</>}
             significance="high"
           />
           <FindingCard
@@ -778,71 +811,87 @@ export function HomePage() {
             notebook="NB8"
             fuente="/data/nb8/p4_resumen.json + p3_contraste.json"
             title={t('El residuo sí detecta latidos ectópicos: 3.12× sobre la prevalencia (NB8)', 'The residual does detect ectopic beats: 3.12× over prevalence (NB8)')}
-            description={lang === 'en' ? <>Over <strong>316 740</strong> beats from 50 patients, of which <strong>38 712</strong> are ectopic (12.22 % prevalence), ranking by prediction error gives <strong>AUC-PR = 0.3808</strong>: <strong>3.12×</strong> the prevalence a random ranking would achieve. The per-class error backs it: the mean MSE of ectopic beats is <strong>3.16×</strong> that of normal ones. It is a signal, not a clinical detector — per-patient precision varies widely.</> : <>Sobre <strong>316 740</strong> latidos de 50 pacientes, de los que <strong>38 712</strong> son ectópicos (prevalencia del 12.22 %), ordenar por el error de predicción da <strong>AUC-PR = 0.3808</strong>: <strong>3.12×</strong> la prevalencia que lograría un orden al azar. El error por clase lo respalda: el MSE medio de los latidos ectópicos es <strong>3.16×</strong> el de los normales. Es una señal, no un detector clínico — la precisión por paciente varía mucho.</>}
+            description={lang === 'en' ? <>Over <strong>316 740</strong> beats from 50 patients, of which <strong>38 712</strong> are ectopic (12.22 % prevalence), ranking by prediction error gives <strong>AUC-PR = 0.3808</strong>: <strong>3.12×</strong> the prevalence a random ranking would achieve. The per-class error backs it: the mean MSE of ectopic beats is <strong>3.16×</strong> that of normal ones. It is a signal, not a clinical detector, per-patient precision varies widely.</> : <>Sobre <strong>316 740</strong> latidos de 50 pacientes, de los que <strong>38 712</strong> son ectópicos (prevalencia del 12.22 %), ordenar por el error de predicción da <strong>AUC-PR = 0.3808</strong>: <strong>3.12×</strong> la prevalencia que lograría un orden al azar. El error por clase lo respalda: el MSE medio de los latidos ectópicos es <strong>3.16×</strong> el de los normales. Es una señal, no un detector clínico, la precisión por paciente varía mucho.</>}
             significance="high"
           />
         </motion.div>
       </motion.section>
 
-      {/* ── 4. Explora el Dashboard — Navigation cards ────────────── */}
+      {/* ── 4. El resultado y su alcance ─────────────────────────── */}
       <motion.section
         variants={containerAnim}
         initial="initial"
         whileInView="animate"
         viewport={{ once: true, margin: '-60px' }}
-        style={{ marginBottom: '64px' }}
+        style={{ marginBottom: '48px' }}
       >
-        <motion.p variants={itemAnim} className="eyebrow" style={{ marginBottom: '20px' }}>{t('Explora el Dashboard', 'Explore the Dashboard')}</motion.p>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '14px' }}>
-          {([
-            { icon: Brain, title: t('Modelos', 'Models'), desc: t('Arquitecturas ML y Deep Learning implementadas', 'Implemented ML and Deep Learning architectures'), route: '/modelos' },
-            { icon: FlaskConical, title: t('Experimentos', 'Experiments'), desc: t('Los ocho experimentos, con sus cifras y su procedencia', 'The eight experiments, with their figures and provenance'), route: '/experimentos' },
-            { icon: Activity, title: t('Predicción LOPO', 'LOPO Prediction'), desc: t('Predicción cross-patient multi-horizonte', 'Cross-patient multi-horizon prediction'), route: '/lopo' },
-            { icon: Search, title: t('Explorador', 'Explorer'), desc: t('Los datos crudos de cada experimento, filtrables y exportables', 'Raw data of each experiment, filterable and exportable'), route: '/explorador' },
-            { icon: BookOpen, title: t('Manual', 'User Guide'), desc: t('Cómo leer cada vista y qué significa cada métrica', 'How to read each view and what each metric means'), route: '/manual' },
-            { icon: GitCompare, title: t('Glosario', 'Glossary'), desc: t('Términos técnicos del proyecto, definidos', 'Project technical terms, defined'), route: '/glosario' },
-          ] as const).map(({ icon: Icon, title, desc, route }) => (
-            <motion.div
-              key={route}
-              variants={itemAnim}
-              onClick={() => navigate(route)}
-              style={{
-                display: 'flex', alignItems: 'flex-start', gap: '14px',
-                padding: '20px', cursor: 'pointer',
-                background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '16px',
-                transition: 'transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease',
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-2px)';
-                (e.currentTarget as HTMLDivElement).style.boxShadow = theme === 'dark'
-                  ? '0 8px 24px rgba(59,130,246,0.1)' : '0 8px 24px rgba(37,99,235,0.08)';
-                (e.currentTarget as HTMLDivElement).style.borderColor = theme === 'dark'
-                  ? 'rgba(59,130,246,0.35)' : 'rgba(37,99,235,0.3)';
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)';
-                (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
-                (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border)';
-              }}
-            >
-              <div style={{
-                width: '36px', height: '36px', borderRadius: '10px', flexShrink: 0,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                background: theme === 'dark' ? 'rgba(59,130,246,0.08)' : 'rgba(37,99,235,0.06)',
-                border: theme === 'dark' ? '1px solid rgba(59,130,246,0.18)' : '1px solid rgba(37,99,235,0.15)',
-              }}>
-                <Icon size={18} color="var(--signal)" />
-              </div>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <p style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 'var(--fs-sm)', color: 'var(--text)', marginBottom: '2px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  {title}
-                  <ArrowRight size={14} color="var(--text-muted)" />
-                </p>
-                <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--fs-xs)', color: 'var(--text-sub)', lineHeight: 1.5 }}>{desc}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        <motion.p variants={itemAnim} className="eyebrow" style={{ marginBottom: '20px' }}>
+          {t('El resultado y su alcance', 'The result and its scope')}
+        </motion.p>
+
+        <motion.div variants={itemAnim} className="card" style={{ padding: '24px 26px' }}>
+          <p style={{
+            fontFamily: 'var(--font-body)', fontSize: 'var(--fs-sm)', lineHeight: 1.7,
+            color: 'var(--text-sub)', maxWidth: '88ch', marginBottom: '18px',
+          }}>
+            {t(
+              'Un modelo CNN-GRU-ATTN predice la forma de onda de los tres latidos siguientes a partir de los cinco anteriores, evaluado dejando un paciente fuera sobre los 123 de MIT-BIH e INCART. La comparación pertinente no es con los modelos intra-paciente, que ven al mismo sujeto en entrenamiento y en prueba, sino con la quinta fase, único antecedente bajo idéntico protocolo.',
+              'A CNN-GRU-ATTN model predicts the waveform of the next three beats from the previous five, evaluated leave-one-patient-out over the 123 patients of MIT-BIH and INCART. The pertinent comparison is not with the intra-patient models, which see the same subject in training and test, but with the fifth phase, the only antecedent under an identical protocol.',
+            )}
+          </p>
+
+          <MetricGrid minimo={186}>
+            <MetricStat
+              fase="NB6"
+              etiqueta={t('R² medio · modelo base', 'Mean R² · base model')}
+              valor={R ? R.r2.toFixed(4) : null}
+              dispersion={R ? R.r2Std.toFixed(4) : undefined}
+              ic95={R?.ic95 ? [R.ic95[0].toFixed(4), R.ic95[1].toFixed(4)] : undefined}
+              n={R?.n}
+              fuente={FUENTE_LOPO}
+            />
+            <MetricStat
+              fase="NB6"
+              etiqueta={t('Frente a la quinta fase', 'Against the fifth phase')}
+              valor={R ? `+${(R.r2 - 0.5484).toFixed(4)}` : null}
+              referencia={R
+                ? `+${(100 * (R.r2 - 0.5484) / 0.5484).toFixed(1)} % · ${t('quinta fase', 'fifth phase')} 0.5484`
+                : undefined}
+              nota={referencia.calibrado
+                ? t(
+                    `con el modelo calibrado la mejora es +${(referencia.calibrado.r2 - 0.5484).toFixed(4)}`,
+                    `with the calibrated model the improvement is +${(referencia.calibrado.r2 - 0.5484).toFixed(4)}`,
+                  )
+                : undefined}
+              n={R?.n}
+              fuente={FUENTE_LOPO}
+            />
+            <MetricStat
+              fase="NB6"
+              etiqueta={t('Pacientes con R² ≥ 0.80', 'Patients with R² ≥ 0.80')}
+              valor={R ? `${R.distribucion.ge080} / ${R.n}` : null}
+              nota={R
+                ? t(
+                    `la media esconde la dispersión: ${R.distribucion.negativos} pliegues quedan en negativo`,
+                    `the mean hides the spread: ${R.distribucion.negativos} folds remain negative`,
+                  )
+                : undefined}
+              n={R?.n}
+              fuente={FUENTE_LOPO}
+            />
+            <MetricStat
+              fase="NB6"
+              etiqueta={t('Brecha entre bases', 'Between-database gap')}
+              valor={porBase ? (porBase.mitbih - porBase.incart).toFixed(4) : null}
+              referencia={porBase
+                ? `MIT-BIH ${porBase.mitbih.toFixed(4)} · INCART ${porBase.incart.toFixed(4)}`
+                : undefined}
+              n={R?.n}
+              fuente={FUENTE_LOPO}
+            />
+          </MetricGrid>
+
+        </motion.div>
       </motion.section>
 
 

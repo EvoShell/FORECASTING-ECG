@@ -1,0 +1,299 @@
+{
+  "fuente": "results/NB5/resultados_lopo.csv",
+  "n_pliegues": 123,
+  "n_pacientes": 123,
+  "tabla_XXVI_globales": {
+    "CNN_GRU_ATTN": {
+      "R2_media": 0.6734,
+      "R2_std": 0.2825,
+      "IC95": [
+        0.6235,
+        0.7233
+      ],
+      "RMSE": 0.5139,
+      "MAE": 0.3178,
+      "SMAPE": 0.7503,
+      "Corr": 0.8233,
+      "Forecast_Score": 0.7073
+    },
+    "CNN_GRU_ATTN_FT": {
+      "R2_media": 0.6797,
+      "R2_std": 0.2777,
+      "IC95": [
+        0.6306,
+        0.7288
+      ],
+      "RMSE": 0.5085,
+      "MAE": 0.3132,
+      "SMAPE": 0.7413,
+      "Corr": 0.8268,
+      "Forecast_Score": 0.7133
+    }
+  },
+  "tabla_XXVII_morfologia": {
+    "base": {
+      "Shape_Corr": 0.8383,
+      "Slope_MSE": 0.02234,
+      "Amp_Error": 0.5653,
+      "R2_train": 0.769,
+      "gap": 0.0956
+    },
+    "ft": {
+      "Shape_Corr": 0.8429,
+      "Slope_MSE": 0.0222,
+      "Amp_Error": 0.5463
+    }
+  },
+  "tabla_XXVIII_horizonte": {
+    "t1": {
+      "R2_base": 0.6833,
+      "R2_ft": 0.6908,
+      "RMSE_base": 0.5038
+    },
+    "t2": {
+      "R2_base": 0.6765,
+      "R2_ft": 0.681,
+      "RMSE_base": 0.5121
+    },
+    "t3": {
+      "R2_base": 0.6604,
+      "R2_ft": 0.6672,
+      "RMSE_base": 0.5238
+    },
+    "media": {
+      "R2_base": 0.6734,
+      "R2_ft": 0.6797
+    },
+    "degradacion_t1_t3_pct": -3.3514,
+    "delta_t1_t3_abs": -0.0229
+  },
+  "tabla_XXIX_distribucion": {
+    "R2 >= 0.80": {
+      "base": 52,
+      "base_pct": 42.2764,
+      "ft": 53,
+      "ft_pct": 43.0894,
+      "delta": 1
+    },
+    "0.60 <= R2 < 0.80": {
+      "base": 35,
+      "base_pct": 28.4553,
+      "ft": 34,
+      "ft_pct": 27.6423,
+      "delta": -1
+    },
+    "0.30 <= R2 < 0.60": {
+      "base": 22,
+      "base_pct": 17.8862,
+      "ft": 23,
+      "ft_pct": 18.6992,
+      "delta": 1
+    },
+    "0.00 <= R2 < 0.30": {
+      "base": 9,
+      "base_pct": 7.3171,
+      "ft": 8,
+      "ft_pct": 6.5041,
+      "delta": -1
+    },
+    "R2 < 0.00": {
+      "base": 5,
+      "base_pct": 4.065,
+      "ft": 5,
+      "ft_pct": 4.065,
+      "delta": 0
+    }
+  },
+  "tabla_XXX_extremos": {
+    "mejores": [
+      {
+        "paciente": "122",
+        "R2_base": 0.9878,
+        "R2_ft": 0.9886,
+        "dataset": "MIT-BIH"
+      },
+      {
+        "paciente": "115",
+        "R2_base": 0.9757,
+        "R2_ft": 0.9757,
+        "dataset": "MIT-BIH"
+      },
+      {
+        "paciente": "234",
+        "R2_base": 0.9756,
+        "R2_ft": 0.9766,
+        "dataset": "MIT-BIH"
+      },
+      {
+        "paciente": "123",
+        "R2_base": 0.9731,
+        "R2_ft": 0.9749,
+        "dataset": "MIT-BIH"
+      },
+      {
+        "paciente": "I61",
+        "R2_base": 0.9725,
+        "R2_ft": 0.9727,
+        "dataset": "INCART"
+      }
+    ],
+    "peores": [
+      {
+        "paciente": "I31",
+        "R2_base": -0.2821,
+        "R2_ft": -0.2807,
+        "dataset": "INCART"
+      },
+      {
+        "paciente": "I29",
+        "R2_base": -0.2477,
+        "R2_ft": -0.2447,
+        "dataset": "INCART"
+      },
+      {
+        "paciente": "I75",
+        "R2_base": -0.1885,
+        "R2_ft": -0.0324,
+        "dataset": "INCART"
+      },
+      {
+        "paciente": "I12",
+        "R2_base": -0.1192,
+        "R2_ft": -0.1172,
+        "dataset": "INCART"
+      },
+      {
+        "paciente": "I30",
+        "R2_base": -0.0895,
+        "R2_ft": -0.0817,
+        "dataset": "INCART"
+      }
+    ]
+  },
+  "tabla_XXXI_por_dataset": {
+    "INCART": {
+      "n": 75,
+      "R2_medio": 0.599,
+      "R2_std": 0.3061,
+      "R2_mediana": 0.6972,
+      "n_ge_080": 20,
+      "pct_ge_080": 26.6667,
+      "n_neg": 5,
+      "pct_neg": 6.6667
+    },
+    "MIT-BIH": {
+      "n": 48,
+      "R2_medio": 0.7896,
+      "R2_std": 0.1925,
+      "R2_mediana": 0.8382,
+      "n_ge_080": 32,
+      "pct_ge_080": 66.6667,
+      "n_neg": 0,
+      "pct_neg": 0.0
+    },
+    "TOTAL": {
+      "n": 123,
+      "R2_medio": 0.6734,
+      "R2_std": 0.2825,
+      "R2_mediana": 0.7593,
+      "n_ge_080": 52,
+      "pct_ge_080": 42.2764,
+      "n_neg": 5,
+      "pct_neg": 4.065
+    },
+    "brecha_MITBIH_menos_INCART": 0.1906
+  },
+  "efecto_fine_tuning": {
+    "delta_medio": 0.0063,
+    "mejora_relativa_pct": 0.9334,
+    "pacientes_mejorados": 114,
+    "n": 123,
+    "pct_mejorados": 92.6829,
+    "Amp_Error_base": 0.5653,
+    "Amp_Error_ft": 0.5463
+  },
+  "tabla_XXXII_costo": {
+    "tiempo_medio_fold_s": 774.2782,
+    "tiempo_medio_fold_min": 12.9046,
+    "epocas_promedio": 30.0,
+    "n_folds": 123,
+    "tiempo_total_h": 26.4545,
+    "n_train_medio": 63440,
+    "n_test_medio": 2280,
+    "K_fine_tuning": 30
+  },
+  "discrepancias_vs_reporte": [
+    {
+      "magnitud": "R2_base",
+      "reporte_07may": 0.6377,
+      "csv_12may": 0.6734,
+      "diferencia": 0.0357
+    },
+    {
+      "magnitud": "R2_ft",
+      "reporte_07may": 0.6431,
+      "csv_12may": 0.6797,
+      "diferencia": 0.0366
+    },
+    {
+      "magnitud": "R2_t1",
+      "reporte_07may": 0.6689,
+      "csv_12may": 0.6833,
+      "diferencia": 0.0144
+    },
+    {
+      "magnitud": "R2_t2",
+      "reporte_07may": 0.6276,
+      "csv_12may": 0.6765,
+      "diferencia": 0.0489
+    },
+    {
+      "magnitud": "R2_t3",
+      "reporte_07may": 0.6167,
+      "csv_12may": 0.6604,
+      "diferencia": 0.0437
+    },
+    {
+      "magnitud": "Shape_Corr",
+      "reporte_07may": 0.8191,
+      "csv_12may": 0.8383,
+      "diferencia": 0.0192
+    },
+    {
+      "magnitud": "Amp_Error",
+      "reporte_07may": 0.605,
+      "csv_12may": 0.5653,
+      "diferencia": -0.0397
+    },
+    {
+      "magnitud": "RMSE",
+      "reporte_07may": 0.5423,
+      "csv_12may": 0.5139,
+      "diferencia": -0.0284
+    },
+    {
+      "magnitud": "R2_train",
+      "reporte_07may": 0.7411,
+      "csv_12may": 0.769,
+      "diferencia": 0.0279
+    },
+    {
+      "magnitud": "gap",
+      "reporte_07may": 0.1034,
+      "csv_12may": 0.0956,
+      "diferencia": -0.0078
+    },
+    {
+      "magnitud": "n_ge_080_base",
+      "reporte_07may": 44,
+      "csv_12may": 52,
+      "diferencia": 8.0
+    },
+    {
+      "magnitud": "n_ge_080_ft",
+      "reporte_07may": 46,
+      "csv_12may": 53,
+      "diferencia": 7.0
+    }
+  ]
+}

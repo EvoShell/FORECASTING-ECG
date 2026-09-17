@@ -1,0 +1,311 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Lleva el codigo del servicio de este repositorio al Space de Hugging Face.
+#
+# POR QUE HACE FALTA UN FLUJO Y NO BASTA CON ENLAZARLOS
+#
+# Hugging Face no se sincroniza solo desde GitHub: un Space ES un repositorio de
+# git, con su propia estructura. Y la estructura del Space NO es la de aqui:
+#
+#     Este repositorio                          El Space
+#     ───────────────────────────────────       ──────────────────
+#     .../ecg_forecast_api/app/           ───▶  app/
+#     .../ecg_forecast_api/requirements   ───▶  requirements.txt
+#     .../ecg_forecast_api/espacio-hf/    ───▶  Dockerfile, README.md
+#                     (no existe aqui)          results/          ← se conserva
+#                     (no existe aqui)          datos_linux.zip   ← se conserva
+#
+# De ahi que esto no sea un espejo sino un ensamblado: se toma lo que aqui hay,
+# se coloca donde el Space lo espera, y se deja intacto lo que solo vive alli.
+#
+# LO QUE NUNCA SE TOCA, Y POR QUE
+#
+# El archivo `datos_linux.zip` pesa 638 MB y guarda las senales ya comprimidas;
+# `results/` guarda los modelos entrenados. Ninguno de los dos esta en este
+# repositorio —el .gitignore excluye `datos/`, `*.zip`, `*.keras` y `results/`,
+# y con razon, porque son gigabytes— asi que este flujo no puede reponerlos si
+# los borrara. Se clonan como punteros y se dejan exactamente como estaban.
+#
+# El clonado usa GIT_LFS_SKIP_SMUDGE=1 justamente para eso: trae el puntero de
+# 133 bytes en lugar de los 638 MB. Sin esa variable, cada sincronizacion se
+# descargaria el archivo entero y lo volveria a subir, que es lo contrario de lo
+# que se busca: el arranque del Space seguiria siendo el mismo y la operacion
+# tardaria media hora.
+#
+# EL TOKEN
+#
+# Se lee del secreto `HF_TOKEN` del repositorio. Hay que crearlo una vez:
+#
+#   1. En Hugging Face: foto de perfil -> Settings -> Access Tokens
+#      -> Create new token -> tipo Write. Copiarlo.
+#   2. En GitHub: Settings del repositorio -> Secrets and variables -> Actions
+#      -> New repository secret -> nombre HF_TOKEN -> pegar el token.
+#
+# El token queda cifrado en GitHub y no aparece en el registro de ejecucion.
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: Sincronizar el Space de Hugging Face
+
+on:
+  push:
+    branches: [main]
+    # Solo cuando cambia algo que el Space necesita. Un cambio en la interfaz no
+    # tiene por que reconstruir el servicio: son cinco o diez minutos de obra.
+    paths:
+      - 'FORECASTING ECG - Dashboard/ecg_forecast_api/app/**'
+      - 'FORECASTING ECG - Dashboard/ecg_forecast_api/requirements.txt'
+      - 'FORECASTING ECG - Dashboard/ecg_forecast_api/espacio-hf/**'
+      - '.github/workflows/sincronizar-space.yml'
+  workflow_dispatch:
+    inputs:
+      forzar:
+        description: 'Sincronizar aunque no haya cambios'
+        type: boolean
+        default: false
+
+concurrency:
+  group: sincronizar-space
+  cancel-in-progress: false
+
+jobs:
+  sincronizar:
+    name: Ensamblar y enviar al Space
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    env:
+      # A donde se envia. Se lee de la variable HF_SPACE del repositorio para que
+      # una mudanza de cuenta no obligue a tocar este archivo: se cambia en
+      # Settings > Secrets and variables > Actions > Variables. Si no esta
+      # definida, se usa el Space actual.
+      ESPACIO: ${{ vars.HF_SPACE || 'Evoshell/api-ecg-forecasting' }}
+      ORIGEN: FORECASTING ECG - Dashboard/ecg_forecast_api
+
+    steps:
+      - name: Traer este repositorio
+        uses: actions/checkout@v4
+
+      - name: Comprobar que el token existe
+        run: |
+          if [ -z "${{ secrets.HF_TOKEN }}" ]; then
+            echo "::error::Falta el secreto HF_TOKEN. Se crea en Settings del repositorio,"
+            echo "::error::en Secrets and variables > Actions > New repository secret."
+            exit 1
+          fi
+          echo "El token esta configurado."
+
+      - name: Clonar el Space sin descargar los archivos grandes
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          set -eu
+          # La variable es lo que evita bajarse los 638 MB: git trae el puntero.
+          export GIT_LFS_SKIP_SMUDGE=1
+          git clone --depth 1 \
+            "https://oauth2:${HF_TOKEN}@huggingface.co/spaces/${ESPACIO}" espacio
+          cd espacio
+          echo "Contenido que trae el Space:"
+          ls -la
+          echo
+          echo "Tamano del puntero de datos_linux.zip (debe ser de bytes, no de MB):"
+          ls -l datos_linux.zip | awk '{print "  " $5 " bytes"}'
+
+      - name: Ensamblar el contenido
+        run: |
+          set -eu
+
+          # El codigo del servicio se reemplaza entero: asi un archivo borrado
+          # aqui tambien desaparece alli. Copiar encima sin borrar antes deja
+          # huerfanos que siguen ejecutandose.
+          rm -rf espacio/app
+          cp -r "${ORIGEN}/app" espacio/app
+
+          # La receta de construccion y las dependencias, desde espacio-hf/ y NO
+          # desde la raiz del servicio.
+          #
+          # El requirements.txt de la raiz declara wfdb y h5py; el del Space no,
+          # a proposito, porque su Dockerfile los instala aparte y luego vuelve a
+          # bajar numpy a 1.24.3. Copiar aqui el de la raiz rompio la
+          # construccion el 17 de septiembre y dejo el servicio con un 503.
+          cp "${ORIGEN}/espacio-hf/Dockerfile"       espacio/Dockerfile
+          cp "${ORIGEN}/espacio-hf/README.md"        espacio/README.md
+          cp "${ORIGEN}/espacio-hf/requirements.txt" espacio/requirements.txt
+
+          # Lo que no se toca, se comprueba que sigue ahi.
+          test -f espacio/datos_linux.zip || {
+            echo "::error::datos_linux.zip no esta en el Space. No se sincroniza nada:"
+            echo "::error::este flujo no puede reponerlo porque no esta en este repositorio."
+            exit 1
+          }
+          test -d espacio/results || {
+            echo "::error::La carpeta results/ no esta en el Space. Se aborta por el mismo motivo."
+            exit 1
+          }
+
+          # Y que el puerto del Dockerfile siga siendo el que la plataforma
+          # publica, porque si no el Space construye sin errores y no responde.
+          grep -q "7860" espacio/Dockerfile || {
+            echo "::error::El Dockerfile no expone el 7860 y el README no declara app_port."
+            exit 1
+          }
+
+          # La comprobacion que habria evitado la caida del 17 de septiembre.
+          # wfdb exige numpy>=1.26.4 y aqui numpy esta fijado en 1.24.3, que es
+          # la version con la que se guardo el modelo. Declarar wfdb en el
+          # requirements hace que pip tenga que resolver las dos a la vez, y
+          # aborta con ResolutionImpossible. El Dockerfile lo instala despues,
+          # en su propio paso, justamente para esquivarlo.
+          if grep -qE '^(wfdb|h5py)' espacio/requirements.txt; then
+            echo "::error::requirements.txt declara wfdb o h5py. Eso rompe la construccion:"
+            echo "::error::wfdb exige numpy>=1.26.4 y el Space fija numpy==1.24.3."
+            echo "::error::El Dockerfile ya los instala en un paso aparte. Revisa"
+            echo "::error::ecg_forecast_api/espacio-hf/POR_QUE.md"
+            exit 1
+          fi
+
+          # Y que numpy siga clavado donde el modelo espera.
+          grep -q 'numpy==1.24.3' espacio/requirements.txt || {
+            echo "::error::numpy ya no esta fijado en 1.24.3, que es la version con la"
+            echo "::error::que se guardo el modelo. El arranque fallaria al cargarlo."
+            exit 1
+          }
+
+          echo "Ensamblado:"
+          echo "  archivos de app/ .......... $(find espacio/app -type f | wc -l)"
+          echo "  archivos de results/ ...... $(find espacio/results -type f | wc -l)  (intactos)"
+          echo "  datos_linux.zip ........... intacto"
+
+      - name: Enviar al Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          set -eu
+          cd espacio
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "El Space ya estaba al dia. No se envia nada."
+            echo "SIN_CAMBIOS=1" >> "$GITHUB_ENV"
+            exit 0
+          fi
+
+          echo "Lo que cambia en el Space:"
+          git diff --cached --stat
+
+          git commit -m "Sincronizar desde ${GITHUB_REPOSITORY}@${GITHUB_SHA::7}
+
+          Enviado automaticamente por el flujo sincronizar-space.yml.
+          No se tocaron datos_linux.zip ni results/."
+
+          git push
+          echo "Enviado. El Space reconstruye solo; tarda entre cinco y diez minutos."
+
+      - name: Esperar a que la reconstruccion termine de verdad
+        if: env.SIN_CAMBIOS != '1'
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          set -u
+
+          SUB=$(echo "$ESPACIO" | tr '/' '-' | tr '[:upper:]' '[:lower:]')
+          URL="https://${SUB}.hf.space"
+          API="https://huggingface.co/api/spaces/${ESPACIO}"
+
+          estado() {
+            curl -s --max-time 30 -H "Authorization: Bearer ${HF_TOKEN}" "$API" \
+              | jq -r '.runtime.stage // "DESCONOCIDO"'
+          }
+
+          # ── Fase 1 ──────────────────────────────────────────────────────
+          # Que la reconstruccion EMPIECE. Sin esta espera, el paso comprobaba
+          # el contenedor viejo, que sigue sirviendo mientras se construye el
+          # nuevo, y daba verde sin haber desplegado nada.
+          echo "Fase 1: esperando a que arranque la reconstruccion."
+          arranco=0
+          for n in $(seq 1 24); do
+            e=$(estado)
+            echo "  [$n] estado: $e"
+            case "$e" in
+              RUNNING) sleep 10 ;;
+              *ERROR*|*FAILED*)
+                echo "::error::La construccion fallo: $e"
+                echo "::error::El registro esta en la pestana App del Space."
+                exit 1 ;;
+              *) echo "  La reconstruccion empezo ($e)."; arranco=1; break ;;
+            esac
+          done
+
+          if [ "$arranco" = "0" ]; then
+            echo "::warning::El Space nunca salio de RUNNING. O la reconstruccion"
+            echo "::warning::fue instantanea, o no llego a dispararse. Se comprueba igual,"
+            echo "::warning::pero este resultado no prueba que el codigo nuevo este activo."
+          fi
+
+          # ── Fase 2 ──────────────────────────────────────────────────────
+          echo "Fase 2: esperando a que vuelva a estar en marcha."
+          listo=0
+          for n in $(seq 1 60); do
+            e=$(estado)
+            case "$e" in
+              RUNNING) echo "  [$n] en marcha"; listo=1; break ;;
+              *ERROR*|*FAILED*)
+                echo "::error::La construccion fallo: $e"
+                exit 1 ;;
+              *) echo "  [$n] $e"; sleep 20 ;;
+            esac
+          done
+
+          if [ "$listo" = "0" ]; then
+            echo "::error::El Space no volvio a estar en marcha en veinte minutos."
+            exit 1
+          fi
+
+          # ── Fase 3 ──────────────────────────────────────────────────────
+          # Solo ahora tiene sentido preguntarle al servicio.
+          echo "Fase 3: comprobando el servicio."
+          sleep 15
+          for n in $(seq 1 10); do
+            codigo=$(curl -s -o salud.json -w '%{http_code}' --max-time 90 "$URL/api/health" || echo 000)
+            [ "$codigo" = "200" ] && break
+            echo "  [$n] estado devolvio $codigo, reintentando"
+            sleep 20
+          done
+
+          if [ "$codigo" != "200" ]; then
+            echo "::error::El servicio no respondio: $codigo"
+            exit 1
+          fi
+
+          cat salud.json; echo
+          modelos=$(jq -r '.models_loaded // 0' salud.json)
+          if [ "$modelos" -lt 1 ]; then
+            echo "::error::El servicio responde pero no cargo ningun modelo."
+            exit 1
+          fi
+
+          n_pac=$(curl -s --max-time 90 "$URL/api/patients" | jq -r '.patients | length')
+          echo "Registros servidos: $n_pac"
+          if [ "$n_pac" != "123" ]; then
+            echo "::error::Se esperaban 123 registros y se sirvieron $n_pac."
+            exit 1
+          fi
+          echo "El servicio esta al dia, con $modelos modelo(s) y los $n_pac registros."
+
+      - name: Resumen
+        if: always()
+        run: |
+          {
+            echo "### Sincronizacion del Space"
+            echo
+            if [ "${{ job.status }}" = "success" ]; then
+              echo "El Space quedo al dia y respondiendo, con los 123 registros."
+            else
+              echo "**Fallo.** El registro de construccion del Space esta en su pestana App."
+            fi
+            echo
+            echo "Space: \`${ESPACIO}\`"
+            echo
+            echo "No se tocaron \`datos_linux.zip\` (638 MB) ni \`results/\`: se conservan"
+            echo "en el Space porque este repositorio no los versiona."
+          } >> "$GITHUB_STEP_SUMMARY"

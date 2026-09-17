@@ -1,0 +1,9 @@
+{
+ "auc_pr": 0.38076304406775047,
+ "prevalencia": 0.12222011744648607,
+ "ganancia": 3.1153876466733643,
+ "puntuacion": "mse",
+ "n_latidos": 316740,
+ "n_ectopicos": 38712,
+ "n_pacientes": 50
+}

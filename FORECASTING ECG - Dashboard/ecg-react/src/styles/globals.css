@@ -531,3 +531,154 @@ select:focus {
 @media (prefers-reduced-motion: reduce) {
   button:not(:disabled):active { transform: none; }
 }
+
+
+/* ── Brillo que recorre un texto (ShinyText) ──────────────────────────────
+   Estaba hecho con JavaScript, escribiendo `background-position` en cada
+   fotograma: 636 mutaciones del arbol cada cinco segundos en la portada, con la
+   pagina en reposo. En CSS lo resuelve el motor de estilo sin tocar el arbol.
+   La duracion, el retardo y el sentido los pone el componente en linea. */
+@keyframes brillo-texto {
+  from { background-position: 150% center; }
+  to   { background-position: -50% center; }
+}
+
+.brillo-texto {
+  animation-name: brillo-texto;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.brillo-pausa-hover:hover {
+  animation-play-state: paused;
+}
+
+/* Quien pide que el sistema reduzca el movimiento deja de ver el brillo. La
+   version anterior no lo respetaba. */
+@media (prefers-reduced-motion: reduce) {
+  .brillo-texto {
+    animation: none;
+    background-position: 50% center;
+  }
+}
+
+/* Rejilla de indicadores en UN solo renglon.
+   `auto-fill` no sirve aqui: reparte por ancho minimo y, en pantallas medias,
+   dejaba cinco tarjetas arriba y una huerfana debajo. Con un numero fijo de
+   columnas el renglon es uno de verdad, y los saltos se deciden a proposito:
+   seis hasta 1150 px, tres hasta 760, y dos por debajo. Nunca queda una sola
+   tarjeta colgando al final de una fila. */
+.kpi-fila {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+@media (max-width: 1150px) {
+  .kpi-fila { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* Medido: a 800 px de ventana la rejilla se queda en 318 px, y con tres columnas
+   cada tarjeta baja a 99 px, donde «Aciertos (VP)» y «Exhaustividad» se cortan.
+   Por eso el corte esta en 900 y no en 760. */
+@media (max-width: 900px) {
+  .kpi-fila { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BARRA LATERAL
+   ═══════════════════════════════════════════════════════════════════════════
+   Antes estaba escrita con colores fijos —`rgba(255,255,255,0.04)` para el fondo
+   y `rgba(6,182,212,…)` para el acento— y ocho manejadores de raton en linea. Eso
+   tenia dos consecuencias: en tema CLARO el hover era invisible, porque un blanco
+   al 4 % sobre fondo blanco no se ve; y el cian no existia en el sistema de
+   tokens, asi que la barra era la unica pieza del tablero con su propia paleta.
+   Ahora todo sale de los tokens y los estados viven en CSS, no en JavaScript. */
+
+.barra-lateral-logo {
+  /* El logotipo se pinta con `mask`, no con <img>: asi hereda `currentColor` y
+     cambia solo con el tema. `logo-mono.svg` es la variante preparada para esto
+     —su relleno es `currentColor`—, y al usar mascara basta UN archivo en vez de
+     una variante por tema. Proporcion real del trazado: 480 × 408. */
+  -webkit-mask: url('/brand/svg/logo-mono.svg') center / contain no-repeat;
+  mask: url('/brand/svg/logo-mono.svg') center / contain no-repeat;
+  background-color: currentColor;
+  display: block;
+  flex: none;
+  transition: width 0.22s ease, height 0.22s ease;
+}
+
+.barra-lateral-enlace {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: var(--text-sub);
+  background: transparent;
+  /* La franja de la izquierda es lo que marca la pagina activa. Se reserva su
+     ancho siempre, en transparente, para que al activarse no se mueva el texto. */
+  border-left: 2px solid transparent;
+  border-top: 1px solid transparent;
+  border-right: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.16s ease, color 0.16s ease, border-color 0.16s ease;
+}
+
+.barra-lateral-enlace:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.barra-lateral-enlace:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.barra-lateral-enlace[data-activo='si'] {
+  background: var(--accent-bg);
+  color: var(--text);
+  font-weight: 600;
+  border-left-color: var(--accent);
+  border-top-color: var(--accent-border);
+  border-right-color: var(--accent-border);
+  border-bottom-color: var(--accent-border);
+}
+
+/* Los botones de tema e idioma comparten estado, asi que comparten clase. */
+.barra-lateral-boton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-sub);
+  cursor: pointer;
+  font-family: var(--font-data);
+  font-size: var(--fs-3xs);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transition: background 0.16s ease, color 0.16s ease, border-color 0.16s ease;
+}
+
+.barra-lateral-boton:hover {
+  background: var(--accent-bg);
+  border-color: var(--accent-border);
+  color: var(--text);
+}
+
+.barra-lateral-boton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .barra-lateral-logo,
+  .barra-lateral-enlace,
+  .barra-lateral-boton { transition: none; }
+}

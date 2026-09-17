@@ -1,0 +1,82 @@
+{
+  "protocolo": {
+    "filtro": "F_N+MED",
+    "lookback": 3,
+    "n_iter": 20,
+    "cv": "TimeSeriesSplit(3)",
+    "semilla": 42,
+    "pacientes": [
+      "104",
+      "113",
+      "121",
+      "201",
+      "202",
+      "203",
+      "205",
+      "219",
+      "222",
+      "230"
+    ],
+    "n_pacientes": 10,
+    "formulacion": "Experimento B (one-beat-ahead)"
+  },
+  "modelos": {
+    "RF": {
+      "r2_base_media": 0.5547,
+      "r2_base_std": 0.1619,
+      "r2_opt_media": 0.5657,
+      "r2_opt_std": 0.1573,
+      "delta_medio": 0.011,
+      "mejora_relativa_pct": 1.99,
+      "pacientes_mejorados": 10,
+      "n_pacientes": 10,
+      "wilcoxon_W": 0.0,
+      "wilcoxon_p": 0.001953125,
+      "significativo_005": true,
+      "config_consenso": {
+        "n_estimators": "120",
+        "max_depth": "None",
+        "min_samples_leaf": "4",
+        "max_features": "sqrt"
+      }
+    },
+    "DT": {
+      "r2_base_media": 0.3792,
+      "r2_base_std": 0.25,
+      "r2_opt_media": 0.4495,
+      "r2_opt_std": 0.2154,
+      "delta_medio": 0.0703,
+      "mejora_relativa_pct": 18.54,
+      "pacientes_mejorados": 8,
+      "n_pacientes": 10,
+      "wilcoxon_W": 5.0,
+      "wilcoxon_p": 0.01953125,
+      "significativo_005": true,
+      "config_consenso": {
+        "max_depth": "6",
+        "min_samples_leaf": "16",
+        "min_samples_split": "2"
+      }
+    },
+    "MLP": {
+      "r2_base_media": 0.5324,
+      "r2_base_std": 0.2035,
+      "r2_opt_media": 0.5286,
+      "r2_opt_std": 0.2318,
+      "delta_medio": -0.0038,
+      "mejora_relativa_pct": -0.72,
+      "pacientes_mejorados": 5,
+      "n_pacientes": 10,
+      "wilcoxon_W": 23.0,
+      "wilcoxon_p": 0.6953125,
+      "significativo_005": false,
+      "config_consenso": {
+        "hidden_layer_sizes": "[256, 128]",
+        "alpha": "0.0001",
+        "learning_rate_init": "0.0005",
+        "batch_size": "64"
+      }
+    }
+  },
+  "tiempo_total_s": 1830.0
+}

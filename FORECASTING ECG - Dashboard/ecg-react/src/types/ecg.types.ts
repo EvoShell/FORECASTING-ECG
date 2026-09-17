@@ -1,7 +1,7 @@
 export type ModelName = 'LSTM' | 'GRU' | 'CNN-GRU' | 'CNN-LSTM' | 'RF' | 'MLP' | 'DT' | 'SVR_rbf' | 'baseline' | 'LOPO';
 export type AlertLevel = 'normal' | 'warning' | 'critical';
 export type ArrhythmiaType = 'normal' | 'LBBB' | 'RBBB' | 'APC' | 'PVC';
-export type ExperimentType = 'nb1' | 'nb2' | 'nb3' | 'nb4b' | 'nb5' | 'nb5b';
+export type ExperimentType = 'nb1' | 'nb2' | 'nb3' | 'nb4b' | 'nb5b' | 'nb5' | 'nb7' | 'nb8';
 
 export interface ECGSignal {
   values: number[];
@@ -104,13 +104,18 @@ export const FILTRO_COLORS: Record<string, string> = {
   'F_N+PB+MED': '#ef4444',
 };
 
+// El orden importa y se presta a confusion: la carpeta `nb5b` es el experimento 5
+// y la carpeta `nb5` es el 6. Los rotulos siguen la numeracion que ve el usuario en
+// la pagina de Experimentos, no el nombre de la carpeta.
 export const EXPERIMENT_LABELS: Record<ExperimentType, { es: string; en: string }> = {
-  nb1: { es: 'NB1 - Modelos Tradicionales', en: 'NB1 - Traditional Models' },
-  nb2: { es: 'NB2 - Deep Learning', en: 'NB2 - Deep Learning' },
-  nb3: { es: 'NB3 - Evaluación Comparativa', en: 'NB3 - Comparative Evaluation' },
-  nb4b: { es: 'NB4B - Multi-sujeto', en: 'NB4B - Multi-subject' },
-  nb5: { es: 'NB5 - Multi-step LOPO (CNN-GRU-ATTN)', en: 'NB5 - Multi-step LOPO (CNN-GRU-ATTN)' },
-  nb5b: { es: 'NB5B - Cross-patient (LOPO)', en: 'NB5B - Cross-patient (LOPO)' },
+  nb1: { es: 'Exp. 1 - Modelos tradicionales', en: 'Exp. 1 - Traditional models' },
+  nb2: { es: 'Exp. 2 - Deep Learning', en: 'Exp. 2 - Deep Learning' },
+  nb3: { es: 'Exp. 3 - Evaluación comparativa', en: 'Exp. 3 - Comparative evaluation' },
+  nb4b: { es: 'Exp. 4 - Multi-sujeto', en: 'Exp. 4 - Multi-subject' },
+  nb5b: { es: 'Exp. 5 - Cross-patient (LOPO)', en: 'Exp. 5 - Cross-patient (LOPO)' },
+  nb5: { es: 'Exp. 6 - Cross-patient multi-step (CNN_GRU_ATTN)', en: 'Exp. 6 - Cross-patient multi-step (CNN_GRU_ATTN)' },
+  nb7: { es: 'Exp. 7 - Hiperparámetros', en: 'Exp. 7 - Hyperparameters' },
+  nb8: { es: 'Exp. 8 - Detección de eventos', en: 'Exp. 8 - Event detection' },
 };
 
 export interface BaseMetrics {

@@ -1,0 +1,11 @@
+{
+  "n_pacientes": 10,
+  "atenuacion_R_media_pct": 76.5,
+  "atenuacion_R_std_pct": 13.9,
+  "atenuacion_R_min_pct": 49.1,
+  "atenuacion_R_max_pct": 95.5,
+  "persistencia_F_N_MED": 0.0854,
+  "persistencia_F_NB6": -0.202,
+  "delta_persistencia": 0.2875,
+  "ventana_mediana_ms": 102.8
+}

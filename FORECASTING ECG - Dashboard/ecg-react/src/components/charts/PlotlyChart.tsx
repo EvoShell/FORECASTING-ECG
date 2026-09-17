@@ -101,12 +101,24 @@ function PlotlyChartBase({ data, layout = {}, config = {}, style, onError, vacio
       ...config,
     };
 
+    // El dibujado es asincrono y el desmontaje no lo espera. Si el componente se va
+    // antes de que Plotly termine, su codigo interno acaba llamando a `gd.emit` sobre
+    // un div al que `purge` ya le quito sus propiedades, y salta
+    // «gd.emit is not a function». No es un fallo de la grafica: es una carrera de
+    // desmontaje, y no debe ensenarsele al usuario como si no se hubiera podido dibujar.
+    let vivo = true;
+
     const fallo = (err: unknown) => {
+      if (!vivo || !nodo.isConnected) return;   // se desmonto a medio dibujar
       const msg = err instanceof Error ? err.message : 'Error al dibujar la grafica';
       console.error('[PlotlyChart]', err);
       setError(msg);
       onError?.(msg);
     };
+
+    // Un nodo desprendido del documento no se puede dibujar. Ocurre cuando un limite
+    // de errores recrea el arbol: la referencia sigue viva, pero el div ya no esta.
+    if (!nodo.isConnected) return;
 
     try {
       // `Plotly.react` devuelve una promesa: el try/catch no capturaba un fallo
@@ -114,11 +126,13 @@ function PlotlyChartBase({ data, layout = {}, config = {}, style, onError, vacio
       Promise.resolve(
         Plotly.react(nodo, safeData as never[], defaultLayout, defaultConfig),
       )
-        .then(() => setIsLoading(false))
+        .then(() => { if (vivo) setIsLoading(false); })
         .catch(fallo);
     } catch (err) {
       fallo(err);
     }
+
+    return () => { vivo = false; };
     // `layout` y `config` entran por su firma, no por su identidad.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [marcaData, firmaLayout, firmaConfig]);

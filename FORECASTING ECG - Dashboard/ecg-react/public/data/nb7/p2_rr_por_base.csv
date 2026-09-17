@@ -1,0 +1,4 @@
+base,n_pacientes,rr_media_s,rr_std_intra_s,fc_media_lpm
+INCART,75,0.8057,0.1567,78.1848
+MIT-BIH,48,0.8193,0.1247,75.9952
+CONJUNTO,123,0.811,0.1442,77.33

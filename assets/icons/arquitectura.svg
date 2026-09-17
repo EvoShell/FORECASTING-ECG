@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+     fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
+     role="img" aria-label="Arquitectura">
+  <title>Arquitectura</title>
+  <style>
+    /* Paleta completa en la raiz: el bloque oscuro solo afina, nunca define. */
+    :root { --ic: #6b7785; }
+    @media (prefers-color-scheme: light) { :root { --ic: #57606a; } }
+    @media (prefers-color-scheme: dark)  { :root { --ic: #9198a1; } }
+    .t { stroke: var(--ic); }
+    .f { fill: var(--ic); stroke: none; }
+  </style>
+  <path class="t" d="M12 2.8 21 7.4l-9 4.6-9-4.6 9-4.6z"/>
+  <path class="t" d="M3 12.2l9 4.6 9-4.6"/>
+  <path class="t" d="M3 16.8l9 4.6 9-4.6"/>
+</svg>

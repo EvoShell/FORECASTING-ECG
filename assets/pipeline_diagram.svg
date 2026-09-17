@@ -1,4 +1,62 @@
 <svg viewBox="0 0 1000 740" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flujo del sistema en 4 pasos: el historial de 5 latidos más el intervalo RR entra a los modelos de forecasting (ML clásico evolucionando a Deep Learning), que producen la predicción de latidos futuros, la cual alimenta la detección anticipada de anomalías en el dashboard.">
+  <style id="tema-oscuro-generado">
+    /* La paleta clara queda intacta: aqui solo se reasigna cuando el
+       navegador informa de que el tema del sistema es oscuro. */
+    @media (prefers-color-scheme: dark) {
+      [fill="#047857"]  { fill:   #34d399; }
+      [stroke="#047857"]{ stroke: #34d399; }
+      [fill="#059669"]  { fill:   #34d399; }
+      [stroke="#059669"]{ stroke: #34d399; }
+      [fill="#0f172a"]  { fill:   #e6edf3; }
+      [stroke="#0f172a"]{ stroke: #e6edf3; }
+      [fill="#1e40af"]  { fill:   #60a5fa; }
+      [stroke="#1e40af"]{ stroke: #60a5fa; }
+      [fill="#2563eb"]  { fill:   #6aa6ff; }
+      [stroke="#2563eb"]{ stroke: #6aa6ff; }
+      [fill="#334155"]  { fill:   #c9d1d9; }
+      [stroke="#334155"]{ stroke: #c9d1d9; }
+      [fill="#4338ca"]  { fill:   #8b8ff0; }
+      [stroke="#4338ca"]{ stroke: #8b8ff0; }
+      [fill="#475569"]  { fill:   #b8c0c9; }
+      [stroke="#475569"]{ stroke: #b8c0c9; }
+      [fill="#4f46e5"]  { fill:   #8b8ff0; }
+      [stroke="#4f46e5"]{ stroke: #8b8ff0; }
+      [fill="#64748b"]  { fill:   #8b949e; }
+      [stroke="#64748b"]{ stroke: #8b949e; }
+      [fill="#be123c"]  { fill:   #fb7185; }
+      [stroke="#be123c"]{ stroke: #fb7185; }
+      [fill="#bfdbfe"]  { fill:   #2d4a73; }
+      [stroke="#bfdbfe"]{ stroke: #2d4a73; }
+      [fill="#c7d2fe"]  { fill:   #3b4270; }
+      [stroke="#c7d2fe"]{ stroke: #3b4270; }
+      [fill="#cbd5e1"]  { fill:   #3d444d; }
+      [stroke="#cbd5e1"]{ stroke: #3d444d; }
+      [fill="#d1fae5"]  { fill:   #1c4034; }
+      [stroke="#d1fae5"]{ stroke: #1c4034; }
+      [fill="#e0e7ff"]  { fill:   #2a2f45; }
+      [stroke="#e0e7ff"]{ stroke: #2a2f45; }
+      [fill="#e11d48"]  { fill:   #fb7185; }
+      [stroke="#e11d48"]{ stroke: #fb7185; }
+      [fill="#e2e8f0"]  { fill:   #30363d; }
+      [stroke="#e2e8f0"]{ stroke: #30363d; }
+      [fill="#ecfdf5"]  { fill:   #0d2820; }
+      [stroke="#ecfdf5"]{ stroke: #0d2820; }
+      [fill="#eef2ff"]  { fill:   #1a1d2e; }
+      [stroke="#eef2ff"]{ stroke: #1a1d2e; }
+      [fill="#eff6ff"]  { fill:   #172033; }
+      [stroke="#eff6ff"]{ stroke: #172033; }
+      [fill="#f1f5f9"]  { fill:   #21262d; }
+      [stroke="#f1f5f9"]{ stroke: #21262d; }
+      [fill="#f8fafc"]  { fill:   #1c2128; }
+      [stroke="#f8fafc"]{ stroke: #1c2128; }
+      [fill="#ffe4e6"]  { fill:   #3d1f24; }
+      [stroke="#ffe4e6"]{ stroke: #3d1f24; }
+      [fill="#fff1f2"]  { fill:   #2b1418; }
+      [stroke="#fff1f2"]{ stroke: #2b1418; }
+      [fill="#ffffff"]  { fill:   #161b22; }
+      [stroke="#ffffff"]{ stroke: #161b22; }
+    }
+  </style>
   <defs>
     <filter id="pf-shadow" x="-30%" y="-30%" width="160%" height="160%">
       <feDropShadow dx="0" dy="1.5" stdDeviation="2.5" flood-color="#0f172a" flood-opacity="0.10"/>
@@ -90,9 +148,9 @@
       <rect width="900" height="120" rx="14" fill="#ecfdf5" stroke="#059669" stroke-width="1.5"/>
       <circle cx="52" cy="55" r="26" fill="#d1fae5"/>
       <use href="#pf-i-heartmon" x="40" y="43" width="24" height="24" color="#059669"/>
-      <text x="100" y="46" font-size="15" font-weight="700" fill="#0f172a">4 · DETECCIÓN ANTICIPADA</text>
-      <text x="100" y="70" font-size="12" fill="#047857">Identificación de anomalías antes de la manifestación crítica</text>
-      <text x="100" y="89" font-size="12" fill="#047857">Visualización clínica en tiempo real · Dashboard FastAPI + React</text>
+      <text x="100" y="46" font-size="15" font-weight="700" fill="#0f172a">4 · RESIDUO Y ANÁLISIS</text>
+      <text x="100" y="70" font-size="12" fill="#047857">Error entre la previsión y la señal real, latido a latido</text>
+      <text x="100" y="89" font-size="12" fill="#047857">Tablero interactivo de análisis · FastAPI + React</text>
     </g>
 
     <text x="920" y="722" font-size="9" letter-spacing="1.5" fill="#cbd5e1" text-anchor="end">ECG FORECASTING</text>

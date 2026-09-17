@@ -7,6 +7,12 @@
 *.md
 !README.md
 
+# Excepcion acotada: la configuracion del Space de Hugging Face y su explicacion.
+# La regla de arriba existe para no versionar los borradores de la tesis, pero
+# este archivo documenta por que el requirements.txt del Space NO puede llevar
+# wfdb, que es lo que tiro el servicio el 17 de septiembre de 2026.
+!FORECASTING ECG - Dashboard/ecg_forecast_api/espacio-hf/*.md
+
 # ── Documentos Ofimáticos y Formatos de Texto ────────────────────
 *.docx
 *.doc
@@ -53,6 +59,25 @@ Correcciones/
 # OJO: La carpeta local se llama "datos" (no solo data)
 datos/
 data/
+
+# ── Rescate de lo que la regla `data/` se llevaba por delante ─────
+#
+# `data/` no lleva barra inicial, de modo que en git coincide con CUALQUIER
+# carpeta llamada «data» a cualquier profundidad. Eso excluia en silencio dos
+# cosas del tablero que no son datos pesados, y el despliegue en Vercel fallo
+# el 17 de septiembre de 2026 por ello:
+#
+#   - `src/components/data/` son 17 KB de codigo. Sin ellos la compilacion
+#     muere con «Cannot find module @/components/data/DataTable».
+#   - `public/data/` son 16 MB de JSON que la interfaz lee en ejecucion: las
+#     anotaciones de los 123 registros, los resultados de la septima fase y los
+#     casos de deteccion de la octava. Sin ellos compila, pero se rompe al usar
+#     los modulos de LOPO y Experimentos.
+#
+# Se rescatan por nombre en lugar de aflojar la regla general, que sigue
+# protegiendo las senales y las carpetas `data` de los entornos virtuales.
+!FORECASTING ECG - Dashboard/ecg-react/src/components/data/
+!FORECASTING ECG - Dashboard/ecg-react/public/data/
 *.dat
 *.atr
 *.hea

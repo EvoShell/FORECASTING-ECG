@@ -1,11 +1,10 @@
 fastapi==0.109.0
 uvicorn[standard]==0.27.0
 pydantic==2.5.0
-python-multipart==0.0.6
 numpy==1.24.3
 scipy==1.11.4
 pandas==2.0.3
-wfdb==4.1.2          # lo importa app/api/routes/patients.py; sin el, la API no arranca
+wfdb==4.3.1          # lo importa app/api/routes/patients.py; sin el, la API no arranca
 h5py==3.10.0         # lo necesita keras para leer model.weights.h5
 tensorflow==2.15.0
 orjson==3.9.0

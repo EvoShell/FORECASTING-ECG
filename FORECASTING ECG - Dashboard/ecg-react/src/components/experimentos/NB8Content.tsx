@@ -37,6 +37,7 @@ import {
   FUENTE_LOPO_NB5,
 } from '@/hooks/useNB8Results';
 import type { FilaClaseAAMI, FilaDeteccion, ParPaciente } from '@/hooks/useNB8Results';
+import { CasosDeteccion } from '@/components/experimentos/CasosDeteccion';
 
 // ── Formato ───────────────────────────────────────────────────────────────────
 
@@ -577,7 +578,7 @@ export function NB8Content() {
             n={reproduccion?.n}
             fase="NB6"
             fuente={reproduccion?.fuenteNB5 ?? FUENTE_LOPO_NB5}
-            referencia={`modelo ${reproduccion?.modeloNB5 ?? '—'}, mismos pacientes`}
+            referencia={`modelo ${reproduccion?.modeloNB5 ?? '·'}, mismos pacientes`}
           />
           <MetricStat
             densa
@@ -759,8 +760,8 @@ export function NB8Content() {
         {peor && claseNormal && (
           <Aviso tono="atencion" titulo="El deterioro no es uniforme entre clases ectópicas">
             La razón global de {fx(contraste?.razon)} × esconde que el daño se concentra en una sola
-            clase. {peor.clase_aami} tiene un MSE medio de {fx(peor.mse_media)} —{' '}
-            {fx(peor.razonMseVsNormal, 2)} × el del latido normal — y su correlación de forma cae a{' '}
+            clase. {peor.clase_aami} tiene un MSE medio de {fx(peor.mse_media)},{' '}
+            {fx(peor.razonMseVsNormal, 2)} × el del latido normal, y su correlación de forma cae a{' '}
             {fx(peor.shape_corr_media)} frente a {fx(claseNormal.shape_corr_media)} de la clase N:{' '}
             {fsigno(peor.deltaCorrVsNormal)}. Ahí la predicción deja de reproducir la morfología, no
             solo la amplitud.{' '}
@@ -865,8 +866,8 @@ export function NB8Content() {
         </MetricGrid>
 
         <Aviso tono="neutro" titulo="Por qué el área bajo la curva de precisión-exhaustividad y no la ROC">
-          Con una prevalencia de {fx(resumenP4?.prevalencia)} — {fent(resumenP4?.n_ectopicos)}{' '}
-          latidos ectópicos entre {fent(resumenP4?.n_latidos)} — la clase negativa es abrumadora. La
+          Con una prevalencia de {fx(resumenP4?.prevalencia)}, {fent(resumenP4?.n_ectopicos)}{' '}
+          latidos ectópicos entre {fent(resumenP4?.n_latidos)}, la clase negativa es abrumadora. La
           ROC cruza la tasa de falsos positivos, que se calcula sobre esa clase negativa enorme:
           miles de falsas alarmas apenas la mueven, y la curva sale engañosamente favorable. La
           precisión, en cambio, divide por los positivos declarados, así que cada falsa alarma se
@@ -1079,13 +1080,34 @@ export function NB8Content() {
                 </>
               )}
               . En ellos el canal analizado no es el MLII que el pipeline supone, así que la
-              morfología del latido —y con ella el error por clase y la puntuación de detección— se
+              morfología del latido, y con ella el error por clase y la puntuación de detección, se
               mide sobre una señal de otra geometría. Sus filas siguen contando en los agregados de
               los bloques 2 y 3; queda dicho para que no se lean como equivalentes.
             </Aviso>
           </>
         )}
         <Procedencia fuente={FUENTE_SALVEDAD} n={salvedad.length} />
+      </Seccion>
+
+      <Seccion
+        numero="5"
+        titulo="El caso concreto detrás de cada cifra"
+        entradilla={
+          <>
+            Un recuento no es una prueba. Aquí está el latido: la onda que el cardiólogo anotó y
+            la que el modelo predijo, superpuestas, con el error que las separa. El argumento se
+            ve de un vistazo,{' '}
+            <strong style={{ color: 'var(--text)' }}>
+              el modelo predice cómo debería ser el siguiente latido normal, y cuando el real es
+              ectópico las dos curvas se separan
+            </strong>
+            ,{' '}y también se ve dónde falla. De cada veredicto se muestran dos casos a
+            propósito: el más claro y el que quedó pegado al umbral, porque enseñar solo los
+            fáciles es justo lo que invita a desconfiar.
+          </>
+        }
+      >
+        <CasosDeteccion />
       </Seccion>
     </div>
   );

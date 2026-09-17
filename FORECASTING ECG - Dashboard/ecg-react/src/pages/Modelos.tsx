@@ -18,9 +18,9 @@ type LopoModel = 'GRU_base' | 'CNN_GRU' | 'BiGRU_MHA' | 'Ensemble' | 'CNN_GRU_AT
 type AnyModel = DeepModel | TraditionalModel | LopoModel;
 
 const getCategoryMeta = (t: TFn): Record<Category, { label: string; sub: string; models: AnyModel[] }> => ({
-  deep:        { label: 'Deep Learning',       sub: t('NB2 — Redes neuronales recurrentes e híbridas', 'NB2 — Recurrent and hybrid neural networks'),    models: ['LSTM', 'GRU', 'CNN-GRU'] },
-  traditional: { label: t('ML Tradicional', 'Traditional ML'),      sub: t('NB1 — Modelos clásicos de machine learning', 'NB1 — Classical machine learning models'),      models: ['RF', 'MLP', 'SVR_rbf', 'DT'] },
-  lopo:        { label: 'Cross-Patient (LOPO)', sub: t('NB5B y NB6 — Leave-One-Patient-Out con fine-tuning', 'NB5B and NB6 — Leave-One-Patient-Out with fine-tuning'),    models: ['GRU_base', 'CNN_GRU', 'BiGRU_MHA', 'Ensemble', 'CNN_GRU_ATTN'] },
+  deep:        { label: 'Deep Learning',       sub: t('NB2 · Redes neuronales recurrentes e híbridas', 'NB2 · Recurrent and hybrid neural networks'),    models: ['LSTM', 'GRU', 'CNN-GRU'] },
+  traditional: { label: t('ML Tradicional', 'Traditional ML'),      sub: t('NB1 · Modelos clásicos de machine learning', 'NB1 · Classical machine learning models'),      models: ['RF', 'MLP', 'SVR_rbf', 'DT'] },
+  lopo:        { label: 'Cross-Patient (LOPO)', sub: t('NB5B y NB6 · Leave-One-Patient-Out con fine-tuning', 'NB5B and NB6 · Leave-One-Patient-Out with fine-tuning'),    models: ['GRU_base', 'CNN_GRU', 'BiGRU_MHA', 'Ensemble', 'CNN_GRU_ATTN'] },
 });
 
 function modelColor(m: AnyModel): string {
@@ -129,7 +129,7 @@ const getDescriptions = (t: TFn): Record<AnyModel, ModelDesc> => ({
     strengths: [
       t('Aproximador universal de funciones (teorema de Cybenko)', 'Universal function approximator (Cybenko theorem)'),
       t('Rápido de entrenar con Adam solver', 'Fast to train with Adam solver'),
-      t('Rendimiento consistente entre pacientes', 'Consistent performance across patients'),
+      t('Dispersión entre pacientes de 0.2448 en R² (Exp B), menor que DT y SVR_rbf', 'Across-patient dispersion of 0.2448 in R² (Exp B), lower than DT and SVR_rbf'),
     ],
     tradeoffs: [
       t('No modela dependencias secuenciales explícitamente', 'Does not model sequential dependencies explicitly'),
@@ -193,7 +193,7 @@ const getDescriptions = (t: TFn): Record<AnyModel, ModelDesc> => ({
     mechanism: t('La misma arquitectura CNN-GRU de NB2 (Conv1D 64f → Conv1D 64f → BN → MaxPool → GRU 64 → Dense 256) entrenada en modo LOPO. Las capas CNN aprenden features locales compartidas entre pacientes (pendientes QRS generalizadas), mientras la GRU captura la dinámica temporal. En la variante fine-tuned (CNN_GRU_FT), 15 muestras del paciente objetivo refinan las últimas capas.', 'The same CNN-GRU architecture from NB2 (Conv1D 64f → Conv1D 64f → BN → MaxPool → GRU 64 → Dense 256) trained in LOPO mode. CNN layers learn shared local features across patients (generalized QRS slopes), while GRU captures temporal dynamics. In the fine-tuned variant (CNN_GRU_FT), 15 samples from the target patient refine the last layers.'),
     strengths: [
       t('R² = 0.5331 ± 0.2818 (mejor individual sin fine-tuning)', 'R² = 0.5331 ± 0.2818 (best individual without fine-tuning)'),
-      t('Menor varianza que GRU_base → más estable entre pacientes', 'Lower variance than GRU_base → more stable across patients'),
+      t('Dispersión algo menor que GRU_base (R² std 0.2818 vs 0.2938 en Exp. 5)', 'Slightly lower dispersion than GRU_base (R² std 0.2818 vs 0.2938 in Exp. 5)'),
       t('Fine-tuning (+15 muestras): R² sube a 0.5349', 'Fine-tuning (+15 samples): R² rises to 0.5349'),
       t('Menor latencia que GRU_base (0.236 ms)', 'Lower latency than GRU_base (0.236 ms)'),
     ],
@@ -209,7 +209,7 @@ const getDescriptions = (t: TFn): Record<AnyModel, ModelDesc> => ({
     mechanism: t('Una capa BiGRU (64+64 unidades) procesa la secuencia en ambas direcciones, generando una representación que combina contexto pasado y futuro (dentro del lookback). Luego, Multi-Head Attention (8 cabezas) pondera dinámicamente qué pasos temporales son más informativos. La variante fine-tuned (BiGRU_MHA_FT) muestra la mayor ganancia relativa (+4.15% R²) al adaptarse al paciente específico.', 'A BiGRU layer (64+64 units) processes the sequence in both directions, generating a representation that combines past and future context (within the lookback). Then, Multi-Head Attention (8 heads) dynamically weights which temporal steps are most informative. The fine-tuned variant (BiGRU_MHA_FT) shows the highest relative gain (+4.15% R²) when adapting to the specific patient.'),
     strengths: [
       t('Mayor ganancia con fine-tuning (+4.15% vs +0.34% CNN_GRU)', 'Highest fine-tuning gain (+4.15% vs +0.34% CNN_GRU)'),
-      t('Mecanismo de atención identifica latidos más informativos', 'Attention mechanism identifies most informative beats'),
+      t('Atención multi-cabeza (8 cabezas) que pondera los pasos del lookback', 'Multi-head attention (8 heads) weighting the lookback steps'),
       t('Procesamiento bidireccional captura contexto completo', 'Bidirectional processing captures full context'),
     ],
     tradeoffs: [
@@ -227,7 +227,7 @@ const getDescriptions = (t: TFn): Record<AnyModel, ModelDesc> => ({
       t('Mejor R² global: 0.5484 ± 0.2724 (Ensemble_FT)', 'Best global R²: 0.5484 ± 0.2724 (Ensemble_FT)'),
       t('Menor varianza entre pacientes (σ=0.2724 vs 0.2938)', 'Lower inter-patient variance (σ=0.2724 vs 0.2938)'),
       t('RMSE más bajo de todos: 0.6411', 'Lowest RMSE of all: 0.6411'),
-      t('Reducción del gap entre R² alto y bajo', 'Reduction of gap between high and low R²'),
+      t('La dispersión más baja del Exp. 5 junto a su variante FT (R² std 0.2727 y 0.2724)', 'The lowest dispersion in Exp. 5 alongside its FT variant (R² std 0.2727 and 0.2724)'),
     ],
     tradeoffs: [
       t('3× costo computacional en inferencia', '3× computational cost in inference'),
@@ -243,9 +243,9 @@ const getDescriptions = (t: TFn): Record<AnyModel, ModelDesc> => ({
     strengths: [
       t('R² = 0.6734 ± 0.2825 en 123 pacientes (MIT-BIH + INCART)', 'R² = 0.6734 ± 0.2825 across 123 patients (MIT-BIH + INCART)'),
       t('Forecast Score = 0.7073 (métrica compuesta de calidad predictiva)', 'Forecast Score = 0.7073 (composite predictive quality metric)'),
-      t('Shape Correlation = 0.8383 — alta fidelidad morfológica', 'Shape Correlation = 0.8383 — high morphological fidelity'),
+      t('Shape Correlation = 0.8383 · alta fidelidad morfológica', 'Shape Correlation = 0.8383 · high morphological fidelity'),
       t('Fine-tuning con 30 latidos: R² sube a 0.6797 (+0.93%), y mejora en 114 de 123 pacientes', 'Fine-tuning with 30 beats: R² rises to 0.6797 (+0.93%), improving 114 of 123 patients'),
-      t('Conexión residual estabiliza predicción multi-paso', 'Residual connection stabilizes multi-step prediction'),
+      t('Incluye conexión residual en la predicción multi-paso', 'Includes a residual connection in the multi-step prediction'),
       t('Degradación temporal controlada: Slope MSE = 0.0223', 'Controlled temporal degradation: Slope MSE = 0.0223'),
     ],
     tradeoffs: [
@@ -599,28 +599,58 @@ function ArchDiagram({ nodes, width, color }: { nodes: ArchNode[]; width: number
 function TraditionalDiagram({ model, color, t }: { model: TraditionalModel; color: string; t: TFn }) {
   if (model === 'RF') {
     return (
-      <svg width="100%" height="130" viewBox="0 0 600 130" style={{ overflow: 'visible' }}>
-        <rect x={20} y={45} width={80} height={45} rx={8} fill={`${color}10`} stroke={`${color}40`} />
-        <text x={60} y={64} textAnchor="middle" fill={color} fontFamily="Inter" fontSize={10} fontWeight={600}>Input</text>
-        <text x={60} y={78} textAnchor="middle" fill="var(--text-muted)" fontFamily="DM Mono" fontSize={8}>LB × 256</text>
-        {[0,1,2,3,4].map(i => {
-          const tx = 180 + i * 70;
-          const label = i < 4 ? `Tree ${i+1}` : '...×30';
+      <svg
+        width="100%"
+        height="190"
+        viewBox="0 0 520 190"
+        style={{ overflow: 'visible' }}
+        role="img"
+        aria-label={t(
+          'Diagrama: la entrada alimenta treinta arboles en paralelo y sus salidas se promedian',
+          'Diagram: the input feeds thirty parallel trees whose outputs are averaged',
+        )}
+      >
+        {/* Entrada, a media altura. */}
+        <rect x={8} y={72} width={86} height={46} rx={6} fill={`${color}10`} stroke={`${color}40`} />
+        <text x={51} y={92} textAnchor="middle" fill={color} fontFamily="Inter" fontSize={10} fontWeight={600}>Input</text>
+        <text x={51} y={106} textAnchor="middle" fill="var(--text-muted)" fontFamily="DM Mono" fontSize={8}>LB x 256</text>
+
+        {/* Los arboles, en columna: asi cada linea llega a una altura propia y
+            ninguna se monta sobre otra. La ultima fila resume los 26 restantes. */}
+        {[0, 1, 2, 3, 4].map((i) => {
+          const ty = 14 + i * 34;          // centro vertical de cada arbol
+          const etiqueta = i < 4 ? `Tree ${i + 1}` : '... x26';
           return (
             <g key={i}>
-              <line x1={104} y1={67} x2={tx} y2={55} stroke="var(--text-muted)" strokeWidth={0.8} opacity={0.3} />
-              <rect x={tx - 28} y={32} width={56} height={42} rx={6} fill={`${color}08`} stroke={`${color}30`} />
-              <text x={tx} y={57} textAnchor="middle" fill={color} fontFamily="DM Mono" fontSize={8} fontWeight={600}>{label}</text>
+              <line
+                x1={94} y1={95} x2={186} y2={ty + 13}
+                stroke="var(--text-muted)" strokeWidth={0.9} opacity={0.35}
+              />
+              <rect
+                x={186} y={ty} width={104} height={26} rx={5}
+                fill={`${color}08`} stroke={`${color}30`}
+              />
+              <text
+                x={238} y={ty + 17} textAnchor="middle"
+                fill={i < 4 ? color : 'var(--text-muted)'}
+                fontFamily="DM Mono" fontSize={9} fontWeight={600}
+              >
+                {etiqueta}
+              </text>
+              <line
+                x1={290} y1={ty + 13} x2={382} y2={95}
+                stroke="var(--text-muted)" strokeWidth={0.9} opacity={0.22}
+              />
             </g>
           );
         })}
-        <line x1={540} y1={53} x2={540} y2={67} stroke="transparent" />
-        <rect x={480} y={38} width={90} height={50} rx={8} fill="rgba(59,130,246,0.08)" stroke="rgba(59,130,246,0.3)" />
-        <text x={525} y={58} textAnchor="middle" fill="#3b82f6" fontFamily="Inter" fontSize={10} fontWeight={600}>Promedio</text>
-        <text x={525} y={73} textAnchor="middle" fill="var(--text-muted)" fontFamily="DM Mono" fontSize={8}>→ Output</text>
-        {[0,1,2,3,4].map(i => (
-          <line key={`o${i}`} x1={180 + i*70 + 28} y1={53} x2={480} y2={63} stroke="var(--text-muted)" strokeWidth={0.8} opacity={0.2} />
-        ))}
+
+        {/* Promedio y salida. */}
+        <rect x={382} y={72} width={102} height={46} rx={6} fill="var(--accent-bg)" stroke="var(--accent-border)" />
+        <text x={433} y={92} textAnchor="middle" fill="var(--text)" fontFamily="Inter" fontSize={10} fontWeight={600}>
+          {t('Promedio', 'Average')}
+        </text>
+        <text x={433} y={106} textAnchor="middle" fill="var(--text-muted)" fontFamily="DM Mono" fontSize={8}>256</text>
       </svg>
     );
   }
@@ -816,19 +846,19 @@ export function ModelosPage() {
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '16px' }}>
               <div>
-                <p style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-3xs)', color: '#3b82f6', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', fontWeight: 600 }}>{t('Fortalezas', 'Strengths')}</p>
+                <p style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-3xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', fontWeight: 600 }}>{t('Fortalezas', 'Strengths')}</p>
                 {desc.strengths.map((s, i) => (
                   <div key={i} style={{ display: 'flex', gap: '6px', marginBottom: '4px', alignItems: 'flex-start' }}>
-                    <span style={{ color: '#3b82f6', fontSize: 'var(--fs-3xs)', marginTop: '2px', flexShrink: 0 }}>+</span>
+                    <span style={{ color: 'var(--ok)', fontSize: 'var(--fs-3xs)', marginTop: '2px', flexShrink: 0 }}>+</span>
                     <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--fs-xs)', color: 'var(--text-sub)', lineHeight: 1.4 }}>{s}</p>
                   </div>
                 ))}
               </div>
               <div>
-                <p style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-3xs)', color: '#f59e0b', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', fontWeight: 600 }}>{t('Compromisos', 'Tradeoffs')}</p>
+                <p style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-3xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', fontWeight: 600 }}>{t('Compromisos', 'Tradeoffs')}</p>
                 {desc.tradeoffs.map((t, i) => (
                   <div key={i} style={{ display: 'flex', gap: '6px', marginBottom: '4px', alignItems: 'flex-start' }}>
-                    <span style={{ color: '#f59e0b', fontSize: 'var(--fs-3xs)', marginTop: '2px', flexShrink: 0 }}>~</span>
+                    <span style={{ color: 'var(--warn)', fontSize: 'var(--fs-3xs)', marginTop: '2px', flexShrink: 0 }}>~</span>
                     <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--fs-xs)', color: 'var(--text-sub)', lineHeight: 1.4 }}>{t}</p>
                   </div>
                 ))}
@@ -862,7 +892,7 @@ export function ModelosPage() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
             <div className="card" style={{ padding: '20px' }}>
               <p style={{ fontFamily: 'var(--font-section)', fontWeight: 600, fontSize: 'var(--fs-sm)', color: 'var(--text)', marginBottom: '16px' }}>
-                {t('Hiperparámetros', 'Hyperparameters')} — {active === 'SVR_rbf' ? 'SVR (RBF)' : active.replace('_', ' ')}
+                {t('Hiperparámetros', 'Hyperparameters')}, {active === 'SVR_rbf' ? 'SVR (RBF)' : active.replace('_', ' ')}
               </p>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 {HYPERPARAMS[active].map(({ label, value }, i) => (
@@ -901,9 +931,9 @@ export function ModelosPage() {
           {/* ── Comparison table per category ── */}
           <div className="card" style={{ marginTop: '20px', padding: '16px' }}>
             <p style={{ fontFamily: 'var(--font-section)', fontWeight: 600, fontSize: 'var(--fs-sm)', color: 'var(--text)', marginBottom: '12px' }}>
-              {category === 'deep' ? t('Comparación — Deep Learning (NB2)', 'Comparison — Deep Learning (NB2)')
-                : category === 'traditional' ? t('Comparación — ML Tradicional (NB1)', 'Comparison — Traditional ML (NB1)')
-                : t('Comparación — Cross-Patient LOPO (NB5B / NB6)', 'Comparison — Cross-Patient LOPO (NB5B / NB6)')}
+              {category === 'deep' ? t('Comparación · Deep Learning (NB2)', 'Comparison · Deep Learning (NB2)')
+                : category === 'traditional' ? t('Comparación · ML Tradicional (NB1)', 'Comparison · Traditional ML (NB1)')
+                : t('Comparación · Cross-Patient LOPO (NB5B / NB6)', 'Comparison · Cross-Patient LOPO (NB5B / NB6)')}
             </p>
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--font-data)', fontSize: 'var(--fs-2xs)' }}>
@@ -980,8 +1010,8 @@ export function ModelosPage() {
                   color: 'var(--text-muted)', maxWidth: '86ch',
                 }}>
                   {t(
-                    'Las dos cohortes no son comparables entre sí. Los cuatro primeros modelos se evaluaron sobre los 48 pacientes de MIT-BIH (NB5B); CNN GRU ATTN, sobre los 123 de MIT-BIH e INCART (NB6). INCART rinde significativamente peor —Mann-Whitney, p < 0.0001, ver Cohorte—, de modo que su R² mayor no se obtuvo en condiciones más fáciles, sino sobre una población más difícil. La latencia ausente no es cero: no se registró para los conjuntos ni para CNN GRU ATTN.',
-                    'The two cohorts are not comparable. The first four models were evaluated on the 48 MIT-BIH patients (NB5B); CNN GRU ATTN on the 123 patients of MIT-BIH and INCART (NB6). INCART performs significantly worse —Mann-Whitney, p < 0.0001, see Cohort— so its higher R² was not obtained under easier conditions but on a harder population. A missing latency is not zero: it was not recorded for the ensembles nor for CNN GRU ATTN.',
+                    'Las dos cohortes no son comparables entre sí. Los cuatro primeros modelos se evaluaron sobre los 48 pacientes de MIT-BIH (NB5B); CNN GRU ATTN, sobre los 123 de MIT-BIH e INCART (NB6). INCART rinde significativamente peor, Mann-Whitney, p < 0.0001, ver Cohorte, de modo que su R² mayor no se obtuvo en condiciones más fáciles, sino sobre una población más difícil. La latencia ausente no es cero: no se registró para los conjuntos ni para CNN GRU ATTN.',
+                    'The two cohorts are not comparable. The first four models were evaluated on the 48 MIT-BIH patients (NB5B); CNN GRU ATTN on the 123 patients of MIT-BIH and INCART (NB6). INCART performs significantly worse, Mann-Whitney, p < 0.0001, see Cohort, so its higher R² was not obtained under easier conditions but on a harder population. A missing latency is not zero: it was not recorded for the ensembles nor for CNN GRU ATTN.',
                   )}
                   <span style={{ display: 'block', marginTop: '5px', fontFamily: 'var(--font-data)' }}>
                     Fuente: /data/nb5b/tabla_resumen_v2.csv · /data/nb5/tabla_resumen.csv · /data/nb5/resultados_lopo.csv

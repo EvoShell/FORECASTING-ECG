@@ -119,9 +119,18 @@ export const Boton = forwardRef<HTMLButtonElement, Props>(function Boton(
       }}
       {...resto}
     >
-      {cargando ? <span className="btn-anillo" aria-hidden /> : icono}
-      {children}
-      {iconoDerecha}
+      {/* Cada hueco va envuelto en un <span> que SIEMPRE existe. Sin el, cambiar
+          el tipo de elemento de un hueco (el anillo de carga por el icono, o un
+          chevron por el otro) obliga a React a insertar el nodo nuevo delante de
+          su hermano, y esa operacion falla con «insertBefore ... no es un hijo de
+          este nodo» si algo mas toco el DOM. `display: contents` deja el nodo en
+          el arbol pero sin caja, asi que el flex y el gap no cambian en nada: un
+          hueco vacio sigue sin ocupar espacio, como hasta ahora. */}
+      <span style={{ display: 'contents' }}>
+        {cargando ? <span className="btn-anillo" aria-hidden /> : icono}
+      </span>
+      <span style={{ display: 'contents' }}>{children}</span>
+      <span style={{ display: 'contents' }}>{iconoDerecha}</span>
     </button>
   );
 });

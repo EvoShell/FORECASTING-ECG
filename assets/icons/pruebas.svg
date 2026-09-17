@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+     fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
+     role="img" aria-label="Pruebas">
+  <title>Pruebas</title>
+  <style>
+    /* Paleta completa en la raiz: el bloque oscuro solo afina, nunca define. */
+    :root { --ic: #6b7785; }
+    @media (prefers-color-scheme: light) { :root { --ic: #57606a; } }
+    @media (prefers-color-scheme: dark)  { :root { --ic: #9198a1; } }
+    .t { stroke: var(--ic); }
+    .f { fill: var(--ic); stroke: none; }
+  </style>
+  <path class="t" d="M12 2.9 4.6 5.8v6c0 4.4 3.1 7.9 7.4 9.3 4.3-1.4 7.4-4.9 7.4-9.3v-6L12 2.9z"/>
+  <path class="t" d="M8.8 11.9 11.2 14.3l4-4.4"/>
+</svg>

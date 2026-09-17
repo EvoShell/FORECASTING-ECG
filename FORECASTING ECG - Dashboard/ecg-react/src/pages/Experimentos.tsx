@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Brain, Activity, Users, Zap, Database, Calendar, Filter, TrendingUp, BarChart3, RotateCcw } from 'lucide-react';
+import { Brain, Activity, Users, Zap, Filter, TrendingUp, BarChart3, RotateCcw } from 'lucide-react';
 import { PageWrapper } from '@/components/layout/PageWrapper';
 import { DataTable } from '@/components/data/DataTable';
 import { MetricStat } from '@/components/metrics/MetricStat';
@@ -152,7 +152,6 @@ export function ExperimentosPage() {
     // boton Atras. La primera pestaña no ensucia la direccion.
     setSearchParams(id === 'nb1' ? {} : { exp: id });
   };
-  const theme = useECGStore((s) => s.theme);
   const nb1Data = useECGStore((s) => s.nb1Data);
   const nb2Data = useECGStore((s) => s.nb2Data);
   const nb4bData = useECGStore((s) => s.nb4bData);
@@ -165,7 +164,6 @@ export function ExperimentosPage() {
 
   useEffect(() => {
     if (!nb1Data && !nb2Data && !nb4bData && !nb5Data && !nb5bData) {
-      console.log('[Experimentos] Cargando datos...');
       loadAllExperimentsData().catch(err => console.error('[Experimentos] Error:', err));
     }
   }, []);
@@ -424,7 +422,6 @@ function NB1Content(props: NB1ContentProps) {
   const theme = useECGStore((s) => s.theme);
   const { t } = useLang();
   const [activeSubTab, setActiveSubTab] = useState<'resumen' | 'expA' | 'expB' | 'estadisticas' | 'filtros_hallazgos'>('resumen');
-  const isDark = theme === 'dark';
 
   // ── Todos los hooks ANTES de cualquier return condicional ─────────────────
   const modelosComp = ['DT', 'RF', 'SVR_rbf', 'MLP'];
@@ -679,7 +676,7 @@ function NB1Content(props: NB1ContentProps) {
               <MetricStat
                 densa
                 fase="E1"
-                etiqueta={<>{t('Gap Train–Test', 'Train–Test Gap')}</>}
+                etiqueta={<>{t('Gap Train-Test', 'Train-Test Gap')}</>}
                 valor={<>{gapBestB.toFixed(3)}</>}
                 nota={<>{bestModelB?.Modelo} · Exp B</>}
               />
@@ -730,7 +727,7 @@ function NB1Content(props: NB1ContentProps) {
                     {t(': la segmentación por latidos impone una estructura cuasiperiódica que regulariza implícitamente la tarea de predicción. Cada latido, al estar normalizado a 256 muestras, opera como una representación compacta que reduce la dimensionalidad efectiva del problema.', ': beat segmentation imposes a quasi-periodic structure that implicitly regularizes the prediction task. Each beat, being normalized to 256 samples, operates as a compact representation that reduces the effective dimensionality of the problem.')}
                   </p>
                   <p>
-                    {t('Sin embargo, incluso el mejor resultado en Exp B (R² = 0.6454) debe interpretarse con cautela. En el contexto de señales ECG, un R² de 0.65 implica que el 35% de la varianza de la morfología del siguiente latido permanece inexplicada. En zonas de transición de ritmo normal a arritmia —precisamente el escenario de mayor relevancia clínica— este margen de error puede ser crítico, ya que las alteraciones morfológicas que distinguen latidos normales de ectópicos operan en rangos de amplitud que pueden quedar enmascarados por el error residual.', 'However, even the best result in Exp B (R² = 0.6454) should be interpreted with caution. In the context of ECG signals, an R² of 0.65 implies that 35% of the variance in the next beat morphology remains unexplained. In transition zones from normal rhythm to arrhythmia —precisely the most clinically relevant scenario— this margin of error can be critical, as the morphological alterations that distinguish normal from ectopic beats operate in amplitude ranges that may be masked by the residual error.')}
+                    {t('Sin embargo, incluso el mejor resultado en Exp B (R² = 0.6454) debe interpretarse con cautela. En el contexto de señales ECG, un R² de 0.65 implica que el 35% de la varianza de la morfología del siguiente latido permanece inexplicada. En zonas de transición de ritmo normal a arritmia, precisamente el escenario de mayor relevancia clínica, este margen de error puede ser crítico, ya que las alteraciones morfológicas que distinguen latidos normales de ectópicos operan en rangos de amplitud que pueden quedar enmascarados por el error residual.', 'However, even the best result in Exp B (R² = 0.6454) should be interpreted with caution. In the context of ECG signals, an R² of 0.65 implies that 35% of the variance in the next beat morphology remains unexplained. In transition zones from normal rhythm to arrhythmia, precisely the most clinically relevant scenario, this margin of error can be critical, as the morphological alterations that distinguish normal from ectopic beats operate in amplitude ranges that may be masked by the residual error.')}
                   </p>
               </div>
             </div>
@@ -740,16 +737,16 @@ function NB1Content(props: NB1ContentProps) {
               <h2 style={{ fontSize: 'var(--fs-md)', fontWeight: 600, color: 'var(--text)', marginBottom: '16px' }}>
                 {t('Consideraciones Metodológicas', 'Methodological Considerations')}
               </h2>
-              <Callout type="warning" title={t('Advertencia — Comparabilidad SVR_rbf en Exp B', 'Warning — SVR_rbf Comparability in Exp B')}>
+              <Callout type="warning" title={t('Advertencia · Comparabilidad SVR_rbf en Exp B', 'Warning · SVR_rbf Comparability in Exp B')}>
                 {t('SVR_rbf predice un valor escalar (el primer valor del R-peak del siguiente latido), no el vector completo de 256 muestras que predicen RF, MLP y DT. Sus métricas de MSE y MAE no son directamente comparables con los demás modelos en Exp B.', 'SVR_rbf predicts a scalar value (the first R-peak value of the next beat), not the full 256-sample vector predicted by RF, MLP, and DT. Its MSE and MAE metrics are not directly comparable with the other models in Exp B.')}
               </Callout>
-              <Callout type="warning" title={t('Advertencia — Escala LinReg en Exp B', 'Warning — LinReg Scale in Exp B')}>
+              <Callout type="warning" title={t('Advertencia · Escala LinReg en Exp B', 'Warning · LinReg Scale in Exp B')}>
                 {t('El colapso de LinReg se debe a multicolinealidad en la matriz de características latido-a-latido. Excluir de gráficas comparativas de escala normal.', 'LinReg collapse is due to multicollinearity in the beat-to-beat feature matrix. Exclude from normal-scale comparative charts.')}
               </Callout>
-              <Callout type="note" title={t('Nota — Partición temporal', 'Note — Temporal Split')}>
+              <Callout type="note" title={t('Nota · Partición temporal', 'Note · Temporal Split')}>
                 {t('La partición 80/20 es estrictamente temporal sin aleatorizar para preservar la estructura secuencial de la señal ECG y prevenir data leakage.', 'The 80/20 split is strictly temporal without randomization to preserve the sequential structure of the ECG signal and prevent data leakage.')}
               </Callout>
-              <Callout type="note" title={t('Nota — Evaluación intra-paciente', 'Note — Intra-patient Evaluation')}>
+              <Callout type="note" title={t('Nota · Evaluación intra-paciente', 'Note · Intra-patient Evaluation')}>
                 {t('Todos los modelos fueron entrenados y evaluados dentro del mismo paciente. La generalización inter-paciente se evaluará en NB5B.', 'All models were trained and evaluated within the same patient. Inter-patient generalization will be evaluated in NB5B.')}
               </Callout>
             </div>
@@ -760,7 +757,7 @@ function NB1Content(props: NB1ContentProps) {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
               <h2 style={{ fontSize: 'var(--fs-md)', fontWeight: 600, color: 'var(--text)', margin: 0 }}>
-                {t('Experimento A — Multi-step Directo', 'Experiment A — Direct Multi-step')}
+                {t('Experimento A · Multi-step Directo', 'Experiment A · Direct Multi-step')}
               </h2>
               <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-muted)', background: 'var(--elevated)', padding: '4px 8px', borderRadius: '4px' }}>
                 {(resumenA[0]?.N ?? 0).toLocaleString()} {t('evaluaciones', 'evaluations')}
@@ -842,7 +839,7 @@ function NB1Content(props: NB1ContentProps) {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
               <h2 style={{ fontSize: 'var(--fs-md)', fontWeight: 600, color: 'var(--text)', margin: 0 }}>
-                Experimento B — One-Beat-Ahead
+                Experimento B, One-Beat-Ahead
               </h2>
               <span style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-muted)', background: 'var(--elevated)', padding: '4px 8px', borderRadius: '4px' }}>
                 {(resumenB[0]?.N ?? 0).toLocaleString()} {t('evaluaciones', 'evaluations')}
@@ -1137,7 +1134,6 @@ interface NB2ContentProps {
 function NB2Content(props: NB2ContentProps) {
   const { resumenA, resumenB, rawA, rawB, ic95A, ic95B, wilcoxonA, wilcoxonB, overfitA, overfitB, comparativa, bestModelA, bestModelB, loading, error } = props;
   const theme = useECGStore((s) => s.theme);
-  const isDark = theme === 'dark';
   const { t } = useLang();
   const [selectedICExp, setSelectedICExp] = useState<'Exp A' | 'Exp B'>('Exp B');
   const [selectedRankExp, setSelectedRankExp] = useState<'Todos' | 'A: Tiempo' | 'B: Latidos'>('Todos');
@@ -1531,7 +1527,7 @@ function NB2Content(props: NB2ContentProps) {
           <div>
             <div style={{ marginBottom: '32px' }}>
               <h3 style={{ fontSize: 'var(--fs-md)', fontWeight: 600, marginBottom: '16px', color: 'var(--text)' }}>
-                {t('Experimento A — Deep Learning', 'Experiment A — Deep Learning')}
+                {t('Experimento A · Deep Learning', 'Experiment A · Deep Learning')}
               </h3>
               <DataTable
                 data={resumenA as unknown as Record<string, unknown>[]}
@@ -1606,7 +1602,7 @@ function NB2Content(props: NB2ContentProps) {
           <div>
             <div style={{ marginBottom: '32px' }}>
               <h3 style={{ fontSize: 'var(--fs-md)', fontWeight: 600, marginBottom: '16px', color: 'var(--text)' }}>
-                {t('Experimento B — One-Beat-Ahead (DL)', 'Experiment B — One-Beat-Ahead (DL)')}
+                {t('Experimento B · One-Beat-Ahead (DL)', 'Experiment B · One-Beat-Ahead (DL)')}
               </h3>
               <DataTable
                 data={resumenB as unknown as Record<string, unknown>[]}
@@ -1941,10 +1937,10 @@ function NB2Content(props: NB2ContentProps) {
                   { src: '/data/nb2/img/prediccion_DL_Exp A_ganador.png', title: t('Predicción Visual: Ganador Exp A', 'Visual Prediction: Exp A Winner') },
                   { src: '/data/nb2/img/prediccion_DL_Exp B_ganador.png', title: t('Predicción Visual: Ganador Exp B', 'Visual Prediction: Exp B Winner') },
                   { src: '/data/nb2/img/boxplot_DL_A_vs_B.png', title: t('Comparativa Exp A vs Exp B', 'Exp A vs Exp B Comparison') },
-                  { src: '/data/nb2/img/boxplot_DL_Exp A_global.png', title: t('Boxplot Global — Exp A', 'Global Boxplot — Exp A') },
-                  { src: '/data/nb2/img/boxplot_DL_Exp B_global.png', title: t('Boxplot Global — Exp B', 'Global Boxplot — Exp B') },
-                  { src: '/data/nb2/img/boxplot_DL_Exp A_desglose.png', title: t('Desglose por Modelo — Exp A', 'Breakdown by Model — Exp A') },
-                  { src: '/data/nb2/img/boxplot_DL_Exp B_desglose.png', title: t('Desglose por Modelo — Exp B', 'Breakdown by Model — Exp B') },
+                  { src: '/data/nb2/img/boxplot_DL_Exp A_global.png', title: t('Boxplot Global · Exp A', 'Global Boxplot · Exp A') },
+                  { src: '/data/nb2/img/boxplot_DL_Exp B_global.png', title: t('Boxplot Global · Exp B', 'Global Boxplot · Exp B') },
+                  { src: '/data/nb2/img/boxplot_DL_Exp A_desglose.png', title: t('Desglose por Modelo · Exp A', 'Breakdown by Model · Exp A') },
+                  { src: '/data/nb2/img/boxplot_DL_Exp B_desglose.png', title: t('Desglose por Modelo · Exp B', 'Breakdown by Model · Exp B') },
                   { src: '/data/nb2/img/boxplot_global_trad_vs_dl.png', title: t('Tradicional vs Deep Learning', 'Traditional vs Deep Learning') },
                 ]}
                 columns={2}
@@ -1975,7 +1971,6 @@ interface NB4BContentProps {
 function NB4BContent(props: NB4BContentProps) {
   const { global, resumen, bestGlobal, mejorModelo, overfit, wilcoxon, ic95, loading, error } = props;
   const theme = useECGStore((s) => s.theme);
-  const isDark = theme === 'dark';
   const { t } = useLang();
   const [selectedFiltro, setSelectedFiltro] = useState('F_MED');
   const [activeSubTab, setActiveSubTab] = useState<'resumen' | 'expA' | 'expB' | 'estadisticas' | 'filtros_hallazgos'>('resumen');
@@ -2155,7 +2150,7 @@ function NB4BContent(props: NB4BContentProps) {
               <MetricStat
                 densa
                 fase="E4"
-                etiqueta={<>{t('Gap Train–Test Mín', 'Min Train–Test Gap')}</>}
+                etiqueta={<>{t('Gap Train-Test Mín', 'Min Train-Test Gap')}</>}
                 valor={<>{minGap?.GAP?.toFixed(4) ?? 'N/A'}</>}
                 nota={<>{minGap?.Modelo} · {minGap?.Filtro}</>}
               />
@@ -2206,14 +2201,14 @@ function NB4BContent(props: NB4BContentProps) {
               }}>
                   <p style={{ marginBottom: '12px' }}>
                     {t(
-                      'Los resultados del NB4B confirman que el paradigma de entrenamiento multi-sujeto constituye un avance significativo respecto al entrenamiento intra-paciente evaluado en NB1 y NB2. El R² máximo de 0.7295 (RF) y 0.7237 (GRU) —ambos obtenidos con el filtro F_MED— establecen nuevos máximos del proyecto y demuestran que la agregación de datos de múltiples pacientes proporciona una base de entrenamiento más rica que beneficia la capacidad predictiva general.',
-                      'NB4B results confirm that the multi-subject training paradigm constitutes a significant advance over intra-patient training evaluated in NB1 and NB2. The maximum R² of 0.7295 (RF) and 0.7237 (GRU) —both obtained with the F_MED filter— establish new project highs and demonstrate that aggregating data from multiple patients provides a richer training base that benefits general predictive capacity.'
+                      'Los resultados del NB4B confirman que el paradigma de entrenamiento multi-sujeto constituye un avance significativo respecto al entrenamiento intra-paciente evaluado en NB1 y NB2. El R² máximo de 0.7295 (RF) y 0.7237 (GRU), ambos obtenidos con el filtro F_MED, establecen nuevos máximos del proyecto y demuestran que la agregación de datos de múltiples pacientes proporciona una base de entrenamiento más rica que beneficia la capacidad predictiva general.',
+                      'NB4B results confirm that the multi-subject training paradigm constitutes a significant advance over intra-patient training evaluated in NB1 and NB2. The maximum R² of 0.7295 (RF) and 0.7237 (GRU), both obtained with the F_MED filter, establish new project highs and demonstrate that aggregating data from multiple patients provides a richer training base that benefits general predictive capacity.'
                     )}
                   </p>
                   <p style={{ marginBottom: '12px' }}>
                     {t(
-                      'La mejora del 9.8% de GRU multi-sujeto sobre GRU intra-paciente (NB2 Exp B) es particularmente reveladora. En el paradigma intra-paciente, cada modelo dispone de un máximo de ~90 latidos de entrenamiento. En el paradigma multi-sujeto, el modelo global dispone de 3 086 ventanas de entrenamiento distribuidas entre los 48 pacientes —un incremento de ~34× que permite aprender patrones universales de la dinámica latido-a-latido.',
-                      'The 9.8% improvement of multi-subject GRU over intra-patient GRU (NB2 Exp B) is particularly revealing. In the intra-patient paradigm, each model has a maximum of ~90 training beats. In the multi-subject paradigm, the global model has 3,086 training windows distributed across 48 patients —a ~34× increase that enables learning universal beat-to-beat dynamics patterns.'
+                      'La mejora del 9.8% de GRU multi-sujeto sobre GRU intra-paciente (NB2 Exp B) es particularmente reveladora. En el paradigma intra-paciente, cada modelo dispone de un máximo de ~90 latidos de entrenamiento. En el paradigma multi-sujeto, el modelo global dispone de 3 086 ventanas de entrenamiento distribuidas entre los 48 pacientes, un incremento de ~34× que permite aprender patrones universales de la dinámica latido-a-latido.',
+                      'The 9.8% improvement of multi-subject GRU over intra-patient GRU (NB2 Exp B) is particularly revealing. In the intra-patient paradigm, each model has a maximum of ~90 training beats. In the multi-subject paradigm, the global model has 3,086 training windows distributed across 48 patients, a ~34× increase that enables learning universal beat-to-beat dynamics patterns.'
                     )}
                   </p>
                   <p>
@@ -2732,7 +2727,7 @@ function NB5Content(props: NB5ContentProps) {
               <MetricStat
                 densa
                 fase="E6"
-                etiqueta={<>{t('Gap Train–Test', 'Train–Test Gap')}</>}
+                etiqueta={<>{t('Gap Train-Test', 'Train-Test Gap')}</>}
                 valor={<>{gapData[0]?.GAP?.toFixed(4) ?? 'N/A'}</>}
                 nota={<>{t('Generalización excelente', 'Excellent generalization')}</>}
               />
@@ -2773,18 +2768,29 @@ function NB5Content(props: NB5ContentProps) {
               />
             </div>
 
-            {/* Interpretación (collapsed) */}
-            <details style={{ marginBottom: '28px', border: '1px solid var(--border)', borderRadius: '10px', overflow: 'hidden' }}>
-              <summary style={{ padding: '14px 18px', cursor: 'pointer', fontWeight: 600, fontSize: 'var(--fs-base)', background: 'var(--surface)', color: 'var(--text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span>{t('Interpretación de Resultados en el Contexto del Problema', 'Interpretation of Results in the Problem Context')}</span>
-              </summary>
-              <div style={{ padding: '20px 22px', fontSize: 'var(--fs-sm)', lineHeight: 1.75, color: 'var(--text-sub)', display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                <p>{t(`El NB6 representa la expansión más ambiciosa del proyecto en tres dimensiones: base de datos (48→123 pacientes), horizonte de predicción (1→3 latidos) y arquitectura (CNN_GRU_ATTN con atención temporal y pérdida ECG compuesta). El R² = ${baseModel?.R2_total_mean?.toFixed(4) ?? '—'} del modelo base —obtenido sin que el modelo haya visto jamás al paciente de prueba— demuestra que existe un `, `NB6 represents the most ambitious expansion of the project in three dimensions: database (48→123 patients), prediction horizon (1→3 beats), and architecture (CNN_GRU_ATTN with temporal attention and composite ECG loss). The R² = ${baseModel?.R2_total_mean?.toFixed(4) ?? '—'} of the base model —obtained without the model ever seeing the test patient— demonstrates that there is a `)}<strong>{t('componente morfológico universal', 'universal morphological component')}</strong>{t(' transferible entre sujetos.', ' transferable between subjects.')}</p>
-                <p>{t(`El gap train–test de ${gapData[0]?.GAP?.toFixed(4) ?? '—'} es el más bajo de toda la trayectoria experimental, incluyendo los paradigmas intra-paciente de NB1 y NB2. Esto valida que la combinación de dataset ampliado + arquitectura con regularización implícita (atención temporal + conexión residual + pérdida ECG compuesta) mitiga efectivamente el sobreajuste.`, `The train-test gap of ${gapData[0]?.GAP?.toFixed(4) ?? '—'} is the lowest in the entire experimental trajectory, including NB1 and NB2 intra-patient paradigms. This validates that the combination of expanded dataset + architecture with implicit regularization (temporal attention + residual connection + composite ECG loss) effectively mitigates overfitting.`)}</p>
+              <div style={{ marginBottom: '28px' }}>
+                <h3 style={{ margin: '0 0 10px 0', fontFamily: 'var(--font-display)', fontSize: 'var(--fs-md)', fontWeight: 600, color: 'var(--text)' }}>
+                  {t('Interpretación de Resultados en el Contexto del Problema', 'Interpretation of Results in the Problem Context')}
+                </h3>
+                <div style={{
+                  padding: '16px 18px',
+                  background: 'var(--surface)',
+                  border: '1px solid var(--border)',
+                  borderRadius: 'var(--radius-sm)',
+                  fontSize: 'var(--fs-sm)',
+                  lineHeight: 1.7,
+                  color: 'var(--text-sub)',
+                  maxWidth: '92ch',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '14px',
+                }}>
+                <p>{t(`El NB6 representa la expansión más ambiciosa del proyecto en tres dimensiones: base de datos (48→123 pacientes), horizonte de predicción (1→3 latidos) y arquitectura (CNN_GRU_ATTN con atención temporal y pérdida ECG compuesta). El R² = ${baseModel?.R2_total_mean?.toFixed(4) ?? '—'} del modelo base, obtenido sin que el modelo haya visto jamás al paciente de prueba, demuestra que existe un `, `NB6 represents the most ambitious expansion of the project in three dimensions: database (48→123 patients), prediction horizon (1→3 beats), and architecture (CNN_GRU_ATTN with temporal attention and composite ECG loss). The R² = ${baseModel?.R2_total_mean?.toFixed(4) ?? '—'} of the base model, obtained without the model ever seeing the test patient, demonstrates that there is a `)}<strong>{t('componente morfológico universal', 'universal morphological component')}</strong>{t(' transferible entre sujetos.', ' transferable between subjects.')}</p>
+                <p>{t(`El gap train-test de ${gapData[0]?.GAP?.toFixed(4) ?? '—'} es el más bajo de toda la trayectoria experimental, incluyendo los paradigmas intra-paciente de NB1 y NB2. Esto valida que la combinación de dataset ampliado + arquitectura con regularización implícita (atención temporal + conexión residual + pérdida ECG compuesta) mitiga efectivamente el sobreajuste.`, `The train-test gap of ${gapData[0]?.GAP?.toFixed(4) ?? '—'} is the lowest in the entire experimental trajectory, including NB1 and NB2 intra-patient paradigms. This validates that the combination of expanded dataset + architecture with implicit regularization (temporal attention + residual connection + composite ECG loss) effectively mitigates overfitting.`)}</p>
                 <p>{t(`La degradación temporal multi-step es sorprendentemente contenida (${temporalDegTotal != null ? ((temporalDegTotal / (temporalDeg[0]?.r2Base || 1)) * 100).toFixed(1) : '—'}% de t+1→t+3). La conexión residual obliga al modelo a aprender diferencias incrementales (last_beat + delta), reduciendo la acumulación de errores en predicción multi-step.`, `The multi-step temporal degradation is surprisingly contained (${temporalDegTotal != null ? ((temporalDegTotal / (temporalDeg[0]?.r2Base || 1)) * 100).toFixed(1) : '—'}% from t+1→t+3). The residual connection forces the model to learn incremental differences (last_beat + delta), reducing error accumulation in multi-step prediction.`)}</p>
                 <p>{t('La brecha sistemática entre datasets es notable: ningún paciente MIT-BIH obtuvo R² negativo, mientras que 5 pacientes INCART mantuvieron R² &lt; 0. Esto refleja la mayor diversidad morfológica de INCART y posibles artefactos de las grabaciones de Holter 24h.', 'The systematic gap between datasets is notable: no MIT-BIH patient obtained negative R², while 5 INCART patients maintained R² &lt; 0. This reflects the greater morphological diversity of INCART and possible artifacts from 24h Holter recordings.')}</p>
+                </div>
               </div>
-            </details>
           </div>
         )}
 
@@ -3064,7 +3070,7 @@ function NB5Content(props: NB5ContentProps) {
             {/* Gap Train–Test */}
             {gapData.length > 0 && (
               <div className="card" style={{ padding: '16px', marginBottom: '20px' }}>
-                <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, marginBottom: '4px', color: 'var(--text)' }}>{t('Brecha Train–Test · Gap de Generalización LOPO', 'Train–Test Gap · LOPO Generalization Gap')}</h3>
+                <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, marginBottom: '4px', color: 'var(--text)' }}>{t('Brecha Train-Test · Gap de Generalización LOPO', 'Train-Test Gap · LOPO Generalization Gap')}</h3>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '16px' }}>
                   <DataTable
                     data={gapData.map((g: any) => ({
@@ -3072,7 +3078,7 @@ function NB5Content(props: NB5ContentProps) {
                       'R² train': g.R2_train.toFixed(4),
                       'R² test': g.R2_test.toFixed(4),
                       GAP: g.GAP.toFixed(4),
-                      Nivel: g.GAP < 0.15 ? t('🟢 Excelente', '🟢 Excellent') : g.GAP < 0.30 ? t('🟡 Moderado', '🟡 Moderate') : t('🔴 Alto', '🔴 High'),
+                      Nivel: g.GAP < 0.15 ? t('Excelente', 'Excellent') : g.GAP < 0.30 ? t('Moderado', 'Moderate') : t('Alto', 'High'),
                     })) as unknown as Record<string, unknown>[]}
                     title=""
                     columns={[
@@ -3123,7 +3129,7 @@ function NB5Content(props: NB5ContentProps) {
             {/* Key Findings */}
             <FindingsSection title={t('Hallazgos Principales', 'Key Findings')}>
               <FindingCard number={1} title={t('R² = 0.6734 con 123 pacientes demuestra escalabilidad', 'R² = 0.6734 with 123 patients demonstrates scalability')} description={t('El modelo CNN_GRU_ATTN supera al mejor NB5B (0.5484) en un +22.8 % con 2.56× más pacientes y 3× horizonte, simultáneamente.', 'CNN_GRU_ATTN outperforms the best NB5B (0.5484) by +22.8 % with 2.56× more patients and 3× horizon, simultaneously.')} significance="high" />
-              <FindingCard number={2} title={t('Brecha entrenamiento–prueba = 0.0956: generalización contenida', 'Train–test gap = 0.0956: contained generalization')} description={t('El gap más bajo del proyecto (vs 0.30–0.44 de NB5B). Dataset ampliado + atención temporal + pérdida ECG compuesta mitigan el sobreajuste inter-paciente.', 'The lowest gap in the project (vs 0.30–0.44 from NB5B). Expanded dataset + temporal attention + composite ECG loss mitigate inter-patient overfitting.')} significance="high" />
+              <FindingCard number={2} title={t('Brecha entrenamiento-prueba = 0.0956: generalización contenida', 'Train-test gap = 0.0956: contained generalization')} description={t('El gap más bajo del proyecto (vs 0.30–0.44 de NB5B). Dataset ampliado + atención temporal + pérdida ECG compuesta mitigan el sobreajuste inter-paciente.', 'The lowest gap in the project (vs 0.30–0.44 from NB5B). Expanded dataset + temporal attention + composite ECG loss mitigate inter-patient overfitting.')} significance="high" />
               <FindingCard number={3} title={t('Degradación temporal estable: −3.35 % de t+1 a t+3', 'Stable temporal degradation: −3.35 % from t+1 to t+3')} description={t('La conexión residual (last_beat + delta) previene degradación exponencial. t+2→t+3 se estabiliza en −2.38 %.', 'The residual connection (last_beat + delta) prevents exponential degradation. t+2→t+3 stabilizes at −2.38 %.')} significance="high" />
               <FindingCard number={4} title={t('Shape_Corr = 0.8383: fidelidad morfológica confirmada', 'Shape_Corr = 0.8383: morphological fidelity confirmed')} description={t('El modelo reproduce la secuencia morfológica (P-QRS-T) con alta fidelidad. Slope_MSE = 0.0223 indica captura precisa del pico R.', 'The model reproduces the morphological sequence (P-QRS-T) with high fidelity. Slope_MSE = 0.0223 indicates precise R-peak capture.')} significance="medium" />
               <FindingCard number={5} title={t('Brecha MIT-BIH vs INCART: 5 pacientes INCART con R² < 0', 'MIT-BIH vs INCART gap: 5 INCART patients with R² < 0')} description={t('Ningún paciente MIT-BIH obtuvo R² negativo. INCART tiene mayor diversidad morfológica y artefactos de Holter 24h que dificultan la generalización.', 'No MIT-BIH patient obtained negative R². INCART has greater morphological diversity and 24h Holter artifacts that hinder generalization.')} significance="medium" />
@@ -3135,11 +3141,11 @@ function NB5Content(props: NB5ContentProps) {
               <h3 style={{ fontSize: 'var(--fs-md)', fontWeight: 600, marginBottom: '16px', color: 'var(--text)' }}>{t('Galería de Visualizaciones · NB6', 'Visualizations Gallery · NB6')}</h3>
               <ImageGallery
                 images={[
-                  { src: '/data/nb5/img/10_boxplot_r2_total.png', title: t('Boxplot R² — CNN_GRU_ATTN Base vs FT', 'Boxplot R² — CNN_GRU_ATTN Base vs FT') },
-                  { src: '/data/nb5/img/10_r2_pacientes_CNN_GRU_ATTN.png', title: t('R² por Paciente — CNN_GRU_ATTN', 'R² per Patient — CNN_GRU_ATTN') },
+                  { src: '/data/nb5/img/10_boxplot_r2_total.png', title: t('Boxplot R² · CNN_GRU_ATTN Base vs FT', 'Boxplot R² · CNN_GRU_ATTN Base vs FT') },
+                  { src: '/data/nb5/img/10_r2_pacientes_CNN_GRU_ATTN.png', title: t('R² por Paciente · CNN_GRU_ATTN', 'R² per Patient · CNN_GRU_ATTN') },
                   { src: '/data/nb5/img/10_degradacion_temporal.png', title: t('Degradación Temporal Multi-step', 'Multi-step Temporal Degradation') },
-                  { src: '/data/nb5/img/07_demo_CNN_GRU_ATTN.png', title: t('Demo Predicción — CNN_GRU_ATTN', 'Prediction Demo — CNN_GRU_ATTN') },
-                  { src: '/data/nb5/img/03_ecg_filtrado.png', title: t('ECG Filtrado — Pipeline NB6', 'Filtered ECG — NB6 Pipeline') },
+                  { src: '/data/nb5/img/07_demo_CNN_GRU_ATTN.png', title: t('Demo Predicción · CNN_GRU_ATTN', 'Prediction Demo · CNN_GRU_ATTN') },
+                  { src: '/data/nb5/img/03_ecg_filtrado.png', title: t('ECG Filtrado · Pipeline NB6', 'Filtered ECG · NB6 Pipeline') },
                   { src: '/data/nb5/img/12_5_real_vs_pred_ft.png', title: t('Real vs Predicho (Fine-Tuned)', 'Actual vs Predicted (Fine-Tuned)') },
                   { src: '/data/nb5/img/12_5_prediccion_extendida_ft.png', title: t('Predicción Extendida (Fine-Tuned)', 'Extended Prediction (Fine-Tuned)') },
                   { src: '/data/nb5/img/12_5_tabla_metricas_ft.png', title: t('Tabla Métricas Fine-Tuning', 'Fine-Tuning Metrics Table') },
@@ -3183,7 +3189,6 @@ function NB5BContent(props: NB5BContentProps) {
     gapMinimo, gapData, ftEffect, ic95Data, comprehensiveTable, loading, error,
   } = props;
   const bestModel = mejoresModelos[0];
-  const worstModel = mejoresModelos[mejoresModelos.length - 1];
   const nb5bData = useECGStore((s) => s.nb5bData);
   const raw5b = nb5bData?.raw ?? [];
   const theme = useECGStore((s) => s.theme);
@@ -3456,7 +3461,7 @@ function NB5BContent(props: NB5BContentProps) {
               <MetricStat
                 densa
                 fase="E5"
-                etiqueta={<>{t('Gap mínimo train–test', 'Min train–test gap')}</>}
+                etiqueta={<>{t('Gap mínimo train-test', 'Min train-test gap')}</>}
                 valor={<>{gapMinimo?.GAP?.toFixed(4) ?? 'N/A'}</>}
                 nota={<>{gapMinimo?.Modelo}</>}
               />
@@ -3476,19 +3481,30 @@ function NB5BContent(props: NB5BContentProps) {
               />
             </div>
 
-            {/* Interpretación (collapsed) */}
-            <details style={{ marginBottom: '28px', border: '1px solid var(--border)', borderRadius: '10px', overflow: 'hidden' }}>
-              <summary style={{ padding: '14px 18px', cursor: 'pointer', fontWeight: 600, fontSize: 'var(--fs-base)', background: 'var(--surface)', color: 'var(--text)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span>{t('Interpretación de Resultados en el Contexto del Problema', 'Interpretation of Results in the Problem Context')}</span>
-              </summary>
-              <div style={{ padding: '20px 22px', fontSize: 'var(--fs-sm)', lineHeight: 1.75, color: 'var(--text-sub)', display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                <p>{t('Los resultados del NB5B confirman que el paradigma LOPO constituye la prueba de generalización más exigente del proyecto. El R² = 0.5484 del Ensemble_FT —obtenido sin que el modelo haya visto jamás al paciente de prueba durante el entrenamiento— demuestra que existe un ', 'NB5B results confirm that the LOPO paradigm constitutes the most demanding generalization test of the project. The R² = 0.5484 of Ensemble_FT —obtained without the model ever seeing the test patient during training— demonstrates that there is a ')}<strong>{t('componente morfológico universal', 'universal morphological component')}</strong>{t(' en la señal ECG transferible entre sujetos.', ' in the ECG signal transferable between subjects.')}</p>
+              <div style={{ marginBottom: '28px' }}>
+                <h3 style={{ margin: '0 0 10px 0', fontFamily: 'var(--font-display)', fontSize: 'var(--fs-md)', fontWeight: 600, color: 'var(--text)' }}>
+                  {t('Interpretación de Resultados en el Contexto del Problema', 'Interpretation of Results in the Problem Context')}
+                </h3>
+                <div style={{
+                  padding: '16px 18px',
+                  background: 'var(--surface)',
+                  border: '1px solid var(--border)',
+                  borderRadius: 'var(--radius-sm)',
+                  fontSize: 'var(--fs-sm)',
+                  lineHeight: 1.7,
+                  color: 'var(--text-sub)',
+                  maxWidth: '92ch',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '14px',
+                }}>
+                <p>{t('Los resultados del NB5B confirman que el paradigma LOPO constituye la prueba de generalización más exigente del proyecto. El R² = 0.5484 del Ensemble_FT, obtenido sin que el modelo haya visto jamás al paciente de prueba durante el entrenamiento, demuestra que existe un ', 'NB5B results confirm that the LOPO paradigm constitutes the most demanding generalization test of the project. The R² = 0.5484 of Ensemble_FT, obtained without the model ever seeing the test patient during training, demonstrates that there is a ')}<strong>{t('componente morfológico universal', 'universal morphological component')}</strong>{t(' en la señal ECG transferible entre sujetos.', ' in the ECG signal transferable between subjects.')}</p>
                 <p>{t('La degradación de −24.2 % respecto al NB4B (pool intra-paciente) cuantifica el costo de generalización inter-sujeto, pero simultáneamente valida la viabilidad del despliegue clínico: un modelo pre-entrenado con una cohorte suficiente podría ofrecer predicciones útiles (R² > 0.50) sobre pacientes nuevos sin calibración, y con una breve calibración de 15 latidos alcanzar R² ≈ 0.55.', 'The degradation of −24.2% relative to NB4B (intra-patient pool) quantifies the cost of inter-subject generalization, but simultaneously validates the viability of clinical deployment: a pre-trained model with a sufficient cohort could offer useful predictions (R² > 0.50) on new patients without calibration, and with a brief calibration of 15 beats reach R² ≈ 0.55.')}</p>
                 <p>{t('La ', 'The ')}<strong>{t('inversión de la jerarquía', 'hierarchy inversion')}</strong>{t(' respecto al NB4B es reveladora: mientras que GRU lideraba en el paradigma intra-paciente, CNN_GRU emerge como la mejor arquitectura individual en cross-patient. Las capas convolucionales extraen patrones locales (pendientes QRS, mesetas ST, morfología de onda T) con mayor invarianza inter-sujeto que las representaciones puramente recurrentes.', ' relative to NB4B is revealing: while GRU led in the intra-patient paradigm, CNN_GRU emerges as the best individual architecture in cross-patient. Convolutional layers extract local patterns (QRS slopes, ST plateaus, T-wave morphology) with greater inter-subject invariance than purely recurrent representations.')}</p>
-                <p>{t('El colapso de BiGRU_MHA (R² = 0.4386, gap = 0.44) constituye la contribución empírica más importante: la mayor expresividad de un modelo bidireccional con atención multi-cabeza ', 'The collapse of BiGRU_MHA (R² = 0.4386, gap = 0.44) constitutes the most important empirical contribution: the greater expressiveness of a bidirectional model with multi-head attention ')}<strong>{t('no garantiza', 'does not guarantee')}</strong>{t(' mejor generalización cross-patient. Al contrario, la capacidad adicional permitió codificar patrones poblacionales específicos que no se transfirieron a morfologías atípicas — un fenómeno de ', ' better cross-patient generalization. On the contrary, the additional capacity allowed encoding specific population patterns that did not transfer to atypical morphologies — a phenomenon of ')}<em>{t('sobreajuste de segundo orden', 'second-order overfitting')}</em>.</p>
+                <p>{t('El colapso de BiGRU_MHA (R² = 0.4386, gap = 0.44) constituye la contribución empírica más importante: la mayor expresividad de un modelo bidireccional con atención multi-cabeza ', 'The collapse of BiGRU_MHA (R² = 0.4386, gap = 0.44) constitutes the most important empirical contribution: the greater expressiveness of a bidirectional model with multi-head attention ')}<strong>{t('no garantiza', 'does not guarantee')}</strong>{t(' mejor generalización cross-patient. Al contrario, la capacidad adicional permitió codificar patrones poblacionales específicos que no se transfirieron a morfologías atípicas, un fenómeno de ', ' better cross-patient generalization. On the contrary, the additional capacity allowed encoding specific population patterns that did not transfer to atypical morphologies, a phenomenon of ')}<em>{t('sobreajuste de segundo orden', 'second-order overfitting')}</em>.</p>
                 <p>{t('La variabilidad inter-paciente (σ ≈ 0.27–0.34) constituye el desafío central: pacientes de la serie 100 (ritmo sinusal) alcanzan R² > 0.70 consistentemente, mientras que la serie 200 (arritmias complejas) produce R² < 0.10 o negativo. Los pacientes 200 y 203 mostraron R² negativo en las ', 'Inter-patient variability (σ ≈ 0.27–0.34) constitutes the central challenge: patients from the 100 series (sinus rhythm) consistently reach R² > 0.70, while the 200 series (complex arrhythmias) produces R² < 0.10 or negative. Patients 200 and 203 showed negative R² in all ')}<strong>{t('ocho configuraciones', 'eight configurations')}</strong>{t(', lo que sugiere que un sistema clínico debería incorporar un detector de confianza para derivar pacientes atípicos a calibración extendida.', ', suggesting that a clinical system should incorporate a confidence detector to refer atypical patients to extended calibration.')}</p>
+                </div>
               </div>
-            </details>
           </div>
         )}
 
@@ -3707,7 +3723,7 @@ function NB5BContent(props: NB5BContentProps) {
                     {t('Validación Externa · Base de Datos INCART St.-Petersburg', 'External Validation · INCART St.-Petersburg Database')}
                   </h3>
                   <p style={{ margin: 0, fontSize: 'var(--fs-xs)', color: 'var(--text-sub)' }}>
-                    {t('Prueba de robustez en dataset completamente externo', 'Robustness test on completely external dataset')} — {incartStats.n} {t('registros · Equipment distinto · Pacientes europeos', 'records · Different equipment · European patients')}
+                    {t('Prueba de robustez en dataset completamente externo', 'Robustness test on completely external dataset')}, {incartStats.n} {t('registros · Equipment distinto · Pacientes europeos', 'records · Different equipment · European patients')}
                   </p>
                 </div>
 
@@ -3835,7 +3851,7 @@ function NB5BContent(props: NB5BContentProps) {
             {/* Gap Train–Test */}
             {gapData.length > 0 && (
               <div className="card" style={{ padding: '16px', marginBottom: '20px' }}>
-                <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, marginBottom: '4px', color: 'var(--text)' }}>{t('Brecha Train–Test · Gap de Generalización LOPO', 'Train–Test Gap · LOPO Generalization Gap')}</h3>
+                <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, marginBottom: '4px', color: 'var(--text)' }}>{t('Brecha Train-Test · Gap de Generalización LOPO', 'Train-Test Gap · LOPO Generalization Gap')}</h3>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '16px' }}>
                   <DataTable
                     data={gapData.map((g: any) => ({
@@ -3843,7 +3859,7 @@ function NB5BContent(props: NB5BContentProps) {
                       'R² train': g.R2_train.toFixed(4),
                       'R² test': g.R2_test.toFixed(4),
                       GAP: g.GAP.toFixed(4),
-                      Nivel: g.GAP < 0.35 ? t('🟡 Moderado', '🟡 Moderate') : g.GAP < 0.45 ? t('🟠 Alto', '🟠 High') : t('🔴 Severo', '🔴 Severe'),
+                      Nivel: g.GAP < 0.35 ? t('Moderado', 'Moderate') : g.GAP < 0.45 ? t('Alto', 'High') : t('Severo', 'Severe'),
                     })) as unknown as Record<string, unknown>[]}
                     title=""
                     columns={[
@@ -3919,15 +3935,15 @@ function NB5BContent(props: NB5BContentProps) {
               <h3 style={{ fontSize: 'var(--fs-md)', fontWeight: 600, marginBottom: '16px', color: 'var(--text)' }}>{t('Galería de Visualizaciones · NB5B', 'Visualizations Gallery · NB5B')}</h3>
               <ImageGallery
                 images={[
-                  { src: '/data/nb5b/img/lopo_v2_boxplot_all.png', title: t('Boxplot R² — Todos los Modelos LOPO', 'Boxplot R² — All LOPO Models') },
-                  { src: '/data/nb5b/img/lopo_v2_GRU_base_r2.png', title: t('R² por Paciente — GRU Base', 'R² per Patient — GRU Base') },
-                  { src: '/data/nb5b/img/lopo_v2_CNN_GRU_r2.png', title: t('R² por Paciente — CNN-GRU', 'R² per Patient — CNN-GRU') },
-                  { src: '/data/nb5b/img/lopo_v2_BiGRU_MHA_r2.png', title: t('R² por Paciente — BiGRU MHA', 'R² per Patient — BiGRU MHA') },
-                  { src: '/data/nb5b/img/demo_v2_GRU_base.png', title: t('Demo Predicción — GRU Base', 'Prediction Demo — GRU Base') },
-                  { src: '/data/nb5b/img/demo_v2_CNN_GRU.png', title: t('Demo Predicción — CNN-GRU', 'Prediction Demo — CNN-GRU') },
-                  { src: '/data/nb5b/img/demo_v2_BiGRU_MHA.png', title: t('Demo Predicción — BiGRU MHA', 'Prediction Demo — BiGRU MHA') },
-                  { src: '/data/nb5b/img/lopo_v2_mejora_ft_CNN_GRU.png', title: t('Mejora Fine-Tuning — CNN-GRU', 'Fine-Tuning Improvement — CNN-GRU') },
-                  { src: '/data/nb5b/img/lopo_v2_mejora_ft_BiGRU_MHA.png', title: t('Mejora Fine-Tuning — BiGRU MHA', 'Fine-Tuning Improvement — BiGRU MHA') },
+                  { src: '/data/nb5b/img/lopo_v2_boxplot_all.png', title: t('Boxplot R² · Todos los Modelos LOPO', 'Boxplot R² · All LOPO Models') },
+                  { src: '/data/nb5b/img/lopo_v2_GRU_base_r2.png', title: t('R² por Paciente · GRU Base', 'R² per Patient · GRU Base') },
+                  { src: '/data/nb5b/img/lopo_v2_CNN_GRU_r2.png', title: t('R² por Paciente · CNN-GRU', 'R² per Patient · CNN-GRU') },
+                  { src: '/data/nb5b/img/lopo_v2_BiGRU_MHA_r2.png', title: t('R² por Paciente · BiGRU MHA', 'R² per Patient · BiGRU MHA') },
+                  { src: '/data/nb5b/img/demo_v2_GRU_base.png', title: t('Demo Predicción · GRU Base', 'Prediction Demo · GRU Base') },
+                  { src: '/data/nb5b/img/demo_v2_CNN_GRU.png', title: t('Demo Predicción · CNN-GRU', 'Prediction Demo · CNN-GRU') },
+                  { src: '/data/nb5b/img/demo_v2_BiGRU_MHA.png', title: t('Demo Predicción · BiGRU MHA', 'Prediction Demo · BiGRU MHA') },
+                  { src: '/data/nb5b/img/lopo_v2_mejora_ft_CNN_GRU.png', title: t('Mejora Fine-Tuning · CNN-GRU', 'Fine-Tuning Improvement · CNN-GRU') },
+                  { src: '/data/nb5b/img/lopo_v2_mejora_ft_BiGRU_MHA.png', title: t('Mejora Fine-Tuning · BiGRU MHA', 'Fine-Tuning Improvement · BiGRU MHA') },
                 ]}
                 columns={3}
               />
@@ -3950,7 +3966,6 @@ interface NB3ContentProps {
 
 function NB3Content({ expA, expBResumen, expBTransferencia, expC, loading, error }: NB3ContentProps) {
   const theme = useECGStore((s) => s.theme);
-  const isDark = theme === 'dark';
   const { t } = useLang();
   const [activeSubTab, setActiveSubTab] = useState<'resumen' | 'expA' | 'expB' | 'estadisticas' | 'filtros_hallazgos'>('resumen');
 
@@ -4179,7 +4194,7 @@ function NB3Content({ expA, expBResumen, expBTransferencia, expC, loading, error
         {activeSubTab === 'expA' && expAStats && (
           <div>
             <h3 style={{ fontSize: 'var(--fs-md)', fontWeight: 600, color: 'var(--text)', marginBottom: '16px' }}>
-              {t('Exp A — Evaluación Estándar por Paciente', 'Exp A — Standard Evaluation per Patient')}
+              {t('Exp A · Evaluación Estándar por Paciente', 'Exp A · Standard Evaluation per Patient')}
             </h3>
             <p style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-sub)', marginBottom: '20px' }}>
               {t(`Cada modelo se evalúa con datos del mismo paciente (train/test temporal). Se comparan ${expAStats.modelos.length} modelos sobre ${expAStats.pacientes.length} pacientes.`, `Each model is evaluated with data from the same patient (temporal train/test). ${expAStats.modelos.length} models are compared across ${expAStats.pacientes.length} patients.`)}
@@ -4255,7 +4270,7 @@ function NB3Content({ expA, expBResumen, expBTransferencia, expC, loading, error
         {activeSubTab === 'expB' && expBStats && (
           <div>
             <h3 style={{ fontSize: 'var(--fs-md)', fontWeight: 600, color: 'var(--text)', marginBottom: '16px' }}>
-              {t('Exp B — Transferencia Cruzada de Modelos NB2', 'Exp B — Cross Transfer of NB2 Models')}
+              {t('Exp B · Transferencia Cruzada de Modelos NB2', 'Exp B · Cross Transfer of NB2 Models')}
             </h3>
             <p style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-sub)', marginBottom: '20px' }}>
               {t('Se evalúa qué pasa cuando un modelo NB2 entrenado en un paciente se aplica a otro. Se compara con NB4B y NB5B que son modelos globales.', 'Evaluates what happens when an NB2 model trained on one patient is applied to another. Compared with NB4B and NB5B which are global models.')}
@@ -4333,7 +4348,7 @@ function NB3Content({ expA, expBResumen, expBTransferencia, expC, loading, error
         {activeSubTab === 'estadisticas' && expCStats && (
           <div>
             <h3 style={{ fontSize: 'var(--fs-md)', fontWeight: 600, color: 'var(--text)', marginBottom: '16px' }}>
-              {t('Exp C — Escenario Clínico (Pacientes Nuevos)', 'Exp C — Clinical Scenario (New Patients)')}
+              {t('Exp C · Escenario Clínico (Pacientes Nuevos)', 'Exp C · Clinical Scenario (New Patients)')}
             </h3>
             <p style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-sub)', marginBottom: '20px' }}>
               {t(`Evaluación sobre ${expCStats.pacientes.length} pacientes usando solo modelos que no requieren datos de entrenamiento individuales: NB4B, NB5B y Persistencia.`, `Evaluation on ${expCStats.pacientes.length} patients using only models that do not require individual training data: NB4B, NB5B and Persistence.`)}
@@ -4341,7 +4356,7 @@ function NB3Content({ expA, expBResumen, expBTransferencia, expC, loading, error
 
             {/* Bar chart: R² medio por modelo */}
             <div className="card" style={{ padding: '20px', marginBottom: '24px' }}>
-              <h4 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, color: 'var(--text)', marginBottom: '12px' }}>{t('R² Medio por Modelo — Escenario Clínico', 'Average R² per Model — Clinical Scenario')}</h4>
+              <h4 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, color: 'var(--text)', marginBottom: '12px' }}>{t('R² Medio por Modelo · Escenario Clínico', 'Average R² per Model · Clinical Scenario')}</h4>
               <PlotlyBarChart
                 data={expCStats.byModelo.map((m: any) => ({
                   name: m.Modelo,
@@ -4436,13 +4451,13 @@ function NB3Content({ expA, expBResumen, expBTransferencia, expC, loading, error
         {activeSubTab === 'filtros_hallazgos' && (
           <div>
             <div style={{ marginBottom: '24px' }}>
-              <Callout type="warning" title={t('Hallazgo clave — Los modelos NB2 no transfieren', 'Key finding — NB2 models do not transfer')}>
+              <Callout type="warning" title={t('Hallazgo clave · Los modelos NB2 no transfieren', 'Key finding · NB2 models do not transfer')}>
                 {t(`La caída media de R² al transferir un modelo NB2 a otro paciente es de ${expBStats?.avgCaida.toFixed(4) ?? '—'}. Los modelos intra-paciente no generalizan. NB4B (R² medio: ${expBStats?.avgNB4B.toFixed(4) ?? '—'}) y NB5B (R² medio: ${expBStats?.avgNB5B.toFixed(4) ?? '—'}) resisten mejor al ser modelos multi-sujeto.`, `The average R² drop when transferring an NB2 model to another patient is ${expBStats?.avgCaida.toFixed(4) ?? '—'}. Intra-patient models do not generalize. NB4B (average R²: ${expBStats?.avgNB4B.toFixed(4) ?? '—'}) and NB5B (average R²: ${expBStats?.avgNB5B.toFixed(4) ?? '—'}) perform better as multi-subject models.`)}
               </Callout>
-              <Callout type="note" title={t('Nota — Evaluación intra-paciente', 'Note — Intra-patient evaluation')}>
+              <Callout type="note" title={t('Nota · Evaluación intra-paciente', 'Note · Intra-patient evaluation')}>
                 {t('En este experimento, cada modelo se entrena y evalúa sobre el mismo paciente con partición temporal estricta (80/20). NB1 y NB2 son modelos intra-paciente, mientras que NB4B y NB5B son modelos multi-sujeto evaluados sobre cada paciente.', 'In this experiment, each model is trained and evaluated on the same patient with strict temporal partitioning (80/20). NB1 and NB2 are intra-patient models, while NB4B and NB5B are multi-subject models evaluated on each patient.')}
               </Callout>
-              <Callout type="note" title={t('Nota — Simulación de despliegue real', 'Note — Real deployment simulation')}>
+              <Callout type="note" title={t('Nota · Simulación de despliegue real', 'Note · Real deployment simulation')}>
                 {t('El Exp C simula un despliegue clínico donde NO se dispone de datos previos del paciente. Solo modelos multi-sujeto (NB4B, NB5B) son aplicables. NB5B supera a NB4B y Persistencia en la mayoría de pacientes, demostrando la viabilidad del enfoque cross-patient.', 'Exp C simulates a clinical deployment where NO prior patient data is available. Only multi-subject models (NB4B, NB5B) are applicable. NB5B outperforms NB4B and Persistence in most patients, demonstrating the viability of the cross-patient approach.')}
               </Callout>
             </div>

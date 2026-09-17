@@ -1,0 +1,32 @@
+modelo,hiperparametro,valor,veces_seleccionado,pct
+RF,n_estimators,120,4,40.0
+RF,n_estimators,150,4,40.0
+RF,n_estimators,80,1,10.0
+RF,n_estimators,30,1,10.0
+RF,max_depth,None,5,50.0
+RF,max_depth,20,4,40.0
+RF,max_depth,15,1,10.0
+RF,min_samples_leaf,4,5,50.0
+RF,min_samples_leaf,2,4,40.0
+RF,min_samples_leaf,1,1,10.0
+RF,max_features,sqrt,10,100.0
+DT,max_depth,6,5,50.0
+DT,max_depth,4,5,50.0
+DT,min_samples_leaf,16,7,70.0
+DT,min_samples_leaf,4,3,30.0
+DT,min_samples_split,2,5,50.0
+DT,min_samples_split,10,4,40.0
+DT,min_samples_split,20,1,10.0
+MLP,hidden_layer_sizes,"[256, 128]",5,50.0
+MLP,hidden_layer_sizes,[128],4,40.0
+MLP,hidden_layer_sizes,"[128, 64]",1,10.0
+MLP,alpha,0.0001,6,60.0
+MLP,alpha,1e-05,2,20.0
+MLP,alpha,0.01,1,10.0
+MLP,alpha,0.001,1,10.0
+MLP,learning_rate_init,0.0005,5,50.0
+MLP,learning_rate_init,0.0001,3,30.0
+MLP,learning_rate_init,0.001,2,20.0
+MLP,batch_size,64,7,70.0
+MLP,batch_size,128,2,20.0
+MLP,batch_size,32,1,10.0

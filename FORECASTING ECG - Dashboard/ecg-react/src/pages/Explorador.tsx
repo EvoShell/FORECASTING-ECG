@@ -31,7 +31,7 @@ import { descargarCSV } from '@/lib/exportarCSV';
 import { Boton } from '@/components/ui/Boton';
 import { BarraFiltros, Selector, Busqueda, RecuentoFiltro } from '@/components/ui/Filtros';
 import { useLang, type TFn } from '@/i18n';
-import { ChevronDown, ChevronUp, Download, Search, RotateCcw } from 'lucide-react';
+import { ChevronDown, ChevronUp, Download, RotateCcw } from 'lucide-react';
 
 type ExperimentKey = 'NB1' | 'NB2' | 'NB3' | 'NB4B' | 'NB5B' | 'NB6' | 'NB7' | 'NB8';
 
@@ -119,7 +119,6 @@ export function ExploradorPage() {
 
   useEffect(() => {
     if (!nb1Data && !nb2Data && !nb4bData && !nb5Data && !nb5bData) {
-      console.log('[Explorador] Cargando datos...');
       loadAllExperimentsData().catch(err => console.error('[Explorador] Error:', err));
     }
   }, []);
@@ -453,7 +452,7 @@ function NB1Explorer({ nb1, isDark, t, searchTerm, setSearchTerm, modelFilter, s
             role="tab"
             aria-selected={nb1Exp === exp}
           >
-            Exp {exp}{exp === 'A' ? ` — ${t('Ventanas de tiempo', 'Time windows')}` : ` — ${t('Latido a latido', 'Beat-to-beat')}`}
+            Exp {exp}{exp === 'A' ? ` · ${t('Ventanas de tiempo', 'Time windows')}` : ` · ${t('Latido a latido', 'Beat-to-beat')}`}
           </Boton>
         ))}
       </div>
@@ -491,7 +490,7 @@ function NB1Explorer({ nb1, isDark, t, searchTerm, setSearchTerm, modelFilter, s
       {/* Summary Table */}
       <div className="card" style={{ padding: '16px', marginBottom: '24px' }}>
         <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, color: 'var(--text)', margin: '0 0 12px 0' }}>
-          {t('Tabla Resumen', 'Summary Table')} — Exp {nb1Exp}
+          {t('Tabla Resumen', 'Summary Table')}, Exp {nb1Exp}
         </h3>
         <DataTable
           fuente={`/data/nb1/resumen_Exp${nb1Exp}.csv`}
@@ -672,7 +671,7 @@ function NB2Explorer({ nb2, isDark, t, searchTerm, setSearchTerm, modelFilter, s
             role="tab"
             aria-selected={nb2Exp === exp}
           >
-            Exp {exp}{exp === 'A' ? ` — ${t('Ventanas de tiempo', 'Time windows')}` : ` — ${t('Latido a latido', 'Beat-to-beat')}`}
+            Exp {exp}{exp === 'A' ? ` · ${t('Ventanas de tiempo', 'Time windows')}` : ` · ${t('Latido a latido', 'Beat-to-beat')}`}
           </Boton>
         ))}
       </div>
@@ -699,7 +698,7 @@ function NB2Explorer({ nb2, isDark, t, searchTerm, setSearchTerm, modelFilter, s
       )}
 
       <div className="card" style={{ padding: '16px', marginBottom: '24px' }}>
-        <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, color: 'var(--text)', margin: '0 0 12px 0' }}>{t('Tabla Resumen', 'Summary Table')} — Exp {nb2Exp}</h3>
+        <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, color: 'var(--text)', margin: '0 0 12px 0' }}>{t('Tabla Resumen', 'Summary Table')}, Exp {nb2Exp}</h3>
         <DataTable
           fuente={`/data/nb2/resumen_Exp ${nb2Exp}.csv`}
           data={resumen as unknown as Record<string, unknown>[]}
@@ -820,7 +819,7 @@ function NB3Explorer({ nb3, t, expandedSections, toggleSection, handleExportCSV 
             role="tab"
             aria-selected={nb3SubTab === exp}
           >
-            {exp === 'A' ? `Exp A — ${t('Evaluacion Estandar', 'Standard Evaluation')}` : exp === 'B' ? `Exp B — ${t('Transferencia Cruzada', 'Cross Transfer')}` : `Exp C — ${t('Escenario Clinico', 'Clinical Scenario')}`}
+            {exp === 'A' ? `Exp A · ${t('Evaluacion Estandar', 'Standard Evaluation')}` : exp === 'B' ? `Exp B · ${t('Transferencia Cruzada', 'Cross Transfer')}` : `Exp C · ${t('Escenario Clinico', 'Clinical Scenario')}`}
           </Boton>
         ))}
       </div>
@@ -837,7 +836,7 @@ function NB3Explorer({ nb3, t, expandedSections, toggleSection, handleExportCSV 
             </MetricGrid>
           )}
           <div style={{ marginBottom: '24px' }}>
-            <SectionHeader title={`${t('Datos Crudos', 'Raw Data')} — Exp A (${nb3.expA.length})`} expanded={expandedSections.raw} onToggle={() => toggleSection('raw')} />
+            <SectionHeader title={`${t('Datos Crudos', 'Raw Data')} · Exp A (${nb3.expA.length})`} expanded={expandedSections.raw} onToggle={() => toggleSection('raw')} />
             {expandedSections.raw && (
               <div className="card" style={{ padding: '16px' }}>
                 <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '8px' }}>
@@ -1418,7 +1417,7 @@ function NB5BExplorer({ nb5b, isDark, t, searchTerm, setSearchTerm, modelFilter,
 
       {/* Resumen */}
       <div className="card" style={{ padding: '16px', marginBottom: '24px' }}>
-        <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, color: 'var(--text)', margin: '0 0 12px 0' }}>{t('Tabla Resumen', 'Summary Table')} — {metricFilter}</h3>
+        <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, color: 'var(--text)', margin: '0 0 12px 0' }}>{t('Tabla Resumen', 'Summary Table')}, {metricFilter}</h3>
         <DataTable
           fuente="/data/nb5b/tabla_resumen_v2.csv"
           data={filteredResumen as unknown as Record<string, unknown>[]}

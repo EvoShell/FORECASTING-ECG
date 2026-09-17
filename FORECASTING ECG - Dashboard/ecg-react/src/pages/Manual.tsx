@@ -3,10 +3,10 @@ import { PageWrapper } from '@/components/layout/PageWrapper';
 import { useLang } from '@/i18n';
 import type { TFn } from '@/i18n';
 import {
-  ChevronDown, Download, BookOpen, Home, Brain, Activity, FlaskConical,
-  Search, BarChart2, Zap, BookText, Monitor, Server, Database, Settings,
-  Play, Pause, RotateCcw, Sun, Moon, ChevronLeft, ChevronRight,
-  AlertTriangle, CheckCircle2, Info, FileText, Layers, Users,
+  ChevronDown, BookOpen, Home, Brain, FlaskConical,
+  Search, Zap, BookText, Monitor, Server, 
+  Sun, Moon, ChevronLeft, 
+  AlertTriangle, CheckCircle2, Info, FileText, Users,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -196,7 +196,7 @@ export function ManualPage() {
             {t('Manual de Usuario', 'User Manual')}
           </h1>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--fs-xs)', color: 'var(--text-muted)', marginTop: '6px' }}>
-            ECG Forecasting Dashboard — {t('Versión', 'Version')} 1.0 · Universidad CESMAG · 2025
+            ECG Forecasting Dashboard, {t('Versión', 'Version')} 1.0 · Universidad CESMAG · 2025
           </p>
         </div>
       </div>
@@ -298,7 +298,7 @@ export function ManualPage() {
 
         <h3 style={S.h3}>{t('1.1 Propósito', '1.1 Purpose')}</h3>
         <p style={S.body}>
-          {t('El sistema permite visualizar, analizar y comparar los resultados de cinco etapas experimentales de predicción de señales ECG, así como realizar predicciones interactivas en tiempo real sobre registros reales de pacientes. Está diseñado para uso académico, investigativo y de demostración ante comités evaluadores.', 'The system allows visualizing, analyzing and comparing the results of five experimental stages of ECG signal prediction, as well as performing interactive real-time predictions on real patient records. It is designed for academic, research and demonstration use before evaluation committees.')}
+          {t('El sistema permite visualizar, analizar y comparar los resultados de ocho etapas experimentales de predicción de señales ECG, así como ejecutar el modelo paso a paso sobre registros reales de pacientes. Está diseñado para uso académico, investigativo y de demostración ante comités evaluadores.', 'The system allows visualizing, analyzing and comparing the results of eight experimental stages of ECG signal prediction, as well as running the model step by step on real patient records. It is designed for academic, research and demonstration use before evaluation committees.')}
         </p>
 
         <h3 style={S.h3}>{t('1.2 Arquitectura', '1.2 Architecture')}</h3>
@@ -337,11 +337,11 @@ export function ManualPage() {
               </tr>
             </thead>
             <tbody>
-              <tr><td style={S.td}><span style={S.mono}>NB1</span></td><td style={S.td}>{t('Modelos Tradicionales', 'Traditional Models')}</td><td style={S.td}>{t('RF, SVR, MLP, DT, LinReg, ARIMA — evaluados por paciente individual', 'RF, SVR, MLP, DT, LinReg, ARIMA — evaluated per individual patient')}</td><td style={S.td}>RF: R² = 0.6264 (Exp B)</td></tr>
-              <tr><td style={S.td}><span style={S.mono}>NB2</span></td><td style={S.td}>Deep Learning</td><td style={S.td}>{t('LSTM, GRU, CNN-LSTM, CNN-GRU — evaluados por paciente individual', 'LSTM, GRU, CNN-LSTM, CNN-GRU — evaluated per individual patient')}</td><td style={S.td}>GRU/LSTM: R² = 0.6592 (Exp B)</td></tr>
-              <tr><td style={S.td}><span style={S.mono}>NB3</span></td><td style={S.td}>{t('Evaluación Cruzada', 'Cross Evaluation')}</td><td style={S.td}>{t('Comparación entre notebooks — Exp A, B y C (escenario clínico)', 'Comparison between notebooks — Exp A, B and C (clinical scenario)')}</td><td style={S.td}>{t('Evaluación integrada', 'Integrated evaluation')}</td></tr>
+              <tr><td style={S.td}><span style={S.mono}>NB1</span></td><td style={S.td}>{t('Modelos Tradicionales', 'Traditional Models')}</td><td style={S.td}>{t('RF, SVR, MLP, DT, LinReg, ARIMA · evaluados por paciente individual', 'RF, SVR, MLP, DT, LinReg, ARIMA · evaluated per individual patient')}</td><td style={S.td}>RF: R² = 0.6264 (Exp B)</td></tr>
+              <tr><td style={S.td}><span style={S.mono}>NB2</span></td><td style={S.td}>Deep Learning</td><td style={S.td}>{t('LSTM, GRU, CNN-LSTM, CNN-GRU · evaluados por paciente individual', 'LSTM, GRU, CNN-LSTM, CNN-GRU · evaluated per individual patient')}</td><td style={S.td}>GRU/LSTM: R² = 0.6592 (Exp B)</td></tr>
+              <tr><td style={S.td}><span style={S.mono}>NB3</span></td><td style={S.td}>{t('Evaluación Cruzada', 'Cross Evaluation')}</td><td style={S.td}>{t('Comparación entre notebooks · Exp A, B y C (escenario clínico)', 'Comparison between notebooks · Exp A, B and C (clinical scenario)')}</td><td style={S.td}>{t('Evaluación integrada', 'Integrated evaluation')}</td></tr>
               <tr><td style={S.td}><span style={S.mono}>NB4B</span></td><td style={S.td}>{t('Multi-Sujeto', 'Multi-Subject')}</td><td style={S.td}>{t('GRU entrenado con pool de 48 pacientes (intra-paciente)', 'GRU trained with 48-patient pool (intra-patient)')}</td><td style={S.td}>R² global = 0.7237</td></tr>
-              <tr><td style={S.td}><span style={S.mono}>NB5B</span></td><td style={S.td}>Cross-Patient (LOPO)</td><td style={S.td}>{t('Leave-One-Patient-Out — generalización a pacientes no vistos', 'Leave-One-Patient-Out — generalization to unseen patients')}</td><td style={S.td}>GRU_weighted: R² = 0.5311</td></tr>
+              <tr><td style={S.td}><span style={S.mono}>NB5B</span></td><td style={S.td}>Cross-Patient (LOPO)</td><td style={S.td}>{t('Leave-One-Patient-Out · generalización a pacientes no vistos', 'Leave-One-Patient-Out · generalization to unseen patients')}</td><td style={S.td}>GRU_weighted: R² = 0.5311</td></tr>
               <tr><td style={S.td}><span style={S.mono}>NB6</span></td><td style={S.td}>{t('Multi-step Cross-Patient', 'Multi-step Cross-Patient')}</td><td style={S.td}>{t('CNN-GRU-ATTN, LOPO sobre 123 pacientes de MIT-BIH e INCART, horizonte H=3', 'CNN-GRU-ATTN, LOPO over 123 patients from MIT-BIH and INCART, horizon H=3')}</td><td style={S.td}>CNN_GRU_ATTN: R² = 0.6734</td></tr>
               <tr><td style={S.td}><span style={S.mono}>NB7</span></td><td style={S.td}>{t('Hiperparámetros', 'Hyperparameters')}</td><td style={S.td}>{t('20 configuraciones por arquitectura sobre 10 pliegues de la cohorte reducida de 50', '20 configurations per architecture over 10 folds of the reduced 50-patient cohort')}</td><td style={S.td}>{t('Ninguna mejor: p = 1.0000', 'None better: p = 1.0000')}</td></tr>
               <tr><td style={S.td}><span style={S.mono}>NB8</span></td><td style={S.td}>{t('Detección de evento', 'Event detection')}</td><td style={S.td}>{t('Error por clase AAMI y detección de latido ectópico sobre el residuo', 'Per-AAMI-class error and ectopic beat detection on the residual')}</td><td style={S.td}>AUC-PR = 0.3808 (3.12×)</td></tr>
@@ -352,13 +352,13 @@ export function ManualPage() {
         <h3 style={S.h3}>{t('1.5 Enfoques Experimentales', '1.5 Experimental Approaches')}</h3>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginTop: '8px' }}>
           <div style={{ padding: '12px 16px', borderRadius: 'var(--radius-md)', background: 'var(--elevated)', border: '1px solid var(--border)' }}>
-            <span style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-2xs)', fontWeight: 600, color: 'var(--text)' }}>{t('Exp A — Ventanas Temporales', 'Exp A — Time Windows')}</span>
+            <span style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-2xs)', fontWeight: 600, color: 'var(--text)' }}>{t('Exp A · Ventanas Temporales', 'Exp A · Time Windows')}</span>
             <p style={{ ...S.body, fontSize: 'var(--fs-xs)', marginTop: '6px' }}>
               {t('Señal continua segmentada en ventanas de 5 segundos. Horizontes de predicción: 1, 3 y 5 segundos. Lookback fijo de 5s (1800 muestras a 360 Hz).', 'Continuous signal segmented into 5-second windows. Prediction horizons: 1, 3 and 5 seconds. Fixed lookback of 5s (1800 samples at 360 Hz).')}
             </p>
           </div>
           <div style={{ padding: '12px 16px', borderRadius: 'var(--radius-md)', background: 'var(--elevated)', border: '1px solid var(--border)' }}>
-            <span style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-2xs)', fontWeight: 600, color: 'var(--text)' }}>{t('Exp B — Latido a Latido', 'Exp B — Beat to Beat')}</span>
+            <span style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-2xs)', fontWeight: 600, color: 'var(--text)' }}>{t('Exp B · Latido a Latido', 'Exp B · Beat to Beat')}</span>
             <p style={{ ...S.body, fontSize: 'var(--fs-xs)', marginTop: '6px' }}>
               {t('Señal segmentada en latidos individuales de 256 muestras centrados en el pico R. Lookbacks: N = 3, 5 o 10 latidos previos. Obtiene métricas superiores en todos los modelos.', 'Signal segmented into individual beats of 256 samples centered on the R-peak. Lookbacks: N = 3, 5 or 10 previous beats. Achieves superior metrics across all models.')}
             </p>
@@ -434,8 +434,11 @@ export function ManualPage() {
           {t('Espere hasta ver el mensaje:', 'Wait until you see the message:')}
         </NumberedStep>
         <div style={{ background: 'var(--elevated)', borderRadius: 'var(--radius-md)', padding: '12px 16px', marginBottom: '12px', marginLeft: '34px' }}>
-          <code style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-2xs)', color: '#10b981' }}>
-            api-1 | INFO: Uvicorn running on http://0.0.0.0:8000 — Application startup complete.
+          <code style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-2xs)', color: 'var(--text-sub)' }}>
+            {/* Son dos lineas distintas del registro real; estaban unidas por una
+                raya que la terminal nunca imprime. */}
+            api-1 | INFO: Uvicorn running on http://0.0.0.0:8000<br />
+            api-1 | INFO: Application startup complete.
           </code>
         </div>
         <NumberedStep n={6}>
@@ -500,7 +503,7 @@ export function ManualPage() {
               <tr><td style={S.td}><Brain size={14} /></td><td style={S.td}>{t('Modelos', 'Models')}</td><td style={S.td}>{t('Catálogo de las arquitecturas y tabla comparativa LOPO con su n y su cohorte', 'Catalog of architectures and LOPO comparison table with its n and cohort')}</td><td style={S.td}><span style={S.mono}>/modelos</span></td></tr>
               <tr><td style={S.td}><FlaskConical size={14} /></td><td style={S.td}>{t('Experimentos', 'Experiments')}</td><td style={S.td}>{t('Los ocho experimentos, una pestaña por cada uno', 'The eight experiments, one tab each')}</td><td style={S.td}><span style={S.mono}>/experimentos</span></td></tr>
               <tr><td style={S.td}><Search size={14} /></td><td style={S.td}>{t('Explorador', 'Explorer')}</td><td style={S.td}>{t('Exploración interactiva de los datos crudos, con filtros y exportación a CSV', 'Interactive exploration of the raw data, with filters and CSV export')}</td><td style={S.td}><span style={S.mono}>/explorador</span></td></tr>
-              <tr><td style={S.td}><Zap size={14} /></td><td style={S.td}>{t('Predicción LOPO', 'LOPO Prediction')}</td><td style={S.td}>{t('Predicción cross-patient en tiempo real sobre un paciente no visto', 'Real-time cross-patient prediction on an unseen patient')}</td><td style={S.td}><span style={S.mono}>/lopo</span></td></tr>
+              <tr><td style={S.td}><Zap size={14} /></td><td style={S.td}>{t('Predicción LOPO', 'LOPO Prediction')}</td><td style={S.td}>{t('Ejecuta el modelo paso a paso sobre un registro real. El protocolo de paciente no visto es el del experimento 8, no el de esta página', 'Runs the model step by step on a real record. The unseen-patient protocol is experiment 8, not this page')}</td><td style={S.td}><span style={S.mono}>/lopo</span></td></tr>
               <tr><td style={S.td}><Users size={14} /></td><td style={S.td}>{t('Cohorte y método', 'Cohort & method')}</td><td style={S.td}>{t('Quiénes son los pacientes, dónde falla el modelo y por qué se descartó el filtro de mediana', 'Who the patients are, where the model fails, and why the median filter was discarded')}</td><td style={S.td}><span style={S.mono}>/cohorte</span></td></tr>
               <tr><td style={S.td}><BookOpen size={14} /></td><td style={S.td}>{t('Manual', 'User Guide')}</td><td style={S.td}>{t('Esta guía de usuario', 'This user guide')}</td><td style={S.td}><span style={S.mono}>/manual</span></td></tr>
               <tr><td style={S.td}><BookText size={14} /></td><td style={S.td}>{t('Glosario', 'Glossary')}</td><td style={S.td}>{t('Diccionario de términos técnicos', 'Dictionary of technical terms')}</td><td style={S.td}><span style={S.mono}>/glosario</span></td></tr>
@@ -548,7 +551,7 @@ export function ManualPage() {
         <h4 style={S.h4}>{t('Visión General (3 tarjetas)', 'Overview (3 cards)')}</h4>
         <Bullet><strong>{t('Enfoques Experimentales', 'Experimental Approaches')}</strong>: {t('Describe Exp A (ventanas de 5s) y Exp B (latido a latido, 256 muestras).', 'Describes Exp A (5s windows) and Exp B (beat to beat, 256 samples).')}</Bullet>
         <Bullet><strong>{t('Modelos Implementados', 'Implemented Models')}</strong>: {t('Muestra badges de ML Clásico (LinReg, DT, RF, SVR, MLP, ARIMA) y Deep Learning (LSTM, GRU, CNN-LSTM, CNN-GRU).', 'Shows badges for Classic ML (LinReg, DT, RF, SVR, MLP, ARIMA) and Deep Learning (LSTM, GRU, CNN-LSTM, CNN-GRU).')}</Bullet>
-        <Bullet><strong>{t('Evaluación', 'Evaluation')}</strong>: {t('KPIs resumen — 48 pacientes, 7 pipelines de preprocesamiento, métricas R², RMSE, MAE, DTW.', 'Summary KPIs — 48 patients, 7 preprocessing pipelines, R², RMSE, MAE, DTW metrics.')}</Bullet>
+        <Bullet><strong>{t('Evaluación', 'Evaluation')}</strong>: {t('KPIs resumen, 48 pacientes, 7 pipelines de preprocesamiento, métricas R², RMSE, MAE, DTW.', 'Summary KPIs, 48 patients, 7 preprocessing pipelines, R², RMSE, MAE, DTW metrics.')}</Bullet>
 
         <h4 style={S.h4}>{t('Metodología (Pipeline Visual)', 'Methodology (Visual Pipeline)')}</h4>
         <Bullet>{t('Diagrama horizontal de 5 pasos conectados por flechas: MIT-BIH → Preprocesamiento → Segmentación → Entrenamiento → Evaluación.', 'Horizontal diagram of 5 steps connected by arrows: MIT-BIH → Preprocessing → Segmentation → Training → Evaluation.')}</Bullet>
@@ -586,11 +589,11 @@ export function ManualPage() {
             <p style={{ ...S.body, fontSize: 'var(--fs-2xs)', marginTop: '4px' }}>LSTM, GRU, CNN-GRU</p>
           </div>
           <div style={{ padding: '10px 14px', borderRadius: 'var(--radius-md)', background: 'var(--elevated)', border: '1px solid var(--border)', textAlign: 'center' }}>
-            <span style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-2xs)', fontWeight: 600, color: '#10b981' }}>ML Tradicional</span>
+            <span style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-2xs)', fontWeight: 600, color: 'var(--text)' }}>ML Tradicional</span>
             <p style={{ ...S.body, fontSize: 'var(--fs-2xs)', marginTop: '4px' }}>RF, MLP, SVR (RBF), DT</p>
           </div>
           <div style={{ padding: '10px 14px', borderRadius: 'var(--radius-md)', background: 'var(--elevated)', border: '1px solid var(--border)', textAlign: 'center' }}>
-            <span style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-2xs)', fontWeight: 600, color: '#f59e0b' }}>Cross-Patient (LOPO)</span>
+            <span style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-2xs)', fontWeight: 600, color: 'var(--text)' }}>Cross-Patient (LOPO)</span>
             <p style={{ ...S.body, fontSize: 'var(--fs-2xs)', marginTop: '4px' }}>GRU base, CNN GRU, BiGRU MHA, Ensemble</p>
           </div>
         </div>
@@ -653,36 +656,20 @@ export function ManualPage() {
         <Bullet>{t('Selector de paciente en dos grupos: MIT-BIH e INCART. Los pacientes marcados en verde tienen señal disponible en el servicio; el resto se atiende con la señal de demostración. No hay carga de archivos propios.', 'Patient selector in two groups: MIT-BIH and INCART. Patients marked green have their signal available from the service; the rest fall back to the demonstration signal. There is no upload of your own files.')}</Bullet>
 
         <h4 style={S.h4}>{t('Modo de Predicción', 'Prediction Mode')}</h4>
-        <p style={S.body}>{t('Dos modos disponibles:', 'Two available modes:')}</p>
-        <Bullet><strong>{t('Prospectivo', 'Prospective')}</strong>: {t('Predicción rolling latido a latido. Parámetros ajustables: latidos a predecir, posiciones, ancla y filtrar ruido.', 'Rolling beat-by-beat prediction. Adjustable parameters: beats to predict, positions, anchor and noise filter.')}</Bullet>
-        <Bullet><strong>{t('Futuro', 'Future')}</strong> ({t('exclusivo de LOPO', 'LOPO exclusive')}): {t('Modo de generación autoregresiva que simula la continuación de la señal ECG más allá de los datos disponibles.', 'Autoregressive generation mode that simulates the continuation of the ECG signal beyond available data.')}</Bullet>
-
-        <h3 style={S.h3}>{t('7.3 Modo Futuro — Generación Autoregresiva', '7.3 Future Mode — Autoregressive Generation')}</h3>
-        <p style={S.body}>
-          {t('Este modo exclusivo simula la continuación de la señal ECG del paciente de forma autoregresiva: la predicción de cada latido se utiliza como entrada para predecir el siguiente, generando así una señal futura continua.', 'This exclusive mode simulates the continuation of the patient\'s ECG signal autoregressively: each beat\'s prediction is used as input to predict the next one, thus generating a continuous future signal.')}
-        </p>
-        <Bullet><strong>{t('Duración', 'Duration')}</strong>: {t('Ajustable mediante un slider (en minutos) que controla la cantidad de señal futura a generar.', 'Adjustable via a slider (in minutes) that controls the amount of future signal to generate.')}</Bullet>
-        <Bullet><strong>{t('Monitor ECG', 'ECG Monitor')}</strong>: {t('Visualización tipo monitor clínico con indicador «LIVE» rojo pulsante y la señal generada en tiempo real.', 'Clinical monitor-style visualization with pulsing red «LIVE» indicator and the generated signal in real time.')}</Bullet>
-        <Bullet><strong>{t('Alertas clínicas', 'Clinical alerts')}</strong>: {t('Sistema de detección automática de anomalías durante la generación, con categorías:', 'Automatic anomaly detection system during generation, with categories:')}</Bullet>
-        <div style={{ marginLeft: '28px' }}>
-          <Bullet><span style={S.badge('#ef4444')}>{t('Morfología', 'Morphology')}</span> — {t('Cambios en la forma del latido', 'Changes in beat shape')}</Bullet>
-          <Bullet><span style={S.badge('#f59e0b')}>{t('Amplitud', 'Amplitude')}</span> — {t('Variaciones anormales de amplitud', 'Abnormal amplitude variations')}</Bullet>
-          <Bullet><span style={S.badge('#3b82f6')}>{t('Ritmo', 'Rhythm')}</span> — {t('Irregularidades en el intervalo R-R', 'R-R interval irregularities')}</Bullet>
-          <Bullet><span style={S.badge('#8b5cf6')}>Flatline</span> — {t('Detección de señal plana', 'Flat signal detection')}</Bullet>
-        </div>
-        <Bullet><strong>{t('Métricas de estabilidad', 'Stability metrics')}</strong>: {t('R² morfológico, R² auto-similaridad, estabilidad de amplitud, DTW, RMSE, MAE, amplitud QRS.', 'Morphological R², auto-similarity R², amplitude stability, DTW, RMSE, MAE, QRS amplitude.')}</Bullet>
+        <p style={S.body}>{t('Un único modo de predicción:', 'A single prediction mode:')}</p>
+        <Bullet><strong>{t('Prospectivo', 'Prospective')}</strong>: {t('Analiza la señal del registro por tramos. Cada análisis toma los 5 latidos anteriores, predice los 3 siguientes y se detiene. Dos formas de encadenarlo: «Uno a uno», que analiza un tramo por pulsación, y «Hasta la alarma», que encadena análisis y para en cuanto un latido supera el umbral. La velocidad de dibujado se ajusta con un deslizador.', 'Analyses the record in segments. Each analysis takes the previous 5 beats, predicts the next 3 and stops. Two ways to chain it: «One by one», analysing one segment per click, and «Until the alarm», which chains analyses and stops as soon as a beat exceeds the threshold. Drawing speed is set with a slider.')}</Bullet>
 
         <InfoBox type="warning" t={t}>
           {t('La normalización LOPO es', 'LOPO normalization is')} <strong>per-beat instance</strong> ({t('no global como NB4B', 'not global like NB4B')}). {t('Esto significa que cada latido se normaliza individualmente. El modelo GRU_weighted también utiliza los intervalos RR como entrada adicional para mejorar la generalización.', 'This means each beat is normalized individually. The GRU_weighted model also uses RR intervals as additional input to improve generalization.')}
         </InfoBox>
 
-        <h3 style={S.h3}>{t('7.4 Flujo de Uso Paso a Paso', '7.4 Step-by-Step Usage Flow')}</h3>
+        <h3 style={S.h3}>{t('7.3 Flujo de Uso Paso a Paso', '7.3 Step-by-Step Usage Flow')}</h3>
         <NumberedStep n={1}>{t('Seleccione la fuente de señal y el paciente.', 'Select the signal source and patient.')}</NumberedStep>
-        <NumberedStep n={2}>{t('Elija el modo:', 'Choose the mode:')} <strong>{t('Prospectivo', 'Prospective')}</strong> ({t('evaluación directa', 'direct evaluation')}) {t('o', 'or')} <strong>{t('Futuro', 'Future')}</strong> ({t('generación continua', 'continuous generation')}).</NumberedStep>
-        <NumberedStep n={3}>{t('Configure los parámetros del modo seleccionado.', 'Configure the selected mode parameters.')}</NumberedStep>
-        <NumberedStep n={4}>{t('Haga clic en', 'Click')} <strong>{t('Iniciar', 'Start')}</strong> {t('para comenzar.', 'to begin.')}</NumberedStep>
-        <NumberedStep n={5}>{t('En modo Futuro, observe las alertas clínicas y las métricas de estabilidad.', 'In Future mode, observe the clinical alerts and stability metrics.')}</NumberedStep>
-        <NumberedStep n={6}>{t('Use', 'Use')} <strong>{t('Detener', 'Stop')}</strong> {t('o', 'or')} <strong>Reset</strong> {t('según sea necesario.', 'as needed.')}</NumberedStep>
+        <NumberedStep n={2}>{t('El modo de predicción es', 'The prediction mode is')} <strong>{t('Prospectivo', 'Prospective')}</strong>: {t('evaluación directa sobre el registro.', 'direct evaluation over the record.')}</NumberedStep>
+        <NumberedStep n={3}>{t('Elija «Uno a uno» o «Hasta la alarma».', 'Choose «One by one» or «Until the alarm».')}</NumberedStep>
+        <NumberedStep n={4}>{t('Pulse', 'Press')} <strong>{t('Analizar un latido', 'Analyse one beat')}</strong> {t('o', 'or')} <strong>{t('Analizar hasta la alarma', 'Analyse until alarm')}</strong>.</NumberedStep>
+        <NumberedStep n={5}>{t('Cada análisis deja una fila en la tabla. Si un latido supera el umbral, el análisis se detiene y ese latido se pinta en rojo sobre la gráfica.', 'Each analysis leaves a row in the table. If a beat exceeds the threshold, the analysis stops and that beat is drawn in red on the chart.')}</NumberedStep>
+        <NumberedStep n={6}>{t('Use', 'Use')} <strong>{t('Detener', 'Stop')}</strong> {t('para interrumpir, o', 'to interrupt, or')} <strong>{t('Reiniciar', 'Restart')}</strong> {t('para empezar de cero.', 'to start over.')}</NumberedStep>
       </div>
 
       {/* ════════════════════════════════════════════════════════════════════════
@@ -702,19 +689,19 @@ export function ManualPage() {
           <table style={S.table}>
             <thead><tr><th style={S.th}>{t('Pestaña', 'Tab')}</th><th style={S.th}>{t('Nombre', 'Name')}</th><th style={S.th}>{t('Contenido Principal', 'Main Content')}</th></tr></thead>
             <tbody>
-              <tr><td style={S.td}><span style={S.badge('#3b82f6')}>Exp. 1 · NB1</span></td><td style={S.td}>{t('Tradicionales', 'Traditional')}</td><td style={S.td}>RF, SVR, MLP, DT, LinReg, ARIMA — Exp A {t('y', 'and')} Exp B</td></tr>
-              <tr><td style={S.td}><span style={S.badge('#8b5cf6')}>Exp. 2 · NB2</span></td><td style={S.td}>Deep Learning</td><td style={S.td}>LSTM, GRU, CNN-LSTM, CNN-GRU — Exp A {t('y', 'and')} Exp B</td></tr>
+              <tr><td style={S.td}><span style={S.badge('#3b82f6')}>Exp. 1 · NB1</span></td><td style={S.td}>{t('Tradicionales', 'Traditional')}</td><td style={S.td}>RF, SVR, MLP, DT, LinReg, ARIMA, Exp A {t('y', 'and')} Exp B</td></tr>
+              <tr><td style={S.td}><span style={S.badge('#8b5cf6')}>Exp. 2 · NB2</span></td><td style={S.td}>Deep Learning</td><td style={S.td}>LSTM, GRU, CNN-LSTM, CNN-GRU, Exp A {t('y', 'and')} Exp B</td></tr>
               <tr><td style={S.td}><span style={S.badge('#10b981')}>Exp. 3 · NB3</span></td><td style={S.td}>{t('Evaluación', 'Evaluation')}</td><td style={S.td}>{t('Comparación cruzada entre notebooks', 'Cross-comparison between notebooks')}</td></tr>
               <tr><td style={S.td}><span style={S.badge('#f59e0b')}>Exp. 4 · NB4B</span></td><td style={S.td}>{t('Multi-sujeto', 'Multi-subject')}</td><td style={S.td}>{t('Modelo GRU pool de 48 pacientes', 'GRU model 48-patient pool')}</td></tr>
               <tr><td style={S.td}><span style={S.badge('#ef4444')}>Exp. 5 · NB5B</span></td><td style={S.td}>Cross-patient</td><td style={S.td}>{t('LOPO sobre 48 pacientes de MIT-BIH, con fine-tuning y validación externa en INCART', 'LOPO over 48 MIT-BIH patients, with fine-tuning and external INCART validation')}</td></tr>
-              <tr><td style={S.td}><span style={S.badge('#06b6d4')}>Exp. 6 · NB6</span></td><td style={S.td}>{t('Multi-step LOPO', 'Multi-step LOPO')}</td><td style={S.td}>{t('CNN-GRU-ATTN sobre los 123 pacientes de MIT-BIH e INCART, horizonte H=3 — el modelo final', 'CNN-GRU-ATTN over the 123 MIT-BIH and INCART patients, horizon H=3 — the final model')}</td></tr>
+              <tr><td style={S.td}><span style={S.badge('#06b6d4')}>Exp. 6 · NB6</span></td><td style={S.td}>{t('Multi-step LOPO', 'Multi-step LOPO')}</td><td style={S.td}>{t('CNN-GRU-ATTN sobre los 123 pacientes de MIT-BIH e INCART, horizonte H=3, el modelo final', 'CNN-GRU-ATTN over the 123 MIT-BIH and INCART patients, horizon H=3, the final model')}</td></tr>
               <tr><td style={S.td}><span style={S.badge('#a855f7')}>Exp. 7 · NB7</span></td><td style={S.td}>{t('Hiperparámetros', 'Hyperparameters')}</td><td style={S.td}>{t('Búsqueda sistemática y análisis de sensibilidad; también el efecto del filtro de mediana', 'Systematic search and sensitivity analysis; also the median filter effect')}</td></tr>
               <tr><td style={S.td}><span style={S.badge('#14b8a6')}>Exp. 8 · NB8</span></td><td style={S.td}>{t('Detección de evento', 'Event detection')}</td><td style={S.td}>{t('Error por clase AAMI y detección de latido ectópico ordenando por el residuo', 'Per-AAMI-class error and ectopic beat detection by ranking on the residual')}</td></tr>
             </tbody>
           </table>
         </div>
 
-        <h3 style={S.h3}>{t('8.2 NB1 — Modelos Tradicionales de ML', '8.2 NB1 — Traditional ML Models')}</h3>
+        <h3 style={S.h3}>{t('8.2 NB1 · Modelos Tradicionales de ML', '8.2 NB1 · Traditional ML Models')}</h3>
         <p style={S.body}>{t('Presenta los resultados de los modelos de Machine Learning clásico entrenados por paciente individual.', 'Presents the results of classic Machine Learning models trained per individual patient.')}</p>
         <h4 style={S.h4}>{t('Elementos visuales', 'Visual elements')}</h4>
         <Bullet><strong>{t('Banner de encabezado', 'Header banner')}</strong>: {t('Título, subtexto y metadata (dataset, partición, evaluaciones totales, modelos y pipelines).', 'Title, subtext and metadata (dataset, split, total evaluations, models and pipelines).')}</Bullet>
@@ -727,22 +714,22 @@ export function ManualPage() {
         <Bullet><strong>{t('Análisis de sobreajuste', 'Overfitting analysis')}</strong>: {t('Gap R² (diferencia entre train y test).', 'R² Gap (difference between train and test).')}</Bullet>
         <Bullet><strong>{t('Interpretación', 'Interpretation')}</strong>: {t('Análisis textual de los resultados. Sale completo al entrar; ya no hay que desplegarlo.', 'Textual analysis of the results. It is shown in full on entry; no longer collapsed.')}</Bullet>
 
-        <h3 style={S.h3}>{t('8.3 NB2 — Deep Learning', '8.3 NB2 — Deep Learning')}</h3>
+        <h3 style={S.h3}>{t('8.3 NB2 · Deep Learning', '8.3 NB2 · Deep Learning')}</h3>
         <p style={S.body}>
           {t('Estructura idéntica a NB1, aplicada a los modelos de aprendizaje profundo. Incluye los mismos elementos (KPIs, barras, forest plot, heatmaps, tabla, Wilcoxon, sobreajuste) para LSTM, GRU, CNN-LSTM y CNN-GRU.', 'Identical structure to NB1, applied to deep learning models. Includes the same elements (KPIs, bars, forest plot, heatmaps, table, Wilcoxon, overfitting) for LSTM, GRU, CNN-LSTM and CNN-GRU.')}
         </p>
 
-        <h3 style={S.h3}>{t('8.4 NB3 — Evaluación Cruzada', '8.4 NB3 — Cross Evaluation')}</h3>
+        <h3 style={S.h3}>{t('8.4 NB3 · Evaluación Cruzada', '8.4 NB3 · Cross Evaluation')}</h3>
         <p style={S.body}>
           {t('Compara los resultados de NB1 y NB2 bajo un mismo marco de evaluación. Los datos provienen del notebook de evaluación cruzada', 'Compares results from NB1 and NB2 under the same evaluation framework. Data comes from the cross-evaluation notebook')} <span style={S.mono}>03_evaluation.ipynb</span>.
         </p>
 
-        <h3 style={S.h3}>{t('8.5 NB4B — Multi-Sujeto', '8.5 NB4B — Multi-Subject')}</h3>
+        <h3 style={S.h3}>{t('8.5 NB4B · Multi-Sujeto', '8.5 NB4B · Multi-Subject')}</h3>
         <p style={S.body}>
           {t('Presenta los resultados del modelo GRU entrenado con datos de los 48 pacientes simultáneamente (pool intra-paciente). Incluye métricas globales y desglose por paciente individual para evaluar la variabilidad.', 'Presents the results of the GRU model trained with data from all 48 patients simultaneously (intra-patient pool). Includes global metrics and per-patient breakdown to assess variability.')}
         </p>
 
-        <h3 style={S.h3}>{t('8.6 NB5B — Cross-Patient (LOPO)', '8.6 NB5B — Cross-Patient (LOPO)')}</h3>
+        <h3 style={S.h3}>{t('8.6 NB5B · Cross-Patient (LOPO)', '8.6 NB5B · Cross-Patient (LOPO)')}</h3>
         <p style={S.body}>
           {t('La pestaña más completa. Presenta los resultados de la validación Leave-One-Patient-Out con múltiples visualizaciones:', 'The most complete tab. Presents the results of Leave-One-Patient-Out validation with multiple visualizations:')}
         </p>
@@ -761,14 +748,14 @@ export function ManualPage() {
         <Bullet><strong>{t('Hallazgos clave', 'Key findings')}</strong>: {t('Tarjetas de resumen con los hallazgos más relevantes.', 'Summary cards with the most relevant findings.')}</Bullet>
         <Bullet><strong>{t('Galería de imágenes', 'Image gallery')}</strong>: {t('Visualizaciones adicionales del notebook.', 'Additional notebook visualizations.')}</Bullet>
 
-        <h3 style={S.h3}>{t('8.7 NB6 — Multi-step LOPO, el modelo final', '8.7 NB6 — Multi-step LOPO, the final model')}</h3>
+        <h3 style={S.h3}>{t('8.7 NB6 · Multi-step LOPO, el modelo final', '8.7 NB6 · Multi-step LOPO, the final model')}</h3>
         <p style={S.body}>
           {t('El experimento del que sale el resultado principal de la tesis. CNN-GRU-ATTN evaluado con Leave-One-Patient-Out sobre los 123 pacientes de MIT-BIH e INCART, prediciendo tres latidos por delante. R² medio de 0.6734 sobre los 123 pliegues.', 'The experiment the main thesis result comes from. CNN-GRU-ATTN evaluated with Leave-One-Patient-Out over the 123 MIT-BIH and INCART patients, predicting three beats ahead. Mean R² of 0.6734 across the 123 folds.')}
         </p>
         <Bullet>{t('Ojo con la carpeta: en disco se llama', 'Careful with the folder: on disk it is called')} <span style={S.mono}>public/data/nb5/</span>{t(', pero guarda el experimento 6. El nombre de la carpeta está mal, no el del experimento.', ', but it holds experiment 6. The folder name is wrong, not the experiment’s.')}</Bullet>
         <Bullet>{t('Distribución por paciente, contraste entre bases y degradación por horizonte, cada bloque con su n y su archivo.', 'Per-patient distribution, between-database contrast and per-horizon degradation, each block with its n and its file.')}</Bullet>
 
-        <h3 style={S.h3}>{t('8.8 NB7 — Búsqueda de hiperparámetros', '8.8 NB7 — Hyperparameter search')}</h3>
+        <h3 style={S.h3}>{t('8.8 NB7 · Búsqueda de hiperparámetros', '8.8 NB7 · Hyperparameter search')}</h3>
         <p style={S.body}>
           {t('Veinte configuraciones por arquitectura, evaluadas sobre los mismos 10 pliegues LOPO de una cohorte reducida de 50 pacientes. El resultado es contraintuitivo y conviene leerlo despacio: para CNN-GRU-ATTN la búsqueda NO encontró ninguna configuración mejor que la que el proyecto ya usaba (Wilcoxon p = 1.0000). Eso no es un fracaso del experimento, es su conclusión: el R² publicado no depende de una configuración afortunada.', 'Twenty configurations per architecture, evaluated over the same 10 LOPO folds of a reduced 50-patient cohort. The result is counter-intuitive and worth reading slowly: for CNN-GRU-ATTN the search found NO configuration better than the one already in use (Wilcoxon p = 1.0000). That is not a failure of the experiment, it is its conclusion: the published R² does not depend on a lucky configuration.')}
         </p>
@@ -776,7 +763,7 @@ export function ManualPage() {
         <Bullet>{t('El GRU optimizado sí mejora de forma significativa, y la pestaña explica en tres puntos por qué eso no justifica cambiar el modelo final.', 'The optimized GRU does improve significantly, and the tab explains in three points why that does not justify changing the final model.')}</Bullet>
         <Bullet>{t('También aquí se mide el efecto del filtro de mediana sobre el pico R.', 'The median filter’s effect on the R peak is also measured here.')}</Bullet>
 
-        <h3 style={S.h3}>{t('8.9 NB8 — Detección de evento', '8.9 NB8 — Event detection')}</h3>
+        <h3 style={S.h3}>{t('8.9 NB8 · Detección de evento', '8.9 NB8 · Event detection')}</h3>
         <p style={S.body}>
           {t('Responde a la pregunta que el resto del trabajo deja abierta: ¿sirve de algo el error de predicción? Ordenando los 316 740 latidos de 50 pacientes por su error, el área bajo la curva de precisión-exhaustividad es 0.3808, que es 3.12 veces la prevalencia de latidos ectópicos (12.22 %).', 'It answers the question the rest of the work leaves open: is the prediction error good for anything? Ranking the 316,740 beats of 50 patients by their error, the area under the precision-recall curve is 0.3808, which is 3.12 times the ectopic beat prevalence (12.22 %).')}
         </p>
@@ -824,396 +811,7 @@ export function ManualPage() {
         <NumberedStep n={5}>{t('Ordene la tabla por la columna que le interese pulsando su cabecera.', 'Sort the table by the column you care about by clicking its header.')}</NumberedStep>
         <NumberedStep n={6}>{t('Exporte a CSV lo que quede filtrado.', 'Export the filtered result to CSV.')}</NumberedStep>
 
-        <InfoBox type="info" t={t}>
-          {t('La primera ejecución puede tardar entre 5 y 10 minutos mientras se descargan las dependencias (TensorFlow, etc.). Para ejecuciones posteriores, basta con:', 'The first run may take between 5 and 10 minutes while dependencies are downloaded (TensorFlow, etc.). For subsequent runs, just use:')} <span style={S.mono}>docker compose up</span> ({t('sin', 'without')} <span style={S.mono}>--build</span>).
-        </InfoBox>
-
-        <h3 style={S.h3}>{t('3.2 Detener la Aplicación', '3.2 Stop the Application')}</h3>
-        <Bullet>{t('En la terminal donde está corriendo, presione', 'In the terminal where it is running, press')} <span style={S.mono}>Ctrl + C</span>.</Bullet>
-        <Bullet>{t('O desde otra terminal en la misma carpeta:', 'Or from another terminal in the same folder:')} <span style={S.mono}>docker compose down</span>.</Bullet>
-
-        <h3 style={S.h3}>{t('3.3 Verificar el Funcionamiento', '3.3 Verify Operation')}</h3>
-        <div style={{ overflowX: 'auto', marginTop: '8px' }}>
-          <table style={S.table}>
-            <thead>
-              <tr><th style={S.th}>URL</th><th style={S.th}>{t('Resultado Esperado', 'Expected Result')}</th></tr>
-            </thead>
-            <tbody>
-              <tr><td style={S.td}><span style={S.mono}>http://localhost</span></td><td style={S.td}>{t('Interfaz principal del dashboard', 'Dashboard main interface')}</td></tr>
-              <tr><td style={S.td}><span style={S.mono}>http://localhost:8000/docs</span></td><td style={S.td}>{t('Documentación interactiva de la API (Swagger)', 'Interactive API documentation (Swagger)')}</td></tr>
-              <tr><td style={S.td}><span style={S.mono}>http://localhost:8000/api/health</span></td><td style={S.td}>{t('Respuesta JSON:', 'JSON response:')} <span style={S.mono}>{`{"status":"ok"}`}</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <InfoBox type="warning" t={t}>
-          {t('Si el backend no está disponible, el dashboard opera automáticamente con datos de demostración. Las predicciones en vivo requieren que la API esté activa.', 'If the backend is not available, the dashboard automatically operates with demo data. Live predictions require the API to be active.')}
-        </InfoBox>
       </div>
-
-      {/* ════════════════════════════════════════════════════════════════════════
-          SECCIÓN 4 — INTERFAZ DE USUARIO
-         ════════════════════════════════════════════════════════════════════════ */}
-      <div className="card" style={{ marginBottom: '20px' }} id="interface">
-        <h2 style={S.sectionTitle}>{t('4. Interfaz de Usuario', '4. User Interface')}</h2>
-
-        <h3 style={S.h3}>{t('4.1 Barra de Navegación Lateral (Sidebar)', '4.1 Side Navigation Bar (Sidebar)')}</h3>
-        <p style={S.body}>
-          {t('La barra de navegación lateral es el punto central de acceso a todas las secciones del dashboard. Se ubica en el lado izquierdo de la pantalla y permanece visible en todo momento.', 'The side navigation bar is the central access point to all dashboard sections. It is located on the left side of the screen and remains visible at all times.')}
-        </p>
-        <h4 style={S.h4}>{t('Elementos de la Sidebar', 'Sidebar Elements')}</h4>
-        <Bullet><strong>{t('Logo y marca', 'Logo and branding')}</strong>: {t('Logo «ECG FORECASTING» con subtexto «CESMAG · 2025» en la parte superior.', 'Logo «ECG FORECASTING» with subtext «CESMAG · 2025» at the top.')}</Bullet>
-        <Bullet><strong>{t('Botón de colapso', 'Collapse button')}</strong>: {t('Permite alternar entre el modo expandido (220px, muestra ícono + texto) y el modo colapsado (72px, solo ícono).', 'Toggles between expanded mode (220px, shows icon + text) and collapsed mode (72px, icon only).')}</Bullet>
-        <Bullet><strong>{t('Enlaces de navegación', 'Navigation links')}</strong>: {t('9 secciones accesibles, cada una con su ícono representativo. El enlace activo se resalta con fondo azul semitransparente e indicador circular azul a la derecha.', '9 accessible sections, each with its representative icon. The active link is highlighted with semi-transparent blue background and circular blue indicator on the right.')}</Bullet>
-        <Bullet><strong>{t('Indicador MIT-BIH', 'MIT-BIH indicator')}</strong>: {t('En la parte inferior, un punto verde animado indica que la base de datos está disponible.', 'At the bottom, an animated green dot indicates the database is available.')}</Bullet>
-        <Bullet><strong>{t('Botón de tema', 'Theme button')}</strong>: {t('Alterna entre el tema oscuro (predeterminado) y el tema claro.', 'Toggles between the dark theme (default) and the light theme.')}</Bullet>
-
-        <h4 style={S.h4}>{t('Secciones de Navegación', 'Navigation Sections')}</h4>
-        <div style={{ overflowX: 'auto', marginTop: '8px' }}>
-          <table style={S.table}>
-            <thead>
-              <tr><th style={S.th}>{t('Ícono', 'Icon')}</th><th style={S.th}>{t('Sección', 'Section')}</th><th style={S.th}>{t('Descripción', 'Description')}</th></tr>
-            </thead>
-            <tbody>
-              {/* Estas ocho filas son exactamente las de components/layout/Navbar.tsx.
-                  La tabla anterior listaba «Predicción» y «Estadísticas», que no existen,
-                  y omitía «Cohorte y método», que sí. */}
-              <tr><td style={S.td}><Home size={14} /></td><td style={S.td}>Home</td><td style={S.td}>{t('Página de inicio con la visión general del proyecto y los ocho hallazgos principales', 'Home page with the project overview and the eight key findings')}</td><td style={S.td}><span style={S.mono}>/</span></td></tr>
-              <tr><td style={S.td}><Brain size={14} /></td><td style={S.td}>{t('Modelos', 'Models')}</td><td style={S.td}>{t('Catálogo de las arquitecturas y tabla comparativa LOPO con su n y su cohorte', 'Catalog of architectures and LOPO comparison table with its n and cohort')}</td><td style={S.td}><span style={S.mono}>/modelos</span></td></tr>
-              <tr><td style={S.td}><FlaskConical size={14} /></td><td style={S.td}>{t('Experimentos', 'Experiments')}</td><td style={S.td}>{t('Los ocho experimentos, una pestaña por cada uno', 'The eight experiments, one tab each')}</td><td style={S.td}><span style={S.mono}>/experimentos</span></td></tr>
-              <tr><td style={S.td}><Search size={14} /></td><td style={S.td}>{t('Explorador', 'Explorer')}</td><td style={S.td}>{t('Exploración interactiva de los datos crudos, con filtros y exportación a CSV', 'Interactive exploration of the raw data, with filters and CSV export')}</td><td style={S.td}><span style={S.mono}>/explorador</span></td></tr>
-              <tr><td style={S.td}><Zap size={14} /></td><td style={S.td}>{t('Predicción LOPO', 'LOPO Prediction')}</td><td style={S.td}>{t('Predicción cross-patient en tiempo real sobre un paciente no visto', 'Real-time cross-patient prediction on an unseen patient')}</td><td style={S.td}><span style={S.mono}>/lopo</span></td></tr>
-              <tr><td style={S.td}><Users size={14} /></td><td style={S.td}>{t('Cohorte y método', 'Cohort & method')}</td><td style={S.td}>{t('Quiénes son los pacientes, dónde falla el modelo y por qué se descartó el filtro de mediana', 'Who the patients are, where the model fails, and why the median filter was discarded')}</td><td style={S.td}><span style={S.mono}>/cohorte</span></td></tr>
-              <tr><td style={S.td}><BookOpen size={14} /></td><td style={S.td}>{t('Manual', 'User Guide')}</td><td style={S.td}>{t('Esta guía de usuario', 'This user guide')}</td><td style={S.td}><span style={S.mono}>/manual</span></td></tr>
-              <tr><td style={S.td}><BookText size={14} /></td><td style={S.td}>{t('Glosario', 'Glossary')}</td><td style={S.td}>{t('Diccionario de términos técnicos', 'Dictionary of technical terms')}</td><td style={S.td}><span style={S.mono}>/glosario</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3 style={S.h3}>{t('4.2 Tema Claro / Oscuro', '4.2 Light / Dark Theme')}</h3>
-        <p style={S.body}>
-          {t('El dashboard incluye un sistema de temas con dos modos visuales. Para cambiar de tema, utilice el botón con ícono de sol/luna ubicado en la parte inferior de la barra de navegación.', 'The dashboard includes a theme system with two visual modes. To change the theme, use the sun/moon icon button located at the bottom of the navigation bar.')}
-        </p>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginTop: '10px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 14px', borderRadius: 'var(--radius-md)', background: 'var(--elevated)', border: '1px solid var(--border)' }}>
-            <Moon size={14} color="var(--prediction)" />
-            <span style={{ ...S.body, fontSize: 'var(--fs-xs)' }}><strong>{t('Modo oscuro', 'Dark mode')}</strong> ({t('predeterminado', 'default')}): {t('fondo oscuro, texto claro. Ideal para reducir fatiga visual.', 'dark background, light text. Ideal for reducing eye strain.')}</span>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 14px', borderRadius: 'var(--radius-md)', background: 'var(--elevated)', border: '1px solid var(--border)' }}>
-            <Sun size={14} color="#f59e0b" />
-            <span style={{ ...S.body, fontSize: 'var(--fs-xs)' }}><strong>{t('Modo claro', 'Light mode')}</strong>: {t('fondo blanco, texto oscuro. Adecuado para ambientes con iluminación intensa.', 'white background, dark text. Suitable for brightly lit environments.')}</span>
-          </div>
-        </div>
-
-        <h3 style={S.h3}>{t('4.3 Diseño Responsivo', '4.3 Responsive Design')}</h3>
-        <p style={S.body}>
-          {t('La interfaz se adapta automáticamente a diferentes tamaños de pantalla. En dispositivos móviles (ancho ≤ 768px), la barra lateral se convierte en un menú desplegable (drawer) accesible mediante un botón hamburguesa. Los gráficos y tablas se reorganizan verticalmente para facilitar la lectura.', 'The interface automatically adapts to different screen sizes. On mobile devices (width ≤ 768px), the sidebar becomes a dropdown menu (drawer) accessible via a hamburger button. Charts and tables are reorganized vertically for easier reading.')}
-        </p>
-      </div>
-
-      {/* ════════════════════════════════════════════════════════════════════════
-          SECCIÓN 5 — HOME
-         ════════════════════════════════════════════════════════════════════════ */}
-      <div className="card" style={{ marginBottom: '20px' }} id="home">
-        <h2 style={S.sectionTitle}>{t('5. Página de Inicio (Home)', '5. Home Page')}</h2>
-        <p style={S.sectionSub}>
-          {t('La página de inicio presenta una visión general del proyecto y facilita la navegación rápida hacia las secciones principales.', 'The home page presents a project overview and facilitates quick navigation to the main sections.')}
-        </p>
-
-        <h3 style={S.h3}>{t('5.1 Secciones de la Página', '5.1 Page Sections')}</h3>
-
-        <h4 style={S.h4}>{t('Hero (Sección Principal)', 'Hero (Main Section)')}</h4>
-        <Bullet>{t('Título del proyecto con efecto visual animado y fondo decorativo con gradientes.', 'Project title with animated visual effect and decorative gradient background.')}</Bullet>
-        <Bullet><strong>{t('Animación ECG decorativa', 'Decorative ECG animation')}</strong>: {t('Canvas decorativo con un trazado sintético en desplazamiento continuo. Está rotulado como sintético a propósito: no es una señal real de ningún paciente.', 'Decorative canvas with a synthetic trace in continuous scroll. It is labelled as synthetic on purpose: it is not a real signal from any patient.')}</Bullet>
-        <Bullet>{t('Afiliación institucional: «Universidad CESMAG · Ingeniería de Sistemas · 2025–2026».', 'Institutional affiliation: «Universidad CESMAG · Systems Engineering · 2025–2026».')}</Bullet>
-
-        <h4 style={S.h4}>{t('Visión General (3 tarjetas)', 'Overview (3 cards)')}</h4>
-        <Bullet><strong>{t('Enfoques Experimentales', 'Experimental Approaches')}</strong>: {t('Describe Exp A (ventanas de 5s) y Exp B (latido a latido, 256 muestras).', 'Describes Exp A (5s windows) and Exp B (beat to beat, 256 samples).')}</Bullet>
-        <Bullet><strong>{t('Modelos Implementados', 'Implemented Models')}</strong>: {t('Muestra badges de ML Clásico (LinReg, DT, RF, SVR, MLP, ARIMA) y Deep Learning (LSTM, GRU, CNN-LSTM, CNN-GRU).', 'Shows badges for Classic ML (LinReg, DT, RF, SVR, MLP, ARIMA) and Deep Learning (LSTM, GRU, CNN-LSTM, CNN-GRU).')}</Bullet>
-        <Bullet><strong>{t('Evaluación', 'Evaluation')}</strong>: {t('KPIs resumen — 48 pacientes, 7 pipelines de preprocesamiento, métricas R², RMSE, MAE, DTW.', 'Summary KPIs — 48 patients, 7 preprocessing pipelines, R², RMSE, MAE, DTW metrics.')}</Bullet>
-
-        <h4 style={S.h4}>{t('Metodología (Pipeline Visual)', 'Methodology (Visual Pipeline)')}</h4>
-        <Bullet>{t('Diagrama horizontal de 5 pasos conectados por flechas: MIT-BIH → Preprocesamiento → Segmentación → Entrenamiento → Evaluación.', 'Horizontal diagram of 5 steps connected by arrows: MIT-BIH → Preprocessing → Segmentation → Training → Evaluation.')}</Bullet>
-
-        <h4 style={S.h4}>{t('Resultados Destacados (4 tarjetas)', 'Key Results (4 cards)')}</h4>
-        <Bullet>{t('Exp B supera consistentemente a Exp A.', 'Exp B consistently outperforms Exp A.')}</Bullet>
-        <Bullet>{t('GRU: mejor modelo Deep Learning (R² = 0.6592).', 'GRU: best Deep Learning model (R² = 0.6592).')}</Bullet>
-        <Bullet>{t('Random Forest: mejor modelo tradicional (R² = 0.6264).', 'Random Forest: best traditional model (R² = 0.6264).')}</Bullet>
-        <Bullet>{t('El filtro de mediana (F_MED) da el mejor R² en esta fase, pero por aplanar el pico R: el modelo final lo descarta.', 'The median filter (F_MED) gives the best R² in this phase, but by flattening the R peak: the final model discards it.')}</Bullet>
-
-        <h4 style={S.h4}>{t('Navegación Rápida', 'Quick Navigation')}</h4>
-        <Bullet>{t('6 tarjetas que llevan a: Modelos, Experimentos, Predicción LOPO, Explorador, Manual y Glosario. La navegación completa, incluida «Cohorte y método», está en el menú lateral.', '6 cards linking to: Models, Experiments, LOPO Prediction, Explorer, User Guide and Glossary. The full navigation, including «Cohort & method», is in the side menu.')}</Bullet>
-
-        <h4 style={S.h4}>{t('Equipo de Investigación', 'Research Team')}</h4>
-        <Bullet>{t('3 tarjetas con foto circular, nombre, rol y detalle de cada integrante del equipo.', '3 cards with circular photo, name, role and details of each team member.')}</Bullet>
-
-        <h4 style={S.h4}>{t('Base de Datos', 'Database')}</h4>
-        <Bullet>{t('Logo institucional + 3 mini-cards informativas (48 registros, 360 Hz, ~30 min) + chips descriptivos.', 'Institutional logo + 3 informative mini-cards (48 records, 360 Hz, ~30 min) + descriptive chips.')}</Bullet>
-      </div>
-
-      {/* ════════════════════════════════════════════════════════════════════════
-          SECCIÓN 6 — MODELOS
-         ════════════════════════════════════════════════════════════════════════ */}
-      <div className="card" style={{ marginBottom: '20px' }} id="modelos">
-        <h2 style={S.sectionTitle}>{t('6. Catálogo de Modelos', '6. Models Catalog')}</h2>
-        <p style={S.sectionSub}>
-          {t('La sección «Modelos» presenta información detallada sobre cada arquitectura de predicción utilizada en el proyecto, organizada en tres categorías.', 'The «Models» section presents detailed information about each prediction architecture used in the project, organized into three categories.')}
-        </p>
-
-        <h3 style={S.h3}>{t('6.1 Categorías de Modelos', '6.1 Model Categories')}</h3>
-        <p style={S.body}>{t('En la parte superior, tres botones permiten alternar entre las categorías:', 'At the top, three buttons allow switching between categories:')}</p>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px', marginTop: '10px', marginBottom: '14px' }}>
-          <div style={{ padding: '10px 14px', borderRadius: 'var(--radius-md)', background: 'var(--elevated)', border: '1px solid var(--border)', textAlign: 'center' }}>
-            <span style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-2xs)', fontWeight: 600, color: 'var(--prediction)' }}>Deep Learning</span>
-            <p style={{ ...S.body, fontSize: 'var(--fs-2xs)', marginTop: '4px' }}>LSTM, GRU, CNN-GRU</p>
-          </div>
-          <div style={{ padding: '10px 14px', borderRadius: 'var(--radius-md)', background: 'var(--elevated)', border: '1px solid var(--border)', textAlign: 'center' }}>
-            <span style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-2xs)', fontWeight: 600, color: '#10b981' }}>ML Tradicional</span>
-            <p style={{ ...S.body, fontSize: 'var(--fs-2xs)', marginTop: '4px' }}>RF, MLP, SVR (RBF), DT</p>
-          </div>
-          <div style={{ padding: '10px 14px', borderRadius: 'var(--radius-md)', background: 'var(--elevated)', border: '1px solid var(--border)', textAlign: 'center' }}>
-            <span style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-2xs)', fontWeight: 600, color: '#f59e0b' }}>Cross-Patient (LOPO)</span>
-            <p style={{ ...S.body, fontSize: 'var(--fs-2xs)', marginTop: '4px' }}>GRU base, CNN GRU, BiGRU MHA, Ensemble</p>
-          </div>
-        </div>
-
-        <h3 style={S.h3}>{t('6.2 Información por Modelo', '6.2 Model Information')}</h3>
-        <p style={S.body}>{t('Al seleccionar un modelo, se despliega una tarjeta detallada con:', 'When selecting a model, a detailed card is displayed with:')}</p>
-        <Bullet><strong>{t('Nombre completo y resumen', 'Full name and summary')}</strong>: {t('Descripción concisa de la arquitectura.', 'Concise description of the architecture.')}</Bullet>
-        <Bullet><strong>{t('Mecanismo interno', 'Internal mechanism')}</strong>: {t('Explicación técnica del funcionamiento del modelo.', 'Technical explanation of model operation.')}</Bullet>
-        <Bullet><strong>{t('Fortalezas', 'Strengths')}</strong>: {t('Ventajas del modelo (marcadas con «+» azul).', 'Model advantages (marked with blue «+»).')}</Bullet>
-        <Bullet><strong>{t('Compromisos', 'Trade-offs')}</strong>: {t('Limitaciones o trade-offs (marcados con «~» amarillo).', 'Limitations or trade-offs (marked with yellow «~»).')}</Bullet>
-        <Bullet><strong>{t('¿Por qué para ECG?', 'Why for ECG?')}</strong>: {t('Justificación de la elección del modelo para señales electrocardiográficas.', 'Justification for choosing the model for electrocardiographic signals.')}</Bullet>
-
-        <h3 style={S.h3}>{t('6.3 Diagrama de Arquitectura', '6.3 Architecture Diagram')}</h3>
-        <p style={S.body}>
-          {t('Cada modelo incluye un diagrama SVG interactivo que ilustra su arquitectura interna:', 'Each model includes an interactive SVG diagram illustrating its internal architecture:')}
-        </p>
-        <Bullet><strong>Deep Learning</strong>: {t('Nodos de flujo (Input → capas recurrentes/convolucionales → Output) con colores diferenciados por tipo de capa.', 'Flow nodes (Input → recurrent/convolutional layers → Output) with colors differentiated by layer type.')}</Bullet>
-        <Bullet><strong>{t('ML Tradicional', 'Traditional ML')}</strong>: {t('Diagramas conceptuales personalizados (RF = bosque de árboles → promedio, MLP = capas de neuronas, SVR = kernel RBF, DT = árbol de decisión).', 'Custom conceptual diagrams (RF = tree forest → average, MLP = neuron layers, SVR = RBF kernel, DT = decision tree).')}</Bullet>
-
-        <h3 style={S.h3}>{t('6.4 Tabla Comparativa', '6.4 Comparative Table')}</h3>
-        <p style={S.body}>
-          {t('En la parte inferior de cada categoría se muestra una tabla comparativa con las métricas clave de todos los modelos de esa categoría, incluyendo R² Exp A, R² Exp B, tipo, framework, velocidad de entrenamiento y observaciones relevantes.', 'At the bottom of each category, a comparative table is shown with the key metrics of all models in that category, including R² Exp A, R² Exp B, type, framework, training speed and relevant observations.')}
-        </p>
-
-        <h3 style={S.h3}>{t('6.5 Cómo Usar esta Sección', '6.5 How to Use this Section')}</h3>
-        <NumberedStep n={1}>{t('Seleccione una categoría (Deep Learning, ML Tradicional o LOPO).', 'Select a category (Deep Learning, Traditional ML or LOPO).')}</NumberedStep>
-        <NumberedStep n={2}>{t('Haga clic en el nombre del modelo deseado en la fila de pestañas.', 'Click on the desired model name in the tab row.')}</NumberedStep>
-        <NumberedStep n={3}>{t('Observe la descripción, diagrama, hiperparámetros y fortalezas del modelo.', 'Observe the description, diagram, hyperparameters and strengths of the model.')}</NumberedStep>
-        <NumberedStep n={4}>{t('Consulte la tabla comparativa al final para comparar con otros modelos de la misma categoría.', 'Check the comparative table at the bottom to compare with other models in the same category.')}</NumberedStep>
-      </div>
-
-      {/* ════════════════════════════════════════════════════════════════════════
-          SECCIÓN 7 — PREDICCIÓN LOPO
-         ════════════════════════════════════════════════════════════════════════ */}
-      <div className="card" style={{ marginBottom: '20px' }} id="lopo">
-        <h2 style={S.sectionTitle}>{t('7. Predicción LOPO (Cross-Patient)', '7. LOPO Prediction (Cross-Patient)')}</h2>
-        <p style={S.sectionSub}>
-          {t('La sección LOPO (Leave-One-Patient-Out) permite realizar predicciones utilizando un modelo entrenado con 47 pacientes y evaluado sobre el paciente excluido. Mide la capacidad de generalización del modelo a pacientes nunca vistos durante el entrenamiento.', 'The LOPO (Leave-One-Patient-Out) section allows making predictions using a model trained with 47 patients and evaluated on the excluded patient. It measures the model\'s generalization capability to patients never seen during training.')}
-        </p>
-
-        <h3 style={S.h3}>{t('7.1 Modelo LOPO', '7.1 LOPO Model')}</h3>
-        <div style={{ overflowX: 'auto', marginTop: '8px', marginBottom: '14px' }}>
-          <table style={S.table}>
-            <thead><tr><th style={S.th}>{t('Parámetro', 'Parameter')}</th><th style={S.th}>{t('Valor', 'Value')}</th></tr></thead>
-            <tbody>
-              <tr><td style={S.td}>{t('Modelo', 'Model')}</td><td style={S.td}>GRU_weighted</td></tr>
-              <tr><td style={S.td}>{t('Filtro', 'Filter')}</td><td style={S.td}>F_N+PB+MED (Notch + {t('Pasabanda', 'Bandpass')} + {t('Mediana', 'Median')})</td></tr>
-              <tr><td style={S.td}>Lookback</td><td style={S.td}>{t('5 latidos', '5 beats')}</td></tr>
-              <tr><td style={S.td}>{t('R² medio LOPO', 'R² mean LOPO')}</td><td style={S.td}>0.5311</td></tr>
-              <tr><td style={S.td}>IC 95%</td><td style={S.td}>[0.4534, 0.6128]</td></tr>
-              <tr><td style={S.td}>{t('Característica especial', 'Special feature')}</td><td style={S.td}>{t('Incluye intervalos RR como feature adicional', 'Includes RR intervals as additional feature')}</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3 style={S.h3}>{t('7.2 Configuración', '7.2 Configuration')}</h3>
-        <p style={S.body}>{t('La interfaz se organiza en tres bloques: la fuente de la señal, el modo de predicción y la visualización de resultados.', 'The interface has three blocks: the signal source, the prediction mode and the results view.')}</p>
-
-        <h4 style={S.h4}>{t('Fuente de Señal', 'Signal Source')}</h4>
-        <Bullet>{t('Selector de paciente en dos grupos: MIT-BIH e INCART. Los pacientes marcados en verde tienen señal disponible en el servicio; el resto se atiende con la señal de demostración. No hay carga de archivos propios.', 'Patient selector in two groups: MIT-BIH and INCART. Patients marked green have their signal available from the service; the rest fall back to the demonstration signal. There is no upload of your own files.')}</Bullet>
-
-        <h4 style={S.h4}>{t('Modo de Predicción', 'Prediction Mode')}</h4>
-        <p style={S.body}>{t('Dos modos disponibles:', 'Two available modes:')}</p>
-        <Bullet><strong>{t('Prospectivo', 'Prospective')}</strong>: {t('Predicción rolling latido a latido. Parámetros ajustables: latidos a predecir, posiciones, ancla y filtrar ruido.', 'Rolling beat-by-beat prediction. Adjustable parameters: beats to predict, positions, anchor and noise filter.')}</Bullet>
-        <Bullet><strong>{t('Futuro', 'Future')}</strong> ({t('exclusivo de LOPO', 'LOPO exclusive')}): {t('Modo de generación autoregresiva que simula la continuación de la señal ECG más allá de los datos disponibles.', 'Autoregressive generation mode that simulates the continuation of the ECG signal beyond available data.')}</Bullet>
-
-        <h3 style={S.h3}>{t('7.3 Modo Futuro — Generación Autoregresiva', '7.3 Future Mode — Autoregressive Generation')}</h3>
-        <p style={S.body}>
-          {t('Este modo exclusivo simula la continuación de la señal ECG del paciente de forma autoregresiva: la predicción de cada latido se utiliza como entrada para predecir el siguiente, generando así una señal futura continua.', 'This exclusive mode simulates the continuation of the patient\'s ECG signal autoregressively: each beat\'s prediction is used as input to predict the next one, thus generating a continuous future signal.')}
-        </p>
-        <Bullet><strong>{t('Duración', 'Duration')}</strong>: {t('Ajustable mediante un slider (en minutos) que controla la cantidad de señal futura a generar.', 'Adjustable via a slider (in minutes) that controls the amount of future signal to generate.')}</Bullet>
-        <Bullet><strong>{t('Monitor ECG', 'ECG Monitor')}</strong>: {t('Visualización tipo monitor clínico con indicador «LIVE» rojo pulsante y la señal generada en tiempo real.', 'Clinical monitor-style visualization with pulsing red «LIVE» indicator and the generated signal in real time.')}</Bullet>
-        <Bullet><strong>{t('Alertas clínicas', 'Clinical alerts')}</strong>: {t('Sistema de detección automática de anomalías durante la generación, con categorías:', 'Automatic anomaly detection system during generation, with categories:')}</Bullet>
-        <div style={{ marginLeft: '28px' }}>
-          <Bullet><span style={S.badge('#ef4444')}>{t('Morfología', 'Morphology')}</span> — {t('Cambios en la forma del latido', 'Changes in beat shape')}</Bullet>
-          <Bullet><span style={S.badge('#f59e0b')}>{t('Amplitud', 'Amplitude')}</span> — {t('Variaciones anormales de amplitud', 'Abnormal amplitude variations')}</Bullet>
-          <Bullet><span style={S.badge('#3b82f6')}>{t('Ritmo', 'Rhythm')}</span> — {t('Irregularidades en el intervalo R-R', 'R-R interval irregularities')}</Bullet>
-          <Bullet><span style={S.badge('#8b5cf6')}>Flatline</span> — {t('Detección de señal plana', 'Flat signal detection')}</Bullet>
-        </div>
-        <Bullet><strong>{t('Métricas de estabilidad', 'Stability metrics')}</strong>: {t('R² morfológico, R² auto-similaridad, estabilidad de amplitud, DTW, RMSE, MAE, amplitud QRS.', 'Morphological R², auto-similarity R², amplitude stability, DTW, RMSE, MAE, QRS amplitude.')}</Bullet>
-
-        <InfoBox type="warning" t={t}>
-          {t('La normalización LOPO es', 'LOPO normalization is')} <strong>per-beat instance</strong> ({t('no global como NB4B', 'not global like NB4B')}). {t('Esto significa que cada latido se normaliza individualmente. El modelo GRU_weighted también utiliza los intervalos RR como entrada adicional para mejorar la generalización.', 'This means each beat is normalized individually. The GRU_weighted model also uses RR intervals as additional input to improve generalization.')}
-        </InfoBox>
-
-        <h3 style={S.h3}>{t('7.4 Flujo de Uso Paso a Paso', '7.4 Step-by-Step Usage Flow')}</h3>
-        <NumberedStep n={1}>{t('Seleccione la fuente de señal y el paciente.', 'Select the signal source and patient.')}</NumberedStep>
-        <NumberedStep n={2}>{t('Elija el modo:', 'Choose the mode:')} <strong>{t('Prospectivo', 'Prospective')}</strong> ({t('evaluación directa', 'direct evaluation')}) {t('o', 'or')} <strong>{t('Futuro', 'Future')}</strong> ({t('generación continua', 'continuous generation')}).</NumberedStep>
-        <NumberedStep n={3}>{t('Configure los parámetros del modo seleccionado.', 'Configure the selected mode parameters.')}</NumberedStep>
-        <NumberedStep n={4}>{t('Haga clic en', 'Click')} <strong>{t('Iniciar', 'Start')}</strong> {t('para comenzar.', 'to begin.')}</NumberedStep>
-        <NumberedStep n={5}>{t('En modo Futuro, observe las alertas clínicas y las métricas de estabilidad.', 'In Future mode, observe the clinical alerts and stability metrics.')}</NumberedStep>
-        <NumberedStep n={6}>{t('Use', 'Use')} <strong>{t('Detener', 'Stop')}</strong> {t('o', 'or')} <strong>Reset</strong> {t('según sea necesario.', 'as needed.')}</NumberedStep>
-      </div>
-
-      {/* ════════════════════════════════════════════════════════════════════════
-          SECCIÓN 8 — EXPERIMENTOS
-         ════════════════════════════════════════════════════════════════════════ */}
-      <div className="card" style={{ marginBottom: '20px' }} id="experimentos">
-        <h2 style={S.sectionTitle}>{t('8. Experimentos', '8. Experiments')}</h2>
-        <p style={S.sectionSub}>
-          {t('La sección de Experimentos presenta los resultados completos de los ocho cuadernos del proyecto. Cada pestaña declara su cuaderno, su base de datos y su partición, y cada cifra lleva el archivo del que sale.', 'The Experiments section presents the complete results of the eight project notebooks. Each tab declares its notebook, database and split, and every figure carries the file it comes from.')}
-        </p>
-
-        <h3 style={S.h3}>{t('8.1 Navegación por Pestañas', '8.1 Tab Navigation')}</h3>
-        <p style={S.body}>
-          {t('Arriba hay ocho pestañas, rótuladas «Exp. 1» a «Exp. 8». El orden es el de los experimentos, que no coincide con el alfabético de los cuadernos: NB5B es el quinto y NB6 el sexto.', 'There are eight tabs at the top, labelled «Exp. 1» to «Exp. 8». The order is that of the experiments, which does not match the notebooks’ alphabetical order: NB5B is the fifth and NB6 the sixth.')}
-        </p>
-        <div style={{ overflowX: 'auto', marginTop: '8px', marginBottom: '14px' }}>
-          <table style={S.table}>
-            <thead><tr><th style={S.th}>{t('Pestaña', 'Tab')}</th><th style={S.th}>{t('Nombre', 'Name')}</th><th style={S.th}>{t('Contenido Principal', 'Main Content')}</th></tr></thead>
-            <tbody>
-              <tr><td style={S.td}><span style={S.badge('#3b82f6')}>Exp. 1 · NB1</span></td><td style={S.td}>{t('Tradicionales', 'Traditional')}</td><td style={S.td}>RF, SVR, MLP, DT, LinReg, ARIMA — Exp A {t('y', 'and')} Exp B</td></tr>
-              <tr><td style={S.td}><span style={S.badge('#8b5cf6')}>Exp. 2 · NB2</span></td><td style={S.td}>Deep Learning</td><td style={S.td}>LSTM, GRU, CNN-LSTM, CNN-GRU — Exp A {t('y', 'and')} Exp B</td></tr>
-              <tr><td style={S.td}><span style={S.badge('#10b981')}>Exp. 3 · NB3</span></td><td style={S.td}>{t('Evaluación', 'Evaluation')}</td><td style={S.td}>{t('Comparación cruzada entre notebooks', 'Cross-comparison between notebooks')}</td></tr>
-              <tr><td style={S.td}><span style={S.badge('#f59e0b')}>Exp. 4 · NB4B</span></td><td style={S.td}>{t('Multi-sujeto', 'Multi-subject')}</td><td style={S.td}>{t('Modelo GRU pool de 48 pacientes', 'GRU model 48-patient pool')}</td></tr>
-              <tr><td style={S.td}><span style={S.badge('#ef4444')}>Exp. 5 · NB5B</span></td><td style={S.td}>Cross-patient</td><td style={S.td}>{t('LOPO sobre 48 pacientes de MIT-BIH, con fine-tuning y validación externa en INCART', 'LOPO over 48 MIT-BIH patients, with fine-tuning and external INCART validation')}</td></tr>
-              <tr><td style={S.td}><span style={S.badge('#06b6d4')}>Exp. 6 · NB6</span></td><td style={S.td}>{t('Multi-step LOPO', 'Multi-step LOPO')}</td><td style={S.td}>{t('CNN-GRU-ATTN sobre los 123 pacientes de MIT-BIH e INCART, horizonte H=3 — el modelo final', 'CNN-GRU-ATTN over the 123 MIT-BIH and INCART patients, horizon H=3 — the final model')}</td></tr>
-              <tr><td style={S.td}><span style={S.badge('#a855f7')}>Exp. 7 · NB7</span></td><td style={S.td}>{t('Hiperparámetros', 'Hyperparameters')}</td><td style={S.td}>{t('Búsqueda sistemática y análisis de sensibilidad; también el efecto del filtro de mediana', 'Systematic search and sensitivity analysis; also the median filter effect')}</td></tr>
-              <tr><td style={S.td}><span style={S.badge('#14b8a6')}>Exp. 8 · NB8</span></td><td style={S.td}>{t('Detección de evento', 'Event detection')}</td><td style={S.td}>{t('Error por clase AAMI y detección de latido ectópico ordenando por el residuo', 'Per-AAMI-class error and ectopic beat detection by ranking on the residual')}</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3 style={S.h3}>{t('8.2 NB1 — Modelos Tradicionales de ML', '8.2 NB1 — Traditional ML Models')}</h3>
-        <p style={S.body}>{t('Presenta los resultados de los modelos de Machine Learning clásico entrenados por paciente individual.', 'Presents the results of classic Machine Learning models trained per individual patient.')}</p>
-        <h4 style={S.h4}>{t('Elementos visuales', 'Visual elements')}</h4>
-        <Bullet><strong>{t('Banner de encabezado', 'Header banner')}</strong>: {t('Título, subtexto y metadata (dataset, partición, evaluaciones totales, modelos y pipelines).', 'Title, subtext and metadata (dataset, split, total evaluations, models and pipelines).')}</Bullet>
-        <Bullet><strong>{t('4 tarjetas KPI', '4 KPI cards')}</strong>: {t('Mejor R² Exp A, Mejor R² Exp B, Mejora A→B (%), Filtro óptimo.', 'Best R² Exp A, Best R² Exp B, Improvement A→B (%), Optimal filter.')}</Bullet>
-        <Bullet><strong>{t('Gráfico de barras', 'Bar chart')}</strong>: {t('R² por modelo para Exp A y Exp B.', 'R² per model for Exp A and Exp B.')}</Bullet>
-        <Bullet><strong>Forest Plot</strong>: {t('Intervalos de confianza al 95% para cada modelo.', '95% confidence intervals for each model.')}</Bullet>
-        <Bullet><strong>Heatmaps</strong>: {t('Mapas de calor Filtro × Horizonte (Exp A) y Filtro × Lookback (Exp B).', 'Filter × Horizon (Exp A) and Filter × Lookback (Exp B) heatmaps.')}</Bullet>
-        <Bullet><strong>{t('Tabla de resultados', 'Results table')}</strong>: {t('Resumen completo con todas las métricas por modelo y configuración.', 'Complete summary with all metrics per model and configuration.')}</Bullet>
-        <Bullet><strong>{t('Pruebas de Wilcoxon', 'Wilcoxon tests')}</strong>: {t('Significancia estadística de cada modelo vs. persistencia (modelo base).', 'Statistical significance of each model vs. persistence (baseline model).')}</Bullet>
-        <Bullet><strong>{t('Análisis de sobreajuste', 'Overfitting analysis')}</strong>: {t('Gap R² (diferencia entre train y test).', 'R² Gap (difference between train and test).')}</Bullet>
-        <Bullet><strong>{t('Interpretación', 'Interpretation')}</strong>: {t('Análisis textual de los resultados. Sale completo al entrar; ya no hay que desplegarlo.', 'Textual analysis of the results. It is shown in full on entry; no longer collapsed.')}</Bullet>
-
-        <h3 style={S.h3}>{t('8.3 NB2 — Deep Learning', '8.3 NB2 — Deep Learning')}</h3>
-        <p style={S.body}>
-          {t('Estructura idéntica a NB1, aplicada a los modelos de aprendizaje profundo. Incluye los mismos elementos (KPIs, barras, forest plot, heatmaps, tabla, Wilcoxon, sobreajuste) para LSTM, GRU, CNN-LSTM y CNN-GRU.', 'Identical structure to NB1, applied to deep learning models. Includes the same elements (KPIs, bars, forest plot, heatmaps, table, Wilcoxon, overfitting) for LSTM, GRU, CNN-LSTM and CNN-GRU.')}
-        </p>
-
-        <h3 style={S.h3}>{t('8.4 NB3 — Evaluación Cruzada', '8.4 NB3 — Cross Evaluation')}</h3>
-        <p style={S.body}>
-          {t('Compara los resultados de NB1 y NB2 bajo un mismo marco de evaluación. Los datos provienen del notebook de evaluación cruzada', 'Compares results from NB1 and NB2 under the same evaluation framework. Data comes from the cross-evaluation notebook')} <span style={S.mono}>03_evaluation.ipynb</span>.
-        </p>
-
-        <h3 style={S.h3}>{t('8.5 NB4B — Multi-Sujeto', '8.5 NB4B — Multi-Subject')}</h3>
-        <p style={S.body}>
-          {t('Presenta los resultados del modelo GRU entrenado con datos de los 48 pacientes simultáneamente (pool intra-paciente). Incluye métricas globales y desglose por paciente individual para evaluar la variabilidad.', 'Presents the results of the GRU model trained with data from all 48 patients simultaneously (intra-patient pool). Includes global metrics and per-patient breakdown to assess variability.')}
-        </p>
-
-        <h3 style={S.h3}>{t('8.6 NB5B — Cross-Patient (LOPO)', '8.6 NB5B — Cross-Patient (LOPO)')}</h3>
-        <p style={S.body}>
-          {t('La pestaña más completa. Presenta los resultados de la validación Leave-One-Patient-Out con múltiples visualizaciones:', 'The most complete tab. Presents the results of Leave-One-Patient-Out validation with multiple visualizations:')}
-        </p>
-        <Bullet><strong>{t('6 tarjetas KPI', '6 KPI cards')}</strong>: {t('R² medio, R² mediana, R² máximo, mejor modelo, IC 95%, número de pacientes evaluados.', 'R² mean, R² median, R² maximum, best model, 95% CI, number of evaluated patients.')}</Bullet>
-        <Bullet><strong>{t('Interpretación', 'Interpretation')}</strong>: {t('análisis detallado, visible desde el primer momento.', 'detailed analysis, visible from the start.')}</Bullet>
-        <Bullet><strong>{t('Tabla comprehensiva', 'Comprehensive table')}</strong>: {t('Resultados por paciente y modelo con todas las métricas.', 'Results per patient and model with all metrics.')}</Bullet>
-        <Bullet><strong>Boxplots R²</strong>: {t('Distribución del R² por modelo.', 'R² distribution per model.')}</Bullet>
-        <Bullet><strong>{t('R² Promedio por Paciente', 'R² Average per Patient')}</strong>: {t('Gráfico de barras con etiquetas individuales.', 'Bar chart with individual labels.')}</Bullet>
-        <Bullet><strong>{t('Efecto del Fine-Tuning', 'Fine-Tuning Effect')}</strong>: {t('Comparación R² LOPO vs. R² Fine-Tuned.', 'Comparison R² LOPO vs. R² Fine-Tuned.')}</Bullet>
-        <Bullet><strong>Forest Plot IC95%</strong>: {t('Intervalos de confianza por modelo.', 'Confidence intervals per model.')}</Bullet>
-        <Bullet><strong>Scatter n_test vs R²</strong>: {t('Relación entre tamaño de muestra de test y rendimiento.', 'Relationship between test sample size and performance.')}</Bullet>
-        <Bullet><strong>{t('Radar multi-métrica', 'Multi-metric radar')}</strong>: {t('Comparación de modelos en 4 dimensiones (R², RMSE, MAE, DTW).', 'Model comparison in 4 dimensions (R², RMSE, MAE, DTW).')}</Bullet>
-        <Bullet><strong>Gap train-test</strong>: {t('Análisis de sobreajuste por modelo.', 'Overfitting analysis per model.')}</Bullet>
-        <Bullet><strong>{t('Top/Bottom pacientes', 'Top/Bottom patients')}</strong>: {t('Los pacientes con mejor y peor rendimiento.', 'The patients with best and worst performance.')}</Bullet>
-        <Bullet><strong>{t('Validación INCART', 'INCART Validation')}</strong>: {t('Resultados de validación externa con la base de datos INCART (75 registros, 257 Hz).', 'External validation results with the INCART database (75 records, 257 Hz).')}</Bullet>
-        <Bullet><strong>{t('Hallazgos clave', 'Key findings')}</strong>: {t('Tarjetas de resumen con los hallazgos más relevantes.', 'Summary cards with the most relevant findings.')}</Bullet>
-        <Bullet><strong>{t('Galería de imágenes', 'Image gallery')}</strong>: {t('Visualizaciones adicionales del notebook.', 'Additional notebook visualizations.')}</Bullet>
-
-        <h3 style={S.h3}>{t('8.7 NB6 — Multi-step LOPO, el modelo final', '8.7 NB6 — Multi-step LOPO, the final model')}</h3>
-        <p style={S.body}>
-          {t('El experimento del que sale el resultado principal de la tesis. CNN-GRU-ATTN evaluado con Leave-One-Patient-Out sobre los 123 pacientes de MIT-BIH e INCART, prediciendo tres latidos por delante. R² medio de 0.6734 sobre los 123 pliegues.', 'The experiment the main thesis result comes from. CNN-GRU-ATTN evaluated with Leave-One-Patient-Out over the 123 MIT-BIH and INCART patients, predicting three beats ahead. Mean R² of 0.6734 across the 123 folds.')}
-        </p>
-        <Bullet>{t('Ojo con la carpeta: en disco se llama', 'Careful with the folder: on disk it is called')} <span style={S.mono}>public/data/nb5/</span>{t(', pero guarda el experimento 6. El nombre de la carpeta está mal, no el del experimento.', ', but it holds experiment 6. The folder name is wrong, not the experiment’s.')}</Bullet>
-        <Bullet>{t('Distribución por paciente, contraste entre bases y degradación por horizonte, cada bloque con su n y su archivo.', 'Per-patient distribution, between-database contrast and per-horizon degradation, each block with its n and its file.')}</Bullet>
-
-        <h3 style={S.h3}>{t('8.8 NB7 — Búsqueda de hiperparámetros', '8.8 NB7 — Hyperparameter search')}</h3>
-        <p style={S.body}>
-          {t('Veinte configuraciones por arquitectura, evaluadas sobre los mismos 10 pliegues LOPO de una cohorte reducida de 50 pacientes. El resultado es contraintuitivo y conviene leerlo despacio: para CNN-GRU-ATTN la búsqueda NO encontró ninguna configuración mejor que la que el proyecto ya usaba (Wilcoxon p = 1.0000). Eso no es un fracaso del experimento, es su conclusión: el R² publicado no depende de una configuración afortunada.', 'Twenty configurations per architecture, evaluated over the same 10 LOPO folds of a reduced 50-patient cohort. The result is counter-intuitive and worth reading slowly: for CNN-GRU-ATTN the search found NO configuration better than the one already in use (Wilcoxon p = 1.0000). That is not a failure of the experiment, it is its conclusion: the published R² does not depend on a lucky configuration.')}
-        </p>
-        <Bullet>{t('Análisis de sensibilidad por hiperparámetro, con el recorrido de R² de cada uno.', 'Per-hyperparameter sensitivity analysis, with each one’s R² range.')}</Bullet>
-        <Bullet>{t('El GRU optimizado sí mejora de forma significativa, y la pestaña explica en tres puntos por qué eso no justifica cambiar el modelo final.', 'The optimized GRU does improve significantly, and the tab explains in three points why that does not justify changing the final model.')}</Bullet>
-        <Bullet>{t('También aquí se mide el efecto del filtro de mediana sobre el pico R.', 'The median filter’s effect on the R peak is also measured here.')}</Bullet>
-
-        <h3 style={S.h3}>{t('8.9 NB8 — Detección de evento', '8.9 NB8 — Event detection')}</h3>
-        <p style={S.body}>
-          {t('Responde a la pregunta que el resto del trabajo deja abierta: ¿sirve de algo el error de predicción? Ordenando los 316 740 latidos de 50 pacientes por su error, el área bajo la curva de precisión-exhaustividad es 0.3808, que es 3.12 veces la prevalencia de latidos ectópicos (12.22 %).', 'It answers the question the rest of the work leaves open: is the prediction error good for anything? Ranking the 316,740 beats of 50 patients by their error, the area under the precision-recall curve is 0.3808, which is 3.12 times the ectopic beat prevalence (12.22 %).')}
-        </p>
-        <Bullet>{t('Error por clase AAMI: el MSE medio de los latidos ectópicos es 3.16 veces el de los normales.', 'Per-AAMI-class error: the mean MSE of ectopic beats is 3.16 times that of normal ones.')}</Bullet>
-        <Bullet>{t('Detección paciente a paciente, sin promediar: hay pliegues con precisión casi nula junto a pliegues altos, y una media los taparía.', 'Per-patient detection, unaveraged: there are folds with near-zero precision next to high ones, and a mean would hide them.')}</Bullet>
-        <Bullet>{t('Es una señal, no un detector clínico. La pestaña lo dice y aquí se repite.', 'It is a signal, not a clinical detector. The tab says so and it bears repeating here.')}</Bullet>
-      </div>
-
-      {/* ════════════════════════════════════════════════════════════════════════
-          SECCIÓN 9 — EXPLORADOR
-         ════════════════════════════════════════════════════════════════════════ */}
-      <div className="card" style={{ marginBottom: '20px' }} id="explorador">
-        <h2 style={S.sectionTitle}>{t('9. Explorador de Resultados', '9. Results Explorer')}</h2>
-        <p style={S.sectionSub}>
-          {t('El Explorador permite filtrar, cruzar y visualizar libremente los datos de cualquier notebook. Es la herramienta más flexible del dashboard para análisis personalizado.', 'The Explorer allows freely filtering, cross-referencing and visualizing data from any notebook. It is the most flexible dashboard tool for custom analysis.')}
-        </p>
-
-        <h3 style={S.h3}>{t('9.1 Panel de Filtros (Lateral Izquierdo)', '9.1 Filters Panel (Left Sidebar)')}</h3>
-        <p style={S.body}>{t('Un panel adhesivo de 280px con los siguientes controles:', 'A sticky 280px panel with the following controls:')}</p>
-        <Bullet><strong>Notebook</strong>: {t('Seleccione NB1, NB2, NB4B o NB5B.', 'Select NB1, NB2, NB4B or NB5B.')}</Bullet>
-        <Bullet><strong>{t('Experimento', 'Experiment')}</strong>: {t('Elija Exp A (ventanas de tiempo) o Exp B (latido a latido).', 'Choose Exp A (time windows) or Exp B (beat to beat).')}</Bullet>
-        <Bullet><strong>{t('Modelos', 'Models')}</strong>: {t('Lista multi-selección con todos los modelos disponibles del notebook elegido.', 'Multi-select list with all available models from the chosen notebook.')}</Bullet>
-        <Bullet><strong>{t('Filtros', 'Filters')}</strong>: {t('Lista multi-selección con los 7 pipelines de preprocesamiento.', 'Multi-select list with the 7 preprocessing pipelines.')}</Bullet>
-        <Bullet><strong>{t('Horizonte/Lookback', 'Horizon/Lookback')}</strong>: {t('Dropdown con valores disponibles + opción «Todos».', 'Dropdown with available values + «All» option.')}</Bullet>
-        <Bullet><strong>{t('Mostrar línea base Persistencia', 'Show Persistence baseline')}</strong>: {t('Checkbox para incluir el modelo base como referencia.', 'Checkbox to include the baseline model as reference.')}</Bullet>
-        <Bullet><strong>{t('Mostrar análisis sobreajuste', 'Show overfitting analysis')}</strong>: {t('Checkbox para incluir columnas de Gap R².', 'Checkbox to include R² Gap columns.')}</Bullet>
-        <Bullet><strong>{t('Análisis por paciente', 'Per-patient analysis')}</strong>: {t('Checkbox que habilita visualización adicional por paciente y selector de métrica (R², RMSE, MAE).', 'Checkbox that enables additional per-patient visualization and metric selector (R², RMSE, MAE).')}</Bullet>
-
-        <h3 style={S.h3}>{t('9.2 Área de Resultados', '9.2 Results Area')}</h3>
-        <h4 style={S.h4}>KPI Grid ({t('4 tarjetas', '4 cards')})</h4>
-        <Bullet>{t('Evaluaciones totales | Pacientes evaluados | R² medio global | Mejor modelo.', 'Total evaluations | Evaluated patients | Global mean R² | Best model.')}</Bullet>
-
-        <h4 style={S.h4}>{t('Tabla de Resultados', 'Results Table')}</h4>
-        <Bullet>{t('Columnas: Notebook, Modelo, Filtro, Horizonte/Lookback, R² medio, R² std, RMSE, MAE.', 'Columns: Notebook, Model, Filter, Horizon/Lookback, R² mean, R² std, RMSE, MAE.')}</Bullet>
-        <Bullet>{t('Botón', 'Button')} <strong>{t('Exportar CSV', 'Export CSV')}</strong>: {t('Descarga directa del dataset filtrado.', 'Direct download of the filtered dataset.')}</Bullet>
-
-        <h4 style={S.h4}>{t('Gráficos', 'Charts')}</h4>
-        <Bullet><strong>{t('R² medio por modelo', 'R² mean per model')}</strong>: {t('Barras horizontales con barras de error.', 'Horizontal bars with error bars.')}</Bullet>
-        <Bullet><strong>{t('Heatmap Modelo × Filtro', 'Heatmap Model × Filter')}</strong>: {t('Visible cuando hay ≥2 modelos y ≥2 filtros seleccionados.', 'Visible when ≥2 models and ≥2 filters are selected.')}</Bullet>
-
-        <h4 style={S.h4}>{t('Análisis por Paciente (cuando se activa)', 'Per-Patient Analysis (when enabled)')}</h4>
-        <Bullet><strong>Scatter plot</strong>: {t('Métrica media por paciente y modelo.', 'Mean metric per patient and model.')}</Bullet>
-        <Bullet><strong>Violin plot</strong>: {t('Distribución de la métrica por modelo.', 'Metric distribution per model.')}</Bullet>
-        <Bullet><strong>{t('Top/Bottom N pacientes', 'Top/Bottom N patients')}</strong>: {t('Los pacientes con mayor y menor rendimiento.', 'The patients with highest and lowest performance.')}</Bullet>
-
-        <h3 style={S.h3}>{t('9.3 Flujo de Uso', '9.3 Usage Flow')}</h3>
-        <NumberedStep n={1}>{t('Seleccione el notebook y el experimento de interés en el panel de filtros.', 'Select the notebook and experiment of interest in the filters panel.')}</NumberedStep>
-        <NumberedStep n={2}>{t('Elija uno o más modelos y filtros para comparar.', 'Choose one or more models and filters to compare.')}</NumberedStep>
-        <NumberedStep n={3}>{t('Ajuste el horizonte o lookback si desea un análisis más específico.', 'Adjust the horizon or lookback for a more specific analysis.')}</NumberedStep>
-        <NumberedStep n={4}>{t('Revise la tabla de resultados y los gráficos generados automáticamente.', 'Review the results table and automatically generated charts.')}</NumberedStep>
-        <NumberedStep n={5}>{t('Active «Análisis por paciente» para un desglose granular.', 'Enable «Per-patient analysis» for a granular breakdown.')}</NumberedStep>
-        <NumberedStep n={6}>{t('Exporte los datos a CSV con el botón de descarga.', 'Export the data to CSV with the download button.')}</NumberedStep>
-      </div>
-
-
 
       {/* ════════════════════════════════════════════════════════════════════════
           SECCIÓN 10 — COHORTE Y MÉTODO
@@ -1250,31 +848,31 @@ export function ManualPage() {
       <div className="card" style={{ marginBottom: '20px' }} id="glosario">
         <h2 style={S.sectionTitle}>{t('11. Glosario', '11. Glossary')}</h2>
         <p style={S.sectionSub}>
-          {t('El Glosario es un diccionario de referencia rápida con más de 50 términos técnicos organizados por categoría y ordenados alfabéticamente.', 'The Glossary is a quick reference dictionary with more than 50 technical terms organized by category and sorted alphabetically.')}
+          {t('El Glosario es un diccionario de referencia rápida con 86 términos técnicos organizados por categoría y ordenados alfabéticamente.', 'The Glossary is a quick reference dictionary with 86 technical terms organized by category and sorted alphabetically.')}
         </p>
 
         <h3 style={S.h3}>{t('11.1 Búsqueda y Filtrado', '11.1 Search and Filtering')}</h3>
         <Bullet><strong>{t('Barra de búsqueda', 'Search bar')}</strong>: {t('Escriba cualquier término o parte de su definición para filtrar la lista en tiempo real.', 'Type any term or part of its definition to filter the list in real time.')}</Bullet>
-        <Bullet><strong>{t('Filtros por categoría', 'Category filters')}</strong>: {t('5 botones — Todos, Clínico, Modelo, Métrica, Preprocesamiento.', '5 buttons — All, Clinical, Model, Metric, Preprocessing.')}</Bullet>
+        <Bullet><strong>{t('Filtros por categoría', 'Category filters')}</strong>: {t('5 botones · Todos, Clínico, Modelo, Métrica, Preprocesamiento.', '5 buttons · All, Clinical, Model, Metric, Preprocessing.')}</Bullet>
         <Bullet><strong>{t('Contador', 'Counter')}</strong>: {t('Muestra el número de términos encontrados según los filtros activos.', 'Shows the number of terms found according to the active filters.')}</Bullet>
 
         <h3 style={S.h3}>{t('11.2 Categorías', '11.2 Categories')}</h3>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginTop: '8px' }}>
           <div style={{ padding: '10px 14px', borderRadius: 'var(--radius-md)', background: 'var(--elevated)', border: '1px solid var(--border)' }}>
             <span style={S.badge('#ef4444')}>Clínico</span>
-            <p style={{ ...S.body, fontSize: 'var(--fs-2xs)', marginTop: '6px' }}>~17 términos: Arritmia, APC, Bradicardia, ECG, LBBB, MIT-BIH, Onda P/T, PVC, QRS, RBBB, Taquicardia, etc.</p>
+            <p style={{ ...S.body, fontSize: 'var(--fs-2xs)', marginTop: '6px' }}>{t('24 términos: Arritmia, APC, Bradicardia, Complejo QRS, ECG, AAMI, latido ectópico, entre otros.', '24 terms: Arrhythmia, APC, Bradycardia, QRS complex, ECG, AAMI, ectopic beat, among others.')}</p>
           </div>
           <div style={{ padding: '10px 14px', borderRadius: 'var(--radius-md)', background: 'var(--elevated)', border: '1px solid var(--border)' }}>
             <span style={S.badge('#1e40af')}>Modelo</span>
-            <p style={{ ...S.body, fontSize: 'var(--fs-2xs)', marginTop: '6px' }}>86 términos en cuatro categorías: clínicos, modelos, métricas y preprocesamiento. Incluye el vocabulario de los dos experimentos nuevos — AAMI, AUC-PR, precisión, exhaustividad, prevalencia, Wilcoxon y Mann-Whitney.</p>
+            <p style={{ ...S.body, fontSize: 'var(--fs-2xs)', marginTop: '6px' }}>{t('29 términos: BiGRU, CNN-GRU, CNN-LSTM, DT, Dropout, Early stopping, LOPO, atención temporal, entre otros.', '29 terms: BiGRU, CNN-GRU, CNN-LSTM, DT, Dropout, Early stopping, LOPO, temporal attention, among others.')}</p>
           </div>
           <div style={{ padding: '10px 14px', borderRadius: 'var(--radius-md)', background: 'var(--elevated)', border: '1px solid var(--border)' }}>
             <span style={S.badge('#3b82f6')}>Métrica</span>
-            <p style={{ ...S.body, fontSize: 'var(--fs-2xs)', marginTop: '6px' }}>~6 términos: DTW, Gap R², MAE, MSE, R², RMSE.</p>
+            <p style={{ ...S.body, fontSize: 'var(--fs-2xs)', marginTop: '6px' }}>{t('17 términos: DTW, Gap R², MAE, MSE, R², RMSE, AUC-PR, precisión, exhaustividad, entre otros.', '17 terms: DTW, R² gap, MAE, MSE, R², RMSE, AUC-PR, precision, recall, among others.')}</p>
           </div>
           <div style={{ padding: '10px 14px', borderRadius: 'var(--radius-md)', background: 'var(--elevated)', border: '1px solid var(--border)' }}>
             <span style={S.badge('#06b6d4')}>Preprocesamiento</span>
-            <p style={{ ...S.body, fontSize: 'var(--fs-2xs)', marginTop: '6px' }}>~11 términos: Exp A, Exp B, F_MED, F_NOTCH, Lookback, Horizonte, Normalización Z-score, etc.</p>
+            <p style={{ ...S.body, fontSize: 'var(--fs-2xs)', marginTop: '6px' }}>{t('16 términos: Exp A, Exp B, F_MED, F_NOTCH, filtro pasa-banda, lookback, horizonte, normalización Z-score, entre otros.', '16 terms: Exp A, Exp B, F_MED, F_NOTCH, band-pass filter, lookback, horizon, Z-score normalization, among others.')}</p>
           </div>
         </div>
 
@@ -1461,8 +1059,8 @@ export function ManualPage() {
           <p style={S.body}>
             {t('Verifique que existan los archivos de modelos en las siguientes rutas:', 'Verify that model files exist in the following paths:')}
           </p>
-          <Bullet><span style={S.mono}>results/NB4B/modelos/</span> — {t('Modelos', 'Models')} <span style={S.mono}>.keras</span> {t('para predicción normal.', 'for normal prediction.')}</Bullet>
-          <Bullet><span style={S.mono}>results/NB5B/modelos/</span> — {t('Modelo LOPO', 'LOPO model')} <span style={S.mono}>.keras</span>.</Bullet>
+          <Bullet>{t('El contenedor incluye el modelo final en formato', 'The container includes the final model in')} <span style={S.mono}>.keras</span>{t('. La imagen lo copia durante la construcción; no hay que colocarlo a mano.', ' format. The image copies it during the build; there is no need to place it manually.')}</Bullet>
+          <Bullet>{t('Si el arranque informa de que no encuentra el modelo, reconstruya la imagen con', 'If startup reports that it cannot find the model, rebuild the image with')} <span style={S.mono}>docker compose up --build</span>{t(', que vuelve a copiarlo.', ', which copies it again.')}</Bullet>
           <p style={{ ...S.body, marginTop: '8px' }}>
             {t('Si los archivos no existen, es necesario ejecutar los notebooks correspondientes para generarlos.', 'If the files don\'t exist, you need to run the corresponding notebooks to generate them.')}
           </p>
@@ -1485,11 +1083,11 @@ export function ManualPage() {
             {t('Los datos se cargan directamente desde archivos CSV estáticos ubicados en', 'Data is loaded directly from static CSV files located in')} <span style={S.mono}>public/data/</span>.
             {t('Verifique que existan los archivos CSV correspondientes:', 'Verify that the corresponding CSV files exist:')}
           </p>
-          <Bullet><span style={S.mono}>public/data/nb1/</span> — {t('CSVs de NB1 (resumen, resultados, IC95, Wilcoxon, etc.)', 'NB1 CSVs (summary, results, CI95, Wilcoxon, etc.)')}</Bullet>
-          <Bullet><span style={S.mono}>public/data/nb2/</span> — {t('CSVs de NB2', 'NB2 CSVs')}</Bullet>
-          <Bullet><span style={S.mono}>public/data/nb3/</span> — {t('CSVs de NB3', 'NB3 CSVs')}</Bullet>
-          <Bullet><span style={S.mono}>public/data/nb4b/</span> — {t('CSV de NB4B', 'NB4B CSV')}</Bullet>
-          <Bullet><span style={S.mono}>public/data/nb5b/</span> — {t('CSVs de NB5B (LOPO, resumen, validación INCART)', 'NB5B CSVs (LOPO, summary, INCART validation)')}</Bullet>
+          <Bullet><span style={S.mono}>public/data/nb1/</span>, {t('CSVs de NB1 (resumen, resultados, IC95, Wilcoxon, etc.)', 'NB1 CSVs (summary, results, CI95, Wilcoxon, etc.)')}</Bullet>
+          <Bullet><span style={S.mono}>public/data/nb2/</span>, {t('CSVs de NB2', 'NB2 CSVs')}</Bullet>
+          <Bullet><span style={S.mono}>public/data/nb3/</span>, {t('CSVs de NB3', 'NB3 CSVs')}</Bullet>
+          <Bullet><span style={S.mono}>public/data/nb4b/</span>, {t('CSV de NB4B', 'NB4B CSV')}</Bullet>
+          <Bullet><span style={S.mono}>public/data/nb5b/</span>, {t('CSVs de NB5B (LOPO, resumen, validación INCART)', 'NB5B CSVs (LOPO, summary, INCART validation)')}</Bullet>
         </Accordion>
 
         <Accordion title={t('Los gráficos no se renderizan o aparecen en blanco', 'Charts don\'t render or appear blank')}>
@@ -1508,13 +1106,13 @@ export function ManualPage() {
 
         <Accordion title={t('¿Qué significa una alerta roja en la predicción?', 'What does a red alert in prediction mean?')}>
           <p style={S.body}>
-            {t('Una alerta roja indica que el modelo detectó una irregularidad en el segmento de señal analizado. Las categorías anotadas en MIT-BIH incluyen: LBBB (bloqueo de rama izquierda), RBBB (bloqueo de rama derecha), APC (contracción auricular prematura) y PVC (contracción ventricular prematura). Las alertas se clasifican por severidad en', 'A red alert indicates the model detected an irregularity in the analyzed signal segment. Categories annotated in MIT-BIH include: LBBB (left bundle branch block), RBBB (right bundle branch block), APC (atrial premature contraction) and PVC (premature ventricular contraction). Alerts are classified by severity as')} <span style={S.badge('#f59e0b')}>warning</span> {t('y', 'and')} <span style={S.badge('#ef4444')}>critical</span>.
+            {t('No hay categorías de alerta ni niveles de severidad. Un latido se marca cuando el error cuadrático medio entre el latido real y el que el modelo predijo supera un umbral fijado en el experimento 8; entonces el análisis se detiene y ese latido se pinta en rojo sobre la gráfica. El sistema no dice de qué tipo de latido se trata, porque no es un clasificador: la etiqueta del cardiólogo (N, SVEB, VEB, F o Q, en la agrupación AAMI) se consulta después, y solo para puntuar si la marca fue un acierto o una falsa alarma.', 'There are no alert categories or severity levels. A beat is flagged when the mean squared error between the real beat and the one the model predicted exceeds a threshold fixed in experiment 8; the analysis then stops and that beat is drawn in red on the chart. The system does not say what kind of beat it is, because it is not a classifier: the cardiologist label (N, SVEB, VEB, F or Q, in the AAMI grouping) is consulted afterwards, and only to score whether the flag was a hit or a false alarm.')}
           </p>
         </Accordion>
 
         <Accordion title={t('¿Puedo usar esta herramienta para diagnóstico médico?', 'Can I use this tool for medical diagnosis?')}>
           <p style={S.body}>
-            <strong>No.</strong> {t('Este dashboard es una herramienta de investigación académica. Los resultados de predicción NO deben utilizarse para diagnóstico clínico. El mejor modelo explica ~66% de la varianza de la señal (R² = 0.6592 en Exp B por paciente), lo cual es insuficiente para uso clínico. Siempre se recomienda confirmación médica profesional.', 'This dashboard is an academic research tool. Prediction results should NOT be used for clinical diagnosis. The best model explains ~66% of the signal variance (R² = 0.6592 in Exp B per patient), which is insufficient for clinical use. Professional medical confirmation is always recommended.')}
+            <strong>No.</strong> {t('Este dashboard es una herramienta de investigación académica. Los resultados de predicción NO deben utilizarse para diagnóstico clínico. El mejor modelo del proyecto explica alrededor del 67 % de la varianza de la señal (R² = 0.6734, modelo cross-patient del experimento 6), lo cual es insuficiente para uso clínico. Siempre se recomienda confirmación médica profesional.', 'This dashboard is an academic research tool. Prediction results should NOT be used for clinical diagnosis. The best model in the project explains about 67 % of the signal variance (R² = 0.6734, the cross-patient model from experiment 6), which is insufficient for clinical use. Professional medical confirmation is always recommended.')}
           </p>
         </Accordion>
 

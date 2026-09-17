@@ -76,7 +76,9 @@ export function FindingCard({
       >
         <Icon size={16} color={config.color} />
       </div>
-      <div style={{ flex: 1 }}>
+      {/* `minWidth: 0` es lo que permite que este hijo se encoja: sin el, un
+          hijo flexible no baja de su contenido y una ruta larga desborda. */}
+      <div style={{ flex: 1, minWidth: 0 }}>
         <div
           style={{
             display: 'flex',
@@ -103,6 +105,8 @@ export function FindingCard({
               fontSize: 'var(--fs-sm)',
               fontWeight: 600,
               color: 'var(--text)',
+              minWidth: 0,
+              overflowWrap: 'anywhere',
             }}
           >
             {title}
@@ -111,8 +115,9 @@ export function FindingCard({
         <div
           style={{
             fontSize: 'var(--fs-xs)',
-            lineHeight: 1.5,
+            lineHeight: 1.55,
             color: 'var(--text-sub)',
+            overflowWrap: 'anywhere',
           }}
         >
           {typeof description === 'string' ? (
@@ -128,6 +133,8 @@ export function FindingCard({
             fontFamily: 'var(--font-data)', fontSize: 'var(--fs-3xs)',
             color: 'var(--text-muted)', letterSpacing: '0.02em',
             display: 'flex', flexWrap: 'wrap', gap: '4px 10px',
+            // Las rutas de archivo no tienen espacios donde partir.
+            overflowWrap: 'anywhere', minWidth: 0,
           }}>
             {n !== undefined && <span>n = {n}</span>}
             {notebook && <span>{notebook}</span>}
@@ -159,7 +166,6 @@ export function FindingsSection({
   title: string;
   children: ReactNode;
 }) {
-  const isDark = useIsDark();
 
   return (
     <div style={{ marginBottom: '28px' }}>

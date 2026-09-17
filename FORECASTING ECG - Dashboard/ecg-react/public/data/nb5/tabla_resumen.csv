@@ -1,0 +1,2 @@
+Modelo,N_pacientes,R2_total_mean,R2_total_std,R2_mean_mean,R2_mean_std,RMSE_total_mean,RMSE_total_std,Shape_Corr_mean,Slope_MSE_mean,Amp_Error_mean,Forecast_Score_mean
+CNN_GRU_ATTN,123,0.6734,0.2825,0.6734,0.2825,0.5139,0.2355,0.8383,0.0223,0.5653,0.7073

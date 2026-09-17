@@ -129,6 +129,8 @@ function Tabla({ cabeceras, filas, fuente }: { cabeceras: string[]; filas: (stri
 
 /** Dispersión de los 123 pacientes. Es el gráfico que faltaba: la media sola engaña. */
 function Dispersion({ valores }: { valores: { r2: number; incart: boolean }[] }) {
+  // El pie de la figura estaba escrito solo en espanol: no cambiaba al pulsar EN.
+  const { t } = useLang();
   if (valores.length === 0) return null;
   const min = -0.35, max = 1.0;
   const W = 1000, H = 128, PADL = 34, PADR = 14, TOP = 14, BASE = 88;
@@ -168,10 +170,12 @@ function Dispersion({ valores }: { valores: { r2: number; incart: boolean }[] })
         <text x={PADL} y={TOP + 85} fontSize="10" fontFamily="var(--font-data)" fill="var(--text-muted)">MIT-BIH</text>
       </svg>
       <figcaption style={{ fontSize: 'var(--fs-xs)', color: 'var(--text-muted)', marginTop: '12px', lineHeight: 1.5 }}>
-        <strong style={{ color: 'var(--text-sub)' }}>Figura.</strong>{' '}
-        Coeficiente R² de cada uno de los {valores.length} pacientes bajo el protocolo
-        Leave-One-Patient-Out. Cada marca es un paciente; las líneas verticales tenues son las
-        medias de cada base. Fuente: <code style={{ fontFamily: 'var(--font-data)' }}>/data/nb5/resultados_lopo.csv</code>.
+        <strong style={{ color: 'var(--text-sub)' }}>{t('Figura.', 'Figure.')}</strong>{' '}
+        {t(
+          `Coeficiente R² de cada uno de los ${valores.length} pacientes bajo el protocolo Leave-One-Patient-Out. Cada marca es un paciente; las líneas verticales tenues son las medias de cada base. Fuente:`,
+          `R² coefficient for each of the ${valores.length} patients under the Leave-One-Patient-Out protocol. Each mark is one patient; the faint vertical lines are the per-database means. Source:`,
+        )}{' '}
+        <code style={{ fontFamily: 'var(--font-data)' }}>/data/nb5/resultados_lopo.csv</code>.
       </figcaption>
     </figure>
   );
@@ -295,7 +299,7 @@ export function CohortePage() {
         {error && <div style={{ marginBottom: '32px' }}><Aviso mensaje={`No se pudieron cargar los datos. ${error}`} /></div>}
 
         {/* ── 1. La cohorte ───────────────────────────────────────── */}
-        <Seccion eyebrow="01 — Población y muestra" titulo={t('Los 123 pacientes', 'The 123 patients')}>
+        <Seccion eyebrow={t('01 · Población y muestra', '01 · Population and sample')} titulo={t('Los 123 pacientes', 'The 123 patients')}>
           {p2 ? (
             <>
               <div style={{ marginBottom: '24px' }}>
@@ -339,7 +343,7 @@ export function CohortePage() {
         </Seccion>
 
         {/* ── 2. Dispersión ───────────────────────────────────────── */}
-        <Seccion eyebrow="02 — Dónde falla el modelo"
+        <Seccion eyebrow={t('02 · Dónde falla el modelo', '02 · Where the model fails')}
           titulo={t('La media no cuenta la historia; la dispersión sí', 'The mean does not tell the story; the spread does')}>
           {estadisticos && (
             <p style={{ color: 'var(--text-sub)', maxWidth: '70ch', marginBottom: '20px', lineHeight: 1.6 }}>
@@ -364,7 +368,7 @@ export function CohortePage() {
         </Seccion>
 
         {/* ── 3. Brecha entre bases ───────────────────────────────── */}
-        <Seccion eyebrow="03 — Generalización entre bases"
+        <Seccion eyebrow={t('03 · Generalización entre bases', '03 · Generalization across databases')}
           titulo={t('MIT-BIH frente a INCART', 'MIT-BIH versus INCART')}>
           {porBase.length > 0 ? (
             <>
@@ -388,7 +392,8 @@ export function CohortePage() {
                     `The between-database difference is statistically significant: ${contraste.prueba}, U = ${contraste.U.toFixed(1)}, p = ${contraste.p_valor.toExponential(2)}, with a ${contraste.interpretacion_efecto} effect size (rank-biserial correlation = ${contraste.rango_biserial.toFixed(4)}). Medians are ${contraste.grupo_1.mediana.toFixed(4)} for ${contraste.grupo_1.nombre} (n = ${contraste.grupo_1.n}) versus ${contraste.grupo_2.mediana.toFixed(4)} for ${contraste.grupo_2.nombre} (n = ${contraste.grupo_2.n}). It is a first-order result on generalization, not an anecdote.`,
                   )}
                   <span style={{ display: 'block', marginTop: '6px', color: 'var(--text-muted)', fontSize: 'var(--fs-2xs)', fontFamily: 'var(--font-data)' }}>
-                    Fuente: /data/nb7/nb6_contraste_bases.json · calculado sobre {contraste.fuente}
+                    {t('Fuente', 'Source')}: /data/nb7/nb6_contraste_bases.json ·{' '}
+                    {t('calculado sobre', 'computed over')} {contraste.fuente}
                   </span>
                 </p>
               )}
@@ -405,7 +410,7 @@ export function CohortePage() {
         </Seccion>
 
         {/* ── 4. El filtro de mediana ─────────────────────────────── */}
-        <Seccion eyebrow="04 — Hallazgo metodológico"
+        <Seccion eyebrow={t('04 · Hallazgo metodológico', '04 · Methodological finding')}
           titulo={t('Por qué se descartó el filtro de mediana', 'Why the median filter was discarded')}>
           {mediana ? (
             <>
@@ -468,7 +473,7 @@ export function CohortePage() {
         </Seccion>
 
         {/* ── 5. Arquitectura ─────────────────────────────────────── */}
-        <Seccion eyebrow="05 — Arquitectura" titulo={t('El modelo CNN-GRU-ATTN', 'The CNN-GRU-ATTN model')}>
+        <Seccion eyebrow={t('05 · Arquitectura', '05 · Architecture')} titulo={t('El modelo CNN-GRU-ATTN', 'The CNN-GRU-ATTN model')}>
           <figure style={{
             margin: 0, background: 'var(--surface)', border: '1px solid var(--border)',
             borderRadius: 'var(--radius-md)', padding: '18px', textAlign: 'center',

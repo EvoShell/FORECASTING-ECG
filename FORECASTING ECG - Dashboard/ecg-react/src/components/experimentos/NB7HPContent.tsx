@@ -1036,7 +1036,7 @@ export function NB7HPContent({ datos, cargando, error }: NB7HPResultado) {
             <MetricStat
               densa
               etiqueta="Épocas: búsqueda vs definitivo"
-              valor={`${attn.protocolo.epochs} vs ${epocasDefinitivo ?? '—'}`}
+              valor={`${attn.protocolo.epochs} vs ${epocasDefinitivo ?? '·'}`}
               unidad="épocas"
               referencia={`definitivo leído de ${FUENTES_NB7HP.lopo.split('/').pop()}`}
               n={nPlieguesDefinitivo}
@@ -1146,8 +1146,8 @@ export function NB7HPContent({ datos, cargando, error }: NB7HPResultado) {
               optimizada frente a GRU optimizado): no está en ningún archivo de resultados, así que
               esta vista no la muestra. Lo que se presenta arriba son las diferencias emparejadas y
               el conteo de pliegues, calculados sobre los vectores por paciente de{' '}
-              {FUENTES_NB7HP.dlResumen}. Los valores p que sí aparecen —uno por arquitectura, base
-              frente a optimizada— vienen del propio archivo.
+              {FUENTES_NB7HP.dlResumen}. Los valores p que sí aparecen, uno por arquitectura, base
+              frente a optimizada, vienen del propio archivo.
             </Aviso>
           </div>
         </Seccion>
@@ -1169,8 +1169,7 @@ export function NB7HPContent({ datos, cargando, error }: NB7HPResultado) {
             {trad.protocolo.formulacion}.{' '}
             <strong style={{ color: 'var(--text)' }}>
               Sus R² absolutos no son comparables con los del experimento 6
-            </strong>{' '}
-            —ni con los de la sección anterior—: solo los deltas emparejados, base frente a
+            </strong>,{' '}ni con los de la sección anterior: solo los deltas emparejados, base frente a
             optimizada dentro de este mismo protocolo, son interpretables.
           </Aviso>
 

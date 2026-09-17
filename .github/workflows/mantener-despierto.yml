@@ -1,0 +1,170 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Mantiene despierto el servicio de inferencia, y avisa si se cae.
+#
+# POR QUÉ EXISTE
+#
+# Un espacio de Hugging Face en hardware gratuito se duerme cuando no recibe
+# visitas durante un periodo que la documentación cifra actualmente en 48 horas.
+# Al despertar tiene que arrancar el proceso y cargar TensorFlow y el modelo, y
+# eso tarda decenas de segundos. La interfaz, además, abandona la petición a los
+# quince segundos, de modo que el arranque en frío no se percibe como lentitud
+# sino como un error.
+#
+# Este flujo pide el estado del servicio cada seis horas. Con ello el contador de
+# inactividad no llega nunca a las 48 horas y el espacio no se duerme.
+#
+# POR QUÉ CADA SEIS HORAS Y NO CADA CINCO MINUTOS
+#
+# Porque el margen es enorme y conviene aprovecharlo. La documentación de GitHub
+# advierte de que las ejecuciones programadas «pueden retrasarse en periodos de
+# carga alta» y que «algunos trabajos en cola pueden descartarse». Con una
+# ventana de 48 horas y un pulso cada seis, pueden fallar siete ejecuciones
+# seguidas y el espacio seguiría despierto. Con un pulso cada cinco minutos no se
+# ganaría nada y se gastarían minutos de ejecución para nada.
+#
+# El minuto 17 tampoco es casual: la propia documentación señala el comienzo de
+# cada hora como el momento de más carga.
+#
+# ESTO NO ES SOLO UN PULSO: TAMBIÉN VIGILA
+#
+# Si el servicio no responde, o responde pero sin el modelo cargado, o deja de
+# servir los 123 registros, el flujo falla. Un flujo fallido manda un correo al
+# propietario del repositorio. Eso convierte el pulso en la única vigilancia
+# automática que tiene el sistema, que es lo que de verdad hace falta antes de
+# una sustentación: enterarse de que algo se cayó sin tener que ir a mirar.
+#
+# LO QUE CUESTA
+#
+# Este repositorio es privado, y en los privados el plan gratuito incluye 2000
+# minutos de ejecución al mes. Cuatro pulsos diarios son unas 122 ejecuciones al
+# mes; GitHub redondea cada trabajo al minuto, de modo que el gasto ronda los 122
+# minutos: alrededor del seis por ciento de la cuota. Si el repositorio pasara a
+# ser público, dejaría de consumir minutos.
+#
+# LÍMITE QUE HAY QUE CONOCER
+#
+# En un repositorio público, GitHub desactiva solo los flujos programados cuando
+# no hay actividad durante 60 días. Hoy no aplica, porque este repositorio es
+# privado, pero conviene recordarlo si algún día se publica: el pulso dejaría de
+# latir en silencio, y para reactivarlo hay que entrar en la pestaña Actions.
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: Mantener el servicio despierto
+
+on:
+  schedule:
+    # Minuto 17 de cada sexta hora, para esquivar la hora en punto.
+    - cron: '17 */6 * * *'
+  # Permite lanzarlo a mano desde la pestaña Actions. Úsenlo la mañana de la
+  # sustentación para dejar el servicio caliente con una sola pulsación.
+  workflow_dispatch:
+
+# Si ya hay un pulso en marcha, no se lanza otro encima.
+concurrency:
+  group: pulso-servicio
+  cancel-in-progress: false
+
+jobs:
+  pulso:
+    name: Comprobar el servicio de inferencia
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      # Si el espacio cambia de nombre, este es el único valor que hay que tocar.
+      # No se deja como secreto a propósito: es una dirección pública, y tenerla
+      # a la vista evita que un cambio de nombre rompa el pulso en silencio.
+      SERVICIO: https://evoshell-api-ecg-forecasting.hf.space
+      # Lo que el servicio debe declarar. Si estas cifras cambian, el flujo falla
+      # y alguien se entera, que es justo lo que se busca.
+      REGISTROS_ESPERADOS: 123
+
+    steps:
+      - name: Despertar el servicio y comprobar su estado
+        run: |
+          set -u
+
+          # El primer intento puede coincidir con un arranque en frío: cargar
+          # TensorFlow y el modelo lleva su tiempo. Por eso se reintenta, y por
+          # eso el tiempo máximo de cada intento es generoso.
+          intentos=5
+          espera=30
+          codigo=000
+
+          for n in $(seq 1 $intentos); do
+            codigo=$(curl -s -o salud.json -w '%{http_code}' \
+                          --max-time 120 "$SERVICIO/api/health" || echo 000)
+            if [ "$codigo" = "200" ]; then
+              echo "El servicio respondió en el intento $n."
+              break
+            fi
+            echo "Intento $n: el servicio devolvió $codigo. Reintentando en ${espera}s."
+            sleep $espera
+          done
+
+          if [ "$codigo" != "200" ]; then
+            echo "::error::El servicio no respondió tras $intentos intentos. Último código: $codigo"
+            exit 1
+          fi
+
+          cat salud.json
+          echo
+
+          estado=$(jq -r '.status // "sin-estado"' salud.json)
+          modelos=$(jq -r '.models_loaded // 0' salud.json)
+          encendido=$(jq -r '.uptime_seconds // 0' salud.json)
+
+          if [ "$estado" != "healthy" ]; then
+            echo "::error::El servicio responde pero declara el estado «$estado»."
+            exit 1
+          fi
+
+          if [ "$modelos" -lt 1 ]; then
+            echo "::error::El servicio responde pero no tiene ningún modelo cargado."
+            exit 1
+          fi
+
+          horas=$(awk -v s="$encendido" 'BEGIN{printf "%.1f", s/3600}')
+          echo "Estado: $estado - modelos cargados: $modelos - $horas horas en marcha"
+
+      - name: Comprobar que sigue sirviendo los registros
+        run: |
+          set -u
+
+          # Que el servicio esté vivo no prueba que esté completo. Si las señales
+          # no entraron en la imagen, /api/health responde igual de bien y la
+          # lista de pacientes sale vacía. Esta comprobación es la que distingue
+          # «el proceso está arriba» de «el sistema funciona».
+          codigo=$(curl -s -o pacientes.json -w '%{http_code}' \
+                        --max-time 60 "$SERVICIO/api/patients" || echo 000)
+
+          if [ "$codigo" != "200" ]; then
+            echo "::error::La relación de registros devolvió $codigo."
+            exit 1
+          fi
+
+          n=$(jq -r '.patients | length' pacientes.json)
+          echo "Registros servidos: $n"
+
+          if [ "$n" -ne "$REGISTROS_ESPERADOS" ]; then
+            echo "::error::Se esperaban $REGISTROS_ESPERADOS registros y se sirvieron $n."
+            echo "::error::Probablemente las senales no entraron en la imagen del espacio."
+            exit 1
+          fi
+
+      - name: Resumen
+        if: always()
+        run: |
+          {
+            echo "### Pulso al servicio de inferencia"
+            echo
+            if [ "${{ job.status }}" = "success" ]; then
+              echo "El servicio está despierto, con el modelo cargado y sirviendo los"
+              echo "$REGISTROS_ESPERADOS registros."
+            else
+              echo "**Algo falló.** Revisen el registro de ejecución del espacio en"
+              echo "Hugging Face: el motivo suele estar ahí."
+            fi
+            echo
+            echo "Servicio: \`$SERVICIO\`"
+          } >> "$GITHUB_STEP_SUMMARY"

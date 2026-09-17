@@ -10,6 +10,8 @@ import numpy as np
 import pytest
 from httpx import ASGITransport, AsyncClient
 
+from app.api.routes.patients import BEAT_TYPES
+from app.config import CLASES_AAMI
 from app.main import app
 
 BASE = "http://test"
@@ -138,3 +140,49 @@ async def test_endpoints_retirados_ya_no_existen(cliente):
                  "/api/explainability/gradcam", "/api/explainability/shap"):
         r = await cliente.post(ruta, json={})
         assert r.status_code == 404, f"{ruta} deberia haber desaparecido"
+
+
+@pytest.mark.asyncio
+async def test_etiqueta_por_latido_alineada(cliente):
+    """Un simbolo y una clase por latido, en el mismo orden que `beats`.
+
+    La prueba que importa es la de longitud: la segmentacion descarta latidos, asi que
+    una etiqueta anadida despues del bucle traeria mas elementos que latidos.
+    """
+    r = await cliente.post(
+        "/api/process_patient",
+        params={"patientId": "100", "lead": "MLII", "filter_type": "F_NB6",
+                "normalize_global": "false"},
+    )
+    if r.status_code != 200:
+        pytest.skip("los registros de MIT-BIH no estan disponibles en este entorno")
+
+    d = r.json()
+    simbolos = d["beat_symbols"]
+    clases = d["beat_classes"]
+
+    assert len(simbolos) == d["num_beats"], "un simbolo por latido servido"
+    assert len(simbolos) == len(d["beats"])
+    assert len(clases) == len(simbolos)
+
+    # El segmentador salta el primer y el ultimo pico como latidos de guarda, y ademas
+    # descarta los que se salen de la senal: siempre hay menos latidos que picos.
+    assert d["num_beats"] <= len(d["r_peaks"]) - 2
+
+    assert set(simbolos) <= BEAT_TYPES, "solo simbolos de latido, no anotaciones de ritmo"
+    assert set(clases) <= set(CLASES_AAMI), "la clase AAMI es una de las cinco"
+    # El registro 100 es casi todo normal, con unas pocas ectopias.
+    assert clases.count("N") > 0
+
+
+@pytest.mark.asyncio
+async def test_signal_devuelve_simbolos_por_pico(cliente):
+    """En /api/signal no hay segmentacion: una etiqueta por pico R, sin descartes."""
+    r = await cliente.get("/api/signal", params={"patientId": "100", "lead": "MLII"})
+    if r.status_code != 200:
+        pytest.skip("los registros de MIT-BIH no estan disponibles en este entorno")
+
+    d = r.json()
+    assert len(d["symbols"]) == len(d["r_peaks"])
+    assert len(d["aami_classes"]) == len(d["r_peaks"])
+    assert set(d["aami_classes"]) <= set(CLASES_AAMI)

@@ -1,4 +1,66 @@
 <svg viewBox="0 0 1160 760" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arquitectura: el repositorio principal contiene notebooks, requirements y el dashboard. El dashboard es orquestado por Docker Compose, que levanta un backend FastAPI y un frontend React; el frontend llama al backend mediante peticiones HTTP a la ruta /api.">
+  <style id="tema-oscuro-generado">
+    /* La paleta clara queda intacta: aqui solo se reasigna cuando el
+       navegador informa de que el tema del sistema es oscuro. */
+    @media (prefers-color-scheme: dark) {
+      [fill="#0891b2"]  { fill:   #22d3ee; }
+      [stroke="#0891b2"]{ stroke: #22d3ee; }
+      [fill="#0e7490"]  { fill:   #22d3ee; }
+      [stroke="#0e7490"]{ stroke: #22d3ee; }
+      [fill="#0f172a"]  { fill:   #e6edf3; }
+      [stroke="#0f172a"]{ stroke: #e6edf3; }
+      [fill="#1e3a8a"]  { fill:   #5b8def; }
+      [stroke="#1e3a8a"]{ stroke: #5b8def; }
+      [fill="#1e40af"]  { fill:   #60a5fa; }
+      [stroke="#1e40af"]{ stroke: #60a5fa; }
+      [fill="#2563eb"]  { fill:   #6aa6ff; }
+      [stroke="#2563eb"]{ stroke: #6aa6ff; }
+      [fill="#3b82f6"]  { fill:   #7cb3ff; }
+      [stroke="#3b82f6"]{ stroke: #7cb3ff; }
+      [fill="#4338ca"]  { fill:   #8b8ff0; }
+      [stroke="#4338ca"]{ stroke: #8b8ff0; }
+      [fill="#4f46e5"]  { fill:   #8b8ff0; }
+      [stroke="#4f46e5"]{ stroke: #8b8ff0; }
+      [fill="#6366f1"]  { fill:   #9ca0f5; }
+      [stroke="#6366f1"]{ stroke: #9ca0f5; }
+      [fill="#64748b"]  { fill:   #8b949e; }
+      [stroke="#64748b"]{ stroke: #8b949e; }
+      [fill="#93c5fd"]  { fill:   #4a7ab8; }
+      [stroke="#93c5fd"]{ stroke: #4a7ab8; }
+      [fill="#94a3b8"]  { fill:   #768390; }
+      [stroke="#94a3b8"]{ stroke: #768390; }
+      [fill="#b45309"]  { fill:   #f0b429; }
+      [stroke="#b45309"]{ stroke: #f0b429; }
+      [fill="#bfdbfe"]  { fill:   #2d4a73; }
+      [stroke="#bfdbfe"]{ stroke: #2d4a73; }
+      [fill="#cbd5e1"]  { fill:   #3d444d; }
+      [stroke="#cbd5e1"]{ stroke: #3d444d; }
+      [fill="#cffafe"]  { fill:   #12333d; }
+      [stroke="#cffafe"]{ stroke: #12333d; }
+      [fill="#d97706"]  { fill:   #f0b429; }
+      [stroke="#d97706"]{ stroke: #f0b429; }
+      [fill="#dbeafe"]  { fill:   #1e2f4a; }
+      [stroke="#dbeafe"]{ stroke: #1e2f4a; }
+      [fill="#e0e7ff"]  { fill:   #2a2f45; }
+      [stroke="#e0e7ff"]{ stroke: #2a2f45; }
+      [fill="#e2e8f0"]  { fill:   #30363d; }
+      [stroke="#e2e8f0"]{ stroke: #30363d; }
+      [fill="#ecfeff"]  { fill:   #0f2830; }
+      [stroke="#ecfeff"]{ stroke: #0f2830; }
+      [fill="#eef2ff"]  { fill:   #1a1d2e; }
+      [stroke="#eef2ff"]{ stroke: #1a1d2e; }
+      [fill="#eff6ff"]  { fill:   #172033; }
+      [stroke="#eff6ff"]{ stroke: #172033; }
+      [fill="#f0fdff"]  { fill:   #0f2830; }
+      [stroke="#f0fdff"]{ stroke: #0f2830; }
+      [fill="#f5f5ff"]  { fill:   #1a1d2b; }
+      [stroke="#f5f5ff"]{ stroke: #1a1d2b; }
+      [fill="#f8fafc"]  { fill:   #1c2128; }
+      [stroke="#f8fafc"]{ stroke: #1c2128; }
+      [fill="#ffffff"]  { fill:   #161b22; }
+      [stroke="#ffffff"]{ stroke: #161b22; }
+    }
+  </style>
   <defs>
     <filter id="ad-shadow" x="-30%" y="-30%" width="160%" height="160%">
       <feDropShadow dx="0" dy="1.5" stdDeviation="2.5" flood-color="#0f172a" flood-opacity="0.10"/>
@@ -137,7 +199,7 @@
           <rect x="20" y="126" width="410" height="46" rx="10" fill="#f0fdff" stroke="#cffafe"/>
           <use href="#ad-i-route" x="32" y="138" width="20" height="20" color="#0891b2"/>
           <text x="64" y="146" font-size="10.5" font-weight="700" fill="#0f172a" font-family="Consolas, Menlo, monospace">api/routes/</text>
-          <text x="64" y="162" font-size="9" fill="#64748b">predict · process · models · patients · explainability</text>
+          <text x="64" y="162" font-size="9" fill="#64748b">health · models · patients · signal · process · predict_lopo</text>
 
           <rect x="20" y="180" width="410" height="46" rx="10" fill="#f0fdff" stroke="#cffafe"/>
           <use href="#ad-i-layers" x="32" y="192" width="20" height="20" color="#0891b2"/>

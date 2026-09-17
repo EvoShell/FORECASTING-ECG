@@ -2,15 +2,34 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 
+# ── Topes de tamano de las entradas ──────────────────────────────────────────
+#
+# Sin ellos, FastAPI carga el cuerpo entero en memoria ANTES de validar: un POST
+# suficientemente grande agota los 4 GB del contenedor y lo reinicia. Ademas
+# `scipy.signal.resample` esta basado en FFT y con una longitud de numero primo
+# recurre al algoritmo de Bluestein, cuyo coste se dispara.
+#
+# Los valores no son redondos por capricho, salen del uso real:
+#   - Un registro de MIT-BIH son ~650 000 muestras (30 min a 360 Hz). El tope de
+#     3 000 000 deja margen para casi dos horas y media, muy por encima de
+#     cualquier registro de las dos bases.
+#   - Los picos R de media hora rondan los 2 300; 50 000 es holgadisimo.
+#   - `predict_lopo` recibe el contexto del modelo, que son 5 latidos. El tope de
+#     64 admite cualquier ventana razonable sin permitir un lote gigante.
+
+MAX_MUESTRAS = 3_000_000
+MAX_PICOS = 50_000
+MAX_LATIDOS_CONTEXTO = 64
+MAX_MUESTRAS_POR_LATIDO = 4_096
+
 
 class ProcessSignalRequest(BaseModel):
-    signal: list[float]
+    signal: list[float] = Field(..., max_length=MAX_MUESTRAS)
     fs: int = Field(default=360, ge=100, le=2000)
     filter_type: str = Field(default="F_NB6")   # cadena del modelo final; la de mediana se descarto
     detect_peaks: bool = Field(default=True)
-    r_peaks_hint: Optional[list[int]] = (
-        None  # Pre-annotated peaks (e.g. from wfdb .atr); skip algorithmic detection if provided
-    )
+    # Picos preanotados (p. ej. del .atr de wfdb); si vienen, se salta la deteccion.
+    r_peaks_hint: Optional[list[int]] = Field(default=None, max_length=MAX_PICOS)
     normalize_global: bool = Field(
         default=True
     )  # True=NB4B global stats (for NB4B models); False=per-recording z-score (for NB5B LOPO model)
@@ -41,55 +60,34 @@ class ProcessSignalResponse(BaseModel):
     rr_per_beat: Optional[list[float]] = (
         None # BACKWARD RR interval in seconds per beat (NB5B/NB6 LOPO requires this)
     )
-    processing_time_ms: float
-
-
-class PredictRequest(BaseModel):
-    beats: list[
-        list[float]
-    ]  # must be z-score normalized (use beat_mu/beat_std from ProcessSignalResponse)
-    lookback: int = Field(default=5, ge=3, le=10)
-    model_name: Optional[str] = None
-    architecture: Optional[str] = None
-    filter_type: Optional[str] = None
-    beat_mu: Optional[float] = (
-        None  # if provided, prediction is denormalized: pred * beat_std + beat_mu
+    # beat_symbols y beat_classes son opcionales por dos motivos. Uno: quedan en null
+    # para quien no los espere, de modo que ningun cliente anterior se rompe. Y dos:
+    # solo hay etiqueta cuando la senal viene de un registro anotado, que es el caso de
+    # /api/process_patient; /api/process_signal recibe una senal cruda y no tiene de
+    # donde sacarla. Son la anotacion del registro, nunca una salida del modelo.
+    beat_symbols: Optional[list[str]] = (
+        None # simbolo PhysioNet de cada latido, alineado con `beats`
     )
-    beat_std: Optional[float] = None
-
-
-class PredictResponse(BaseModel):
-    predicted_beat: list[
-        float
-    ]  # always in z-score space — caller multiplies by beat_std and adds beat_mu to get physical units
-    model_name: str
+    beat_classes: Optional[list[str]] = (
+        None # clase AAMI de cada latido: N, SVEB, VEB, F o Q
+    )
     processing_time_ms: float
-    is_normalized: bool = True  # True = output is z-score space (default); False = physical space (reserved)
 
 
-class PredictBatchRequest(BaseModel):
-    beats: list[list[float]]
-    lookback: int = Field(default=5, ge=3, le=10)
-    model_name: Optional[str] = None
-    beat_mu: Optional[float] = None
-    beat_std: Optional[float] = None
-
-
-class PredictBatchResponse(BaseModel):
-    predicted_beats: list[list[float]]
-    model_name: str
-    processing_time_ms: float
-    is_normalized: bool = True  # True = output is z-score space (default); model always returns normalized
+# Aqui vivian PredictRequest/Response y PredictBatchRequest/Response. Se retiraron
+# con sus endpoints /api/predict y /api/predict_batch, que construian un nombre de
+# modelo inexistente y devolvian 500 en toda peticion. No los usaba nadie mas: el
+# unico camino de prediccion vivo es /api/predict_lopo.
 
 
 class PredictLOPORequest(BaseModel):
-    beats: list[list[float]]
+    beats: list[list[float]] = Field(..., max_length=MAX_LATIDOS_CONTEXTO)
     lookback: Optional[int] = Field(default=5, ge=3, le=10)
     beat_mu: Optional[float] = None
     beat_std: Optional[float] = None
-    rr_per_beat: Optional[list[float]] = (
-        None # BACKWARD RR in seconds per beat (rr[i] = r_peaks[i]-r_peaks[i-1])/fs; if absent, global mean (0.7758 s) is used
-    )
+    # RR hacia atras en segundos por latido: rr[i] = (r_peaks[i] - r_peaks[i-1]) / fs.
+    # Si falta, se usa la media global (0.7758 s).
+    rr_per_beat: Optional[list[float]] = Field(default=None, max_length=MAX_LATIDOS_CONTEXTO)
 
 
 class PredictLOPOResponse(BaseModel):
