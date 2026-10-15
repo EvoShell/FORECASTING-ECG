@@ -1,0 +1,143 @@
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\COMO_EJECUTAR.txt
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\README.md
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\README.md
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\index.html
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg_forecast_api\README.md
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg_forecast_api\docker-compose.yml
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg_forecast_api\espacio-hf\POR_QUE.md
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg_forecast_api\espacio-hf\README.md
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg_forecast_api\espacio-hf\requirements.txt
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg_forecast_api\requirements.txt
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\requirements.txt
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB5\11_conclusiones.txt
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\favicon\apple-touch-icon-180.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\favicon\favicon-16.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\favicon\favicon-32.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\favicon\favicon-48.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\favicon\favicon.svg
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\favicon\icon-192.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\favicon\icon-512.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\png\logo-1024.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\png\logo-2048.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\png\logo-256.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\png\logo-512.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\png\logo-blanco-1024.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\png\logo-claro-1024.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\png\logo-negro-1024.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\social\og-1200x630-azul.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\social\og-1200x630.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\svg\logo-blanco.svg
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\svg\logo-claro.svg
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\svg\logo-mono.svg
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\svg\logo-negro.svg
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\brand\svg\logo.svg
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb1\img\boxplot_A_vs_B.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb1\img\boxplot_ExpA.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb1\img\boxplot_ExpB.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb1\img\boxplot_mse_ExpA.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb1\img\boxplot_mse_ExpB.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb1\img\ecg_train_test_100.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb1\img\ecg_train_test_200.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb1\img\ecg_train_test_217.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb1\img\heatmap_filtro_horizonte.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb1\img\heatmap_filtro_lookback.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb1\img\ic95_ExpA.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb1\img\ic95_ExpB.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb1\img\prediccion_consistencia.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb1\img\prediccion_multistep_todos.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb1\img\prediccion_vs_real.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb2\img\boxplot_DL_A_vs_B.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb2\img\boxplot_DL_Exp A_desglose.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb2\img\boxplot_DL_Exp A_global.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb2\img\boxplot_DL_Exp B_desglose.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb2\img\boxplot_DL_Exp B_global.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb2\img\boxplot_global_trad_vs_dl.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb2\img\prediccion_DL_Exp A_ganador.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb2\img\prediccion_DL_Exp B_ganador.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb4b\img\barras_nb4b_modelo_filtro.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb4b\img\boxplot_nb4b.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb4b\img\comparacion_td_cnn.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb4b\img\ejemplo_segmentos_60s.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb4b\img\heatmap_nb4b.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb4b\img\ic95_nb4b.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb4b\img\r2_por_paciente.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb5\img\03_ecg_filtrado.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb5\img\07_demo_CNN_GRU_ATTN.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb5\img\10_boxplot_r2_total.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb5\img\10_degradacion_temporal.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb5\img\10_r2_pacientes_CNN_GRU_ATTN.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb5\img\12_5_prediccion_extendida_ft.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb5\img\12_5_real_vs_pred_ft.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb5\img\12_5_tabla_metricas_ft.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb5b\img\demo_v2_BiGRU_MHA.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb5b\img\demo_v2_CNN_GRU.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb5b\img\demo_v2_GRU_base.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb5b\img\lopo_v2_BiGRU_MHA_r2.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb5b\img\lopo_v2_CNN_GRU_r2.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb5b\img\lopo_v2_GRU_base_r2.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb5b\img\lopo_v2_boxplot_all.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb5b\img\lopo_v2_mejora_ft_BiGRU_MHA.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb5b\img\lopo_v2_mejora_ft_CNN_GRU.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb7\img\fig26_arquitectura_cnn_gru_attn.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb7\img\fig27_caida_transferencia.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb7\img\fig32_trayectoria_experimental.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\data\nb8\p4_curva_precision_exhaustividad.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\favicon.svg
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\icons.svg
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\img\DarioGomez.JPG
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\img\DarwinBurbano.JPG
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\img\Escudos_2-2 (1).png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\img\HectorMora.JPG
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\img\logoECGF.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\public\img\logoUniv.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\src\assets\hero.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\src\assets\react.svg
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\ecg-react\src\assets\vite.svg
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB1\boxplot_A_vs_B.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB1\boxplot_ExpA.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB1\boxplot_ExpB.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB1\boxplot_mse_ExpA.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB1\boxplot_mse_ExpB.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB1\ecg_train_test_100.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB1\ecg_train_test_200.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB1\ecg_train_test_217.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB1\heatmap_filtro_horizonte.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB1\heatmap_filtro_lookback.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB1\ic95_ExpA.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB1\ic95_ExpB.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB1\prediccion_consistencia.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB1\prediccion_multistep_todos.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB1\prediccion_vs_real.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB2\boxplot_DL_A_vs_B.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB2\boxplot_DL_Exp A_desglose.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB2\boxplot_DL_Exp A_global.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB2\boxplot_DL_Exp B_desglose.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB2\boxplot_DL_Exp B_global.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB2\boxplot_global_trad_vs_dl.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB2\prediccion_DL_Exp A_ganador.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB2\prediccion_DL_Exp B_ganador.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB4B\barras_nb4b_modelo_filtro.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB4B\boxplot_nb4b.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB4B\comparacion_td_cnn.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB4B\ejemplo_segmentos_60s.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB4B\heatmap_nb4b.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB4B\ic95_nb4b.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB4B\r2_por_paciente.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB5B\visualizaciones\comparativa_final_mejoras.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB5B\visualizaciones\demo_v2_BiGRU_MHA.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB5B\visualizaciones\demo_v2_CNN_GRU.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB5B\visualizaciones\demo_v2_GRU_base.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB5B\visualizaciones\lopo_v2_BiGRU_MHA_r2.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB5B\visualizaciones\lopo_v2_CNN_GRU_r2.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB5B\visualizaciones\lopo_v2_GRU_base_r2.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB5B\visualizaciones\lopo_v2_boxplot_all.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB5B\visualizaciones\lopo_v2_mejora_ft_BiGRU_MHA.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB5B\visualizaciones\lopo_v2_mejora_ft_CNN_GRU.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB5\visualizaciones\03_ecg_filtrado.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB5\visualizaciones\07_demo_CNN_GRU_ATTN.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB5\visualizaciones\10_boxplot_r2_total.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB5\visualizaciones\10_degradacion_temporal.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB5\visualizaciones\10_r2_pacientes_CNN_GRU_ATTN.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB5\visualizaciones\12_5_prediccion_extendida_ft.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB5\visualizaciones\12_5_real_vs_pred_ft.png
+D:\FORECASTING ECG\FORECASTING ECG - Dashboard\results\NB5\visualizaciones\12_5_tabla_metricas_ft.png

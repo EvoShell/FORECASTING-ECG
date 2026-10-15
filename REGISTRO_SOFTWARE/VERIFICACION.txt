@@ -1,0 +1,119 @@
+
+==============================================================================
+  VERIFICACIÓN DEL EXPEDIENTE DE INSCRIPCIÓN DE SOPORTE LÓGICO
+  Carpeta: D:/FORECASTING ECG/REGISTRO_SOFTWARE
+==============================================================================
+
+──────────────────────────────────────────────────────────────────────────────
+  Solicitud de inscripción de soporte lógico
+  01_Solicitud_Inscripcion_Soporte_Logico.docx
+  Papel: Hoja maestra de datos. Se transcribe en el formulario en línea.
+──────────────────────────────────────────────────────────────────────────────
+  40 KB · 104 párrafos · 10 tablas · 1820 palabras
+  30 de 30 comprobaciones de contenido superadas
+  campos que el autor debe completar, presentes en el documento: 7 de 7
+  ESTADO: COMPLETO
+
+──────────────────────────────────────────────────────────────────────────────
+  Descripción de programa
+  02_Descripcion_de_Programa.docx
+  Papel: Elemento B del depósito. Se adjunta en formato Word.
+──────────────────────────────────────────────────────────────────────────────
+  43 KB · 60 párrafos · 12 tablas · 2452 palabras
+  34 de 34 comprobaciones de contenido superadas
+  ESTADO: COMPLETO
+
+──────────────────────────────────────────────────────────────────────────────
+  Material auxiliar
+  03_Material_Auxiliar.docx
+  Papel: Elemento C del depósito. Exportar a PDF antes de adjuntarlo.
+──────────────────────────────────────────────────────────────────────────────
+  40 KB · 65 párrafos · 7 tablas · 1554 palabras
+  19 de 19 comprobaciones de contenido superadas
+  ESTADO: COMPLETO
+
+──────────────────────────────────────────────────────────────────────────────
+  Acta de coautoría y participación
+  04_Acta_de_Coautoria_y_Participacion.docx
+  Papel: Respaldo interno. Sustenta el campo de funciones y la posición del asesor.
+──────────────────────────────────────────────────────────────────────────────
+  38 KB · 43 párrafos · 4 tablas · 991 palabras
+  15 de 15 comprobaciones de contenido superadas
+  campos que el autor debe completar, presentes en el documento: 3 de 3
+  ESTADO: COMPLETO
+
+──────────────────────────────────────────────────────────────────────────────
+  Consulta de titularidad a la Universidad
+  05_Consulta_de_Titularidad_Universidad_CESMAG.docx
+  Papel: Se radica ante la Vicerrectoría ANTES de registrar.
+──────────────────────────────────────────────────────────────────────────────
+  38 KB · 54 párrafos · 1 tablas · 1107 palabras
+  15 de 15 comprobaciones de contenido superadas
+  ESTADO: COMPLETO
+
+──────────────────────────────────────────────────────────────────────────────
+  Guía de radicación
+  06_Guia_de_Radicacion_DNDA.docx
+  Papel: Instructivo interno. No se radica.
+──────────────────────────────────────────────────────────────────────────────
+  41 KB · 58 párrafos · 6 tablas · 1999 palabras
+  22 de 22 comprobaciones de contenido superadas
+  ESTADO: COMPLETO
+
+──────────────────────────────────────────────────────────────────────────────
+  Despliegue unificado
+  07_Despliegue_Unificado.docx
+  Papel: Recomendación de alojamiento. No forma parte del expediente de registro.
+──────────────────────────────────────────────────────────────────────────────
+  49 KB · 187 párrafos · 24 tablas · 5086 palabras
+  39 de 39 comprobaciones de contenido superadas
+  ESTADO: COMPLETO
+
+──────────────────────────────────────────────────────────────────────────────
+  Código fuente del programa
+  codigo_fuente.zip
+  Papel: Elemento A del depósito.
+──────────────────────────────────────────────────────────────────────────────
+  OK    el manifiesto está dentro del comprimido
+  OK    el modelo que carga el servicio está incluido
+  OK    el punto de entrada del servicio está incluido
+  OK    la reconstrucción de la arquitectura está incluida
+  OK    las dependencias de la interfaz están declaradas
+  OK    las dependencias del servicio están declaradas
+  OK    NO se depositan los cuadernos de experimentación
+  OK    NO se depositan los programas de análisis
+  OK    no se coló ninguna biblioteca de terceros
+  OK    no se colaron los datos de señal
+  OK    hay exactamente un archivo de modelo, no los 122 de las fases experimentales
+  OK    no se colaron los respaldos del documento de tesis
+  442 archivos · 15.20 MB comprimido
+  ESTADO: COMPLETO
+
+──────────────────────────────────────────────────────────────────────────────
+  COHERENCIA ENTRE DOCUMENTOS
+──────────────────────────────────────────────────────────────────────────────
+  OK    el título es idéntico en 01_Solicitud_Inscripcion_Soporte_Logico.docx
+  OK    el título es idéntico en 02_Descripcion_de_Programa.docx
+  OK    el título es idéntico en 03_Material_Auxiliar.docx
+  OK    el título es idéntico en 04_Acta_de_Coautoria_y_Participacion.docx
+  OK    el título es idéntico en 05_Consulta_de_Titularidad_Universidad_CESMAG.docx
+  OK    el título es idéntico en 06_Guia_de_Radicacion_DNDA.docx
+  OK    el manifiesto del comprimido nombra la misma obra
+  OK    R² del modelo desplegado (0.6797) coincide con la ficha de datos
+  OK    extremo inferior del IC95 (0.6235) coincide con la ficha de datos
+  OK    extremo superior del IC95 (0.7233) coincide con la ficha de datos
+  OK    número de pacientes (123) coincide con la ficha de datos
+  OK    registros de MIT-BIH (48) coincide con la ficha de datos
+  OK    registros de INCART (75) coincide con la ficha de datos
+  OK    el total de líneas declarado (29 889) es el medido sobre el depósito
+  OK    no se declara el total del repositorio (61 034), que incluiría lo no depositado
+  OK    los nueve puntos de acceso están descritos
+  OK    las dieciséis capas del modelo están descritas
+
+==============================================================================
+  RESULTADO: sin fallos.
+  Los siete documentos y el depósito de código están completos y son coherentes
+  entre sí. Lo único que falta son los datos personales que solo los autores
+  pueden aportar, y que están marcados dentro de los documentos.
+  Palabras redactadas en los siete documentos: 15009
+==============================================================================

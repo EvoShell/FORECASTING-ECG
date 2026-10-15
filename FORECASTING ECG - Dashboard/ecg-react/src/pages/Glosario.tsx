@@ -191,6 +191,8 @@ export function GlosarioPage() {
         </div>
         <div style={{
           display: 'flex',
+          flexWrap: 'wrap',
+          maxWidth: '100%',
           gap: '6px',
           background: 'var(--glass-bg)',
           border: '1px solid var(--border)',
@@ -285,8 +287,8 @@ export function GlosarioPage() {
                       transition: 'all 0.2s ease',
                     }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px', marginBottom: '8px' }}>
-                      <p style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 'var(--fs-base)', color: 'var(--text)' }}>{t.term}</p>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '6px 12px', marginBottom: '8px' }}>
+                      <p style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 'var(--fs-base)', color: 'var(--text)', minWidth: 0 }}>{t.term}</p>
                       <span style={{
                         padding: '4px 10px', borderRadius: 'var(--radius-sm)', flexShrink: 0,
                         background: colors.bg, border: `1px solid ${colors.border}`,

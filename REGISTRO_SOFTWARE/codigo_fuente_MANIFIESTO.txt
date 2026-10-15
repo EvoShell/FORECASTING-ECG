@@ -1,0 +1,552 @@
+MANIFIESTO DEL DEPOSITO DE CODIGO FUENTE
+==========================================================================
+
+Obra: ECG Forecasting: sistema de prediccion de morfologia de senal
+      electrocardiografica mediante redes neuronales recurrentes
+
+Elemento A del articulo 3 del Decreto 1360 de 1989: «programa de computador»,
+definido como «la expresion de un conjunto organizado de instrucciones, en
+lenguaje natural o codificado».
+
+Fecha de empaquetado: 17 de septiembre de 2026
+Archivos: 441          Tamano sin comprimir: 22.80 MB
+
+--------------------------------------------------------------------------
+COMPOSICION POR TIPO DE ARCHIVO
+--------------------------------------------------------------------------
+
+  .json          188 archivos     5639.1 KB
+  .png            70 archivos     8598.8 KB
+  .csv            62 archivos     2254.9 KB
+  .tsx            40 archivos     1041.5 KB
+  .ts             28 archivos      147.7 KB
+  .py             22 archivos       84.4 KB
+  .svg            10 archivos      162.9 KB
+  .txt             3 archivos        6.9 KB
+  .js              3 archivos        1.6 KB
+  .jpg             3 archivos     1135.3 KB
+  .md              2 archivos        9.8 KB
+  (sin extension)     2 archivos        1.1 KB
+  .html            1 archivos        3.9 KB
+  .conf            1 archivos        1.1 KB
+  .ico             1 archivos       19.6 KB
+  .webmanifest     1 archivos        0.6 KB
+  .css             1 archivos       22.9 KB
+  .yml             1 archivos        0.9 KB
+  .ini             1 archivos        0.2 KB
+  .keras           1 archivos     4211.4 KB
+
+--------------------------------------------------------------------------
+QUE SE INCLUYO
+--------------------------------------------------------------------------
+
+  FORECASTING ECG - Dashboard/ecg-react/src/     Interfaz: código fuente
+  FORECASTING ECG - Dashboard/ecg-react/public/  Interfaz: recursos estáticos
+  FORECASTING ECG - Dashboard/ecg_forecast_api/app/ Servicio: código fuente
+  FORECASTING ECG - Dashboard/ecg_forecast_api/tests/ Servicio: pruebas automáticas
+
+  FORECASTING ECG - Dashboard/ecg-react/package.json Interfaz: dependencias declaradas
+  FORECASTING ECG - Dashboard/ecg-react/index.html Interfaz: documento base
+  FORECASTING ECG - Dashboard/ecg-react/vite.config.ts Interfaz: configuración de compilación
+  FORECASTING ECG - Dashboard/ecg-react/tsconfig.json Interfaz: configuración de TypeScript
+  FORECASTING ECG - Dashboard/ecg-react/tsconfig.app.json Interfaz: configuración de TypeScript
+  FORECASTING ECG - Dashboard/ecg-react/tsconfig.node.json Interfaz: configuración de TypeScript
+  FORECASTING ECG - Dashboard/ecg-react/eslint.config.js Interfaz: reglas de estilo de código
+  FORECASTING ECG - Dashboard/ecg-react/postcss.config.js Interfaz: configuración de estilos
+  FORECASTING ECG - Dashboard/ecg-react/tailwind.config.js Interfaz: configuración de estilos
+  FORECASTING ECG - Dashboard/ecg-react/Dockerfile Interfaz: definición de imagen
+  FORECASTING ECG - Dashboard/ecg-react/nginx.conf Interfaz: configuración del servidor
+  FORECASTING ECG - Dashboard/ecg_forecast_api/requirements.txt Servicio: dependencias declaradas
+  FORECASTING ECG - Dashboard/ecg_forecast_api/Dockerfile Servicio: definición de imagen
+  FORECASTING ECG - Dashboard/ecg_forecast_api/docker-compose.yml Servicio: orquestación
+  FORECASTING ECG - Dashboard/ecg_forecast_api/patch_model.py Servicio: utilidad sobre el modelo
+  FORECASTING ECG - Dashboard/ecg_forecast_api/pytest.ini Servicio: configuración de pruebas
+  FORECASTING ECG - Dashboard/ecg_forecast_api/README.md Servicio: documentación
+  FORECASTING ECG - Dashboard/README.md          Documentación del sistema
+  FORECASTING ECG - Dashboard/COMO_EJECUTAR.txt  Instrucciones de puesta en marcha
+  requirements.txt                               Dependencias del entorno de experimentación
+  results/NB5/modelos/CNN_GRU_ATTN_final_patched.keras Pesos del modelo que carga el servicio
+
+--------------------------------------------------------------------------
+QUE NO SE INCLUYO, Y POR QUE
+--------------------------------------------------------------------------
+
+  Bibliotecas de terceros (node_modules, entornos virtuales de Python).
+  No son obra de los autores: se invocan bajo sus licencias libres y no se
+  incorporan al codigo de la obra. Sus versiones exactas constan en los
+  archivos package.json y requirements.txt, que si van incluidos.
+
+  Datos de senal de las bases MIT-BIH e INCART de PhysioNet. Son datos de
+  entrada de acceso publico para investigacion, no parte del programa.
+
+  Los modelos intermedios de las fases experimentales. Son resultados de
+  ejecucion, no codigo. Se incluye unicamente el archivo de pesos que el
+  servicio carga en produccion.
+
+  Los ocho cuadernos de experimentacion (notebooks/) y los programas de
+  analisis (scripts/). Contienen el procedimiento de investigacion con el que
+  se entrenaron y se evaluaron los modelos, y constituyen el contenido
+  metodologico del trabajo de grado, no el programa cuya inscripcion se
+  solicita. Lo que aqui se deposita es el programa que se ejecuta: la
+  interfaz, el servicio de inferencia y el archivo de pesos que este carga.
+  Los cuadernos son obra de los mismos autores y su proteccion no depende de
+  este deposito: el derecho de autor nace con la creacion.
+
+  Los archivos de resultados de las fases experimentales que residen en la
+  carpeta results/ del repositorio, y las figuras generadas a partir de ellos.
+
+  Salvedad, para que este manifiesto sea exacto: la carpeta de recursos
+  estaticos de la interfaz (ecg-react/public) si contiene copias de archivos
+  de resultados en formato CSV y JSON, junto con figuras en PNG. Se incluyen
+  porque la interfaz los lee directamente para dibujar sus graficas y sin
+  ellos no funciona. Son datos, no instrucciones, y se depositan como parte
+  funcional del programa, no como obra independiente.
+
+  El documento de la tesis y sus respaldos. Son otra obra, de naturaleza
+  literaria, ajena a este deposito.
+
+--------------------------------------------------------------------------
+RELACION COMPLETA DE ARCHIVOS
+--------------------------------------------------------------------------
+
+  FORECASTING ECG - Dashboard/COMO_EJECUTAR.txt
+  FORECASTING ECG - Dashboard/README.md
+  FORECASTING ECG - Dashboard/ecg-react/Dockerfile
+  FORECASTING ECG - Dashboard/ecg-react/eslint.config.js
+  FORECASTING ECG - Dashboard/ecg-react/index.html
+  FORECASTING ECG - Dashboard/ecg-react/nginx.conf
+  FORECASTING ECG - Dashboard/ecg-react/package.json
+  FORECASTING ECG - Dashboard/ecg-react/postcss.config.js
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/favicon/apple-touch-icon-180.png
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/favicon/favicon-16.png
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/favicon/favicon-32.png
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/favicon/favicon-48.png
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/favicon/favicon.ico
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/favicon/favicon.svg
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/favicon/icon-192.png
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/favicon/icon-512.png
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/png/logo-1024.png
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/png/logo-2048.png
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/png/logo-256.png
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/png/logo-512.png
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/png/logo-blanco-1024.png
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/png/logo-claro-1024.png
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/png/logo-negro-1024.png
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/social/og-1200x630-azul.png
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/social/og-1200x630.png
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/svg/logo-blanco.svg
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/svg/logo-claro.svg
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/svg/logo-mono.svg
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/svg/logo-negro.svg
+  FORECASTING ECG - Dashboard/ecg-react/public/brand/svg/logo.svg
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/100.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/101.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/102.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/103.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/104.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/105.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/106.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/107.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/108.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/109.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/111.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/112.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/113.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/114.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/115.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/116.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/117.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/118.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/119.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/121.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/122.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/123.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/124.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/200.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/201.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/202.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/203.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/205.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/207.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/208.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/209.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/210.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/212.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/213.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/214.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/215.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/217.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/219.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/220.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/221.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/222.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/223.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/228.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/230.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/231.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/232.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/233.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/234.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I01.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I02.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I03.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I04.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I05.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I06.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I07.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I08.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I09.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I10.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I11.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I12.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I13.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I14.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I15.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I16.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I17.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I18.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I19.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I20.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I21.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I22.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I23.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I24.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I25.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I26.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I27.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I28.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I29.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I30.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I31.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I32.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I33.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I34.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I35.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I36.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I37.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I38.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I39.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I40.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I41.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I42.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I43.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I44.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I45.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I46.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I47.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I48.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I49.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I50.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I51.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I52.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I53.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I54.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I55.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I56.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I57.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I58.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I59.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I60.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I61.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I62.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I63.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I64.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I65.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I66.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I67.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I68.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I69.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I70.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I71.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I72.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I73.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I74.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I75.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/indice.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/ic95_r2_ExpA.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/ic95_r2_ExpB.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/boxplot_A_vs_B.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/boxplot_ExpA.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/boxplot_ExpB.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/boxplot_mse_ExpA.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/boxplot_mse_ExpB.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/ecg_train_test_100.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/ecg_train_test_200.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/ecg_train_test_217.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/heatmap_filtro_horizonte.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/heatmap_filtro_lookback.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/ic95_ExpA.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/ic95_ExpB.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/prediccion_consistencia.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/prediccion_multistep_todos.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/prediccion_vs_real.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/ranking_filtros.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/ranking_horizontes.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/resultados_A.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/resultados_B.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/resumen_ExpA.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/resumen_ExpB.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/tabla_maestra_A.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/tabla_maestra_B.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/tabla_r2_train_test_ExpA.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/tabla_r2_train_test_ExpB.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/wilcoxon_vs_persistencia_ExpA.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/wilcoxon_vs_persistencia_ExpB.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/ic95_Exp A.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/ic95_Exp B.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/img/boxplot_DL_A_vs_B.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/img/boxplot_DL_Exp A_desglose.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/img/boxplot_DL_Exp A_global.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/img/boxplot_DL_Exp B_desglose.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/img/boxplot_DL_Exp B_global.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/img/boxplot_global_trad_vs_dl.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/img/prediccion_DL_Exp A_ganador.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/img/prediccion_DL_Exp B_ganador.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/r2_train_test_Exp A.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/r2_train_test_Exp B.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/resultados_ExpA.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/resultados_ExpB.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/resumen_Exp A.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/resumen_Exp B.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/tabla_comparativa_NB1_NB2.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/wilcoxon_vs_persistencia_Exp A.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/wilcoxon_vs_persistencia_Exp B.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb3/expA_evaluacion_estandar.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb3/expB_resumen.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb3/expB_transferencia_cruzada.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb3/expC_escenario_clinico.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/ic95_nb4b.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/img/barras_nb4b_modelo_filtro.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/img/boxplot_nb4b.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/img/comparacion_td_cnn.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/img/ejemplo_segmentos_60s.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/img/heatmap_nb4b.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/img/ic95_nb4b.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/img/r2_por_paciente.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/metadata_segmentos_60s.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/resultados_nb4b_global.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/resultados_nb4b_por_paciente.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/resultados_td_cnn_global.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/resultados_td_cnn_por_paciente.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/resumen_nb4b.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/tabla_r2_train_test_nb4b.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/wilcoxon_nb4b.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5/img/03_ecg_filtrado.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5/img/07_demo_CNN_GRU_ATTN.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5/img/10_boxplot_r2_total.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5/img/10_degradacion_temporal.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5/img/10_r2_pacientes_CNN_GRU_ATTN.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5/img/12_5_prediccion_extendida_ft.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5/img/12_5_real_vs_pred_ft.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5/img/12_5_tabla_metricas_ft.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5/resultados_lopo.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5/tabla_resumen.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/img/demo_v2_BiGRU_MHA.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/img/demo_v2_CNN_GRU.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/img/demo_v2_GRU_base.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/img/lopo_v2_BiGRU_MHA_r2.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/img/lopo_v2_CNN_GRU_r2.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/img/lopo_v2_GRU_base_r2.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/img/lopo_v2_boxplot_all.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/img/lopo_v2_mejora_ft_BiGRU_MHA.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/img/lopo_v2_mejora_ft_CNN_GRU.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/lopo_v2_checkpoint.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/resultados_lopo_v2.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/tabla_resumen_v2.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/validacion_incart.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/cohorte_reducida_50.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/efecto_mediana.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/efecto_mediana_por_paciente.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/hp_busqueda_completa.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/hp_comparacion_final.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/hp_dl_CNN_GRU_ATTN.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/hp_dl_GRU.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/hp_dl_resumen.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/hp_dl_resumen_CNN_GRU_ATTN.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/hp_dl_sensibilidad_CNN_GRU_ATTN.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/hp_dl_sensibilidad_GRU.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/hp_mejores_por_paciente.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/hp_resumen.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/hp_sensibilidad.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/img/fig26_arquitectura_cnn_gru_attn.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/img/fig27_caida_transferencia.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/img/fig32_trayectoria_experimental.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/nb6_comparacion_reporte.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/nb6_contraste_bases.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/nb6_recalculo.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/nb6_tabla_por_dataset.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/p2_distribucion_aami.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/p2_ectopicos_por_paciente.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/p2_ectopicos_vs_r2.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/p2_resumen.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/p2_rr_por_base.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/p2_rr_por_paciente.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/viabilidad_submuestra.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/102.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/104.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/109.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/114.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/117.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/121.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/123.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/124.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/203.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/205.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/208.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/217.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/220.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/221.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/228.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/234.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I03.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I07.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I08.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I11.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I12.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I20.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I21.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I25.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I26.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I29.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I30.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I31.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I32.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I34.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I35.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I39.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I40.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I49.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I50.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I51.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I52.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I53.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I58.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I59.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I61.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I62.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I67.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I69.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I71.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I75.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/indice.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/p3_contraste.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/p3_error_por_clase.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/p4_curva_precision_exhaustividad.png
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/p4_deteccion_por_paciente.csv
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/p4_resumen.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/progreso.json
+  FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/salvedad_derivaciones.json
+  FORECASTING ECG - Dashboard/ecg-react/public/favicon.svg
+  FORECASTING ECG - Dashboard/ecg-react/public/icons.svg
+  FORECASTING ECG - Dashboard/ecg-react/public/img/DarioGomez.JPG
+  FORECASTING ECG - Dashboard/ecg-react/public/img/DarwinBurbano.JPG
+  FORECASTING ECG - Dashboard/ecg-react/public/img/Escudos_2-2 (1).png
+  FORECASTING ECG - Dashboard/ecg-react/public/img/HectorMora.JPG
+  FORECASTING ECG - Dashboard/ecg-react/public/img/logoECGF.png
+  FORECASTING ECG - Dashboard/ecg-react/public/img/logoUniv.png
+  FORECASTING ECG - Dashboard/ecg-react/public/site.webmanifest
+  FORECASTING ECG - Dashboard/ecg-react/src/App.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/assets/hero.png
+  FORECASTING ECG - Dashboard/ecg-react/src/assets/react.svg
+  FORECASTING ECG - Dashboard/ecg-react/src/assets/vite.svg
+  FORECASTING ECG - Dashboard/ecg-react/src/components/charts/BoxPlot.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/charts/ForestPlot.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/charts/Heatmap.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/charts/PlotlyBarChart.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/charts/PlotlyChart.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/charts/index.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/components/common/ErrorBoundary.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/data/DataTable.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/data/KPICards.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/data/index.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/components/ecg/ECGPredictionChart.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/ecg/LightweightECGChart.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/experimentos/CasosDeteccion.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/experimentos/NB7HPContent.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/experimentos/NB8Content.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/layout/Navbar.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/layout/PageWrapper.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/metrics/MetricCard.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/metrics/MetricStat.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/models/ModelBadge.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/ui/Boton.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/ui/Callout.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/ui/Cargando.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/ui/ExpandableSection.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/ui/Filtros.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/ui/FindingCard.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/ui/Grainient.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/ui/ImageGallery.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/ui/PaginaDeError.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/ui/PapelECG.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/ui/ShinyText.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/components/ui/SoftAurora.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/hooks/index.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/hooks/useAnotaciones.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/hooks/useCSV.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/hooks/useCasosDeteccion.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/hooks/useIsDark.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/hooks/useLocalStorage.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/hooks/useMediaQuery.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/hooks/useNB1Results.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/hooks/useNB2Results.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/hooks/useNB3Results.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/hooks/useNB4BResults.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/hooks/useNB5BResults.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/hooks/useNB5Results.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/hooks/useNB7HPResults.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/hooks/useNB8Results.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/hooks/useReferenciaNB6.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/hooks/useTablaLopo.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/hooks/useUmbralDeteccion.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/i18n/index.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/lib/api.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/lib/exportarCSV.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/lib/plotly.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/lib/tokens.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/main.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/pages/Cohorte.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/pages/Experimentos.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/pages/Explorador.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/pages/Glosario.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/pages/Home.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/pages/Lopo.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/pages/Manual.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/pages/Modelos.tsx
+  FORECASTING ECG - Dashboard/ecg-react/src/store/useECGStore.ts
+  FORECASTING ECG - Dashboard/ecg-react/src/styles/globals.css
+  FORECASTING ECG - Dashboard/ecg-react/src/types/ecg.types.ts
+  FORECASTING ECG - Dashboard/ecg-react/tailwind.config.js
+  FORECASTING ECG - Dashboard/ecg-react/tsconfig.app.json
+  FORECASTING ECG - Dashboard/ecg-react/tsconfig.json
+  FORECASTING ECG - Dashboard/ecg-react/tsconfig.node.json
+  FORECASTING ECG - Dashboard/ecg-react/vite.config.ts
+  FORECASTING ECG - Dashboard/ecg_forecast_api/Dockerfile
+  FORECASTING ECG - Dashboard/ecg_forecast_api/README.md
+  FORECASTING ECG - Dashboard/ecg_forecast_api/app/__init__.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/app/api/__init__.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/app/api/routes/__init__.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/app/api/routes/models.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/app/api/routes/patients.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/app/api/routes/predict.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/app/api/routes/process.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/app/config.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/app/core/__init__.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/app/core/filtering.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/app/core/model_loader.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/app/core/preprocessing.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/app/core/rpeak_detection.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/app/core/segmentation.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/app/main.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/app/models/__init__.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/app/models/schemas.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/docker-compose.yml
+  FORECASTING ECG - Dashboard/ecg_forecast_api/patch_model.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/pytest.ini
+  FORECASTING ECG - Dashboard/ecg_forecast_api/requirements.txt
+  FORECASTING ECG - Dashboard/ecg_forecast_api/tests/__init__.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/tests/test_api.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/tests/test_segmentation.py
+  FORECASTING ECG - Dashboard/ecg_forecast_api/tests/test_seguridad.py
+  requirements.txt
+  results/NB5/modelos/CNN_GRU_ATTN_final_patched.keras

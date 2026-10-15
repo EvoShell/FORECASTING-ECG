@@ -35,7 +35,7 @@ const S = {
   } as React.CSSProperties,
   mono: {
     fontFamily: 'var(--font-data)', fontSize: 'var(--fs-xs)', background: 'var(--elevated)',
-    padding: '2px 6px', borderRadius: '4px', color: 'var(--text)',
+    padding: '2px 6px', borderRadius: '4px', color: 'var(--text)', overflowWrap: 'anywhere',
   } as React.CSSProperties,
   badge: (color: string) => ({
     display: 'inline-block', padding: '2px 8px', borderRadius: '4px',
@@ -61,7 +61,7 @@ function Bullet({ children }: { children: React.ReactNode }) {
   return (
     <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', marginBottom: '6px' }}>
       <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'var(--prediction)', marginTop: '7px', flexShrink: 0 }} />
-      <span style={S.body}>{children}</span>
+      <span style={{ ...S.body, minWidth: 0 }}>{children}</span>
     </div>
   );
 }
@@ -268,7 +268,7 @@ export function ManualPage() {
               {tocOpen && (
                 <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
                   transition={{ duration: 0.2 }} style={{ overflow: 'hidden' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '4px 24px', marginTop: '16px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))', gap: '4px 24px', marginTop: '16px' }}>
                     {TOC.map(t => (
                       <button key={t.id} onClick={() => scrollTo(t.id)} style={{
                         background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left',
@@ -303,7 +303,7 @@ export function ManualPage() {
 
         <h3 style={S.h3}>{t('1.2 Arquitectura', '1.2 Architecture')}</h3>
         <p style={S.body}>{t('La aplicación se compone de dos módulos principales desplegados mediante contenedores Docker:', 'The application consists of two main modules deployed via Docker containers:')}</p>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginTop: '12px', marginBottom: '14px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '12px', marginTop: '12px', marginBottom: '14px' }}>
           <div style={{ padding: '12px 16px', borderRadius: 'var(--radius-md)', background: 'var(--elevated)', border: '1px solid var(--border)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
               <Monitor size={14} color="var(--prediction)" />
@@ -350,7 +350,7 @@ export function ManualPage() {
         </div>
 
         <h3 style={S.h3}>{t('1.5 Enfoques Experimentales', '1.5 Experimental Approaches')}</h3>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginTop: '8px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '12px', marginTop: '8px' }}>
           <div style={{ padding: '12px 16px', borderRadius: 'var(--radius-md)', background: 'var(--elevated)', border: '1px solid var(--border)' }}>
             <span style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-2xs)', fontWeight: 600, color: 'var(--text)' }}>{t('Exp A · Ventanas Temporales', 'Exp A · Time Windows')}</span>
             <p style={{ ...S.body, fontSize: 'var(--fs-xs)', marginTop: '6px' }}>
@@ -515,7 +515,7 @@ export function ManualPage() {
         <p style={S.body}>
           {t('El dashboard incluye un sistema de temas con dos modos visuales. Para cambiar de tema, utilice el botón con ícono de sol/luna ubicado en la parte inferior de la barra de navegación.', 'The dashboard includes a theme system with two visual modes. To change the theme, use the sun/moon icon button located at the bottom of the navigation bar.')}
         </p>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginTop: '10px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '12px', marginTop: '10px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 14px', borderRadius: 'var(--radius-md)', background: 'var(--elevated)', border: '1px solid var(--border)' }}>
             <Moon size={14} color="var(--prediction)" />
             <span style={{ ...S.body, fontSize: 'var(--fs-xs)' }}><strong>{t('Modo oscuro', 'Dark mode')}</strong> ({t('predeterminado', 'default')}): {t('fondo oscuro, texto claro. Ideal para reducir fatiga visual.', 'dark background, light text. Ideal for reducing eye strain.')}</span>
@@ -583,7 +583,7 @@ export function ManualPage() {
 
         <h3 style={S.h3}>{t('6.1 Categorías de Modelos', '6.1 Model Categories')}</h3>
         <p style={S.body}>{t('En la parte superior, tres botones permiten alternar entre las categorías:', 'At the top, three buttons allow switching between categories:')}</p>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px', marginTop: '10px', marginBottom: '14px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 170px), 1fr))', gap: '10px', marginTop: '10px', marginBottom: '14px' }}>
           <div style={{ padding: '10px 14px', borderRadius: 'var(--radius-md)', background: 'var(--elevated)', border: '1px solid var(--border)', textAlign: 'center' }}>
             <span style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-2xs)', fontWeight: 600, color: 'var(--prediction)' }}>Deep Learning</span>
             <p style={{ ...S.body, fontSize: 'var(--fs-2xs)', marginTop: '4px' }}>LSTM, GRU, CNN-GRU</p>
@@ -857,7 +857,7 @@ export function ManualPage() {
         <Bullet><strong>{t('Contador', 'Counter')}</strong>: {t('Muestra el número de términos encontrados según los filtros activos.', 'Shows the number of terms found according to the active filters.')}</Bullet>
 
         <h3 style={S.h3}>{t('11.2 Categorías', '11.2 Categories')}</h3>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginTop: '8px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '10px', marginTop: '8px' }}>
           <div style={{ padding: '10px 14px', borderRadius: 'var(--radius-md)', background: 'var(--elevated)', border: '1px solid var(--border)' }}>
             <span style={S.badge('#ef4444')}>Clínico</span>
             <p style={{ ...S.body, fontSize: 'var(--fs-2xs)', marginTop: '6px' }}>{t('24 términos: Arritmia, APC, Bradicardia, Complejo QRS, ECG, AAMI, latido ectópico, entre otros.', '24 terms: Arrhythmia, APC, Bradycardia, QRS complex, ECG, AAMI, ectopic beat, among others.')}</p>

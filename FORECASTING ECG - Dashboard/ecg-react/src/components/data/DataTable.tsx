@@ -265,7 +265,7 @@ export function DataTable<T extends Record<string, unknown>>({
             )}
           </span>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8, maxWidth: '100%' }}>
             <Boton
               tamano="sm"
               variante="sutil"

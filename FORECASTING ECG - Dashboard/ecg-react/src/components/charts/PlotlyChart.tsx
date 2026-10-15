@@ -137,6 +137,31 @@ function PlotlyChartBase({ data, layout = {}, config = {}, style, onError, vacio
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [marcaData, firmaLayout, firmaConfig]);
 
+  // Reajuste al tamano de la CAJA, no de la ventana. `responsive: true` de Plotly
+  // solo escucha `resize` de la ventana, y medido: tras ese evento el SVG se quedaba
+  // 6 px mas ancho que su contenedor en un telefono, y no se enteraba de cambios
+  // que no mueven la ventana (plegar la barra lateral, girar el telefono con la
+  // barra de direcciones cambiando, una rejilla que pasa de 2 columnas a 1).
+  useEffect(() => {
+    const nodo = containerRef.current;
+    if (!nodo || typeof ResizeObserver === 'undefined') return;
+    let ancho = nodo.getBoundingClientRect().width;
+    let marco = 0;
+    const obs = new ResizeObserver(([entrada]) => {
+      const nuevo = entrada.contentRect.width;
+      if (Math.abs(nuevo - ancho) < 1) return;
+      ancho = nuevo;
+      cancelAnimationFrame(marco);
+      marco = requestAnimationFrame(() => {
+        // Solo si ya hay grafica dibujada: antes de eso no hay nada que reajustar.
+        if (!nodo.isConnected || !(nodo as unknown as { _fullLayout?: unknown })._fullLayout) return;
+        Promise.resolve(Plotly.Plots.resize(nodo)).catch(() => { /* desmontada a medias */ });
+      });
+    });
+    obs.observe(nodo);
+    return () => { obs.disconnect(); cancelAnimationFrame(marco); };
+  }, []);
+
   // Limpieza solo al desmontar: Plotly deja nodos y oyentes si no se purga.
   useEffect(() => {
     const nodo = containerRef.current;

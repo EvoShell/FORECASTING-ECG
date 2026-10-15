@@ -32,6 +32,7 @@ export interface PlotlyApi {
   newPlot: (el: HTMLElement, data: unknown[], layout?: unknown, config?: unknown) => Promise<unknown>;
   react: (el: HTMLElement, data: unknown[], layout?: unknown, config?: unknown) => Promise<unknown>;
   purge: (el: HTMLElement) => void;
+  Plots: { resize: (el: HTMLElement) => Promise<unknown> | void };
 }
 
 export default Plotly as PlotlyApi;

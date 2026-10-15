@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Brain, Activity, Users, Zap, Filter, TrendingUp, BarChart3, RotateCcw } from 'lucide-react';
+import { Brain, Activity, Users, Zap, Filter, TrendingUp, BarChart3, RotateCcw, Trophy } from 'lucide-react';
 import { PageWrapper } from '@/components/layout/PageWrapper';
 import { DataTable } from '@/components/data/DataTable';
 import { MetricStat } from '@/components/metrics/MetricStat';
@@ -33,6 +33,7 @@ import { useNB7HPResults } from '@/hooks/useNB7HPResults';
 import { NB7HPContent } from '@/components/experimentos/NB7HPContent';
 import { NB8Content } from '@/components/experimentos/NB8Content';
 import { Boton } from '@/components/ui/Boton';
+import { SelloGanador } from '@/components/experimentos/SelloGanador';
 import type { TFn } from '@/i18n';
 
 type ExperimentTab = 'nb1' | 'nb2' | 'nb3' | 'nb4b' | 'nb5' | 'nb5b'
@@ -269,10 +270,21 @@ export function ExperimentosPage() {
             variante="sutil"
             tamano="sm"
             activo={activeTab === id}
-            icono={icon}
+            icono={id === 'nb5' ? <Trophy size={16} aria-hidden /> : icon}
             role="tab"
             aria-selected={activeTab === id}
-            style={{ fontFamily: 'var(--font-data)' }}
+            data-ganador={id === 'nb5' ? '' : undefined}
+            title={id === 'nb5' ? t('Experimento del modelo ganador', 'Winning model experiment') : undefined}
+            style={{
+              fontFamily: 'var(--font-data)',
+              // Exp. 6 es el experimento del modelo ganador: verde siempre, y
+              // relleno cuando esta seleccionado.
+              ...(id === 'nb5'
+                ? activeTab === id
+                  ? { background: 'var(--ok)', color: 'var(--on-ok)', borderColor: 'var(--ok)', boxShadow: '0 0 0 3px var(--ok-tint), 0 4px 14px -4px var(--ok)' }
+                  : { background: 'var(--ok-tint)', color: 'var(--ok)', borderColor: 'var(--ok-border)' }
+                : null),
+            }}
           >
             {label}
           </Boton>
@@ -285,7 +297,7 @@ export function ExperimentosPage() {
       {meta && (
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))',
           gap: '10px 24px',
           marginBottom: '24px',
           padding: '14px 18px',
@@ -553,11 +565,11 @@ function NB1Content(props: NB1ContentProps) {
         boxShadow: 'var(--glass-shadow)'
       }}>
         {/* Left: Metadata */}
-        <div style={{ flex: '1 1 450px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div style={{ flex: '1 1 min(100%, 450px)', minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', flexWrap: 'wrap' }}>
               <span className="eyebrow" style={{ letterSpacing: '2px', fontSize: 'var(--fs-xs)' }}>Experimento 1 · NB1</span>
-              <span style={{ fontSize: 'var(--fs-xs)', padding: '3px 8px', borderRadius: '4px', background: 'var(--surface)', border: '1px solid var(--border)', fontFamily: 'var(--font-data)', color: 'var(--signal)' }}>01_tradicionales.ipynb</span>
+              <span style={{ fontSize: 'var(--fs-xs)', padding: '3px 8px', borderRadius: '4px', background: 'var(--surface)', border: '1px solid var(--border)', fontFamily: 'var(--font-data)', color: 'var(--signal)', overflowWrap: 'anywhere', maxWidth: '100%' }}>01_tradicionales.ipynb</span>
             </div>
             <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--fs-lg)', fontWeight: 700, margin: '0 0 8px 0', color: 'var(--text)' }}>
               {t('Modelos Tradicionales de ML para Predicción de Señales ECG', 'Traditional ML Models for ECG Signal Prediction')}
@@ -566,14 +578,14 @@ function NB1Content(props: NB1ContentProps) {
               {t('Modelos clásicos: LinReg, DT, RF, SVR, MLP, ARIMA, Persistencia', 'Classic models: LinReg, DT, RF, SVR, MLP, ARIMA, Persistence')}
             </p>
           </div>
-          <div style={{ display: 'flex', gap: '16px', marginTop: '16px', fontSize: 'var(--fs-xs)', color: 'var(--text-muted)' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 16px', marginTop: '16px', fontSize: 'var(--fs-xs)', color: 'var(--text-muted)' }}>
             <span><strong>Dataset:</strong> MIT-BIH Arrhythmia Database · 48 pacientes · 360 Hz · MLII</span>
             <span><strong>Partición:</strong> 80% entrenamiento / 20% prueba · temporal</span>
           </div>
         </div>
 
         {/* Right: Key KPIs */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(118px, 1fr))', gap: '10px', flex: '1 1 320px', alignContent: 'center' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(118px, 1fr))', gap: '10px', flex: '1 1 min(100%, 320px)', minWidth: 0, alignContent: 'center' }}>
           <MetricStat
             densa
             fase="E1"
@@ -616,6 +628,9 @@ function NB1Content(props: NB1ContentProps) {
         {subTabs.map(({ id, label, icon }) => (
           <button
             key={id}
+            role="tab"
+            aria-selected={activeSubTab === id}
+            data-subtab
             onClick={() => setActiveSubTab(id)}
             style={{
               display: 'flex',
@@ -924,7 +939,7 @@ function NB1Content(props: NB1ContentProps) {
                 <h2 style={{ fontSize: 'var(--fs-md)', fontWeight: 600, color: 'var(--text)', marginBottom: '16px' }}>
                   {t('Análisis de Sobreajuste (Train vs Test)', 'Overfitting Analysis (Train vs Test)')}
                 </h2>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '16px' }}>
                   <div className="card" style={{ padding: '16px' }}>
                     <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, marginBottom: '12px', color: 'var(--text)' }}>
                       {t('Experimento A', 'Experiment A')}
@@ -965,7 +980,7 @@ function NB1Content(props: NB1ContentProps) {
                 <h2 style={{ fontSize: 'var(--fs-md)', fontWeight: 600, color: 'var(--text)', marginBottom: '16px' }}>
                   {t('Test de Wilcoxon vs Persistencia', 'Wilcoxon Test vs Persistence')}
                 </h2>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '16px' }}>
                   <div className="card" style={{ padding: '16px' }}>
                     <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, marginBottom: '12px', color: 'var(--text)' }}>
                       {t('Experimento A', 'Experiment A')}
@@ -1358,11 +1373,11 @@ function NB2Content(props: NB2ContentProps) {
         boxShadow: 'var(--glass-shadow)'
       }}>
         {/* Left: Metadata */}
-        <div style={{ flex: '1 1 450px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div style={{ flex: '1 1 min(100%, 450px)', minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', flexWrap: 'wrap' }}>
               <span className="eyebrow" style={{ letterSpacing: '2px', fontSize: 'var(--fs-xs)' }}>Experimento 2 · NB2</span>
-              <span style={{ fontSize: 'var(--fs-xs)', padding: '3px 8px', borderRadius: '4px', background: 'var(--surface)', border: '1px solid var(--border)', fontFamily: 'var(--font-data)', color: 'var(--signal)' }}>02_deep_learning.ipynb</span>
+              <span style={{ fontSize: 'var(--fs-xs)', padding: '3px 8px', borderRadius: '4px', background: 'var(--surface)', border: '1px solid var(--border)', fontFamily: 'var(--font-data)', color: 'var(--signal)', overflowWrap: 'anywhere', maxWidth: '100%' }}>02_deep_learning.ipynb</span>
             </div>
             <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--fs-lg)', fontWeight: 700, margin: '0 0 8px 0', color: 'var(--text)' }}>
               {t('Deep Learning para Predicción de Señales ECG', 'Deep Learning for ECG Signal Prediction')}
@@ -1371,14 +1386,14 @@ function NB2Content(props: NB2ContentProps) {
               {t('Modelos DL: LSTM, GRU, CNN-LSTM, CNN-GRU', 'DL models: LSTM, GRU, CNN-LSTM, CNN-GRU')}
             </p>
           </div>
-          <div style={{ display: 'flex', gap: '16px', marginTop: '16px', fontSize: 'var(--fs-xs)', color: 'var(--text-muted)' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 16px', marginTop: '16px', fontSize: 'var(--fs-xs)', color: 'var(--text-muted)' }}>
             <span><strong>Dataset:</strong> MIT-BIH Arrhythmia Database · 48 pacientes · 360 Hz · MLII</span>
             <span><strong>Partición:</strong> 80% entrenamiento / 20% prueba · temporal</span>
           </div>
         </div>
 
         {/* Right: Key KPIs */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(118px, 1fr))', gap: '10px', flex: '1 1 320px', alignContent: 'center' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(118px, 1fr))', gap: '10px', flex: '1 1 min(100%, 320px)', minWidth: 0, alignContent: 'center' }}>
           <MetricStat
             densa
             fase="E2"
@@ -1421,6 +1436,9 @@ function NB2Content(props: NB2ContentProps) {
         {subTabs.map(({ id, label, icon }) => (
           <button
             key={id}
+            role="tab"
+            aria-selected={activeSubTab === id}
+            data-subtab
             onClick={() => setActiveSubTab(id)}
             style={{
               display: 'flex',
@@ -1567,7 +1585,7 @@ function NB2Content(props: NB2ContentProps) {
 
             {heatmapModelHorizonA.x.length > 0 && (
               <div style={{ marginBottom: '32px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(480px, 1fr))', gap: '20px', marginBottom: '20px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 480px), 1fr))', gap: '20px', marginBottom: '20px' }}>
                   <div className="card" style={{ padding: '16px' }}>
                     <Heatmap
                       x={heatmapModelHorizonA.x}
@@ -1642,7 +1660,7 @@ function NB2Content(props: NB2ContentProps) {
 
             {heatmapModelLookbackB.x.length > 0 && (
               <div style={{ marginBottom: '32px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(480px, 1fr))', gap: '20px', marginBottom: '20px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 480px), 1fr))', gap: '20px', marginBottom: '20px' }}>
                   <div className="card" style={{ padding: '16px' }}>
                     <Heatmap
                       x={heatmapModelLookbackB.x}
@@ -1698,7 +1716,7 @@ function NB2Content(props: NB2ContentProps) {
                 <h2 style={{ fontSize: 'var(--fs-md)', fontWeight: 600, color: 'var(--text)', marginBottom: '16px' }}>
                   {t('Test de Wilcoxon vs Persistencia', 'Wilcoxon Test vs Persistence')}
                 </h2>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '16px' }}>
                   <div className="card" style={{ padding: '16px' }}>
                     <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, marginBottom: '12px', color: 'var(--text)' }}>
                       {t('Experimento A', 'Experiment A')}
@@ -2034,11 +2052,11 @@ function NB4BContent(props: NB4BContentProps) {
         boxShadow: 'var(--glass-shadow)'
       }}>
         {/* Left: Metadata */}
-        <div style={{ flex: '1 1 450px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div style={{ flex: '1 1 min(100%, 450px)', minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', flexWrap: 'wrap' }}>
               <span className="eyebrow" style={{ letterSpacing: '2px', fontSize: 'var(--fs-xs)' }}>Experimento 4 · NB4B</span>
-              <span style={{ fontSize: 'var(--fs-xs)', padding: '3px 8px', borderRadius: '4px', background: 'var(--surface)', border: '1px solid var(--border)', fontFamily: 'var(--font-data)', color: 'var(--signal)' }}>04_compuesta multi-sujeto.ipynb</span>
+              <span style={{ fontSize: 'var(--fs-xs)', padding: '3px 8px', borderRadius: '4px', background: 'var(--surface)', border: '1px solid var(--border)', fontFamily: 'var(--font-data)', color: 'var(--signal)', overflowWrap: 'anywhere', maxWidth: '100%' }}>04_compuesta multi-sujeto.ipynb</span>
             </div>
             <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--fs-lg)', fontWeight: 700, margin: '0 0 8px 0', color: 'var(--text)' }}>
               {t('Modelo Multi-sujeto para Predicción ECG', 'Multi-subject Model for ECG Prediction')}
@@ -2047,14 +2065,14 @@ function NB4BContent(props: NB4BContentProps) {
               {t('Modelo global entrenado en pool de múltiples pacientes para capturar morfologías generales.', 'Global model trained on a pool of multiple patients to capture general morphologies.')}
             </p>
           </div>
-          <div style={{ display: 'flex', gap: '16px', marginTop: '16px', fontSize: 'var(--fs-xs)', color: 'var(--text-muted)' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 16px', marginTop: '16px', fontSize: 'var(--fs-xs)', color: 'var(--text-muted)' }}>
             <span><strong>Dataset:</strong> MIT-BIH · 48 pacientes · 360 Hz · MLII</span>
             <span><strong>Partición:</strong> Conjunta multi-sujeto (80/20)</span>
           </div>
         </div>
 
         {/* Right: Key KPIs */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(118px, 1fr))', gap: '10px', flex: '1 1 320px', alignContent: 'center' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(118px, 1fr))', gap: '10px', flex: '1 1 min(100%, 320px)', minWidth: 0, alignContent: 'center' }}>
           <MetricStat
             densa
             fase="E4"
@@ -2097,6 +2115,9 @@ function NB4BContent(props: NB4BContentProps) {
         {subTabs.map(({ id, label, icon }) => (
           <button
             key={id}
+            role="tab"
+            aria-selected={activeSubTab === id}
+            data-subtab
             onClick={() => setActiveSubTab(id)}
             style={{
               display: 'flex',
@@ -2249,7 +2270,7 @@ function NB4BContent(props: NB4BContentProps) {
               <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, marginBottom: '12px', color: 'var(--text)' }}>
                 R² {t('por Modelo · Filtro:', 'by Model · Filter:')} {selectedFiltro}
               </h3>
-              <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '16px' }}>
                 {filtros.map(f => (
                   <button
                     key={f}
@@ -2617,12 +2638,17 @@ function NB5Content(props: NB5ContentProps) {
         WebkitBackdropFilter: 'var(--glass-blur)',
         boxShadow: 'var(--glass-shadow)'
       }}>
+        {/* Sello de modelo ganador: el CNN-GRU-ATTN de este experimento es el
+            modelo final. Va como un hijo mas de la fila flexible, asi que en un
+            telefono baja a su propia linea en vez de tapar las cifras. */}
+        <SelloGanador />
+
         {/* Left: Metadata */}
-        <div style={{ flex: '1 1 450px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div style={{ flex: '1 1 min(100%, 340px)', minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', flexWrap: 'wrap' }}>
               <span className="eyebrow" style={{ letterSpacing: '2px', fontSize: 'var(--fs-xs)' }}>Experimento 6 · NB6</span>
-              <span style={{ fontSize: 'var(--fs-xs)', padding: '3px 8px', borderRadius: '4px', background: 'var(--surface)', border: '1px solid var(--border)', fontFamily: 'var(--font-data)', color: 'var(--signal)' }}>06_Cross_patient_MultiStep.ipynb</span>
+              <span style={{ fontSize: 'var(--fs-xs)', padding: '3px 8px', borderRadius: '4px', background: 'var(--surface)', border: '1px solid var(--border)', fontFamily: 'var(--font-data)', color: 'var(--signal)', overflowWrap: 'anywhere', maxWidth: '100%' }}>06_Cross_patient_MultiStep.ipynb</span>
             </div>
             <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--fs-lg)', fontWeight: 700, margin: '0 0 8px 0', color: 'var(--text)' }}>
               {t('Cross-patient Multi-step LOPO · CNN-GRU con Atención Temporal', 'Cross-patient Multi-step LOPO · CNN-GRU with Temporal Attention')}
@@ -2631,14 +2657,14 @@ function NB5Content(props: NB5ContentProps) {
               {t('LOPO (Leave-One-Patient-Out) con horizonte H=3 latidos simultáneos y fine-tuning rápido.', 'LOPO (Leave-One-Patient-Out) with H=3 simultaneous beats horizon and quick fine-tuning.')}
             </p>
           </div>
-          <div style={{ display: 'flex', gap: '16px', marginTop: '16px', fontSize: 'var(--fs-xs)', color: 'var(--text-muted)' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 16px', marginTop: '16px', fontSize: 'var(--fs-xs)', color: 'var(--text-muted)' }}>
             <span><strong>Dataset:</strong> MIT-BIH (48) + INCART (75) = 123 pacientes</span>
             <span><strong>Partición:</strong> LOPO (Leave-One-Patient-Out)</span>
           </div>
         </div>
 
         {/* Right: Key KPIs */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(118px, 1fr))', gap: '10px', flex: '1 1 320px', alignContent: 'center' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(118px, 1fr))', gap: '10px', flex: '1 1 min(100%, 320px)', minWidth: 0, alignContent: 'center' }}>
           <MetricStat
             densa
             fase="E6"
@@ -2681,6 +2707,9 @@ function NB5Content(props: NB5ContentProps) {
         {subTabs.map(({ id, label, icon }) => (
           <button
             key={id}
+            role="tab"
+            aria-selected={activeSubTab === id}
+            data-subtab
             onClick={() => setActiveSubTab(id)}
             style={{
               display: 'flex',
@@ -2849,7 +2878,7 @@ function NB5Content(props: NB5ContentProps) {
             {temporalDeg.length > 0 && (
               <div className="card" style={{ padding: '16px', marginBottom: '20px' }}>
                 <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, marginBottom: '4px', color: 'var(--text)' }}>{t('Degradación Temporal Multi-step · R² por Horizonte', 'Multi-step Temporal Degradation · R² per Horizon')}</h3>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '16px' }}>
                   <DataTable
                     data={temporalDeg.map((r: any) => ({
                       Horizonte: r.horizonte,
@@ -2920,7 +2949,7 @@ function NB5Content(props: NB5ContentProps) {
             {r2Distribution.length > 0 && (
               <div className="card" style={{ padding: '16px', marginBottom: '20px' }}>
                 <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, marginBottom: '4px', color: 'var(--text)' }}>{t('Distribución de R² por Rango', 'R² Distribution by Range')}</h3>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '16px' }}>
                   <DataTable
                     data={r2Distribution.map((r: any) => ({
                       Rango: r.rango,
@@ -2958,7 +2987,7 @@ function NB5Content(props: NB5ContentProps) {
             {/* Efecto Fine-Tuning */}
             <div className="card" style={{ padding: '16px', marginBottom: '20px' }}>
               <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, marginBottom: '4px', color: 'var(--text)' }}>{t('Efecto del Fine-Tuning (K=30 latidos)', 'Fine-Tuning Effect (K=30 beats)')}</h3>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '16px' }}>
                 <DataTable
                   data={[{
                     'Modelo base': ftEffect.modeloBase,
@@ -3019,7 +3048,7 @@ function NB5Content(props: NB5ContentProps) {
             </div>
 
             {/* Top/Bottom Pacientes */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px', marginBottom: '20px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '16px', marginBottom: '20px' }}>
               <div className="card" style={{ padding: '16px' }}>
                 <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, marginBottom: '12px', color: 'var(--text)' }}>{t('Top 5 Pacientes (MIT-BIH)', 'Top 5 Patients (MIT-BIH)')}</h3>
                 <DataTable
@@ -3071,7 +3100,7 @@ function NB5Content(props: NB5ContentProps) {
             {gapData.length > 0 && (
               <div className="card" style={{ padding: '16px', marginBottom: '20px' }}>
                 <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, marginBottom: '4px', color: 'var(--text)' }}>{t('Brecha Train-Test · Gap de Generalización LOPO', 'Train-Test Gap · LOPO Generalization Gap')}</h3>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '16px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '16px' }}>
                   <DataTable
                     data={gapData.map((g: any) => ({
                       Modelo: g.Modelo,
@@ -3345,11 +3374,11 @@ function NB5BContent(props: NB5BContentProps) {
         boxShadow: 'var(--glass-shadow)'
       }}>
         {/* Left: Metadata */}
-        <div style={{ flex: '1 1 450px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div style={{ flex: '1 1 min(100%, 450px)', minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', flexWrap: 'wrap' }}>
               <span className="eyebrow" style={{ letterSpacing: '2px', fontSize: 'var(--fs-xs)' }}>Experimento 5 · NB5B</span>
-              <span style={{ fontSize: 'var(--fs-xs)', padding: '3px 8px', borderRadius: '4px', background: 'var(--surface)', border: '1px solid var(--border)', fontFamily: 'var(--font-data)', color: 'var(--signal)' }}>05_cross_patient.ipynb</span>
+              <span style={{ fontSize: 'var(--fs-xs)', padding: '3px 8px', borderRadius: '4px', background: 'var(--surface)', border: '1px solid var(--border)', fontFamily: 'var(--font-data)', color: 'var(--signal)', overflowWrap: 'anywhere', maxWidth: '100%' }}>05_cross_patient.ipynb</span>
             </div>
             <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--fs-lg)', fontWeight: 700, margin: '0 0 8px 0', color: 'var(--text)' }}>
               {t('Evaluación Cross-patient (LOPO)', 'Cross-patient Evaluation (LOPO)')}
@@ -3358,14 +3387,14 @@ function NB5BContent(props: NB5BContentProps) {
               {t('Evaluación Leave-One-Patient-Out (LOPO) sobre MIT-BIH y validación externa en INCART.', 'Leave-One-Patient-Out (LOPO) evaluation on MIT-BIH and external validation on INCART.')}
             </p>
           </div>
-          <div style={{ display: 'flex', gap: '16px', marginTop: '16px', fontSize: 'var(--fs-xs)', color: 'var(--text-muted)' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 16px', marginTop: '16px', fontSize: 'var(--fs-xs)', color: 'var(--text-muted)' }}>
             <span><strong>Dataset:</strong> MIT-BIH Arrhythmia Database · 48 pacientes</span>
             <span><strong>Partición:</strong> LOPO (Leave-One-Patient-Out)</span>
           </div>
         </div>
 
         {/* Right: Key KPIs */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(118px, 1fr))', gap: '10px', flex: '1 1 320px', alignContent: 'center' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(118px, 1fr))', gap: '10px', flex: '1 1 min(100%, 320px)', minWidth: 0, alignContent: 'center' }}>
           <MetricStat
             densa
             fase="E5"
@@ -3408,6 +3437,9 @@ function NB5BContent(props: NB5BContentProps) {
         {subTabs.map(({ id, label, icon }) => (
           <button
             key={id}
+            role="tab"
+            aria-selected={activeSubTab === id}
+            data-subtab
             onClick={() => setActiveSubTab(id)}
             style={{
               display: 'flex',
@@ -3633,7 +3665,7 @@ function NB5BContent(props: NB5BContentProps) {
             {ftEffect.length > 0 && (
               <div className="card" style={{ padding: '16px', marginBottom: '20px' }}>
                 <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, marginBottom: '4px', color: 'var(--text)' }}>{t('Efecto del Fine-Tuning (15 muestras)', 'Fine-Tuning Effect (15 samples)')}</h3>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '16px' }}>
                   <DataTable
                     data={ftEffect.map((r: any) => ({
                       'Modelo base': r.modeloBase,
@@ -3802,7 +3834,7 @@ function NB5BContent(props: NB5BContentProps) {
                     />
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '12px', marginBottom: '12px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '12px', marginBottom: '12px' }}>
                     <div>
                       <h4 style={{ fontSize: 'var(--fs-sm)', fontWeight: 600, color: 'var(--text)', marginBottom: '8px' }}>{t('Distribución R² INCART (histograma)', 'R² Distribution INCART (histogram)')}</h4>
                       <PlotlyChart
@@ -3852,7 +3884,7 @@ function NB5BContent(props: NB5BContentProps) {
             {gapData.length > 0 && (
               <div className="card" style={{ padding: '16px', marginBottom: '20px' }}>
                 <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, marginBottom: '4px', color: 'var(--text)' }}>{t('Brecha Train-Test · Gap de Generalización LOPO', 'Train-Test Gap · LOPO Generalization Gap')}</h3>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '16px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', gap: '16px' }}>
                   <DataTable
                     data={gapData.map((g: any) => ({
                       Modelo: g.Modelo,
@@ -3899,7 +3931,7 @@ function NB5BContent(props: NB5BContentProps) {
           <div>
             {/* Top/Bottom Pacientes */}
             {pacientesOrdenados.length > 0 && (
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px', marginBottom: '20px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '16px', marginBottom: '20px' }}>
                 <div className="card" style={{ padding: '16px' }}>
                   <h3 style={{ fontSize: 'var(--fs-base)', fontWeight: 600, marginBottom: '12px', color: 'var(--text)' }}>{t('Top 5 Pacientes', 'Top 5 Patients')}</h3>
                   <DataTable
@@ -4067,11 +4099,11 @@ function NB3Content({ expA, expBResumen, expBTransferencia, expC, loading, error
         boxShadow: 'var(--glass-shadow)'
       }}>
         {/* Left: Metadata */}
-        <div style={{ flex: '1 1 450px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div style={{ flex: '1 1 min(100%, 450px)', minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', flexWrap: 'wrap' }}>
               <span className="eyebrow" style={{ letterSpacing: '2px', fontSize: 'var(--fs-xs)' }}>Experimento 3 · NB3</span>
-              <span style={{ fontSize: 'var(--fs-xs)', padding: '3px 8px', borderRadius: '4px', background: 'var(--surface)', border: '1px solid var(--border)', fontFamily: 'var(--font-data)', color: 'var(--signal)' }}>03_evaluation.ipynb</span>
+              <span style={{ fontSize: 'var(--fs-xs)', padding: '3px 8px', borderRadius: '4px', background: 'var(--surface)', border: '1px solid var(--border)', fontFamily: 'var(--font-data)', color: 'var(--signal)', overflowWrap: 'anywhere', maxWidth: '100%' }}>03_evaluation.ipynb</span>
             </div>
             <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--fs-lg)', fontWeight: 700, margin: '0 0 8px 0', color: 'var(--text)' }}>
               {t('Evaluación Comparativa de Modelos', 'Comparative Model Evaluation')}
@@ -4080,14 +4112,14 @@ function NB3Content({ expA, expBResumen, expBTransferencia, expC, loading, error
               {t('Evaluación comparativa: Estándar (Exp A), Transferencia (Exp B), y Escenario Clínico (Exp C)', 'Comparative evaluation: Standard (Exp A), Transfer (Exp B), and Clinical Scenario (Exp C)')}
             </p>
           </div>
-          <div style={{ display: 'flex', gap: '16px', marginTop: '16px', fontSize: 'var(--fs-xs)', color: 'var(--text-muted)' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 16px', marginTop: '16px', fontSize: 'var(--fs-xs)', color: 'var(--text-muted)' }}>
             <span><strong>Dataset:</strong> MIT-BIH Arrhythmia Database · 48 pacientes · 360 Hz · MLII</span>
             <span><strong>Evaluación:</strong> Cross-patient & Intra-patient</span>
           </div>
         </div>
 
         {/* Right: Key KPIs */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(118px, 1fr))', gap: '10px', flex: '1 1 320px', alignContent: 'center' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(118px, 1fr))', gap: '10px', flex: '1 1 min(100%, 320px)', minWidth: 0, alignContent: 'center' }}>
           <MetricStat
             densa
             fase="E3"
@@ -4130,6 +4162,9 @@ function NB3Content({ expA, expBResumen, expBTransferencia, expC, loading, error
         {subTabs.map(({ id, label, icon }) => (
           <button
             key={id}
+            role="tab"
+            aria-selected={activeSubTab === id}
+            data-subtab
             onClick={() => setActiveSubTab(id)}
             style={{
               display: 'flex',

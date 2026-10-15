@@ -28,6 +28,7 @@ export function PageWrapper({ children, accentColor }: PageWrapperProps) {
 
   return (
     <motion.div
+      data-page
       variants={pageVariants}
       initial="initial"
       animate="animate"
@@ -36,7 +37,12 @@ export function PageWrapper({ children, accentColor }: PageWrapperProps) {
         minHeight: '100vh',
         padding: isMobile ? '24px 16px' : '40px 48px',
         position: 'relative',
-        overflowY: 'hidden',   /* antes 'hidden' en ambos ejes: recortaba las tablas */
+        /* Solo se recorta en horizontal, y con `clip`, que no crea contenedor de
+           desplazamiento. Con `overflowY: hidden` el navegador pasaba el eje X a
+           `auto` y la pagina entera se podia arrastrar de lado: 63 px en la portada
+           por el lienzo decorativo. Las tablas anchas llevan su propio desplazamiento
+           (`.tabla-scroll`), asi que aqui no se pierde nada. */
+        overflowX: 'clip',
       }}
     >
       {/* Ambient glow blob */}
@@ -44,7 +50,9 @@ export function PageWrapper({ children, accentColor }: PageWrapperProps) {
         <div style={{
           position: 'absolute',
           top: 0, right: 0,
-          width: '600px', height: '400px',
+          // Como mucho el ancho de la pagina: con 600 px fijos asomaba por la
+          // izquierda en un telefono.
+          width: 'min(600px, 100%)', height: '400px',
           background: `radial-gradient(circle at 70% 20%, ${accentColor} 0%, transparent 60%)`,
           pointerEvents: 'none',
           zIndex: 0,

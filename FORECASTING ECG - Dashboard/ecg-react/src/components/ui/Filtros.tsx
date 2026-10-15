@@ -209,13 +209,15 @@ export function RecuentoFiltro({ children }: { children: ReactNode }) {
       aria-live="polite"
       style={{
         marginLeft: 'auto',
-        height: ALTO,
+        // Alto minimo, no fijo, y sin `nowrap`: en un telefono de 320 px el
+        // recuento no cabe en una linea y se salia de la barra.
+        minHeight: ALTO,
+        minWidth: 0,
         display: 'flex',
         alignItems: 'center',
         fontFamily: 'var(--font-data)',
         fontSize: 'var(--fs-2xs)',
         color: 'var(--text-muted)',
-        whiteSpace: 'nowrap',
       }}
     >
       {children}

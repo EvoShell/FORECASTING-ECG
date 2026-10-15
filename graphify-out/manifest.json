@@ -1,0 +1,2744 @@
+{
+  "FORECASTING ECG - Dashboard/ecg-react/eslint.config.js": {
+    "mtime": 1776119942.0,
+    "seen": 1790018782.0913212,
+    "ast_hash": "b8893da386a89dfd3672dad848f4ec7e",
+    "semantic_hash": "b8893da386a89dfd3672dad848f4ec7e"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/package.json": {
+    "mtime": 1789271906.070848,
+    "seen": 1790018782.0913212,
+    "ast_hash": "65c8ccf7f52897883a4191365a7d970d",
+    "semantic_hash": "65c8ccf7f52897883a4191365a7d970d"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/postcss.config.js": {
+    "mtime": 1776119942.0,
+    "seen": 1790018782.0913212,
+    "ast_hash": "ef3ba2a81ba19f8ea5ddf625521e96f0",
+    "semantic_hash": "ef3ba2a81ba19f8ea5ddf625521e96f0"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/100.json": {
+    "mtime": 1789248271.6477263,
+    "seen": 1790018782.0913212,
+    "ast_hash": "f927d2c52171fc7d4d0b9e29868c78ca",
+    "semantic_hash": "f927d2c52171fc7d4d0b9e29868c78ca"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/101.json": {
+    "mtime": 1789248271.655733,
+    "seen": 1790018782.0913212,
+    "ast_hash": "88bfec14df18ce07915ba3252dd809d3",
+    "semantic_hash": "88bfec14df18ce07915ba3252dd809d3"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/102.json": {
+    "mtime": 1789248271.6647325,
+    "seen": 1790018782.0913212,
+    "ast_hash": "d972dcf22362f9ef38f7e4486353d124",
+    "semantic_hash": "d972dcf22362f9ef38f7e4486353d124"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/103.json": {
+    "mtime": 1789248271.674862,
+    "seen": 1790018782.0913212,
+    "ast_hash": "d8a70170d0ac6a562008a94f78509d86",
+    "semantic_hash": "d8a70170d0ac6a562008a94f78509d86"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/104.json": {
+    "mtime": 1789248271.6868699,
+    "seen": 1790018782.0913212,
+    "ast_hash": "11887919cccc625c8fd25feea4fe3f73",
+    "semantic_hash": "11887919cccc625c8fd25feea4fe3f73"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/105.json": {
+    "mtime": 1789248271.700457,
+    "seen": 1790018782.0913212,
+    "ast_hash": "fff37f5ac18f0f3f5f0dae57fb8bf658",
+    "semantic_hash": "fff37f5ac18f0f3f5f0dae57fb8bf658"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/106.json": {
+    "mtime": 1789248271.7119799,
+    "seen": 1790018782.0913212,
+    "ast_hash": "c66d0246f5e685d8f9bff716e65dcedc",
+    "semantic_hash": "c66d0246f5e685d8f9bff716e65dcedc"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/107.json": {
+    "mtime": 1789248271.7233684,
+    "seen": 1790018782.0913212,
+    "ast_hash": "bb3a4d211976583a94f62a43808b94cd",
+    "semantic_hash": "bb3a4d211976583a94f62a43808b94cd"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/108.json": {
+    "mtime": 1789248271.73615,
+    "seen": 1790018782.0913212,
+    "ast_hash": "c922732d0ab7c464d6ae6344a9bdced8",
+    "semantic_hash": "c922732d0ab7c464d6ae6344a9bdced8"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/109.json": {
+    "mtime": 1789248271.7476895,
+    "seen": 1790018782.0913212,
+    "ast_hash": "7167b740753bb7f552a2f6e0a1bf3c54",
+    "semantic_hash": "7167b740753bb7f552a2f6e0a1bf3c54"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/111.json": {
+    "mtime": 1789248271.7577693,
+    "seen": 1790018782.0913212,
+    "ast_hash": "2ef5d82b3320705cd5d0c7ed662d8d80",
+    "semantic_hash": "2ef5d82b3320705cd5d0c7ed662d8d80"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/112.json": {
+    "mtime": 1789248271.7677698,
+    "seen": 1790018782.0913212,
+    "ast_hash": "e49ca49eee51d303fb1c6dc60c726d9e",
+    "semantic_hash": "e49ca49eee51d303fb1c6dc60c726d9e"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/113.json": {
+    "mtime": 1789248271.7778304,
+    "seen": 1790018782.0913212,
+    "ast_hash": "26f562ab9470017dbd71f8c08df00d7d",
+    "semantic_hash": "26f562ab9470017dbd71f8c08df00d7d"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/114.json": {
+    "mtime": 1789248271.7878346,
+    "seen": 1790018782.0913212,
+    "ast_hash": "b976bcb0c8627108d037d80d3ca7d21c",
+    "semantic_hash": "b976bcb0c8627108d037d80d3ca7d21c"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/115.json": {
+    "mtime": 1789248271.7968352,
+    "seen": 1790018782.0913212,
+    "ast_hash": "0b1992a562c490f4b68c5cecc2e9ff34",
+    "semantic_hash": "0b1992a562c490f4b68c5cecc2e9ff34"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/116.json": {
+    "mtime": 1789248271.8084602,
+    "seen": 1790018782.0913212,
+    "ast_hash": "553f2075342a0ea558c40ddf36ca3838",
+    "semantic_hash": "553f2075342a0ea558c40ddf36ca3838"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/117.json": {
+    "mtime": 1789248271.8164701,
+    "seen": 1790018782.0913212,
+    "ast_hash": "90fbfdd26876fce8cad847fb45d7b085",
+    "semantic_hash": "90fbfdd26876fce8cad847fb45d7b085"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/118.json": {
+    "mtime": 1789248271.8267672,
+    "seen": 1790018782.0913212,
+    "ast_hash": "96240fbb047e44102d85a20168c5b367",
+    "semantic_hash": "96240fbb047e44102d85a20168c5b367"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/119.json": {
+    "mtime": 1789248271.8362722,
+    "seen": 1790018782.0913212,
+    "ast_hash": "5ab709a3bc5e897cf2b7cbb96cb9de72",
+    "semantic_hash": "5ab709a3bc5e897cf2b7cbb96cb9de72"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/121.json": {
+    "mtime": 1789248271.845502,
+    "seen": 1790018782.0913212,
+    "ast_hash": "e3c29fa4a79ee2cdfbc2c45995731cc0",
+    "semantic_hash": "e3c29fa4a79ee2cdfbc2c45995731cc0"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/122.json": {
+    "mtime": 1789248271.856508,
+    "seen": 1790018782.0913212,
+    "ast_hash": "8ec5d50b682490e117da865b71bf2707",
+    "semantic_hash": "8ec5d50b682490e117da865b71bf2707"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/123.json": {
+    "mtime": 1789248271.8635075,
+    "seen": 1790018782.0913212,
+    "ast_hash": "a082de92a9eb7ddfdb64987ac2a5608c",
+    "semantic_hash": "a082de92a9eb7ddfdb64987ac2a5608c"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/124.json": {
+    "mtime": 1789248271.8716156,
+    "seen": 1790018782.0913212,
+    "ast_hash": "a2c7f6dcc0f5699c70e9eb1c22a892c1",
+    "semantic_hash": "a2c7f6dcc0f5699c70e9eb1c22a892c1"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/200.json": {
+    "mtime": 1789248271.8846204,
+    "seen": 1790018782.0913212,
+    "ast_hash": "9686d1094c1618801b10c112d915708d",
+    "semantic_hash": "9686d1094c1618801b10c112d915708d"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/201.json": {
+    "mtime": 1789248271.89362,
+    "seen": 1790018782.0913212,
+    "ast_hash": "6a3bc4d77ef94399ca3f6618f5f36ecf",
+    "semantic_hash": "6a3bc4d77ef94399ca3f6618f5f36ecf"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/202.json": {
+    "mtime": 1789248271.9056668,
+    "seen": 1790018782.0913212,
+    "ast_hash": "8a780dd2f9f5ae48f48d49adb1b7d8ea",
+    "semantic_hash": "8a780dd2f9f5ae48f48d49adb1b7d8ea"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/203.json": {
+    "mtime": 1789248271.9201713,
+    "seen": 1790018782.0913212,
+    "ast_hash": "9489c54297a7f75a4a39a95dbdf1ab14",
+    "semantic_hash": "9489c54297a7f75a4a39a95dbdf1ab14"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/205.json": {
+    "mtime": 1789248271.9321766,
+    "seen": 1790018782.0913212,
+    "ast_hash": "ce5423adad05b1ed35a1cb31b06cb190",
+    "semantic_hash": "ce5423adad05b1ed35a1cb31b06cb190"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/207.json": {
+    "mtime": 1789248271.9424448,
+    "seen": 1790018782.0913212,
+    "ast_hash": "a2ced894bc9d80019ca7b87ede30121f",
+    "semantic_hash": "a2ced894bc9d80019ca7b87ede30121f"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/208.json": {
+    "mtime": 1789248271.9565072,
+    "seen": 1790018782.0913212,
+    "ast_hash": "cd7da8aebadab876167e124ca59a5b53",
+    "semantic_hash": "cd7da8aebadab876167e124ca59a5b53"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/209.json": {
+    "mtime": 1789248271.9735928,
+    "seen": 1790018782.0913212,
+    "ast_hash": "500d1bbfef4ddeaa2918dea6a69c1ae0",
+    "semantic_hash": "500d1bbfef4ddeaa2918dea6a69c1ae0"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/210.json": {
+    "mtime": 1789248271.9861138,
+    "seen": 1790018782.0913212,
+    "ast_hash": "e75dff862a751e120f6fff114b731d6e",
+    "semantic_hash": "e75dff862a751e120f6fff114b731d6e"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/212.json": {
+    "mtime": 1789248271.997273,
+    "seen": 1790018782.0913212,
+    "ast_hash": "9aa5600614b9809fc90e0c10910c5516",
+    "semantic_hash": "9aa5600614b9809fc90e0c10910c5516"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/213.json": {
+    "mtime": 1789248272.0114872,
+    "seen": 1790018782.0913212,
+    "ast_hash": "d12aa4789616f262e7fdc1eb5573ec58",
+    "semantic_hash": "d12aa4789616f262e7fdc1eb5573ec58"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/214.json": {
+    "mtime": 1789248272.021993,
+    "seen": 1790018782.0913212,
+    "ast_hash": "4c2509445fecf43ccb0f105f22c0c801",
+    "semantic_hash": "4c2509445fecf43ccb0f105f22c0c801"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/215.json": {
+    "mtime": 1789248272.0350077,
+    "seen": 1790018782.0913212,
+    "ast_hash": "f361fcef9440495d167c3aefb9772da3",
+    "semantic_hash": "f361fcef9440495d167c3aefb9772da3"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/217.json": {
+    "mtime": 1789248272.046128,
+    "seen": 1790018782.0913212,
+    "ast_hash": "dc1e286b3754c1203d93aa5af9bfeea7",
+    "semantic_hash": "dc1e286b3754c1203d93aa5af9bfeea7"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/219.json": {
+    "mtime": 1789248272.0571346,
+    "seen": 1790018782.0913212,
+    "ast_hash": "fbf4e3eaa4dd3bf531229b4cd5096044",
+    "semantic_hash": "fbf4e3eaa4dd3bf531229b4cd5096044"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/220.json": {
+    "mtime": 1789248272.0661325,
+    "seen": 1790018782.0913212,
+    "ast_hash": "41a0e8b5e0f3b2c8897b322cfd947680",
+    "semantic_hash": "41a0e8b5e0f3b2c8897b322cfd947680"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/221.json": {
+    "mtime": 1789248272.0777283,
+    "seen": 1790018782.0913212,
+    "ast_hash": "6a78230baec93a1f9527363d443d18bf",
+    "semantic_hash": "6a78230baec93a1f9527363d443d18bf"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/222.json": {
+    "mtime": 1789248272.0897279,
+    "seen": 1790018782.0913212,
+    "ast_hash": "3901784ab330f3169dc72cb370ab2b23",
+    "semantic_hash": "3901784ab330f3169dc72cb370ab2b23"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/223.json": {
+    "mtime": 1789248272.1013424,
+    "seen": 1790018782.0913212,
+    "ast_hash": "a0b3a14620a2f89a1e83d23dacb28250",
+    "semantic_hash": "a0b3a14620a2f89a1e83d23dacb28250"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/228.json": {
+    "mtime": 1789248272.1118586,
+    "seen": 1790018782.0913212,
+    "ast_hash": "b0d7d7dfd433fb06995dc91db72d1738",
+    "semantic_hash": "b0d7d7dfd433fb06995dc91db72d1738"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/230.json": {
+    "mtime": 1789248272.1228657,
+    "seen": 1790018782.0913212,
+    "ast_hash": "ef7d93dc391a3a26ee5f8846a4eb578c",
+    "semantic_hash": "ef7d93dc391a3a26ee5f8846a4eb578c"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/231.json": {
+    "mtime": 1789248272.1358483,
+    "seen": 1790018782.0913212,
+    "ast_hash": "da09588c82ae6735757d282180048d1b",
+    "semantic_hash": "da09588c82ae6735757d282180048d1b"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/232.json": {
+    "mtime": 1789248272.1448567,
+    "seen": 1790018782.0913212,
+    "ast_hash": "a57300b11ca14babe969006f38d28384",
+    "semantic_hash": "a57300b11ca14babe969006f38d28384"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/233.json": {
+    "mtime": 1789248272.1584315,
+    "seen": 1790018782.0913212,
+    "ast_hash": "22f256a16e7094e053a6f03e1a84b128",
+    "semantic_hash": "22f256a16e7094e053a6f03e1a84b128"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/234.json": {
+    "mtime": 1789248272.16995,
+    "seen": 1790018782.0913212,
+    "ast_hash": "928dc1f2858c2079918ce9c35d39f93a",
+    "semantic_hash": "928dc1f2858c2079918ce9c35d39f93a"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I01.json": {
+    "mtime": 1789248272.1839552,
+    "seen": 1790018782.0913212,
+    "ast_hash": "365b1586819a48b732995b017ca9ade5",
+    "semantic_hash": "365b1586819a48b732995b017ca9ade5"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I02.json": {
+    "mtime": 1789248272.1964667,
+    "seen": 1790018782.0913212,
+    "ast_hash": "db66d052d1f8d597cf301b2cc61812d8",
+    "semantic_hash": "db66d052d1f8d597cf301b2cc61812d8"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I03.json": {
+    "mtime": 1789248272.2115252,
+    "seen": 1790018782.0913212,
+    "ast_hash": "9374e8260d11653c28907f5a7685a8e2",
+    "semantic_hash": "9374e8260d11653c28907f5a7685a8e2"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I04.json": {
+    "mtime": 1789248272.2245278,
+    "seen": 1790018782.0913212,
+    "ast_hash": "b9ab39cd249d835f82b61cf08aa65eef",
+    "semantic_hash": "b9ab39cd249d835f82b61cf08aa65eef"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I05.json": {
+    "mtime": 1789248272.2352443,
+    "seen": 1790018782.0913212,
+    "ast_hash": "c4acd959997c7145a2ebc38673210cba",
+    "semantic_hash": "c4acd959997c7145a2ebc38673210cba"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I06.json": {
+    "mtime": 1789248272.2472444,
+    "seen": 1790018782.0913212,
+    "ast_hash": "760d04b50d8b8b52e9931e7a2d2fa485",
+    "semantic_hash": "760d04b50d8b8b52e9931e7a2d2fa485"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I07.json": {
+    "mtime": 1789248272.2603354,
+    "seen": 1790018782.0913212,
+    "ast_hash": "9a5677512a9055c91874c6800904aaf5",
+    "semantic_hash": "9a5677512a9055c91874c6800904aaf5"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I08.json": {
+    "mtime": 1789248272.2729435,
+    "seen": 1790018782.0913212,
+    "ast_hash": "b573f8fe1cc0d61c38452f5e643ec11e",
+    "semantic_hash": "b573f8fe1cc0d61c38452f5e643ec11e"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I09.json": {
+    "mtime": 1789248272.287949,
+    "seen": 1790018782.0913212,
+    "ast_hash": "db39d325332471fb168606f7d843e068",
+    "semantic_hash": "db39d325332471fb168606f7d843e068"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I10.json": {
+    "mtime": 1789248272.310007,
+    "seen": 1790018782.0913212,
+    "ast_hash": "3d8d947c15f3170f0c9c9584c1740be8",
+    "semantic_hash": "3d8d947c15f3170f0c9c9584c1740be8"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I11.json": {
+    "mtime": 1789248272.3225918,
+    "seen": 1790018782.0913212,
+    "ast_hash": "77b8a88f564aed796250463cfc91af06",
+    "semantic_hash": "77b8a88f564aed796250463cfc91af06"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I12.json": {
+    "mtime": 1789248272.3371754,
+    "seen": 1790018782.0913212,
+    "ast_hash": "3c1fc3295d8408be801c289c723a92be",
+    "semantic_hash": "3c1fc3295d8408be801c289c723a92be"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I13.json": {
+    "mtime": 1789248272.34768,
+    "seen": 1790018782.0913212,
+    "ast_hash": "6103a30be9339bec21483d438fa93624",
+    "semantic_hash": "6103a30be9339bec21483d438fa93624"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I14.json": {
+    "mtime": 1789248272.3576868,
+    "seen": 1790018782.0913212,
+    "ast_hash": "37c043981e1264f459d7870ada60508d",
+    "semantic_hash": "37c043981e1264f459d7870ada60508d"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I15.json": {
+    "mtime": 1789248272.3718536,
+    "seen": 1790018782.0913212,
+    "ast_hash": "5c8c5895e17b6144a46fd7788d764be2",
+    "semantic_hash": "5c8c5895e17b6144a46fd7788d764be2"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I16.json": {
+    "mtime": 1789248272.381939,
+    "seen": 1790018782.0913212,
+    "ast_hash": "11ab8901911c7fb1675faeaf5aadb64f",
+    "semantic_hash": "11ab8901911c7fb1675faeaf5aadb64f"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I17.json": {
+    "mtime": 1789248272.390949,
+    "seen": 1790018782.0913212,
+    "ast_hash": "a1db0032373d4a76d639e571a9e02c45",
+    "semantic_hash": "a1db0032373d4a76d639e571a9e02c45"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I18.json": {
+    "mtime": 1789248272.4050407,
+    "seen": 1790018782.0913212,
+    "ast_hash": "2c94aec5b40d024b09344295dd6311b3",
+    "semantic_hash": "2c94aec5b40d024b09344295dd6311b3"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I19.json": {
+    "mtime": 1789248272.416047,
+    "seen": 1790018782.0913212,
+    "ast_hash": "9022b1c00955493f45b6782f29d9262a",
+    "semantic_hash": "9022b1c00955493f45b6782f29d9262a"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I20.json": {
+    "mtime": 1789248272.4285514,
+    "seen": 1790018782.0913212,
+    "ast_hash": "a4c782b29320bd3d8e4a2b17a98c018d",
+    "semantic_hash": "a4c782b29320bd3d8e4a2b17a98c018d"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I21.json": {
+    "mtime": 1789248272.4425762,
+    "seen": 1790018782.0913212,
+    "ast_hash": "fab22b91f0c2f64db1466a4033bb2d6c",
+    "semantic_hash": "fab22b91f0c2f64db1466a4033bb2d6c"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I22.json": {
+    "mtime": 1789248272.4585721,
+    "seen": 1790018782.0913212,
+    "ast_hash": "65a6a84e99768f670c301378fbce8b37",
+    "semantic_hash": "65a6a84e99768f670c301378fbce8b37"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I23.json": {
+    "mtime": 1789248272.4695694,
+    "seen": 1790018782.0913212,
+    "ast_hash": "deb18a76dec79bd2c311f7ee6588de9d",
+    "semantic_hash": "deb18a76dec79bd2c311f7ee6588de9d"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I24.json": {
+    "mtime": 1789248272.4821534,
+    "seen": 1790018782.0913212,
+    "ast_hash": "3693184ebf15ec73e7ffb5dff085095d",
+    "semantic_hash": "3693184ebf15ec73e7ffb5dff085095d"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I25.json": {
+    "mtime": 1789248272.4941535,
+    "seen": 1790018782.0913212,
+    "ast_hash": "ef38a2899bc95cb0100e15c098719953",
+    "semantic_hash": "ef38a2899bc95cb0100e15c098719953"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I26.json": {
+    "mtime": 1789248272.5038953,
+    "seen": 1790018782.0913212,
+    "ast_hash": "84712f6e09149b05f7592cfe2ea75511",
+    "semantic_hash": "84712f6e09149b05f7592cfe2ea75511"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I27.json": {
+    "mtime": 1789248272.5169067,
+    "seen": 1790018782.0913212,
+    "ast_hash": "63adaf5a26f0becad93d6a607f317a6a",
+    "semantic_hash": "63adaf5a26f0becad93d6a607f317a6a"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I28.json": {
+    "mtime": 1789248272.5274315,
+    "seen": 1790018782.0913212,
+    "ast_hash": "1c541dcb1d1ba3d26158ddcdacf3697e",
+    "semantic_hash": "1c541dcb1d1ba3d26158ddcdacf3697e"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I29.json": {
+    "mtime": 1789248272.5430214,
+    "seen": 1790018782.0913212,
+    "ast_hash": "82698f3e561b3c9e025a8a3720df08bd",
+    "semantic_hash": "82698f3e561b3c9e025a8a3720df08bd"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I30.json": {
+    "mtime": 1789248272.5552118,
+    "seen": 1790018782.0913212,
+    "ast_hash": "7d54d6f85b7e6c8d2d084f9da365562e",
+    "semantic_hash": "7d54d6f85b7e6c8d2d084f9da365562e"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I31.json": {
+    "mtime": 1789248272.5720105,
+    "seen": 1790018782.0913212,
+    "ast_hash": "79aa263dd235ba280efa4eed00aa65fb",
+    "semantic_hash": "79aa263dd235ba280efa4eed00aa65fb"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I32.json": {
+    "mtime": 1789248272.5821593,
+    "seen": 1790018782.0913212,
+    "ast_hash": "cfa981f1f6e682b5fa600151c85376e1",
+    "semantic_hash": "cfa981f1f6e682b5fa600151c85376e1"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I33.json": {
+    "mtime": 1789248272.5921595,
+    "seen": 1790018782.0913212,
+    "ast_hash": "835af8ad5845c9767fc57bdb34c19249",
+    "semantic_hash": "835af8ad5845c9767fc57bdb34c19249"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I34.json": {
+    "mtime": 1789248272.6031857,
+    "seen": 1790018782.0913212,
+    "ast_hash": "0c84e3dc0489e838e0eba37a5bd1524f",
+    "semantic_hash": "0c84e3dc0489e838e0eba37a5bd1524f"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I35.json": {
+    "mtime": 1789248272.6201918,
+    "seen": 1790018782.0913212,
+    "ast_hash": "386aa1d6f1668d1e88f580b59394abeb",
+    "semantic_hash": "386aa1d6f1668d1e88f580b59394abeb"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I36.json": {
+    "mtime": 1789248272.6377053,
+    "seen": 1790018782.0913212,
+    "ast_hash": "b199bf02938f8d37891d811ca9258225",
+    "semantic_hash": "b199bf02938f8d37891d811ca9258225"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I37.json": {
+    "mtime": 1789248272.6497087,
+    "seen": 1790018782.0913212,
+    "ast_hash": "4bc55cf5fd316ce8ecb79394372e9245",
+    "semantic_hash": "4bc55cf5fd316ce8ecb79394372e9245"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I38.json": {
+    "mtime": 1789248272.662833,
+    "seen": 1790018782.0913212,
+    "ast_hash": "02060c8099d13776ce9cb07dd2da0b58",
+    "semantic_hash": "02060c8099d13776ce9cb07dd2da0b58"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I39.json": {
+    "mtime": 1789248272.6753492,
+    "seen": 1790018782.0913212,
+    "ast_hash": "4f0529c3a7d77ff7642526f0c28fbac9",
+    "semantic_hash": "4f0529c3a7d77ff7642526f0c28fbac9"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I40.json": {
+    "mtime": 1789248272.6893554,
+    "seen": 1790018782.0913212,
+    "ast_hash": "d30601acdb50a37813790511a7db7d00",
+    "semantic_hash": "d30601acdb50a37813790511a7db7d00"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I41.json": {
+    "mtime": 1789248272.699372,
+    "seen": 1790018782.0913212,
+    "ast_hash": "85e7a84ea58609dd73d3df5fc85ae59f",
+    "semantic_hash": "85e7a84ea58609dd73d3df5fc85ae59f"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I42.json": {
+    "mtime": 1789248272.7132297,
+    "seen": 1790018782.0913212,
+    "ast_hash": "6cd8419d7e46b5d0733fb6f761ba570e",
+    "semantic_hash": "6cd8419d7e46b5d0733fb6f761ba570e"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I43.json": {
+    "mtime": 1789248272.7252944,
+    "seen": 1790018782.0913212,
+    "ast_hash": "ebfdc25090f0a3756ea435d2d475ae27",
+    "semantic_hash": "ebfdc25090f0a3756ea435d2d475ae27"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I44.json": {
+    "mtime": 1789248272.7373557,
+    "seen": 1790018782.0913212,
+    "ast_hash": "bc3982a1aac3ece72adfa6cb444f33ef",
+    "semantic_hash": "bc3982a1aac3ece72adfa6cb444f33ef"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I45.json": {
+    "mtime": 1789248272.7483613,
+    "seen": 1790018782.0913212,
+    "ast_hash": "49e5e3283606ce605702c880733f92ab",
+    "semantic_hash": "49e5e3283606ce605702c880733f92ab"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I46.json": {
+    "mtime": 1789248272.7618217,
+    "seen": 1790018782.0913212,
+    "ast_hash": "840c2ff61f3c69f8714ace2f46e4b93f",
+    "semantic_hash": "840c2ff61f3c69f8714ace2f46e4b93f"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I47.json": {
+    "mtime": 1789248272.7718225,
+    "seen": 1790018782.0913212,
+    "ast_hash": "65643702be04443e009172492e8a53c8",
+    "semantic_hash": "65643702be04443e009172492e8a53c8"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I48.json": {
+    "mtime": 1789248272.7842357,
+    "seen": 1790018782.0913212,
+    "ast_hash": "815f81fc284ad323a1b38f13f4840f01",
+    "semantic_hash": "815f81fc284ad323a1b38f13f4840f01"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I49.json": {
+    "mtime": 1789248272.7959495,
+    "seen": 1790018782.0913212,
+    "ast_hash": "0d10ad28cf4d67aaac3ee5eaaa94a212",
+    "semantic_hash": "0d10ad28cf4d67aaac3ee5eaaa94a212"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I50.json": {
+    "mtime": 1789248272.8095279,
+    "seen": 1790018782.0913212,
+    "ast_hash": "a37b5eea4b8b30dfcd93dff6d4e04e12",
+    "semantic_hash": "a37b5eea4b8b30dfcd93dff6d4e04e12"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I51.json": {
+    "mtime": 1789248272.8240495,
+    "seen": 1790018782.0913212,
+    "ast_hash": "d0fa492a5371dea8b8e00e10fa9f4e5d",
+    "semantic_hash": "d0fa492a5371dea8b8e00e10fa9f4e5d"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I52.json": {
+    "mtime": 1789248272.833049,
+    "seen": 1790018782.0913212,
+    "ast_hash": "ba006ab739cb5d0237486aa49d0b0b03",
+    "semantic_hash": "ba006ab739cb5d0237486aa49d0b0b03"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I53.json": {
+    "mtime": 1789248272.8460598,
+    "seen": 1790018782.0913212,
+    "ast_hash": "64f2466069fa85cbff8106c549e605e5",
+    "semantic_hash": "64f2466069fa85cbff8106c549e605e5"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I54.json": {
+    "mtime": 1789248272.8581276,
+    "seen": 1790018782.0913212,
+    "ast_hash": "278088f910bde879c0d186e848f83b7a",
+    "semantic_hash": "278088f910bde879c0d186e848f83b7a"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I55.json": {
+    "mtime": 1789248272.8691356,
+    "seen": 1790018782.0913212,
+    "ast_hash": "7bdde8b91697e42b4e6b567f94a43973",
+    "semantic_hash": "7bdde8b91697e42b4e6b567f94a43973"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I56.json": {
+    "mtime": 1789248272.8797648,
+    "seen": 1790018782.0913212,
+    "ast_hash": "9899a0df9f365c94c1333a03ded47601",
+    "semantic_hash": "9899a0df9f365c94c1333a03ded47601"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I57.json": {
+    "mtime": 1789248272.8945155,
+    "seen": 1790018782.0913212,
+    "ast_hash": "019fd73c1c6c1668960f5a8b5d0d1fc1",
+    "semantic_hash": "019fd73c1c6c1668960f5a8b5d0d1fc1"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I58.json": {
+    "mtime": 1789248272.906031,
+    "seen": 1790018782.0913212,
+    "ast_hash": "83e52019bc49312cb963e8005b871e6d",
+    "semantic_hash": "83e52019bc49312cb963e8005b871e6d"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I59.json": {
+    "mtime": 1789248272.9190328,
+    "seen": 1790018782.0913212,
+    "ast_hash": "67480f134f47693f4592e5ef950e25bc",
+    "semantic_hash": "67480f134f47693f4592e5ef950e25bc"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I60.json": {
+    "mtime": 1789248272.9331157,
+    "seen": 1790018782.0913212,
+    "ast_hash": "7407cc3580ae8ebf26c069895e7bd560",
+    "semantic_hash": "7407cc3580ae8ebf26c069895e7bd560"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I61.json": {
+    "mtime": 1789248272.942178,
+    "seen": 1790018782.0913212,
+    "ast_hash": "fa80ce9d801bedcc333847a75b17f506",
+    "semantic_hash": "fa80ce9d801bedcc333847a75b17f506"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I62.json": {
+    "mtime": 1789248272.9541805,
+    "seen": 1790018782.0913212,
+    "ast_hash": "7f782e1a528e72bba91d16c339f4ab1a",
+    "semantic_hash": "7f782e1a528e72bba91d16c339f4ab1a"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I63.json": {
+    "mtime": 1789248272.964748,
+    "seen": 1790018782.0913212,
+    "ast_hash": "1f69bf062e78b66836d978e8955395e9",
+    "semantic_hash": "1f69bf062e78b66836d978e8955395e9"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I64.json": {
+    "mtime": 1789248272.9757552,
+    "seen": 1790018782.0913212,
+    "ast_hash": "625d591b4c9ff2e2a4c54e56ed55413b",
+    "semantic_hash": "625d591b4c9ff2e2a4c54e56ed55413b"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I65.json": {
+    "mtime": 1789248272.988793,
+    "seen": 1790018782.0913212,
+    "ast_hash": "c9ad30f246eaa20532a226378e01e6e9",
+    "semantic_hash": "c9ad30f246eaa20532a226378e01e6e9"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I66.json": {
+    "mtime": 1789248273.0012987,
+    "seen": 1790018782.0913212,
+    "ast_hash": "0473459d8b3d13b954c3526d9acaf7d3",
+    "semantic_hash": "0473459d8b3d13b954c3526d9acaf7d3"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I67.json": {
+    "mtime": 1789248273.0149665,
+    "seen": 1790018782.0913212,
+    "ast_hash": "b20353fbe08a743f5b6021fbd102e95d",
+    "semantic_hash": "b20353fbe08a743f5b6021fbd102e95d"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I68.json": {
+    "mtime": 1789248273.0330462,
+    "seen": 1790018782.0913212,
+    "ast_hash": "5a2d4e53ad0a94f21aad41d1fedee66a",
+    "semantic_hash": "5a2d4e53ad0a94f21aad41d1fedee66a"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I69.json": {
+    "mtime": 1789248273.0445554,
+    "seen": 1790018782.0913212,
+    "ast_hash": "0d1e6fba286a949cd8363fb4831539b1",
+    "semantic_hash": "0d1e6fba286a949cd8363fb4831539b1"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I70.json": {
+    "mtime": 1789248273.0546508,
+    "seen": 1790018782.0913212,
+    "ast_hash": "0edf13987a0b0c2f06d3e55eb1245448",
+    "semantic_hash": "0edf13987a0b0c2f06d3e55eb1245448"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I71.json": {
+    "mtime": 1789248273.0646517,
+    "seen": 1790018782.0913212,
+    "ast_hash": "04ac97d61b4f8f3962db40465a8d6b0e",
+    "semantic_hash": "04ac97d61b4f8f3962db40465a8d6b0e"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I72.json": {
+    "mtime": 1789248273.07805,
+    "seen": 1790018782.0913212,
+    "ast_hash": "465aa99d2cf5be81a4c556b2fad28a54",
+    "semantic_hash": "465aa99d2cf5be81a4c556b2fad28a54"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I73.json": {
+    "mtime": 1789248273.0891092,
+    "seen": 1790018782.0913212,
+    "ast_hash": "9c00fc97eabec5351a85ace684f3c569",
+    "semantic_hash": "9c00fc97eabec5351a85ace684f3c569"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I74.json": {
+    "mtime": 1789248273.1017165,
+    "seen": 1790018782.0913212,
+    "ast_hash": "f85a38f897a268147a389c344efd61a4",
+    "semantic_hash": "f85a38f897a268147a389c344efd61a4"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/I75.json": {
+    "mtime": 1789248273.1117265,
+    "seen": 1790018782.0913212,
+    "ast_hash": "25cd8edc7c70be33d56f6a8de5b9ad93",
+    "semantic_hash": "25cd8edc7c70be33d56f6a8de5b9ad93"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/anotaciones/indice.json": {
+    "mtime": 1789248273.113727,
+    "seen": 1790018782.0913212,
+    "ast_hash": "a5baa408746180890d72db5d983ae446",
+    "semantic_hash": "a5baa408746180890d72db5d983ae446"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/cohorte_reducida_50.json": {
+    "mtime": 1788904075.6505451,
+    "seen": 1790018782.0913212,
+    "ast_hash": "a88e64cc26d47c1af386339239b0417d",
+    "semantic_hash": "a88e64cc26d47c1af386339239b0417d"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/efecto_mediana.json": {
+    "mtime": 1788904075.6580534,
+    "seen": 1790018782.0913212,
+    "ast_hash": "8e4cad2dee5a6a4931c1c45906d4bbb1",
+    "semantic_hash": "8e4cad2dee5a6a4931c1c45906d4bbb1"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/hp_dl_resumen.json": {
+    "mtime": 1789178017.9688416,
+    "seen": 1790018782.0913212,
+    "ast_hash": "24ca885e978d86878f366c2741e7cd88",
+    "semantic_hash": "24ca885e978d86878f366c2741e7cd88"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/hp_dl_resumen_CNN_GRU_ATTN.json": {
+    "mtime": 1789178017.9748442,
+    "seen": 1790018782.0913212,
+    "ast_hash": "6068c477bce2075b88dc49f45a52ddaf",
+    "semantic_hash": "6068c477bce2075b88dc49f45a52ddaf"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/hp_resumen.json": {
+    "mtime": 1788904075.6919608,
+    "seen": 1790018782.0913212,
+    "ast_hash": "b136c735c5932500d7130586411fc8df",
+    "semantic_hash": "b136c735c5932500d7130586411fc8df"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/nb6_contraste_bases.json": {
+    "mtime": 1789005409.1730523,
+    "seen": 1790018782.0913212,
+    "ast_hash": "4b901e386b9794caba948052483a9735",
+    "semantic_hash": "4b901e386b9794caba948052483a9735"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/nb6_recalculo.json": {
+    "mtime": 1788904075.7103374,
+    "seen": 1790018782.0913212,
+    "ast_hash": "9d1c3282293d0118f3bad2b3282ec057",
+    "semantic_hash": "9d1c3282293d0118f3bad2b3282ec057"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/p2_resumen.json": {
+    "mtime": 1788904075.7439208,
+    "seen": 1790018782.0913212,
+    "ast_hash": "f567ade608f199b796f7098832aebaa1",
+    "semantic_hash": "f567ade608f199b796f7098832aebaa1"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/viabilidad_submuestra.json": {
+    "mtime": 1788904075.7645993,
+    "seen": 1790018782.0913212,
+    "ast_hash": "fe0c27ecf09a9304a532eb7e0bb8bf8a",
+    "semantic_hash": "fe0c27ecf09a9304a532eb7e0bb8bf8a"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/102.json": {
+    "mtime": 1789305574.1063998,
+    "seen": 1790018782.0913212,
+    "ast_hash": "d06ab944f2f9613e26ac0791c5f35bf6",
+    "semantic_hash": "d06ab944f2f9613e26ac0791c5f35bf6"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/104.json": {
+    "mtime": 1789305574.1567829,
+    "seen": 1790018782.0913212,
+    "ast_hash": "21c7c0ff5eca02d1e1db50536c561e30",
+    "semantic_hash": "21c7c0ff5eca02d1e1db50536c561e30"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/109.json": {
+    "mtime": 1789305574.2173154,
+    "seen": 1790018782.0913212,
+    "ast_hash": "5f6e09921a305285be0e428a309afa5a",
+    "semantic_hash": "5f6e09921a305285be0e428a309afa5a"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/114.json": {
+    "mtime": 1789305574.2622237,
+    "seen": 1790018782.0913212,
+    "ast_hash": "35c208ed7b96ee999649dbf1ee7cbb06",
+    "semantic_hash": "35c208ed7b96ee999649dbf1ee7cbb06"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/117.json": {
+    "mtime": 1789305574.296943,
+    "seen": 1790018782.0913212,
+    "ast_hash": "d9f4c3a264fe136f44a7ef51363a687c",
+    "semantic_hash": "d9f4c3a264fe136f44a7ef51363a687c"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/121.json": {
+    "mtime": 1789305574.338171,
+    "seen": 1790018782.0913212,
+    "ast_hash": "969726e855cc86211f0d87b2a45cfa51",
+    "semantic_hash": "969726e855cc86211f0d87b2a45cfa51"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/123.json": {
+    "mtime": 1789305574.3732088,
+    "seen": 1790018782.0913212,
+    "ast_hash": "e84ee873d848cac46ef193a7913a0d1d",
+    "semantic_hash": "e84ee873d848cac46ef193a7913a0d1d"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/124.json": {
+    "mtime": 1789305574.4132419,
+    "seen": 1790018782.0913212,
+    "ast_hash": "4392dd8aacbfcaba6e6c517d265e62e3",
+    "semantic_hash": "4392dd8aacbfcaba6e6c517d265e62e3"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/203.json": {
+    "mtime": 1789305574.4746754,
+    "seen": 1790018782.0913212,
+    "ast_hash": "7cd07d793b87906efa9c229431bc339d",
+    "semantic_hash": "7cd07d793b87906efa9c229431bc339d"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/205.json": {
+    "mtime": 1789305574.5356498,
+    "seen": 1790018782.0913212,
+    "ast_hash": "4ebbc028b648a7862636a0361b995c63",
+    "semantic_hash": "4ebbc028b648a7862636a0361b995c63"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/208.json": {
+    "mtime": 1789305574.5999966,
+    "seen": 1790018782.0913212,
+    "ast_hash": "fd9ca8ca82c93d3c06c64634441eb88e",
+    "semantic_hash": "fd9ca8ca82c93d3c06c64634441eb88e"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/217.json": {
+    "mtime": 1789305574.6481109,
+    "seen": 1790018782.0913212,
+    "ast_hash": "50de573f970fd6ae9397ccd53da5c7a9",
+    "semantic_hash": "50de573f970fd6ae9397ccd53da5c7a9"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/220.json": {
+    "mtime": 1789305574.6925044,
+    "seen": 1790018782.0913212,
+    "ast_hash": "bceecf2dc4e0148d5b0aae9a44cd907a",
+    "semantic_hash": "bceecf2dc4e0148d5b0aae9a44cd907a"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/221.json": {
+    "mtime": 1789305574.7471285,
+    "seen": 1790018782.0913212,
+    "ast_hash": "9ded50d2a5844c48cce0bdc356583823",
+    "semantic_hash": "9ded50d2a5844c48cce0bdc356583823"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/228.json": {
+    "mtime": 1789305574.791854,
+    "seen": 1790018782.0913212,
+    "ast_hash": "d05f19d3766322a21dfbe6d06299d0d7",
+    "semantic_hash": "d05f19d3766322a21dfbe6d06299d0d7"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/234.json": {
+    "mtime": 1789305574.851188,
+    "seen": 1790018782.0913212,
+    "ast_hash": "f7bf2012d9b0f07eb161818cf619f86c",
+    "semantic_hash": "f7bf2012d9b0f07eb161818cf619f86c"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I03.json": {
+    "mtime": 1789305574.8998737,
+    "seen": 1790018782.0913212,
+    "ast_hash": "491e67057ba55736ec1f952d46ac899a",
+    "semantic_hash": "491e67057ba55736ec1f952d46ac899a"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I07.json": {
+    "mtime": 1789305574.9560926,
+    "seen": 1790018782.0913212,
+    "ast_hash": "7e2ba43b40db2ab501f85976d05e5721",
+    "semantic_hash": "7e2ba43b40db2ab501f85976d05e5721"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I08.json": {
+    "mtime": 1789305575.001886,
+    "seen": 1790018782.0913212,
+    "ast_hash": "4b885d9f9eca4d5000a33c90d92f14b4",
+    "semantic_hash": "4b885d9f9eca4d5000a33c90d92f14b4"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I11.json": {
+    "mtime": 1789305575.0494869,
+    "seen": 1790018782.0913212,
+    "ast_hash": "e9e436da05ca36d5964427080306dcc9",
+    "semantic_hash": "e9e436da05ca36d5964427080306dcc9"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I12.json": {
+    "mtime": 1789305575.1015048,
+    "seen": 1790018782.0913212,
+    "ast_hash": "90e7e36c0ea8376345e27e786f0f1090",
+    "semantic_hash": "90e7e36c0ea8376345e27e786f0f1090"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I20.json": {
+    "mtime": 1789305575.1527908,
+    "seen": 1790018782.0913212,
+    "ast_hash": "a393a33f6500c2c5764ea2e7c57b0844",
+    "semantic_hash": "a393a33f6500c2c5764ea2e7c57b0844"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I21.json": {
+    "mtime": 1789305575.197344,
+    "seen": 1790018782.0913212,
+    "ast_hash": "f0a62e178f3fb169e67b0ca1e3e7fb68",
+    "semantic_hash": "f0a62e178f3fb169e67b0ca1e3e7fb68"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I25.json": {
+    "mtime": 1789305575.2333198,
+    "seen": 1790018782.0913212,
+    "ast_hash": "317655ebb2319755f4eeead8a01fe254",
+    "semantic_hash": "317655ebb2319755f4eeead8a01fe254"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I26.json": {
+    "mtime": 1789305575.2655094,
+    "seen": 1790018782.0913212,
+    "ast_hash": "bc7556bdff94ebfc4957df9d4340f41e",
+    "semantic_hash": "bc7556bdff94ebfc4957df9d4340f41e"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I29.json": {
+    "mtime": 1789305575.316483,
+    "seen": 1790018782.0913212,
+    "ast_hash": "55c3df272c0e2082666624c2e8961e7d",
+    "semantic_hash": "55c3df272c0e2082666624c2e8961e7d"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I30.json": {
+    "mtime": 1789305575.3653042,
+    "seen": 1790018782.0913212,
+    "ast_hash": "68722f5b6952e01cda831bb4ff7d6e85",
+    "semantic_hash": "68722f5b6952e01cda831bb4ff7d6e85"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I31.json": {
+    "mtime": 1789305575.4289427,
+    "seen": 1790018782.0913212,
+    "ast_hash": "35fb313827aad0bb64b7c951b10513ef",
+    "semantic_hash": "35fb313827aad0bb64b7c951b10513ef"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I32.json": {
+    "mtime": 1789305575.463152,
+    "seen": 1790018782.0913212,
+    "ast_hash": "5870c18a14d4441ca8bf01c232d002df",
+    "semantic_hash": "5870c18a14d4441ca8bf01c232d002df"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I34.json": {
+    "mtime": 1789305575.5031664,
+    "seen": 1790018782.0913212,
+    "ast_hash": "835553c74d9965cbf6a4d82559a6c8b9",
+    "semantic_hash": "835553c74d9965cbf6a4d82559a6c8b9"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I35.json": {
+    "mtime": 1789305575.572225,
+    "seen": 1790018782.0913212,
+    "ast_hash": "1af37837423f77ba88d4fc8a8f6d6211",
+    "semantic_hash": "1af37837423f77ba88d4fc8a8f6d6211"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I39.json": {
+    "mtime": 1789305575.6120505,
+    "seen": 1790018782.0913212,
+    "ast_hash": "ebd70f3e7834334ac0742003f3187e7c",
+    "semantic_hash": "ebd70f3e7834334ac0742003f3187e7c"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I40.json": {
+    "mtime": 1789305575.6654737,
+    "seen": 1790018782.0913212,
+    "ast_hash": "04ced147503c5c202b7eb28a4ba67caa",
+    "semantic_hash": "04ced147503c5c202b7eb28a4ba67caa"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I49.json": {
+    "mtime": 1789305575.7095783,
+    "seen": 1790018782.0913212,
+    "ast_hash": "5fe79a264ba79f680b03f189c1cb6ec0",
+    "semantic_hash": "5fe79a264ba79f680b03f189c1cb6ec0"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I50.json": {
+    "mtime": 1789305575.769538,
+    "seen": 1790018782.0913212,
+    "ast_hash": "078a9c455cbddb28dae33fa0e26759f9",
+    "semantic_hash": "078a9c455cbddb28dae33fa0e26759f9"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I51.json": {
+    "mtime": 1789305575.8264954,
+    "seen": 1790018782.0913212,
+    "ast_hash": "be7a77cd34c714eebbe4f80c0784a54c",
+    "semantic_hash": "be7a77cd34c714eebbe4f80c0784a54c"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I52.json": {
+    "mtime": 1789305575.865767,
+    "seen": 1790018782.0913212,
+    "ast_hash": "21f5ee1dee830998965aa53b3e0ceadb",
+    "semantic_hash": "21f5ee1dee830998965aa53b3e0ceadb"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I53.json": {
+    "mtime": 1789305575.910606,
+    "seen": 1790018782.0913212,
+    "ast_hash": "0bef8f88c64c90a65a8c05dba604b196",
+    "semantic_hash": "0bef8f88c64c90a65a8c05dba604b196"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I58.json": {
+    "mtime": 1789305575.9585092,
+    "seen": 1790018782.0913212,
+    "ast_hash": "d91e3559ffc4b1ac1d3bbf9c052b1ede",
+    "semantic_hash": "d91e3559ffc4b1ac1d3bbf9c052b1ede"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I59.json": {
+    "mtime": 1789305576.005699,
+    "seen": 1790018782.0913212,
+    "ast_hash": "58952437222e808cd84158e6c91730ba",
+    "semantic_hash": "58952437222e808cd84158e6c91730ba"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I61.json": {
+    "mtime": 1789305576.0384147,
+    "seen": 1790018782.0913212,
+    "ast_hash": "406024bcb287318f1628b42a61b1da40",
+    "semantic_hash": "406024bcb287318f1628b42a61b1da40"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I62.json": {
+    "mtime": 1789305576.0852833,
+    "seen": 1790018782.0913212,
+    "ast_hash": "4661e87e94946a002a711d1b63ba1a23",
+    "semantic_hash": "4661e87e94946a002a711d1b63ba1a23"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I67.json": {
+    "mtime": 1789305576.1432645,
+    "seen": 1790018782.0913212,
+    "ast_hash": "d2387c8c44cc6aaf9c7defc6bd257ca8",
+    "semantic_hash": "d2387c8c44cc6aaf9c7defc6bd257ca8"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I69.json": {
+    "mtime": 1789305576.1904013,
+    "seen": 1790018782.0913212,
+    "ast_hash": "12ef5137cdad7ca04790dbee19eb259f",
+    "semantic_hash": "12ef5137cdad7ca04790dbee19eb259f"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I71.json": {
+    "mtime": 1789305576.226449,
+    "seen": 1790018782.0913212,
+    "ast_hash": "be4c3253635df93140d20cc22c128c32",
+    "semantic_hash": "be4c3253635df93140d20cc22c128c32"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/I75.json": {
+    "mtime": 1789305576.2701154,
+    "seen": 1790018782.0913212,
+    "ast_hash": "bf7680cb491e0c453428abf3bddac053",
+    "semantic_hash": "bf7680cb491e0c453428abf3bddac053"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/casos/indice.json": {
+    "mtime": 1789305576.2731159,
+    "seen": 1790018782.0913212,
+    "ast_hash": "610ecf6f1453ca11ab8e234252b9fb65",
+    "semantic_hash": "610ecf6f1453ca11ab8e234252b9fb65"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/p3_contraste.json": {
+    "mtime": 1789178018.002781,
+    "seen": 1790018782.0913212,
+    "ast_hash": "25c16fa13d2b123782ca3ea9b90a0f77",
+    "semantic_hash": "25c16fa13d2b123782ca3ea9b90a0f77"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/p4_resumen.json": {
+    "mtime": 1789178018.065742,
+    "seen": 1790018782.0913212,
+    "ast_hash": "dffa40789386a2e7cd18ba7d71621e2a",
+    "semantic_hash": "dffa40789386a2e7cd18ba7d71621e2a"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/progreso.json": {
+    "mtime": 1789178018.0877473,
+    "seen": 1790018782.0913212,
+    "ast_hash": "13670d2acc72492a9708788ceaaaf643",
+    "semantic_hash": "13670d2acc72492a9708788ceaaaf643"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/salvedad_derivaciones.json": {
+    "mtime": 1789178018.1097777,
+    "seen": 1790018782.0913212,
+    "ast_hash": "706fa7715c73a978528717448fa8c2bd",
+    "semantic_hash": "706fa7715c73a978528717448fa8c2bd"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/App.tsx": {
+    "mtime": 1789668787.825464,
+    "seen": 1790018782.0913212,
+    "ast_hash": "21cbd886af2ba6f9d54ca50b2261bca9",
+    "semantic_hash": "21cbd886af2ba6f9d54ca50b2261bca9"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/charts/BoxPlot.tsx": {
+    "mtime": 1789272263.1897647,
+    "seen": 1790018782.0913212,
+    "ast_hash": "32138f13f04475cb55f9d3a6414dfc0d",
+    "semantic_hash": "32138f13f04475cb55f9d3a6414dfc0d"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/charts/ForestPlot.tsx": {
+    "mtime": 1789004750.1512656,
+    "seen": 1790018782.0913212,
+    "ast_hash": "c6d86b59f2fb70db7b45019fc4325805",
+    "semantic_hash": "c6d86b59f2fb70db7b45019fc4325805"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/charts/Heatmap.tsx": {
+    "mtime": 1789348653.8200786,
+    "seen": 1790018782.0913212,
+    "ast_hash": "fd712bb72b2e131dd132266606311515",
+    "semantic_hash": "fd712bb72b2e131dd132266606311515"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/charts/PlotlyBarChart.tsx": {
+    "mtime": 1789272282.303262,
+    "seen": 1790018782.0913212,
+    "ast_hash": "66f36f079032aed777b7d82addfb6de5",
+    "semantic_hash": "66f36f079032aed777b7d82addfb6de5"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/charts/PlotlyChart.tsx": {
+    "mtime": 1789322105.6688013,
+    "seen": 1790018782.0913212,
+    "ast_hash": "0cee6ec5647978947b11a43b605a8584",
+    "semantic_hash": "0cee6ec5647978947b11a43b605a8584"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/charts/index.ts": {
+    "mtime": 1776119946.0536582,
+    "seen": 1790018782.0913212,
+    "ast_hash": "630934d8e4e0efd6b7740c5c91fdb741",
+    "semantic_hash": "630934d8e4e0efd6b7740c5c91fdb741"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/common/ErrorBoundary.tsx": {
+    "mtime": 1789669018.801131,
+    "seen": 1790018782.0913212,
+    "ast_hash": "7888af4aceace3ec9e7eaf16f6824158",
+    "semantic_hash": "7888af4aceace3ec9e7eaf16f6824158"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/data/DataTable.tsx": {
+    "mtime": 1789348675.1503582,
+    "seen": 1790018782.0913212,
+    "ast_hash": "bb5b55bbf8177af40924819068a1c194",
+    "semantic_hash": "bb5b55bbf8177af40924819068a1c194"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/data/KPICards.tsx": {
+    "mtime": 1789004625.4871402,
+    "seen": 1790018782.0913212,
+    "ast_hash": "d3d3e580d15c9e00fb19502a1f6b47fe",
+    "semantic_hash": "d3d3e580d15c9e00fb19502a1f6b47fe"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/data/index.ts": {
+    "mtime": 1776119945.9175515,
+    "seen": 1790018782.0913212,
+    "ast_hash": "6d132cbd54fe3fd69d822984ba047b19",
+    "semantic_hash": "6d132cbd54fe3fd69d822984ba047b19"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/ecg/ECGPredictionChart.tsx": {
+    "mtime": 1789272351.6944947,
+    "seen": 1790018782.0913212,
+    "ast_hash": "1ecc5cd0d17448ae20d0746e5c811ab0",
+    "semantic_hash": "1ecc5cd0d17448ae20d0746e5c811ab0"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/ecg/LightweightECGChart.tsx": {
+    "mtime": 1789272173.4843774,
+    "seen": 1790018782.0913212,
+    "ast_hash": "b46cec3953f68e8993376822cf35bb23",
+    "semantic_hash": "b46cec3953f68e8993376822cf35bb23"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/experimentos/CasosDeteccion.tsx": {
+    "mtime": 1789305756.5208201,
+    "seen": 1790018782.0913212,
+    "ast_hash": "f915e91e1943e4c3796ae608eda2551c",
+    "semantic_hash": "f915e91e1943e4c3796ae608eda2551c"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/experimentos/NB7HPContent.tsx": {
+    "mtime": 1789345567.608489,
+    "seen": 1790018782.0913212,
+    "ast_hash": "7335bfa77649eb23fc4fc7943b986c86",
+    "semantic_hash": "7335bfa77649eb23fc4fc7943b986c86"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/experimentos/NB8Content.tsx": {
+    "mtime": 1789345568.2444,
+    "seen": 1790018782.0913212,
+    "ast_hash": "98dff366b02358a5638860354766bf25",
+    "semantic_hash": "98dff366b02358a5638860354766bf25"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/layout/Navbar.tsx": {
+    "mtime": 1789668250.924056,
+    "seen": 1790018782.0913212,
+    "ast_hash": "1994b7adae7b4da0690e296f117eff89",
+    "semantic_hash": "1994b7adae7b4da0690e296f117eff89"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/layout/PageWrapper.tsx": {
+    "mtime": 1788903880.5566719,
+    "seen": 1790018782.0913212,
+    "ast_hash": "901d8208e533db9e92176daac1c3df0d",
+    "semantic_hash": "901d8208e533db9e92176daac1c3df0d"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/metrics/MetricCard.tsx": {
+    "mtime": 1788923916.2923484,
+    "seen": 1790018782.0913212,
+    "ast_hash": "9d7b934ce9de8693665961ac27ebe34c",
+    "semantic_hash": "9d7b934ce9de8693665961ac27ebe34c"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/metrics/MetricStat.tsx": {
+    "mtime": 1789225241.2352624,
+    "seen": 1790018782.0913212,
+    "ast_hash": "a6b2c5fd2dfccbe4a06c6a2af4ae0421",
+    "semantic_hash": "a6b2c5fd2dfccbe4a06c6a2af4ae0421"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/models/ModelBadge.tsx": {
+    "mtime": 1776119945.874552,
+    "seen": 1790018782.0913212,
+    "ast_hash": "5a81888e54c4a9272aadb42b47476e76",
+    "semantic_hash": "5a81888e54c4a9272aadb42b47476e76"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/ui/Boton.tsx": {
+    "mtime": 1789323628.3407228,
+    "seen": 1790018782.0913212,
+    "ast_hash": "7e9ad713830efa58b903e98c9a49360d",
+    "semantic_hash": "7e9ad713830efa58b903e98c9a49360d"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/ui/Callout.tsx": {
+    "mtime": 1789303817.7347002,
+    "seen": 1790018782.0913212,
+    "ast_hash": "a2bc93e4cb085f2c053a85e01a703516",
+    "semantic_hash": "a2bc93e4cb085f2c053a85e01a703516"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/ui/Cargando.tsx": {
+    "mtime": 1789668704.3675914,
+    "seen": 1790018782.0913212,
+    "ast_hash": "7c288d6354097bf376eb03eaa0e541cf",
+    "semantic_hash": "7c288d6354097bf376eb03eaa0e541cf"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/ui/ExpandableSection.tsx": {
+    "mtime": 1789323628.342722,
+    "seen": 1790018782.0913212,
+    "ast_hash": "e2aa29902b9adc0494010ff3e646569e",
+    "semantic_hash": "e2aa29902b9adc0494010ff3e646569e"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/ui/Filtros.tsx": {
+    "mtime": 1789228022.928552,
+    "seen": 1790018782.0913212,
+    "ast_hash": "3f9f1141a4e216f1aff20ec9e14c4049",
+    "semantic_hash": "3f9f1141a4e216f1aff20ec9e14c4049"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/ui/FindingCard.tsx": {
+    "mtime": 1789303931.7371836,
+    "seen": 1790018782.0913212,
+    "ast_hash": "583772be00325602438ebde6804f3e7a",
+    "semantic_hash": "583772be00325602438ebde6804f3e7a"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/ui/Grainient.tsx": {
+    "mtime": 1776119945.9695604,
+    "seen": 1790018782.0913212,
+    "ast_hash": "9e2dade8ab292605395d71f2af211210",
+    "semantic_hash": "9e2dade8ab292605395d71f2af211210"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/ui/ImageGallery.tsx": {
+    "mtime": 1789272173.4874473,
+    "seen": 1790018782.0913212,
+    "ast_hash": "f0d59389fb6607e040fe64afae420cd6",
+    "semantic_hash": "f0d59389fb6607e040fe64afae420cd6"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/ui/PaginaDeError.tsx": {
+    "mtime": 1789668759.9127424,
+    "seen": 1790018782.0913212,
+    "ast_hash": "ac09cef213c23f19877d08cb0bb5664e",
+    "semantic_hash": "ac09cef213c23f19877d08cb0bb5664e"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/ui/PapelECG.tsx": {
+    "mtime": 1789616713.546975,
+    "seen": 1790018782.0913212,
+    "ast_hash": "47d82d6a8736f1f03b4f9a7ee0f56ea5",
+    "semantic_hash": "47d82d6a8736f1f03b4f9a7ee0f56ea5"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/ui/ShinyText.tsx": {
+    "mtime": 1789270505.8187714,
+    "seen": 1790018782.0913212,
+    "ast_hash": "74996d6ba4bdc091e14bb691c5817f8a",
+    "semantic_hash": "74996d6ba4bdc091e14bb691c5817f8a"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/ui/SoftAurora.tsx": {
+    "mtime": 1789272351.6944947,
+    "seen": 1790018782.0913212,
+    "ast_hash": "47fbcba9e80dfbb76ddaa5ca817e1a4b",
+    "semantic_hash": "47fbcba9e80dfbb76ddaa5ca817e1a4b"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/hooks/index.ts": {
+    "mtime": 1778267813.2030184,
+    "seen": 1790018782.0913212,
+    "ast_hash": "2d5b2ad3694cf4cb4356fad891f67368",
+    "semantic_hash": "2d5b2ad3694cf4cb4356fad891f67368"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/hooks/useAnotaciones.ts": {
+    "mtime": 1789248590.7464614,
+    "seen": 1790018782.0913212,
+    "ast_hash": "425717876b1b77141ff40eccba90264d",
+    "semantic_hash": "425717876b1b77141ff40eccba90264d"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/hooks/useCSV.ts": {
+    "mtime": 1788903969.2369452,
+    "seen": 1790018782.0913212,
+    "ast_hash": "f1a915970fd0d3fdfee0a96e2897e97d",
+    "semantic_hash": "f1a915970fd0d3fdfee0a96e2897e97d"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/hooks/useCasosDeteccion.ts": {
+    "mtime": 1789305652.5421803,
+    "seen": 1790018782.0913212,
+    "ast_hash": "272f892577aeda4ac87525cf8092f849",
+    "semantic_hash": "272f892577aeda4ac87525cf8092f849"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/hooks/useIsDark.ts": {
+    "mtime": 1788904399.6627903,
+    "seen": 1790018782.0913212,
+    "ast_hash": "c87c3a7e48228d263d41f15c00208ee3",
+    "semantic_hash": "c87c3a7e48228d263d41f15c00208ee3"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/hooks/useLocalStorage.ts": {
+    "mtime": 1776119945.598434,
+    "seen": 1790018782.0913212,
+    "ast_hash": "741046c85797203e610054ff33841433",
+    "semantic_hash": "741046c85797203e610054ff33841433"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/hooks/useMediaQuery.ts": {
+    "mtime": 1776119945.6094325,
+    "seen": 1790018782.0913212,
+    "ast_hash": "7bbb0c64779605293a79912a98f4766e",
+    "semantic_hash": "7bbb0c64779605293a79912a98f4766e"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/hooks/useNB1Results.ts": {
+    "mtime": 1788923567.2532146,
+    "seen": 1790018782.0913212,
+    "ast_hash": "ce89b7b9d338f4fdd289f1cc68bdf4e3",
+    "semantic_hash": "ce89b7b9d338f4fdd289f1cc68bdf4e3"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/hooks/useNB2Results.ts": {
+    "mtime": 1788923567.254214,
+    "seen": 1790018782.0913212,
+    "ast_hash": "91e018c9a3a76f7ca147e6bd8648804d",
+    "semantic_hash": "91e018c9a3a76f7ca147e6bd8648804d"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/hooks/useNB3Results.ts": {
+    "mtime": 1788923567.2562156,
+    "seen": 1790018782.0913212,
+    "ast_hash": "8f2663070d60b635d435174d39b400d2",
+    "semantic_hash": "8f2663070d60b635d435174d39b400d2"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/hooks/useNB4BResults.ts": {
+    "mtime": 1788923567.2572138,
+    "seen": 1790018782.0913212,
+    "ast_hash": "0be7309fbb384c7bed2f4a055772fb91",
+    "semantic_hash": "0be7309fbb384c7bed2f4a055772fb91"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/hooks/useNB5BResults.ts": {
+    "mtime": 1788923567.2582133,
+    "seen": 1790018782.0913212,
+    "ast_hash": "59ec5cabbf6410390169bdbd17e48c1a",
+    "semantic_hash": "59ec5cabbf6410390169bdbd17e48c1a"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/hooks/useNB5Results.ts": {
+    "mtime": 1789272173.4884462,
+    "seen": 1790018782.0913212,
+    "ast_hash": "ae0ffa6e91bd8f849ebe2138fdb03cd8",
+    "semantic_hash": "ae0ffa6e91bd8f849ebe2138fdb03cd8"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/hooks/useNB7HPResults.ts": {
+    "mtime": 1789178422.9647765,
+    "seen": 1790018782.0913212,
+    "ast_hash": "72f7c7a6635be69e8d0e757d07fa9a55",
+    "semantic_hash": "72f7c7a6635be69e8d0e757d07fa9a55"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/hooks/useNB8Results.ts": {
+    "mtime": 1789178390.1330607,
+    "seen": 1790018782.0913212,
+    "ast_hash": "bed7033ae7bf4bb70af0e2a159e444f3",
+    "semantic_hash": "bed7033ae7bf4bb70af0e2a159e444f3"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/hooks/useReferenciaNB6.ts": {
+    "mtime": 1789248060.9237702,
+    "seen": 1790018782.0913212,
+    "ast_hash": "a903265a8eef970c1dd06a720f0693a3",
+    "semantic_hash": "a903265a8eef970c1dd06a720f0693a3"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/hooks/useTablaLopo.ts": {
+    "mtime": 1789005779.0437047,
+    "seen": 1790018782.0913212,
+    "ast_hash": "e91338bff2916930ada6f3975f8dd1ca",
+    "semantic_hash": "e91338bff2916930ada6f3975f8dd1ca"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/hooks/useUmbralDeteccion.ts": {
+    "mtime": 1789248093.9882495,
+    "seen": 1790018782.0913212,
+    "ast_hash": "e9039903bc8301482d19319fa9d0abaf",
+    "semantic_hash": "e9039903bc8301482d19319fa9d0abaf"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/i18n/index.ts": {
+    "mtime": 1776234932.737071,
+    "seen": 1790018782.0913212,
+    "ast_hash": "b774a470558514a317f8f4d567f72ebd",
+    "semantic_hash": "b774a470558514a317f8f4d567f72ebd"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/lib/api.ts": {
+    "mtime": 1788907766.5409484,
+    "seen": 1790018782.0913212,
+    "ast_hash": "6dc85e0ef2d1b4b5fe9b442cadaf9091",
+    "semantic_hash": "6dc85e0ef2d1b4b5fe9b442cadaf9091"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/lib/exportarCSV.ts": {
+    "mtime": 1789006032.4089468,
+    "seen": 1790018782.0913212,
+    "ast_hash": "6f2a76ecdddd1de33373aef8afb3686a",
+    "semantic_hash": "6f2a76ecdddd1de33373aef8afb3686a"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/lib/plotly.ts": {
+    "mtime": 1788924124.643503,
+    "seen": 1790018782.0913212,
+    "ast_hash": "59d2c25642fa980c882bf8288fa14f5e",
+    "semantic_hash": "59d2c25642fa980c882bf8288fa14f5e"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/lib/tokens.ts": {
+    "mtime": 1789004750.0804327,
+    "seen": 1790018782.0913212,
+    "ast_hash": "9344a873d48b14e632adfe9eea57b05e",
+    "semantic_hash": "9344a873d48b14e632adfe9eea57b05e"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/main.tsx": {
+    "mtime": 1776119945.0,
+    "seen": 1790018782.0913212,
+    "ast_hash": "a0eb77aee9f5944ba778e9755ca0ea9e",
+    "semantic_hash": "a0eb77aee9f5944ba778e9755ca0ea9e"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/pages/Cohorte.tsx": {
+    "mtime": 1789348653.909013,
+    "seen": 1790018782.0913212,
+    "ast_hash": "9d1588cf54a390298eaa2389210b7fb6",
+    "semantic_hash": "9d1588cf54a390298eaa2389210b7fb6"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/pages/Experimentos.tsx": {
+    "mtime": 1789345605.3442779,
+    "seen": 1790018782.0913212,
+    "ast_hash": "6026a2ddc9446798817e8b8a9f8a0e2a",
+    "semantic_hash": "6026a2ddc9446798817e8b8a9f8a0e2a"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/pages/Explorador.tsx": {
+    "mtime": 1789345568.2901492,
+    "seen": 1790018782.0913212,
+    "ast_hash": "bda4d5bb9e2fe0f291b65f46d7fd8bdd",
+    "semantic_hash": "bda4d5bb9e2fe0f291b65f46d7fd8bdd"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/pages/Glosario.tsx": {
+    "mtime": 1789612972.4658647,
+    "seen": 1790018782.0913212,
+    "ast_hash": "4a7a5878318551e70e228fecae831419",
+    "semantic_hash": "4a7a5878318551e70e228fecae831419"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/pages/Home.tsx": {
+    "mtime": 1789616735.697292,
+    "seen": 1790018782.0913212,
+    "ast_hash": "aeafe31349f0a1dd8e337c3b4eddcce1",
+    "semantic_hash": "aeafe31349f0a1dd8e337c3b4eddcce1"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/pages/Lopo.tsx": {
+    "mtime": 1789614644.7218006,
+    "seen": 1790018782.0913212,
+    "ast_hash": "302c1aa9d9f976510c05c96e37b06893",
+    "semantic_hash": "302c1aa9d9f976510c05c96e37b06893"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/pages/Manual.tsx": {
+    "mtime": 1789614546.1367364,
+    "seen": 1790018782.0913212,
+    "ast_hash": "fcaefa82c03ae12ca8ab1048875c710f",
+    "semantic_hash": "fcaefa82c03ae12ca8ab1048875c710f"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/pages/Modelos.tsx": {
+    "mtime": 1789345568.3317647,
+    "seen": 1790018782.0913212,
+    "ast_hash": "b1386cc375cf32d8f077718d94fc7f79",
+    "semantic_hash": "b1386cc375cf32d8f077718d94fc7f79"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/store/useECGStore.ts": {
+    "mtime": 1789272229.06565,
+    "seen": 1790018782.0913212,
+    "ast_hash": "6b305772e90aa65dd85415b6c6bcf4c9",
+    "semantic_hash": "6b305772e90aa65dd85415b6c6bcf4c9"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/types/ecg.types.ts": {
+    "mtime": 1789335489.0111458,
+    "seen": 1790018782.0913212,
+    "ast_hash": "ba2cec2f06d50d9f9935f6638f4f01e2",
+    "semantic_hash": "ba2cec2f06d50d9f9935f6638f4f01e2"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/tailwind.config.js": {
+    "mtime": 1776119942.0,
+    "seen": 1790018782.0913212,
+    "ast_hash": "1bbdb0dc344501d694b2fd9a781d3199",
+    "semantic_hash": "1bbdb0dc344501d694b2fd9a781d3199"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/tsconfig.app.json": {
+    "mtime": 1776119942.0,
+    "seen": 1790018782.0913212,
+    "ast_hash": "df12a558a273165c9031f444dcc890c7",
+    "semantic_hash": "df12a558a273165c9031f444dcc890c7"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/tsconfig.json": {
+    "mtime": 1776119942.0,
+    "seen": 1790018782.0913212,
+    "ast_hash": "a3d39fa780ebff65444de257f291ce6c",
+    "semantic_hash": "a3d39fa780ebff65444de257f291ce6c"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/tsconfig.node.json": {
+    "mtime": 1776119942.0,
+    "seen": 1790018782.0913212,
+    "ast_hash": "eec85c9d7c6b599801557f1afd86672c",
+    "semantic_hash": "eec85c9d7c6b599801557f1afd86672c"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/vercel.json": {
+    "mtime": 1779133947.5409043,
+    "seen": 1790018782.0913212,
+    "ast_hash": "d02fa67366295f9fdf9efa3112f15602",
+    "semantic_hash": "d02fa67366295f9fdf9efa3112f15602"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/vite.config.ts": {
+    "mtime": 1789044973.0108488,
+    "seen": 1790018782.0913212,
+    "ast_hash": "4bf79e19bdcfc3ddc428716e529af44b",
+    "semantic_hash": "4bf79e19bdcfc3ddc428716e529af44b"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/app/__init__.py": {
+    "mtime": 1776119935.0,
+    "seen": 1790018782.0913212,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/app/api/__init__.py": {
+    "mtime": 1776119935.0761697,
+    "seen": 1790018782.0913212,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/app/api/routes/__init__.py": {
+    "mtime": 1776119935.0891697,
+    "seen": 1790018782.0913212,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/app/api/routes/models.py": {
+    "mtime": 1776119935.1266115,
+    "seen": 1790018782.0913212,
+    "ast_hash": "897e8ce189710724c465edad1fa5a62e",
+    "semantic_hash": "897e8ce189710724c465edad1fa5a62e"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/app/api/routes/patients.py": {
+    "mtime": 1789271784.5151708,
+    "seen": 1790018782.0913212,
+    "ast_hash": "daf44ee5dbc229081e488819f823ed83",
+    "semantic_hash": "daf44ee5dbc229081e488819f823ed83"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/app/api/routes/predict.py": {
+    "mtime": 1788907737.7404463,
+    "seen": 1790018782.0913212,
+    "ast_hash": "26af5a5e5de4aff7269545bd2a8e2a8b",
+    "semantic_hash": "26af5a5e5de4aff7269545bd2a8e2a8b"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/app/api/routes/process.py": {
+    "mtime": 1789271859.5965464,
+    "seen": 1790018782.0913212,
+    "ast_hash": "69724c5c753d420949cd1b9164010800",
+    "semantic_hash": "69724c5c753d420949cd1b9164010800"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/app/config.py": {
+    "mtime": 1789248411.7334318,
+    "seen": 1790018782.0913212,
+    "ast_hash": "90843a1af40cec782bfbc564db7154a7",
+    "semantic_hash": "90843a1af40cec782bfbc564db7154a7"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/app/core/__init__.py": {
+    "mtime": 1776119935.2196062,
+    "seen": 1790018782.0913212,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/app/core/filtering.py": {
+    "mtime": 1778211729.7532864,
+    "seen": 1790018782.0913212,
+    "ast_hash": "f71bdfe687725354c778be2e6c9dfac2",
+    "semantic_hash": "f71bdfe687725354c778be2e6c9dfac2"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/app/core/model_loader.py": {
+    "mtime": 1778684302.26415,
+    "seen": 1790018782.0913212,
+    "ast_hash": "3ebba00f3d9faea55a6233db5fde6cd3",
+    "semantic_hash": "3ebba00f3d9faea55a6233db5fde6cd3"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/app/core/preprocessing.py": {
+    "mtime": 1789248398.5924106,
+    "seen": 1790018782.0913212,
+    "ast_hash": "f7b7a2f0b77c4561b695f4358f83d275",
+    "semantic_hash": "f7b7a2f0b77c4561b695f4358f83d275"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/app/core/rpeak_detection.py": {
+    "mtime": 1776119935.228607,
+    "seen": 1790018782.0913212,
+    "ast_hash": "ce55788685bfc36b64ada23640c226f2",
+    "semantic_hash": "ce55788685bfc36b64ada23640c226f2"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/app/core/segmentation.py": {
+    "mtime": 1789248379.9956703,
+    "seen": 1790018782.0913212,
+    "ast_hash": "f998350b980ffc2f341c8aa030bea960",
+    "semantic_hash": "f998350b980ffc2f341c8aa030bea960"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/app/main.py": {
+    "mtime": 1788904505.3847952,
+    "seen": 1790018782.0913212,
+    "ast_hash": "31f5527f698298be26cd1933f0280069",
+    "semantic_hash": "31f5527f698298be26cd1933f0280069"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/app/models/__init__.py": {
+    "mtime": 1776119935.1905742,
+    "seen": 1790018782.0913212,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/app/models/schemas.py": {
+    "mtime": 1789271825.7800605,
+    "seen": 1790018782.0913212,
+    "ast_hash": "7ff28e4e1e876f19ebb539fe40efedb4",
+    "semantic_hash": "7ff28e4e1e876f19ebb539fe40efedb4"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/patch_model.py": {
+    "mtime": 1789248512.8590617,
+    "seen": 1790018782.0913212,
+    "ast_hash": "2670623976c1e8884f7177008798a2d3",
+    "semantic_hash": "2670623976c1e8884f7177008798a2d3"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/tests/__init__.py": {
+    "mtime": 1776119935.0,
+    "seen": 1790018782.0913212,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/tests/test_api.py": {
+    "mtime": 1789248592.4333694,
+    "seen": 1790018782.0913212,
+    "ast_hash": "403bd91014fb2e2679ebc151e422a3c5",
+    "semantic_hash": "403bd91014fb2e2679ebc151e422a3c5"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/tests/test_segmentation.py": {
+    "mtime": 1789248638.4533317,
+    "seen": 1790018782.0913212,
+    "ast_hash": "ab7373a7e89b67120665dfce1d0485bb",
+    "semantic_hash": "ab7373a7e89b67120665dfce1d0485bb"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/tests/test_seguridad.py": {
+    "mtime": 1789271670.146211,
+    "seen": 1790018782.0913212,
+    "ast_hash": "81cc06f029d00dc30984c6153cf327ad",
+    "semantic_hash": "81cc06f029d00dc30984c6153cf327ad"
+  },
+  "FORECASTING ECG - Dashboard/results/NB1/config_NB2.json": {
+    "mtime": 1776119935.0,
+    "seen": 1790018782.0913212,
+    "ast_hash": "b9a749f121ada1ecc4fb11e17918979c",
+    "semantic_hash": "b9a749f121ada1ecc4fb11e17918979c"
+  },
+  "FORECASTING ECG - Dashboard/results/NB2/config_NB3.json": {
+    "mtime": 1776119938.0,
+    "seen": 1790018782.0913212,
+    "ast_hash": "c7b58b264821b9f0eb3fd9f8403a98dc",
+    "semantic_hash": "c7b58b264821b9f0eb3fd9f8403a98dc"
+  },
+  "FORECASTING ECG - Dashboard/results/NB4B/config_NB4B.json": {
+    "mtime": 1776119936.0,
+    "seen": 1790018782.0913212,
+    "ast_hash": "7d9029c6f74718b1a50bef2c4b813634",
+    "semantic_hash": "7d9029c6f74718b1a50bef2c4b813634"
+  },
+  "REGISTRO_SOFTWARE/recuento_deposito.json": {
+    "mtime": 1789671230.482146,
+    "seen": 1790018782.0913212,
+    "ast_hash": "871790f6b0844a34ba19d7c137d44e85",
+    "semantic_hash": "871790f6b0844a34ba19d7c137d44e85"
+  },
+  ".github/workflows/mantener-despierto.yml": {
+    "mtime": 1789670818.228835,
+    "seen": 1790692555.8064544,
+    "ast_hash": "176e68bb4d0fc4f6ec7e897e5fab3d99",
+    "semantic_hash": "176e68bb4d0fc4f6ec7e897e5fab3d99"
+  },
+  ".github/workflows/sincronizar-space.yml": {
+    "mtime": 1789675005.3306544,
+    "seen": 1790692555.8064544,
+    "ast_hash": "9175e9a75e96ad4a1b86141e83c466b8",
+    "semantic_hash": "9175e9a75e96ad4a1b86141e83c466b8"
+  },
+  "FORECASTING ECG - Dashboard/COMO_EJECUTAR.txt": {
+    "mtime": 1788907299.1853611,
+    "seen": 1790692555.8064544,
+    "ast_hash": "8634418ea31001deac6bbaac666c1617",
+    "semantic_hash": "8634418ea31001deac6bbaac666c1617"
+  },
+  "FORECASTING ECG - Dashboard/README.md": {
+    "mtime": 1789230612.7977462,
+    "seen": 1790692555.8064544,
+    "ast_hash": "88edaf00b823323ba14374657b038b52",
+    "semantic_hash": "88edaf00b823323ba14374657b038b52"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/README.md": {
+    "mtime": 1776119942.0,
+    "seen": 1790692555.8064544,
+    "ast_hash": "f6e3faf55d738cf2affe1b44195f27cf",
+    "semantic_hash": "f6e3faf55d738cf2affe1b44195f27cf"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/index.html": {
+    "mtime": 1789347900.893447,
+    "seen": 1790692555.8064544,
+    "ast_hash": "6ccb7cffcbdcf59375d520278430da5c",
+    "semantic_hash": "6ccb7cffcbdcf59375d520278430da5c"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/README.md": {
+    "mtime": 1789248549.0631557,
+    "seen": 1790692555.8064544,
+    "ast_hash": "4a4db7448955f9132e450694afbf5ead",
+    "semantic_hash": "4a4db7448955f9132e450694afbf5ead"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/docker-compose.yml": {
+    "mtime": 1788904006.3680394,
+    "seen": 1790692555.8064544,
+    "ast_hash": "ebe39ba8b8462cd27e2ac4838499bdf4",
+    "semantic_hash": "ebe39ba8b8462cd27e2ac4838499bdf4"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/espacio-hf/POR_QUE.md": {
+    "mtime": 1789673845.3819258,
+    "seen": 1790692555.8064544,
+    "ast_hash": "957e6464b2abdb391e2d8af585dddcfa",
+    "semantic_hash": "957e6464b2abdb391e2d8af585dddcfa"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/espacio-hf/README.md": {
+    "mtime": 1789672289.2469025,
+    "seen": 1790692555.8064544,
+    "ast_hash": "7f53876b79c920df571d9b9202af9acd",
+    "semantic_hash": "7f53876b79c920df571d9b9202af9acd"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/espacio-hf/requirements.txt": {
+    "mtime": 1789673845.3541548,
+    "seen": 1790692555.8064544,
+    "ast_hash": "cc84b78edb8e96607dc39cd4239f0f3e",
+    "semantic_hash": "cc84b78edb8e96607dc39cd4239f0f3e"
+  },
+  "FORECASTING ECG - Dashboard/ecg_forecast_api/requirements.txt": {
+    "mtime": 1789272709.462214,
+    "seen": 1790692555.8064544,
+    "ast_hash": "f84e6df82ea7d3dbb63685be76319c95",
+    "semantic_hash": "f84e6df82ea7d3dbb63685be76319c95"
+  },
+  "FORECASTING ECG - Dashboard/requirements.txt": {
+    "mtime": 1776119934.0,
+    "seen": 1790692555.8064544,
+    "ast_hash": "e43e6e654d385059929438918634afe0",
+    "semantic_hash": "e43e6e654d385059929438918634afe0"
+  },
+  "FORECASTING ECG - Dashboard/results/NB5/11_conclusiones.txt": {
+    "mtime": 1778602719.35299,
+    "seen": 1790692555.8064544,
+    "ast_hash": "2d0b3828b64a2034ced8f8fb6b47b1c7",
+    "semantic_hash": "2d0b3828b64a2034ced8f8fb6b47b1c7"
+  },
+  "README.md": {
+    "mtime": 1789680498.172334,
+    "seen": 1790692555.8064544,
+    "ast_hash": "d8b036b121f6bbcb15320809a788ef48",
+    "semantic_hash": "d8b036b121f6bbcb15320809a788ef48"
+  },
+  "REGISTRO_SOFTWARE/VERIFICACION.txt": {
+    "mtime": 1789671767.6340382,
+    "seen": 1790692555.8064544,
+    "ast_hash": "db0982dc3e72ebc661df23fc9e37ea82",
+    "semantic_hash": "db0982dc3e72ebc661df23fc9e37ea82"
+  },
+  "REGISTRO_SOFTWARE/codigo_fuente_MANIFIESTO.txt": {
+    "mtime": 1789671230.4651365,
+    "seen": 1790692555.8064544,
+    "ast_hash": "7bacc39766e870e31ad8f60b0ebaaa61",
+    "semantic_hash": "7bacc39766e870e31ad8f60b0ebaaa61"
+  },
+  "requirements.txt": {
+    "mtime": 1772834833.316245,
+    "seen": 1790692555.8064544,
+    "ast_hash": "e43e6e654d385059929438918634afe0",
+    "semantic_hash": "e43e6e654d385059929438918634afe0"
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/favicon/apple-touch-icon-180.png": {
+    "mtime": 1789309023.9119296,
+    "seen": 1791947958.3920836,
+    "ast_hash": "280273b3cede1caa6313217be662de91",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/favicon/favicon-16.png": {
+    "mtime": 1789309024.8009186,
+    "seen": 1791947958.3920836,
+    "ast_hash": "04196fcdfad87bfa99459060fb59c74c",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/favicon/favicon-32.png": {
+    "mtime": 1789309025.6746,
+    "seen": 1791947958.3920836,
+    "ast_hash": "18cd144e5d1b014d01799a5898ef4dd1",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/favicon/favicon-48.png": {
+    "mtime": 1789309026.5371752,
+    "seen": 1791947958.3920836,
+    "ast_hash": "03a34958fec3d4ca0c993bbfa0532ba2",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/favicon/favicon.svg": {
+    "mtime": 1789309028.2325478,
+    "seen": 1791947958.3920836,
+    "ast_hash": "ed5a5b59dcd33fcd72fe9dd84dd97f35",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/favicon/icon-192.png": {
+    "mtime": 1789309029.0605707,
+    "seen": 1791947958.3920836,
+    "ast_hash": "67c8dcf47908bd616e80eb51c58b556b",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/favicon/icon-512.png": {
+    "mtime": 1789309029.8818266,
+    "seen": 1791947958.3920836,
+    "ast_hash": "eab5ed11546048b30c7196542ed71374",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/png/logo-1024.png": {
+    "mtime": 1789309030.6920204,
+    "seen": 1791947958.3920836,
+    "ast_hash": "6e8d70194f008bb346b0ae248a6ce118",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/png/logo-2048.png": {
+    "mtime": 1789309031.4626954,
+    "seen": 1791947958.3920836,
+    "ast_hash": "ac4da7d6a5c1922ca411899ba7009704",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/png/logo-256.png": {
+    "mtime": 1789309032.152146,
+    "seen": 1791947958.3920836,
+    "ast_hash": "341ddb49613f9191c9008efe62d023f7",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/png/logo-512.png": {
+    "mtime": 1789309032.6183631,
+    "seen": 1791947958.3920836,
+    "ast_hash": "9afcb39fcc48496137d22b71c7fbb234",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/png/logo-blanco-1024.png": {
+    "mtime": 1789309033.0777469,
+    "seen": 1791947958.3920836,
+    "ast_hash": "fbb8738d91616e171e358f712ef95b62",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/png/logo-claro-1024.png": {
+    "mtime": 1789309033.485041,
+    "seen": 1791947958.3920836,
+    "ast_hash": "1b417ada3cb1e35b93cbc8fc7301e119",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/png/logo-negro-1024.png": {
+    "mtime": 1789309033.82999,
+    "seen": 1791947958.3920836,
+    "ast_hash": "a187028e0e7d64abfed8fd2fda8df41f",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/social/og-1200x630-azul.png": {
+    "mtime": 1789309034.0842042,
+    "seen": 1791947958.3920836,
+    "ast_hash": "fbd57d25e7933874838e52136385ee3a",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/social/og-1200x630.png": {
+    "mtime": 1789309034.2601633,
+    "seen": 1791947958.3920836,
+    "ast_hash": "17185172474d4f68c4e66e0b5db34bfa",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/svg/logo-blanco.svg": {
+    "mtime": 1789309034.3939598,
+    "seen": 1791947958.3920836,
+    "ast_hash": "14b90358d221543afc6eb36c0279e00b",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/svg/logo-claro.svg": {
+    "mtime": 1789309034.4824991,
+    "seen": 1791947958.3920836,
+    "ast_hash": "9bf3111e09b4f3a4bca82bbd18b0901b",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/svg/logo-mono.svg": {
+    "mtime": 1789309034.5623412,
+    "seen": 1791947958.3920836,
+    "ast_hash": "3fc6d2bf6199d87a723a3e6cc2bcc0e5",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/svg/logo-negro.svg": {
+    "mtime": 1789309034.6333354,
+    "seen": 1791947958.3920836,
+    "ast_hash": "c7116b7289a92010d40f9939be856762",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/brand/svg/logo.svg": {
+    "mtime": 1789309034.6848495,
+    "seen": 1791947958.3920836,
+    "ast_hash": "ed5a5b59dcd33fcd72fe9dd84dd97f35",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/boxplot_A_vs_B.png": {
+    "mtime": 1776119943.614781,
+    "seen": 1791947958.3920836,
+    "ast_hash": "028ac6e1fea13d903fa82ca881a014cc",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/boxplot_ExpA.png": {
+    "mtime": 1776119943.6503003,
+    "seen": 1791947958.3920836,
+    "ast_hash": "bd4a991dfd6a9e090da5df8a8c85033d",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/boxplot_ExpB.png": {
+    "mtime": 1776119943.594783,
+    "seen": 1791947958.3920836,
+    "ast_hash": "794f772df61bbd86de8aaed2577a4219",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/boxplot_mse_ExpA.png": {
+    "mtime": 1776119943.624782,
+    "seen": 1791947958.3920836,
+    "ast_hash": "506a915bf9636e33d9eaac0ff593ecd3",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/boxplot_mse_ExpB.png": {
+    "mtime": 1776119943.6773014,
+    "seen": 1791947958.3930817,
+    "ast_hash": "ddfc8c32cf3f85d8220c38bb13ff1d4b",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/ecg_train_test_100.png": {
+    "mtime": 1776119943.6377869,
+    "seen": 1791947958.3930817,
+    "ast_hash": "f3535d727ea7b17df086b33c819586af",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/ecg_train_test_200.png": {
+    "mtime": 1776119943.7013712,
+    "seen": 1791947958.3930817,
+    "ast_hash": "235fbd6772206bf946954af5318ebbc2",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/ecg_train_test_217.png": {
+    "mtime": 1776119943.7323763,
+    "seen": 1791947958.3930817,
+    "ast_hash": "c46e6fc1edd13e89020f26cffcf868ba",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/heatmap_filtro_horizonte.png": {
+    "mtime": 1776119943.6683013,
+    "seen": 1791947958.3930817,
+    "ast_hash": "0f5d67f7405b173bf4bb692296bebabd",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/heatmap_filtro_lookback.png": {
+    "mtime": 1776119943.7193708,
+    "seen": 1791947958.3930817,
+    "ast_hash": "6671cf474d6948f0f1e14bfb41402af9",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/ic95_ExpA.png": {
+    "mtime": 1776119943.7103705,
+    "seen": 1791947958.3930817,
+    "ast_hash": "bc20fbf17176d59ed616ad0281a6c764",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/ic95_ExpB.png": {
+    "mtime": 1776119943.658298,
+    "seen": 1791947958.3930817,
+    "ast_hash": "b6c763b80e7e4d8b56afbc116fbfd871",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/prediccion_consistencia.png": {
+    "mtime": 1776119943.7438884,
+    "seen": 1791947958.3930817,
+    "ast_hash": "b56c732c378f029207a66c32366be17b",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/prediccion_multistep_todos.png": {
+    "mtime": 1776119943.6862993,
+    "seen": 1791947958.3930817,
+    "ast_hash": "29215ed7968f0cfb80a419708311d886",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb1/img/prediccion_vs_real.png": {
+    "mtime": 1776119943.6047845,
+    "seen": 1791947958.3930817,
+    "ast_hash": "10fee847968431782cedd8310805e772",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/img/boxplot_DL_A_vs_B.png": {
+    "mtime": 1776119943.1613035,
+    "seen": 1791947958.3930817,
+    "ast_hash": "79d9e990925538d2f91ae6de1dd56199",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/img/boxplot_DL_Exp A_desglose.png": {
+    "mtime": 1776119943.1177845,
+    "seen": 1791947958.3930817,
+    "ast_hash": "cb79ec8159884792bf2bff11fc1ab036",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/img/boxplot_DL_Exp A_global.png": {
+    "mtime": 1776119943.1067846,
+    "seen": 1791947958.3930817,
+    "ast_hash": "be6fc9cec0956374d1d40a16f23be640",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/img/boxplot_DL_Exp B_desglose.png": {
+    "mtime": 1776119943.1503031,
+    "seen": 1791947958.3930817,
+    "ast_hash": "e9f6fa7a9c1a68c50b99489e97270090",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/img/boxplot_DL_Exp B_global.png": {
+    "mtime": 1776119943.0967834,
+    "seen": 1791947958.3930817,
+    "ast_hash": "9ad331395e22aa08f472c0230309a7da",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/img/boxplot_global_trad_vs_dl.png": {
+    "mtime": 1776119943.1403048,
+    "seen": 1791947958.3930817,
+    "ast_hash": "e30d50930e1d9b3c5f114c4922fe8838",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/img/prediccion_DL_Exp A_ganador.png": {
+    "mtime": 1776119943.1307886,
+    "seen": 1791947958.3930817,
+    "ast_hash": "9e7067e95133966450d856a215118a2e",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb2/img/prediccion_DL_Exp B_ganador.png": {
+    "mtime": 1776119943.1743028,
+    "seen": 1791947958.3930817,
+    "ast_hash": "4a69d1cf4ebc8cb4332ca61a5682ebc6",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/img/barras_nb4b_modelo_filtro.png": {
+    "mtime": 1776119943.3345208,
+    "seen": 1791947958.3930817,
+    "ast_hash": "1fda4dacc43cec5e72ad333f01d4e3ab",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/img/boxplot_nb4b.png": {
+    "mtime": 1776119943.324917,
+    "seen": 1791947958.3930817,
+    "ast_hash": "aa8135ce27ca414315eaacce39c1b693",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/img/comparacion_td_cnn.png": {
+    "mtime": 1776119943.3785858,
+    "seen": 1791947958.3930817,
+    "ast_hash": "6598aa62538d0184057b69812bc776d8",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/img/ejemplo_segmentos_60s.png": {
+    "mtime": 1788924412.952771,
+    "seen": 1791947958.3930817,
+    "ast_hash": "9e0a10ff27845c3462b1ded724650954",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/img/heatmap_nb4b.png": {
+    "mtime": 1776119943.3445866,
+    "seen": 1791947958.3930817,
+    "ast_hash": "315be6337f402ac62f52b41158faa765",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/img/ic95_nb4b.png": {
+    "mtime": 1776119943.3685875,
+    "seen": 1791947958.3930817,
+    "ast_hash": "ebec263bfb1da83473b56c2403d67cdb",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb4b/img/r2_por_paciente.png": {
+    "mtime": 1776119943.3905866,
+    "seen": 1791947958.3930817,
+    "ast_hash": "1240c6a3cdfad84ebc788f72914984fc",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb5/img/03_ecg_filtrado.png": {
+    "mtime": 1778206138.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "72e280cfceb0c0ddbeb9a989b2972bab",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb5/img/07_demo_CNN_GRU_ATTN.png": {
+    "mtime": 1778206138.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "d73b18aaddbe6a7d03dcbb0686f921d8",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb5/img/10_boxplot_r2_total.png": {
+    "mtime": 1778206138.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "3a0df3a24242aecbc1d0a8a3cc3a288c",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb5/img/10_degradacion_temporal.png": {
+    "mtime": 1778206138.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "ea0541653147768975e1f6e08264ab69",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb5/img/10_r2_pacientes_CNN_GRU_ATTN.png": {
+    "mtime": 1778206138.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "d30cbfd7c87f08969f02aebd2b99b15d",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb5/img/12_5_prediccion_extendida_ft.png": {
+    "mtime": 1788924412.657439,
+    "seen": 1791947958.3930817,
+    "ast_hash": "eeb14c632f0a36f765c9a406daddf429",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb5/img/12_5_real_vs_pred_ft.png": {
+    "mtime": 1788924412.34613,
+    "seen": 1791947958.3930817,
+    "ast_hash": "a93973fbdb0aa21aaa8eee41abd8ad06",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb5/img/12_5_tabla_metricas_ft.png": {
+    "mtime": 1778206138.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "9014518804713643c8f38f6157e2cbfe",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/img/demo_v2_BiGRU_MHA.png": {
+    "mtime": 1776119943.8437002,
+    "seen": 1791947958.3930817,
+    "ast_hash": "4d9937236a7444685515f4bdc2aa477e",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/img/demo_v2_CNN_GRU.png": {
+    "mtime": 1776119943.8121736,
+    "seen": 1791947958.3930817,
+    "ast_hash": "fdff43b7240b07e36510debd96d04de1",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/img/demo_v2_GRU_base.png": {
+    "mtime": 1776119943.8011212,
+    "seen": 1791947958.3930817,
+    "ast_hash": "126157fd08476b6289df232def9cc50a",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/img/lopo_v2_BiGRU_MHA_r2.png": {
+    "mtime": 1776119943.867989,
+    "seen": 1791947958.3930817,
+    "ast_hash": "072186fdf3a3f4f0a7a23af12c9a13e5",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/img/lopo_v2_CNN_GRU_r2.png": {
+    "mtime": 1776119943.8779912,
+    "seen": 1791947958.3930817,
+    "ast_hash": "fb69c39ba4a519a13650f5ac37e2ec40",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/img/lopo_v2_GRU_base_r2.png": {
+    "mtime": 1776119943.7911208,
+    "seen": 1791947958.3930817,
+    "ast_hash": "ed9df8c224c70bdb737d3b2f06bfe04f",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/img/lopo_v2_boxplot_all.png": {
+    "mtime": 1776119943.822182,
+    "seen": 1791947958.3930817,
+    "ast_hash": "4b86ed68e5a99fa95c3d3a390e6b41e4",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/img/lopo_v2_mejora_ft_BiGRU_MHA.png": {
+    "mtime": 1776119943.8557048,
+    "seen": 1791947958.3930817,
+    "ast_hash": "a92ad4a466291335025ddf8dc23893c4",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb5b/img/lopo_v2_mejora_ft_CNN_GRU.png": {
+    "mtime": 1776119943.8331861,
+    "seen": 1791947958.3930817,
+    "ast_hash": "caf58ff52ac267c7a36ed03c880e5000",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/img/fig26_arquitectura_cnn_gru_attn.png": {
+    "mtime": 1789609581.883566,
+    "seen": 1791947958.3930817,
+    "ast_hash": "664c3ecb03f74c09c26d221b41c05dda",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/img/fig27_caida_transferencia.png": {
+    "mtime": 1788904075.779844,
+    "seen": 1791947958.3930817,
+    "ast_hash": "20bbc37e8d43dec743dff1f158d76fbc",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb7/img/fig32_trayectoria_experimental.png": {
+    "mtime": 1788904075.7870178,
+    "seen": 1791947958.3930817,
+    "ast_hash": "2b4267071dbf342a3b0ca20c1beec698",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/data/nb8/p4_curva_precision_exhaustividad.png": {
+    "mtime": 1789178018.1298437,
+    "seen": 1791947958.3930817,
+    "ast_hash": "08eed8ff6db82b4ac5a796cb936ceb18",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/favicon.svg": {
+    "mtime": 1776119942.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "7e840862161341271697daa99a40d76b",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/icons.svg": {
+    "mtime": 1776119942.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "3b4fcfcf393eca4d264dca4a4663bc37",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/img/DarioGomez.JPG": {
+    "mtime": 1788924411.8381236,
+    "seen": 1791947958.3930817,
+    "ast_hash": "564659606f2ff235b204ac3d354b7f11",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/img/DarwinBurbano.JPG": {
+    "mtime": 1779850366.1865795,
+    "seen": 1791947958.3930817,
+    "ast_hash": "b58cf4713304b87f9042ad5016e78045",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/img/Escudos_2-2 (1).png": {
+    "mtime": 1788924411.8048134,
+    "seen": 1791947958.3930817,
+    "ast_hash": "839f629f051f4ae9801fd7a92212c012",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/img/HectorMora.JPG": {
+    "mtime": 1788924411.8491218,
+    "seen": 1791947958.3930817,
+    "ast_hash": "ca9fbdfed8db8f00e1918d19d17e9682",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/img/logoECGF.png": {
+    "mtime": 1788924411.7138965,
+    "seen": 1791947958.3930817,
+    "ast_hash": "c8c45968c0d59861003a92a27664b8d4",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/img/logoUniv.png": {
+    "mtime": 1788924411.6908548,
+    "seen": 1791947958.3930817,
+    "ast_hash": "d43dddffa38417e5935ed7ff02a97c35",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/assets/hero.png": {
+    "mtime": 1776119945.7039526,
+    "seen": 1791947958.3930817,
+    "ast_hash": "5cf2b0762834cdddc0dd3ec1397b5011",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/assets/react.svg": {
+    "mtime": 1776119945.6869528,
+    "seen": 1791947958.3930817,
+    "ast_hash": "f0402b67b6ce880f65666bb49e841696",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/assets/vite.svg": {
+    "mtime": 1776119945.6959548,
+    "seen": 1791947958.3930817,
+    "ast_hash": "9960a24288958394ac50e57ff638b036",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB1/boxplot_A_vs_B.png": {
+    "mtime": 1776119935.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "028ac6e1fea13d903fa82ca881a014cc",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB1/boxplot_ExpA.png": {
+    "mtime": 1776119935.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "bd4a991dfd6a9e090da5df8a8c85033d",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB1/boxplot_ExpB.png": {
+    "mtime": 1776119935.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "794f772df61bbd86de8aaed2577a4219",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB1/boxplot_mse_ExpA.png": {
+    "mtime": 1776119935.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "506a915bf9636e33d9eaac0ff593ecd3",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB1/boxplot_mse_ExpB.png": {
+    "mtime": 1776119935.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "ddfc8c32cf3f85d8220c38bb13ff1d4b",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB1/ecg_train_test_100.png": {
+    "mtime": 1776119935.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "f3535d727ea7b17df086b33c819586af",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB1/ecg_train_test_200.png": {
+    "mtime": 1776119935.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "235fbd6772206bf946954af5318ebbc2",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB1/ecg_train_test_217.png": {
+    "mtime": 1776119935.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "c46e6fc1edd13e89020f26cffcf868ba",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB1/heatmap_filtro_horizonte.png": {
+    "mtime": 1776119935.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "0f5d67f7405b173bf4bb692296bebabd",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB1/heatmap_filtro_lookback.png": {
+    "mtime": 1776119935.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "6671cf474d6948f0f1e14bfb41402af9",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB1/ic95_ExpA.png": {
+    "mtime": 1776119935.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "bc20fbf17176d59ed616ad0281a6c764",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB1/ic95_ExpB.png": {
+    "mtime": 1776119935.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "b6c763b80e7e4d8b56afbc116fbfd871",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB1/prediccion_consistencia.png": {
+    "mtime": 1776119935.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "b56c732c378f029207a66c32366be17b",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB1/prediccion_multistep_todos.png": {
+    "mtime": 1776119935.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "29215ed7968f0cfb80a419708311d886",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB1/prediccion_vs_real.png": {
+    "mtime": 1776119935.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "10fee847968431782cedd8310805e772",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB2/boxplot_DL_A_vs_B.png": {
+    "mtime": 1776119938.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "79d9e990925538d2f91ae6de1dd56199",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB2/boxplot_DL_Exp A_desglose.png": {
+    "mtime": 1776119938.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "cb79ec8159884792bf2bff11fc1ab036",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB2/boxplot_DL_Exp A_global.png": {
+    "mtime": 1776119938.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "be6fc9cec0956374d1d40a16f23be640",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB2/boxplot_DL_Exp B_desglose.png": {
+    "mtime": 1776119938.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "e9f6fa7a9c1a68c50b99489e97270090",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB2/boxplot_DL_Exp B_global.png": {
+    "mtime": 1776119938.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "9ad331395e22aa08f472c0230309a7da",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB2/boxplot_global_trad_vs_dl.png": {
+    "mtime": 1776119938.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "e30d50930e1d9b3c5f114c4922fe8838",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB2/prediccion_DL_Exp A_ganador.png": {
+    "mtime": 1776119938.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "9e7067e95133966450d856a215118a2e",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB2/prediccion_DL_Exp B_ganador.png": {
+    "mtime": 1776119938.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "4a69d1cf4ebc8cb4332ca61a5682ebc6",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB4B/barras_nb4b_modelo_filtro.png": {
+    "mtime": 1776119936.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "1fda4dacc43cec5e72ad333f01d4e3ab",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB4B/boxplot_nb4b.png": {
+    "mtime": 1776119936.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "aa8135ce27ca414315eaacce39c1b693",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB4B/comparacion_td_cnn.png": {
+    "mtime": 1776119936.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "6598aa62538d0184057b69812bc776d8",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB4B/ejemplo_segmentos_60s.png": {
+    "mtime": 1776119936.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "5b34b1f6e10009249fc6d5c8da238908",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB4B/heatmap_nb4b.png": {
+    "mtime": 1776119936.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "315be6337f402ac62f52b41158faa765",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB4B/ic95_nb4b.png": {
+    "mtime": 1776119936.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "ebec263bfb1da83473b56c2403d67cdb",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB4B/r2_por_paciente.png": {
+    "mtime": 1776119936.0,
+    "seen": 1791947958.3930817,
+    "ast_hash": "1240c6a3cdfad84ebc788f72914984fc",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB5B/visualizaciones/comparativa_final_mejoras.png": {
+    "mtime": 1776119938.448496,
+    "seen": 1791947958.3930817,
+    "ast_hash": "d9cac26204a0027d2563e15fc6359161",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB5B/visualizaciones/demo_v2_BiGRU_MHA.png": {
+    "mtime": 1776119938.469769,
+    "seen": 1791947958.3930817,
+    "ast_hash": "4d9937236a7444685515f4bdc2aa477e",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB5B/visualizaciones/demo_v2_CNN_GRU.png": {
+    "mtime": 1776119938.4997952,
+    "seen": 1791947958.3930817,
+    "ast_hash": "fdff43b7240b07e36510debd96d04de1",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB5B/visualizaciones/demo_v2_GRU_base.png": {
+    "mtime": 1776119938.479796,
+    "seen": 1791947958.3930817,
+    "ast_hash": "126157fd08476b6289df232def9cc50a",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB5B/visualizaciones/lopo_v2_BiGRU_MHA_r2.png": {
+    "mtime": 1776119938.527802,
+    "seen": 1791947958.3930817,
+    "ast_hash": "072186fdf3a3f4f0a7a23af12c9a13e5",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB5B/visualizaciones/lopo_v2_CNN_GRU_r2.png": {
+    "mtime": 1776119938.5187967,
+    "seen": 1791947958.3930817,
+    "ast_hash": "fb69c39ba4a519a13650f5ac37e2ec40",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB5B/visualizaciones/lopo_v2_GRU_base_r2.png": {
+    "mtime": 1776119938.4897957,
+    "seen": 1791947958.3930817,
+    "ast_hash": "ed9df8c224c70bdb737d3b2f06bfe04f",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB5B/visualizaciones/lopo_v2_boxplot_all.png": {
+    "mtime": 1776119938.4394963,
+    "seen": 1791947958.3930817,
+    "ast_hash": "4b86ed68e5a99fa95c3d3a390e6b41e4",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB5B/visualizaciones/lopo_v2_mejora_ft_BiGRU_MHA.png": {
+    "mtime": 1776119938.5087953,
+    "seen": 1791947958.3930817,
+    "ast_hash": "a92ad4a466291335025ddf8dc23893c4",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB5B/visualizaciones/lopo_v2_mejora_ft_CNN_GRU.png": {
+    "mtime": 1776119938.4594948,
+    "seen": 1791947958.3930817,
+    "ast_hash": "caf58ff52ac267c7a36ed03c880e5000",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB5/visualizaciones/03_ecg_filtrado.png": {
+    "mtime": 1778602719.3649898,
+    "seen": 1791947958.3930817,
+    "ast_hash": "be3a5e971389ce75f4ab0807c12ae7cc",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB5/visualizaciones/07_demo_CNN_GRU_ATTN.png": {
+    "mtime": 1778602719.392122,
+    "seen": 1791947958.3930817,
+    "ast_hash": "7cdfe0703d40cf57f352af0674118376",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB5/visualizaciones/10_boxplot_r2_total.png": {
+    "mtime": 1778602719.382997,
+    "seen": 1791947958.3930817,
+    "ast_hash": "5d076d3f910710a11859c20876a8deea",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB5/visualizaciones/10_degradacion_temporal.png": {
+    "mtime": 1778602719.3739958,
+    "seen": 1791947958.3930817,
+    "ast_hash": "e70cce48729b7f3388dbf02cf5c095eb",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB5/visualizaciones/10_r2_pacientes_CNN_GRU_ATTN.png": {
+    "mtime": 1778602719.4019907,
+    "seen": 1791947958.3930817,
+    "ast_hash": "11ba733700c81719e3d0bd9ddbc82d7d",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB5/visualizaciones/12_5_prediccion_extendida_ft.png": {
+    "mtime": 1778602719.4639897,
+    "seen": 1791947958.3930817,
+    "ast_hash": "a19b83d5d0fe92293e89ee87f3ca5944",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB5/visualizaciones/12_5_real_vs_pred_ft.png": {
+    "mtime": 1778602719.4279902,
+    "seen": 1791947958.3930817,
+    "ast_hash": "d53a31439062d06ac2c4d2b6985e3ebd",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/results/NB5/visualizaciones/12_5_tabla_metricas_ft.png": {
+    "mtime": 1778602719.439993,
+    "seen": 1791947958.3930817,
+    "ast_hash": "acc5c2a8b0257290759831d54d32148d",
+    "semantic_hash": ""
+  },
+  "assets/architecture_diagram.svg": {
+    "mtime": 1789679085.24402,
+    "seen": 1791947958.3930817,
+    "ast_hash": "b3c23a16db5cc568b6ba9760c0936cd4",
+    "semantic_hash": ""
+  },
+  "assets/dario_circle.png": {
+    "mtime": 1789670978.9645865,
+    "seen": 1791947958.3930817,
+    "ast_hash": "69cb7a339c643a94d6333f5b880bb508",
+    "semantic_hash": ""
+  },
+  "assets/darwin_circle.png": {
+    "mtime": 1789670978.9655876,
+    "seen": 1791947958.3930817,
+    "ast_hash": "6eeb708987c294fb97d74211b05833d6",
+    "semantic_hash": ""
+  },
+  "assets/ecg_animation.svg": {
+    "mtime": 1789680356.4914317,
+    "seen": 1791947958.3930817,
+    "ast_hash": "a9d20e921c8a6227aae668d56aa2f117",
+    "semantic_hash": ""
+  },
+  "assets/filetree_diagram.svg": {
+    "mtime": 1789679085.2450202,
+    "seen": 1791947958.3930817,
+    "ast_hash": "fbe0a6460eee95f5c00af67fec443ea7",
+    "semantic_hash": ""
+  },
+  "assets/header_banner.png": {
+    "mtime": 1789670978.9695868,
+    "seen": 1791947958.3930817,
+    "ast_hash": "6f6d5b0f12a1f0b71cb553325f01f101",
+    "semantic_hash": ""
+  },
+  "assets/header_banner.svg": {
+    "mtime": 1789680280.88419,
+    "seen": 1791947958.3930817,
+    "ast_hash": "d7a364235f24a0fcca5ba01d9a709204",
+    "semantic_hash": ""
+  },
+  "assets/icons/arquitectura.svg": {
+    "mtime": 1789678740.759648,
+    "seen": 1791947958.3930817,
+    "ast_hash": "18257dbe80b1c92f0bba7cea996c9b98",
+    "semantic_hash": ""
+  },
+  "assets/icons/datos.svg": {
+    "mtime": 1789678740.7626474,
+    "seen": 1791947958.3930817,
+    "ast_hash": "8bc80d8cda959e48fcd9d0b9a116bb5b",
+    "semantic_hash": ""
+  },
+  "assets/icons/demo.svg": {
+    "mtime": 1789678740.763652,
+    "seen": 1791947958.3930817,
+    "ast_hash": "6e0fb5b255e7a01599d7428bf668c0d2",
+    "semantic_hash": ""
+  },
+  "assets/icons/equipo.svg": {
+    "mtime": 1789678740.763652,
+    "seen": 1791947958.3930817,
+    "ast_hash": "8ad3c14b00ce5930a3bbe8cd41b28803",
+    "semantic_hash": ""
+  },
+  "assets/icons/estructura.svg": {
+    "mtime": 1789678740.7646527,
+    "seen": 1791947958.3930817,
+    "ast_hash": "96753fd93679947b2fddde1cd6cc81a4",
+    "semantic_hash": ""
+  },
+  "assets/icons/experimentos.svg": {
+    "mtime": 1789678740.7646527,
+    "seen": 1791947958.3930817,
+    "ast_hash": "5020343cd04bb2dad519b3ac79da3275",
+    "semantic_hash": ""
+  },
+  "assets/icons/flujo.svg": {
+    "mtime": 1789678740.7656524,
+    "seen": 1791947958.3930817,
+    "ast_hash": "9c47907e016539cb366ea8e414522234",
+    "semantic_hash": ""
+  },
+  "assets/icons/instalacion.svg": {
+    "mtime": 1789678740.7656524,
+    "seen": 1791947958.3930817,
+    "ast_hash": "8e885d856f37818c3267a7845641080a",
+    "semantic_hash": ""
+  },
+  "assets/icons/licencia.svg": {
+    "mtime": 1789678740.7666526,
+    "seen": 1791947958.3930817,
+    "ast_hash": "e7207274df4644ca2ac328c738938fce",
+    "semantic_hash": ""
+  },
+  "assets/icons/metricas.svg": {
+    "mtime": 1789678740.7666526,
+    "seen": 1791947958.3930817,
+    "ast_hash": "d87fc61cb9fdde412e8046bb1ab2cb59",
+    "semantic_hash": ""
+  },
+  "assets/icons/pruebas.svg": {
+    "mtime": 1789678740.7676525,
+    "seen": 1791947958.3930817,
+    "ast_hash": "2f58e68cebb4220ff8cb67f88325935c",
+    "semantic_hash": ""
+  },
+  "assets/icons/resultados.svg": {
+    "mtime": 1789678740.7676525,
+    "seen": 1791947958.3930817,
+    "ast_hash": "c68a05772402cb1c5879a9186759b393",
+    "semantic_hash": ""
+  },
+  "assets/icons/resumen.svg": {
+    "mtime": 1789678740.768652,
+    "seen": 1791947958.3930817,
+    "ast_hash": "0e3c31921e386d18e640e9d45cf1211c",
+    "semantic_hash": ""
+  },
+  "assets/logoUniv.png": {
+    "mtime": 1789670978.9730895,
+    "seen": 1791947958.3930817,
+    "ast_hash": "d85c186b60af6512418110c9638cdfa4",
+    "semantic_hash": ""
+  },
+  "assets/pipeline_diagram.svg": {
+    "mtime": 1789679084.611528,
+    "seen": 1791947958.3930817,
+    "ast_hash": "0d01ee354ba34c323b388dbd987283af",
+    "semantic_hash": ""
+  }
+}

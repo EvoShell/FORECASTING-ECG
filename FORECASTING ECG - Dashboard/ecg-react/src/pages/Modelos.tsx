@@ -551,7 +551,7 @@ function ArchDiagram({ nodes, width, color }: { nodes: ArchNode[]; width: number
   };
   const H = 180;
   return (
-    <svg width="100%" height={H} viewBox={`0 0 ${width + 40} ${H}`} style={{ overflow: 'visible' }}>
+    <svg width="100%" height={H} viewBox={`0 0 ${width + 40} ${H}`} style={{ overflow: 'visible', minWidth: 560 }}>
       <defs>
         <marker id="arch-arrow" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
           <path d="M0,0 L7,2.5 L0,5 Z" fill="var(--text-muted)" opacity="0.4" />
@@ -603,7 +603,7 @@ function TraditionalDiagram({ model, color, t }: { model: TraditionalModel; colo
         width="100%"
         height="190"
         viewBox="0 0 520 190"
-        style={{ overflow: 'visible' }}
+        style={{ overflow: 'visible', minWidth: 460 }}
         role="img"
         aria-label={t(
           'Diagrama: la entrada alimenta treinta arboles en paralelo y sus salidas se promedian',
@@ -662,7 +662,7 @@ function TraditionalDiagram({ model, color, t }: { model: TraditionalModel; colo
       { x: 460, label: 'Output', sub: '256', dots: 6 },
     ];
     return (
-      <svg width="100%" height="140" viewBox="0 0 560 140" style={{ overflow: 'visible' }}>
+      <svg width="100%" height="140" viewBox="0 0 560 140" style={{ overflow: 'visible', minWidth: 480 }}>
         {layers.map((l, li) => (
           <g key={li}>
             <text x={l.x + 20} y={15} textAnchor="middle" fill={li === 0 || li === layers.length - 1 ? color : '#3b82f6'} fontFamily="Inter" fontSize={9} fontWeight={600}>{l.label}</text>
@@ -686,7 +686,7 @@ function TraditionalDiagram({ model, color, t }: { model: TraditionalModel; colo
   }
   if (model === 'SVR_rbf') {
     return (
-      <svg width="100%" height="120" viewBox="0 0 600 120" style={{ overflow: 'visible' }}>
+      <svg width="100%" height="120" viewBox="0 0 600 120" style={{ overflow: 'visible', minWidth: 500 }}>
         <rect x={20} y={35} width={80} height={50} rx={8} fill={`${color}10`} stroke={`${color}40`} />
         <text x={60} y={55} textAnchor="middle" fill={color} fontFamily="Inter" fontSize={10} fontWeight={600}>Input</text>
         <text x={60} y={69} textAnchor="middle" fill="var(--text-muted)" fontFamily="DM Mono" fontSize={8}>x ∈ ℝⁿ</text>
@@ -709,7 +709,7 @@ function TraditionalDiagram({ model, color, t }: { model: TraditionalModel; colo
   }
   // DT
   return (
-    <svg width="100%" height="140" viewBox="0 0 500 140" style={{ overflow: 'visible' }}>
+    <svg width="100%" height="140" viewBox="0 0 500 140" style={{ overflow: 'visible', minWidth: 440 }}>
       {[
         { x: 200, y: 10, w: 90, h: 30, label: 'Nodo raíz', type: 'root' },
         { x: 120, y: 60, w: 70, h: 26, label: 'Split L', type: 'node' },
@@ -784,7 +784,7 @@ export function ModelosPage() {
       </p>
 
       {/* ── Category selector ── */}
-      <div role="tablist" aria-label="Categoría de modelo" style={{ display: 'flex', gap: '4px', marginBottom: '12px', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '4px', width: 'fit-content' }}>
+      <div role="tablist" aria-label="Categoría de modelo" style={{ display: 'flex', gap: '4px', marginBottom: '12px', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '4px', width: 'fit-content', maxWidth: '100%', flexWrap: 'wrap' }}>
         {(['deep', 'traditional', 'lopo'] as Category[]).map(cat => (
           <Boton
             key={cat}
@@ -844,7 +844,7 @@ export function ModelosPage() {
               </p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '16px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '12px', marginBottom: '16px' }}>
               <div>
                 <p style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-3xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '8px', fontWeight: 600 }}>{t('Fortalezas', 'Strengths')}</p>
                 {desc.strengths.map((s, i) => (
@@ -889,7 +889,7 @@ export function ModelosPage() {
           </div>
 
           {/* ── Hyperparams + Training config ── */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '20px' }}>
             <div className="card" style={{ padding: '20px' }}>
               <p style={{ fontFamily: 'var(--font-section)', fontWeight: 600, fontSize: 'var(--fs-sm)', color: 'var(--text)', marginBottom: '16px' }}>
                 {t('Hiperparámetros', 'Hyperparameters')}, {active === 'SVR_rbf' ? 'SVR (RBF)' : active.replace('_', ' ')}
@@ -902,7 +902,7 @@ export function ModelosPage() {
                     borderBottom: i < HYPERPARAMS[active].length - 1 ? '1px solid var(--border)' : 'none',
                   }}>
                     <span style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--fs-xs)', color: 'var(--text-sub)' }}>{label}</span>
-                    <span style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-xs)', color, fontWeight: 600, whiteSpace: 'nowrap', marginLeft: '12px' }}>{value}</span>
+                    <span style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-xs)', color, fontWeight: 600, marginLeft: '12px', textAlign: 'right' }}>{value}</span>
                   </div>
                 ))}
               </div>

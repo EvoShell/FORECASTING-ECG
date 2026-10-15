@@ -325,7 +325,10 @@ export function HomePage() {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: '100vw',
+            // Antes 100vw: el ancho de la ventana, sin descontar la barra lateral,
+            // con lo que el fondo sobresalia 63 px de la pagina. Ahora ocupa la
+            // columna del titulo y no pasa de ella.
+            width: '100%',
             height: '100%',
             zIndex: -1,
             opacity: theme === 'dark' ? 0.75 : 0.45,
@@ -448,7 +451,7 @@ export function HomePage() {
         style={{ marginBottom: '64px' }}
       >
         <motion.p variants={itemAnim} className="eyebrow" style={{ marginBottom: '20px' }}>{t('Equipo de Investigación', 'Research Team')}</motion.p>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))', gap: '20px' }}>
           {[
             {
               img: '/img/DarwinBurbano.JPG',
@@ -540,7 +543,7 @@ export function HomePage() {
           {t('Predicción prospectiva de señales ECG combinando Machine Learning clásico y Deep Learning, evaluada sobre 123 pacientes (MIT-BIH + INCART) bajo la metodología CRISP-DM, con validación intra-paciente y cross-patient (LOPO).', 'Prospective ECG signal prediction combining classical Machine Learning and Deep Learning, evaluated on 123 patients (MIT-BIH + INCART) under the CRISP-DM methodology, with intra-patient and cross-patient (LOPO) validation.')}
         </motion.p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '16px' }}>
           {/* Card: Enfoques Experimentales */}
           <motion.div variants={itemAnim} className="card" style={{
             padding: '24px', display: 'flex', flexDirection: 'column', gap: '14px',
@@ -680,7 +683,7 @@ export function HomePage() {
         style={{ marginBottom: '64px' }}
       >
       <motion.p variants={itemAnim} className="eyebrow" style={{ marginBottom: '20px' }}>{t('Metodología CRISP-DM', 'CRISP-DM Methodology')}</motion.p>
-      <motion.div variants={itemAnim} style={{
+      <motion.div variants={itemAnim} className="crisp-flujo" style={{
         display: 'flex', alignItems: 'center', gap: '0', flexWrap: 'wrap', justifyContent: 'center',
       }}>
       {[
@@ -693,7 +696,7 @@ export function HomePage() {
       ].map((step, i, arr) => (
         // La clave era `step.label`, y en español dos fases se llaman «Comprensión»:
         // React avisaba de claves duplicadas en cada carga de la portada.
-        <div key={step.id} style={{ display: 'flex', alignItems: 'center' }}>
+        <div key={step.id} className="crisp-paso" style={{ display: 'flex', alignItems: 'center' }}>
           <div style={{
             display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center',
             padding: '16px 18px', minWidth: '130px', maxWidth: '160px',
@@ -707,7 +710,7 @@ export function HomePage() {
             <p style={{ fontFamily: 'var(--font-data)', fontSize: 'var(--fs-3xs)', color: 'var(--prediction)', marginTop: '4px', lineHeight: 1.3 }}>{step.detail}</p>
           </div>
               {i < arr.length - 1 && (
-                <ArrowRight size={16} color="var(--text-muted)" style={{ margin: '0 6px', flexShrink: 0 }} />
+                <ArrowRight className="crisp-flecha" size={16} color="var(--text-muted)" style={{ margin: '0 6px', flexShrink: 0 }} />
               )}
             </div>
           ))}
@@ -723,7 +726,7 @@ export function HomePage() {
         style={{ marginBottom: '64px' }}
       >
       <motion.p variants={itemAnim} className="eyebrow" style={{ marginBottom: '20px' }}>{t('Resultados Destacados', 'Key Findings')}</motion.p>
-<motion.div variants={itemAnim} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
+<motion.div variants={itemAnim} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '16px' }}>
           <FindingCard
             number={1}
             n={1008}
@@ -906,7 +909,7 @@ export function HomePage() {
         <motion.div variants={itemAnim}>
           <p className="eyebrow" style={{ marginBottom: '16px' }}>{t('Bases de Datos', 'Databases')}</p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px', marginBottom: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '16px', marginBottom: '20px' }}>
             <div className="card" style={{ padding: '18px', display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
               <Database size={22} color="var(--signal)" style={{ flexShrink: 0, marginTop: '2px' }} />
               <div>

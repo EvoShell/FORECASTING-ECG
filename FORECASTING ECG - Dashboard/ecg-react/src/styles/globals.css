@@ -43,6 +43,8 @@
   --crit: #F08A82;              /*  7.80 */
   --alert: #F08A82;             /* alias heredado de --crit             */
   --ok-tint: #16241D;
+  --on-ok: #0B0E13;              /* texto sobre --ok, 8.9:1 */
+  --ok-border: #2F6B4C;
   --warn-tint: #262016;
   --crit-tint: #2A1A19;
 
@@ -128,6 +130,8 @@
   --crit: #A3231B;              /*  7.46 */
   --alert: #A3231B;
   --ok-tint: #E8F3EC;
+  --on-ok: #FFFFFF;              /* texto sobre --ok, 7.67:1 */
+  --ok-border: #8CC3A4;
   --warn-tint: #F7F0E2;
   --crit-tint: #F9EAE8;
 
@@ -506,6 +510,34 @@ button:disabled {
   opacity: 0.55;
 }
 
+/* En pantallas tactiles (telefono y tableta) el dedo necesita mas area que el
+   raton: 44 px es el minimo de las guias de Apple y de WCAG 2.5.5. Se aplica por
+   tipo de puntero y no solo por ancho, porque una tableta de 1024 px tambien es
+   tactil. Los botones del grafico (Plotly) quedan fuera: tienen su propia barra. */
+@media (pointer: coarse), (max-width: 768px) {
+  /* `!important` porque el componente `Boton` fija su alto minimo en linea
+     (30 px en tamano sm), y un estilo en linea gana a cualquier selector. */
+  button:not(.modebar-btn), [role="tab"] {
+    min-height: 44px !important;
+  }
+  .btn-app {
+    min-width: 44px;
+  }
+}
+
+/* Rutas de archivo y nombres de cuaderno: largos y sin espacios. Sin esto
+   empujan la tarjeta fuera de la pantalla en un telefono. */
+code, kbd, samp {
+  overflow-wrap: anywhere;
+}
+
+/* Cualquier palabra mas ancha que su caja (una ruta, un nombre de archivo) se
+   parte en vez de empujar la tarjeta. `break-word` no altera el ancho minimo de
+   las tablas, que siguen desplazandose dentro de `.tabla-scroll`. */
+[data-page] {
+  overflow-wrap: break-word;
+}
+
 button:not(:disabled):active {
   transform: translateY(1px);
 }
@@ -681,4 +713,49 @@ select:focus {
   .barra-lateral-logo,
   .barra-lateral-enlace,
   .barra-lateral-boton { transition: none; }
+}
+
+/* ─── Pestaña del experimento ganador (Exp. 6) ───────────────────────
+   Verde de forma permanente: es el modelo final de la tesis. El color sale
+   del token semantico --ok, asi que se adapta solo al tema claro. */
+.btn-app[data-ganador]:not(:disabled):hover {
+  filter: brightness(1.1);
+}
+:root[data-theme='light'] .btn-app[data-ganador]:not(:disabled):hover {
+  filter: brightness(0.95);
+}
+
+/* En el telefono el sello queda solo en su linea: se centra. */
+@media (max-width: 768px) {
+  .sello-ganador { margin-inline: auto; }
+}
+
+/* Flujo CRISP-DM de la portada. En escritorio es una fila con flechas; en un
+   telefono la fila se partia en renglones de dos y de una tarjeta, con flechas
+   colgando al final de linea. Ahi pasa a rejilla de dos columnas iguales: el
+   orden ya lo da el numero 01-06 de cada tarjeta. */
+@media (max-width: 640px) {
+  .crisp-flujo {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px !important;
+    align-items: stretch !important;
+  }
+  .crisp-paso { align-items: stretch !important; }
+  .crisp-paso > div:first-child {
+    flex: 1;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+  .crisp-flecha { display: none; }
+}
+
+/* Barra de herramientas de Plotly. Siete graficas la llevan siempre visible
+   (`displayModeBar: true`); en un telefono no hay raton que la oculte y quedaba
+   encima del titulo y de la leyenda. En pantallas tactiles o estrechas se quita;
+   en escritorio sigue (descarga PNG, zoom, encuadre). */
+@media (pointer: coarse), (max-width: 768px) {
+  .js-plotly-plot .modebar-container {
+    display: none !important;
+  }
 }

@@ -604,7 +604,7 @@ export function NB7HPContent({ datos, cargando, error }: NB7HPResultado) {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
               gap: '10px',
             }}
           >
@@ -1090,7 +1090,7 @@ export function NB7HPContent({ datos, cargando, error }: NB7HPResultado) {
           </div>
 
           <Subtitulo>Por qué esto no cambia el modelo final</Subtitulo>
-          <ol style={{ margin: 0, padding: 0, display: 'grid', gap: '10px' }}>
+          <ol style={{ margin: 0, padding: 0, display: 'grid', gridTemplateColumns: 'minmax(0, 1fr)', gap: '10px' }}>
             {pliegueCritico && contraste && (
               <Salvedad
                 numero={1}
@@ -1176,7 +1176,7 @@ export function NB7HPContent({ datos, cargando, error }: NB7HPResultado) {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))',
               gap: '10px',
               marginBottom: '14px',
             }}

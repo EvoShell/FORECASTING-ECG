@@ -38,22 +38,30 @@ const VARIANTES: Record<VarianteBoton, React.CSSProperties> = {
   primario: {
     background: 'var(--accent)',
     color: 'var(--on-accent)',
-    border: '1px solid var(--accent)',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'var(--accent)',
   },
   secundario: {
     background: 'var(--surface)',
     color: 'var(--text)',
-    border: '1px solid var(--border-strong)',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'var(--border-strong)',
   },
   sutil: {
     background: 'transparent',
     color: 'var(--text-sub)',
-    border: '1px solid transparent',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'transparent',
   },
   peligro: {
     background: 'var(--crit-tint)',
     color: 'var(--crit)',
-    border: '1px solid var(--crit)',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'var(--crit)',
   },
 };
 

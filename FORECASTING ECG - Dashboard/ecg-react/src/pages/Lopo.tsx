@@ -1708,11 +1708,7 @@ export function LopoPage() {
                 "Este sistema predice la morfología de la señal; no clasifica el evento arrítmico.",
                 "This system predicts signal morphology; it does not classify the arrhythmic event.",
               )}
-            </strong>{" "}
-            {t(
-              "Lo que se marca abajo como latido sospechoso sale de comparar el error de predicción con un umbral, no de un clasificador entrenado con etiquetas. Y lo que detecta es, sobre todo, ectopia VENTRICULAR: su error medio es 3.42 veces el de un latido normal, mientras que el de la supraventricular es 1.19 veces, casi invisible, porque ese latido usa la vía de conducción normal y apenas cambia de forma. No es un detector de uso clínico: su precisión mediana entre pacientes es 0.3123 y varía mucho de uno a otro.",
-              "What is flagged below as a suspicious beat comes from comparing the prediction error against a threshold, not from a classifier trained on labels. And what it detects is mostly VENTRICULAR ectopy: its mean error is 3.42 times that of a normal beat, while supraventricular ectopy is 1.19 times, nearly invisible, because that beat uses the normal conduction pathway and barely changes shape. It is not a clinical detector: its median precision across patients is 0.3123 and varies widely.",
-            )}
+            </strong>
           </div>
         </div>
 
@@ -2002,7 +1998,7 @@ export function LopoPage() {
 
 
  {/* Play / Stop */}
- <div style={{ marginLeft: "auto", display: "flex", gap: 8, alignItems: "center" }}>
+ <div style={{ marginLeft: "auto", display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center", maxWidth: "100%" }}>
  <div
  role="group"
  aria-label={t("Modo de análisis", "Analysis mode")}
@@ -2649,7 +2645,7 @@ export function LopoPage() {
  <div
  style={{
  display: "grid",
- gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 240px), 1fr))",
  gap: 14,
  marginBottom: 18,
  }}
@@ -2692,7 +2688,7 @@ export function LopoPage() {
  >
  {H_LABELS[h]}
  </span>
- <span style={{ fontSize: 10, color: textSec }}>
+ <span style={{ fontSize: 11, color: textSec }}>
  {t("Ref NB6", "Ref NB6")}: {r2Ref.toFixed(4)}
  </span>
  </div>
@@ -2709,7 +2705,7 @@ export function LopoPage() {
  {r2Cur !== null ? r2Cur.toFixed(3) : "—"}
  </div>
  <div
- style={{ fontSize: 10, color: textSec, marginTop: 2 }}
+ style={{ fontSize: 11, color: textSec, marginTop: 2 }}
  >
  R² {H_LABELS[h]}
  </div>
@@ -2739,7 +2735,7 @@ export function LopoPage() {
  style={{
  display: "flex",
  justifyContent: "space-between",
- fontSize: 10,
+ fontSize: 11,
  color: textSec,
  marginTop: 2,
  }}
@@ -3014,7 +3010,7 @@ export function LopoPage() {
  >
  <div
  style={{
- fontSize: 10,
+ fontSize: 11,
  color: textSec,
  textTransform: "uppercase",
  letterSpacing: "0.7px",
@@ -3026,7 +3022,7 @@ export function LopoPage() {
  <div style={{ fontSize: 22, fontWeight: 800, color: col }}>
  {m.value !== null ? m.fmt(m.value) + m.unit : "—"}
  </div>
- <div style={{ fontSize: 10, color: textSec, marginTop: 3 }}>
+ <div style={{ fontSize: 11, color: textSec, marginTop: 3 }}>
  {t("Ref", "Ref")}: {m.fmt(m.ref)}
  {m.unit}
  </div>
@@ -3178,7 +3174,7 @@ export function LopoPage() {
  <div
  style={{
  display: "grid",
- gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))",
+ gridTemplateColumns: "repeat(auto-fit,minmax(min(100%, 200px),1fr))",
  gap: 8,
  }}
  >

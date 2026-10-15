@@ -201,7 +201,7 @@ export function ExploradorPage() {
       </div>
 
       {/* Experiment Tabs */}
-      <div style={{
+      <div role="tablist" aria-label="Experimentos" style={{
         display: 'flex',
         gap: '6px',
         marginBottom: '28px',
@@ -231,10 +231,13 @@ export function ExploradorPage() {
 
       {/* Experiment Header */}
       <div style={{
-        background: HEADER_BG,
+        // El resplandor de la esquina era un div de 120 px desenfocado y desplazado
+        // fuera de la tarjeta; ahora es un degradado del propio fondo: mismo
+        // efecto, y nada que sobresalga de la caja.
+        background: `radial-gradient(circle at calc(100% - 40px) 40px, color-mix(in srgb, var(--signal) 18%, transparent), transparent 110px), ${HEADER_BG}`,
         border: '1px solid var(--border)',
         borderRadius: 'var(--radius-lg)',
-        padding: '28px 32px',
+        padding: 'clamp(20px, 5vw, 28px) clamp(16px, 5vw, 32px)',
         color: 'var(--text)',
         marginBottom: '28px',
         backdropFilter: 'var(--glass-blur)',
@@ -242,18 +245,6 @@ export function ExploradorPage() {
         position: 'relative',
         overflow: 'hidden',
       }}>
-        {/* Glow effect inside */}
-        <div style={{
-          position: 'absolute',
-          top: '-20px',
-          right: '-20px',
-          width: '120px',
-          height: '120px',
-          background: 'var(--signal)',
-          filter: 'blur(60px)',
-          opacity: 0.15,
-          pointerEvents: 'none',
-        }}></div>
         <h2 style={{ color: 'var(--text)', margin: '0 0 6px 0', fontSize: 'var(--fs-lg)', fontFamily: 'var(--font-display)', fontWeight: 700 }}>
           {DESCS[activeExp].title}
         </h2>
@@ -349,7 +340,7 @@ function SectionHeader({ title, expanded, onToggle }: { title: string; expanded:
         marginBottom: expanded ? 16 : 0,
       }}
     >
-      <span>{title}</span>
+      <span style={{ whiteSpace: 'normal', textAlign: 'left', minWidth: 0 }}>{title}</span>
     </Boton>
   );
 }
@@ -442,7 +433,7 @@ function NB1Explorer({ nb1, isDark, t, searchTerm, setSearchTerm, modelFilter, s
 
   return (
     <div>
-      <div role="tablist" style={{ display: 'flex', gap: '6px', marginBottom: '20px' }}>
+      <div role="tablist" style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '20px' }}>
         {(['A', 'B'] as const).map(exp => (
           <Boton
             key={exp}
@@ -661,7 +652,7 @@ function NB2Explorer({ nb2, isDark, t, searchTerm, setSearchTerm, modelFilter, s
 
   return (
     <div>
-      <div role="tablist" style={{ display: 'flex', gap: '6px', marginBottom: '20px' }}>
+      <div role="tablist" style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '20px' }}>
         {(['A', 'B'] as const).map(exp => (
           <Boton
             key={exp}
@@ -809,7 +800,7 @@ function NB3Explorer({ nb3, t, expandedSections, toggleSection, handleExportCSV 
 
   return (
     <div>
-      <div role="tablist" style={{ display: 'flex', gap: '6px', marginBottom: '20px' }}>
+      <div role="tablist" style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '20px' }}>
         {(['A', 'B', 'C'] as const).map(exp => (
           <Boton
             key={exp}

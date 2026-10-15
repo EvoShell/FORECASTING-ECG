@@ -1,0 +1,36 @@
+{
+ "por_lenguaje": [
+  [
+   "TypeScript (React)",
+   22378,
+   "Interfaz de usuario del tablero"
+  ],
+  [
+   "TypeScript",
+   4505,
+   "Logica de datos, procedimientos de acceso y utilidades"
+  ],
+  [
+   "Python",
+   2191,
+   "Servicio de inferencia, procesamiento de senal y pruebas"
+  ],
+  [
+   "CSS",
+   684,
+   "Sistema visual"
+  ],
+  [
+   "JavaScript",
+   70,
+   "Configuracion de compilacion"
+  ],
+  [
+   "HTML",
+   61,
+   "Documento base de la aplicacion"
+  ]
+ ],
+ "total": 29889,
+ "archivos": 441
+}
