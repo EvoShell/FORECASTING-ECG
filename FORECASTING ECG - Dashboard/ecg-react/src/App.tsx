@@ -20,6 +20,7 @@ const ManualPage = lazy(() => import('@/pages/Manual').then(m => ({ default: m.M
 const GlosarioPage = lazy(() => import('@/pages/Glosario').then(m => ({ default: m.GlosarioPage })));
 const ExploradorPage = lazy(() => import('@/pages/Explorador').then(m => ({ default: m.ExploradorPage })));
 const CohortePage = lazy(() => import('@/pages/Cohorte').then(m => ({ default: m.CohortePage })));
+const PresentacionPage = lazy(() => import('@/pages/Presentacion').then(m => ({ default: m.PresentacionPage })));
 
 /** Nombre legible de cada vista, para el mensaje de la barrera de error. */
 const ROTULOS: Record<string, string> = {
@@ -31,6 +32,7 @@ const ROTULOS: Record<string, string> = {
   '/glosario': 'el glosario',
   '/explorador': 'el explorador de datos',
   '/cohorte': 'la caracterizacion de la cohorte',
+  '/presentacion': 'la presentacion de la sustentacion',
 };
 
 /**
@@ -105,6 +107,7 @@ function AnimatedRoutes() {
             <Route path="/glosario" element={<GlosarioPage />} />
             <Route path="/explorador" element={<ExploradorPage />} />
             <Route path="/cohorte" element={<CohortePage />} />
+            <Route path="/presentacion" element={<PresentacionPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

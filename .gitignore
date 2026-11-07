@@ -166,3 +166,7 @@ Skill/
 Thumbs.db
 ehthumbs.db
 desktop.ini
+
+# ── Material de la sustentación (privado: guiones, fotos, constancias, Word) ──
+# La versión pública de la presentación vive en el tablero: ecg-react/public/sustentacion/
+/SUSTENTACION/

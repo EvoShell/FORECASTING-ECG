@@ -27,7 +27,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import {
   Home, Brain, Zap,
   BookOpen, BookText, Sun, Moon,
-  ChevronLeft, ChevronRight, FlaskConical, Search, Globe, Users } from 'lucide-react';
+  ChevronLeft, ChevronRight, FlaskConical, Search, Globe, Users, Presentation } from 'lucide-react';
 import { useECGStore } from '@/store/useECGStore';
 import { useLang } from '@/i18n';
 import type { TFn } from '@/i18n';
@@ -41,6 +41,7 @@ const getRoutes = (t: TFn) => [
   { path: '/cohorte',       label: t('Cohorte y método', 'Cohort & method'), icon: Users },
   { path: '/manual',        label: t('Manual', 'User Guide'),       icon: BookOpen },
   { path: '/glosario',      label: t('Glosario', 'Glossary'),       icon: BookText },
+  { path: '/presentacion',  label: t('Presentación', 'Presentation'), icon: Presentation },
 ];
 
 /** Ruta del logotipo de marca. La variante `mono` hereda el color del texto. */
