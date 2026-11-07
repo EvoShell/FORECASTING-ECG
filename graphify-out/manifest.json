@@ -1122,10 +1122,10 @@
     "semantic_hash": "706fa7715c73a978528717448fa8c2bd"
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/App.tsx": {
-    "mtime": 1789668787.825464,
-    "seen": 1790018782.0913212,
-    "ast_hash": "21cbd886af2ba6f9d54ca50b2261bca9",
-    "semantic_hash": "21cbd886af2ba6f9d54ca50b2261bca9"
+    "mtime": 1793939136.1556067,
+    "seen": 1793939422.525118,
+    "ast_hash": "61288014ea39237702fdc11ee76f0210",
+    "semantic_hash": ""
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/components/charts/BoxPlot.tsx": {
     "mtime": 1789272263.1897647,
@@ -1152,10 +1152,10 @@
     "semantic_hash": "66f36f079032aed777b7d82addfb6de5"
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/components/charts/PlotlyChart.tsx": {
-    "mtime": 1789322105.6688013,
-    "seen": 1790018782.0913212,
-    "ast_hash": "0cee6ec5647978947b11a43b605a8584",
-    "semantic_hash": "0cee6ec5647978947b11a43b605a8584"
+    "mtime": 1792084303.1911745,
+    "seen": 1793939422.525118,
+    "ast_hash": "f0181360841e0e47fc33f71c1e29ea94",
+    "semantic_hash": ""
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/components/charts/index.ts": {
     "mtime": 1776119946.0536582,
@@ -1170,10 +1170,10 @@
     "semantic_hash": "7888af4aceace3ec9e7eaf16f6824158"
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/components/data/DataTable.tsx": {
-    "mtime": 1789348675.1503582,
-    "seen": 1790018782.0913212,
-    "ast_hash": "bb5b55bbf8177af40924819068a1c194",
-    "semantic_hash": "bb5b55bbf8177af40924819068a1c194"
+    "mtime": 1792085493.46395,
+    "seen": 1793939422.525118,
+    "ast_hash": "307e3dd1fd2802782e3f906cedd3efd2",
+    "semantic_hash": ""
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/components/data/KPICards.tsx": {
     "mtime": 1789004625.4871402,
@@ -1206,28 +1206,28 @@
     "semantic_hash": "f915e91e1943e4c3796ae608eda2551c"
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/components/experimentos/NB7HPContent.tsx": {
-    "mtime": 1789345567.608489,
-    "seen": 1790018782.0913212,
-    "ast_hash": "7335bfa77649eb23fc4fc7943b986c86",
-    "semantic_hash": "7335bfa77649eb23fc4fc7943b986c86"
+    "mtime": 1792082706.468661,
+    "seen": 1793939422.525118,
+    "ast_hash": "e6fd7fc418ebcb0c44289155dd99aa8f",
+    "semantic_hash": ""
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/components/experimentos/NB8Content.tsx": {
-    "mtime": 1789345568.2444,
-    "seen": 1790018782.0913212,
-    "ast_hash": "98dff366b02358a5638860354766bf25",
-    "semantic_hash": "98dff366b02358a5638860354766bf25"
+    "mtime": 1792082706.4696589,
+    "seen": 1793939422.525118,
+    "ast_hash": "704a1bcf04d681a22981c13d1dc1c2bd",
+    "semantic_hash": ""
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/components/layout/Navbar.tsx": {
-    "mtime": 1789668250.924056,
-    "seen": 1790018782.0913212,
-    "ast_hash": "1994b7adae7b4da0690e296f117eff89",
-    "semantic_hash": "1994b7adae7b4da0690e296f117eff89"
+    "mtime": 1793939136.174692,
+    "seen": 1793939422.525118,
+    "ast_hash": "f36dc616b8ab251db52e98c5c5c1b1a8",
+    "semantic_hash": ""
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/components/layout/PageWrapper.tsx": {
-    "mtime": 1788903880.5566719,
-    "seen": 1790018782.0913212,
-    "ast_hash": "901d8208e533db9e92176daac1c3df0d",
-    "semantic_hash": "901d8208e533db9e92176daac1c3df0d"
+    "mtime": 1792086148.2673638,
+    "seen": 1793939422.525118,
+    "ast_hash": "5900982a1a6f738ca0d8ef878e83775e",
+    "semantic_hash": ""
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/components/metrics/MetricCard.tsx": {
     "mtime": 1788923916.2923484,
@@ -1248,10 +1248,10 @@
     "semantic_hash": "5a81888e54c4a9272aadb42b47476e76"
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/components/ui/Boton.tsx": {
-    "mtime": 1789323628.3407228,
-    "seen": 1790018782.0913212,
-    "ast_hash": "7e9ad713830efa58b903e98c9a49360d",
-    "semantic_hash": "7e9ad713830efa58b903e98c9a49360d"
+    "mtime": 1792082752.816235,
+    "seen": 1793939422.525118,
+    "ast_hash": "28d1441d984b52ad8cf22a7add142ef4",
+    "semantic_hash": ""
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/components/ui/Callout.tsx": {
     "mtime": 1789303817.7347002,
@@ -1272,10 +1272,10 @@
     "semantic_hash": "e2aa29902b9adc0494010ff3e646569e"
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/components/ui/Filtros.tsx": {
-    "mtime": 1789228022.928552,
-    "seen": 1790018782.0913212,
-    "ast_hash": "3f9f1141a4e216f1aff20ec9e14c4049",
-    "semantic_hash": "3f9f1141a4e216f1aff20ec9e14c4049"
+    "mtime": 1792082706.4716918,
+    "seen": 1793939422.525118,
+    "ast_hash": "24a60c4b4da1af711ff41cda9a1b1587",
+    "semantic_hash": ""
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/components/ui/FindingCard.tsx": {
     "mtime": 1789303931.7371836,
@@ -1446,10 +1446,10 @@
     "semantic_hash": "6f2a76ecdddd1de33373aef8afb3686a"
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/lib/plotly.ts": {
-    "mtime": 1788924124.643503,
-    "seen": 1790018782.0913212,
-    "ast_hash": "59d2c25642fa980c882bf8288fa14f5e",
-    "semantic_hash": "59d2c25642fa980c882bf8288fa14f5e"
+    "mtime": 1792084319.5167038,
+    "seen": 1793939422.525118,
+    "ast_hash": "e0a5f524158468ae9cd3eba709a24862",
+    "semantic_hash": ""
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/lib/tokens.ts": {
     "mtime": 1789004750.0804327,
@@ -1470,46 +1470,46 @@
     "semantic_hash": "9d1588cf54a390298eaa2389210b7fb6"
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/pages/Experimentos.tsx": {
-    "mtime": 1789345605.3442779,
-    "seen": 1790018782.0913212,
-    "ast_hash": "6026a2ddc9446798817e8b8a9f8a0e2a",
-    "semantic_hash": "6026a2ddc9446798817e8b8a9f8a0e2a"
+    "mtime": 1792082706.475965,
+    "seen": 1793939422.525118,
+    "ast_hash": "ec30a670a374dc005626a40f28559f15",
+    "semantic_hash": ""
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/pages/Explorador.tsx": {
-    "mtime": 1789345568.2901492,
-    "seen": 1790018782.0913212,
-    "ast_hash": "bda4d5bb9e2fe0f291b65f46d7fd8bdd",
-    "semantic_hash": "bda4d5bb9e2fe0f291b65f46d7fd8bdd"
+    "mtime": 1792084521.577616,
+    "seen": 1793939422.525118,
+    "ast_hash": "da5e019db37f9a5929ab6bc5ba894db0",
+    "semantic_hash": ""
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/pages/Glosario.tsx": {
-    "mtime": 1789612972.4658647,
-    "seen": 1790018782.0913212,
-    "ast_hash": "4a7a5878318551e70e228fecae831419",
-    "semantic_hash": "4a7a5878318551e70e228fecae831419"
+    "mtime": 1792085509.0166204,
+    "seen": 1793939422.525118,
+    "ast_hash": "80e7d210c953104098db52c40916b07b",
+    "semantic_hash": ""
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/pages/Home.tsx": {
-    "mtime": 1789616735.697292,
-    "seen": 1790018782.0913212,
-    "ast_hash": "aeafe31349f0a1dd8e337c3b4eddcce1",
-    "semantic_hash": "aeafe31349f0a1dd8e337c3b4eddcce1"
+    "mtime": 1792085868.476504,
+    "seen": 1793939422.525118,
+    "ast_hash": "9c163ab8d587866f4bff7f3679799f65",
+    "semantic_hash": ""
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/pages/Lopo.tsx": {
-    "mtime": 1789614644.7218006,
-    "seen": 1790018782.0913212,
-    "ast_hash": "302c1aa9d9f976510c05c96e37b06893",
-    "semantic_hash": "302c1aa9d9f976510c05c96e37b06893"
+    "mtime": 1792089329.4998386,
+    "seen": 1793939422.525118,
+    "ast_hash": "adc5dda56f2032e3b5142c702a6e599f",
+    "semantic_hash": ""
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/pages/Manual.tsx": {
-    "mtime": 1789614546.1367364,
-    "seen": 1790018782.0913212,
-    "ast_hash": "fcaefa82c03ae12ca8ab1048875c710f",
-    "semantic_hash": "fcaefa82c03ae12ca8ab1048875c710f"
+    "mtime": 1792082706.485926,
+    "seen": 1793939422.525118,
+    "ast_hash": "6e50064c842ebd52028ffaecb715c29a",
+    "semantic_hash": ""
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/pages/Modelos.tsx": {
-    "mtime": 1789345568.3317647,
-    "seen": 1790018782.0913212,
-    "ast_hash": "b1386cc375cf32d8f077718d94fc7f79",
-    "semantic_hash": "b1386cc375cf32d8f077718d94fc7f79"
+    "mtime": 1792082706.4880848,
+    "seen": 1793939422.525118,
+    "ast_hash": "251722dc80ab41a960900d1c210050d1",
+    "semantic_hash": ""
   },
   "FORECASTING ECG - Dashboard/ecg-react/src/store/useECGStore.ts": {
     "mtime": 1789272229.06565,
@@ -2739,6 +2739,468 @@
     "mtime": 1789679084.611528,
     "seen": 1791947958.3930817,
     "ast_hash": "0d01ee354ba34c323b388dbd987283af",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/components/experimentos/SelloGanador.tsx": {
+    "mtime": 1792081617.5784864,
+    "seen": 1793939422.525118,
+    "ast_hash": "5b01b678c8dd1a8def3b8d4a0bb8d9d0",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/src/pages/Presentacion.tsx": {
+    "mtime": 1793939144.117861,
+    "seen": 1793939422.525118,
+    "ast_hash": "f97de95c6aa884a31e08f4ce2803db1d",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/calc_persistencia_lopo.py": {
+    "mtime": 1793925430.8018272,
+    "seen": 1793939422.525118,
+    "ast_hash": "d58a8b637243cd68b4c7304f6228e429",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/exportar_word.py": {
+    "mtime": 1793925757.4259975,
+    "seen": 1793939422.525118,
+    "ast_hash": "75c5a264d74bf0e567ac20dc0c774e79",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/generar_g9_persistencia.py": {
+    "mtime": 1793925611.4683688,
+    "seen": 1793939422.525118,
+    "ast_hash": "00c4523ad260613e63147f4427c10b38",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/generar_graficas.py": {
+    "mtime": 1793923383.0009778,
+    "seen": 1793939422.525118,
+    "ast_hash": "a6b948279ea0908651196a27a7b4f7f2",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/persistencia_lopo.json": {
+    "mtime": 1793925484.1199558,
+    "seen": 1793939422.525118,
+    "ast_hash": "6e527eed6e676d7f3865732f35a75b9c",
+    "semantic_hash": ""
+  },
+  "FORECASTING ECG - Dashboard/ecg-react/public/presentacion/index.html": {
+    "mtime": 1794008477.4037933,
+    "seen": 1794016408.479357,
+    "ast_hash": "21f5ddcbf042b0b221c0a1324dda65f5",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/presentacion/Para_el_asesor/LEAME_PRIMERO.txt": {
+    "mtime": 1793938764.088012,
+    "seen": 1793939422.525118,
+    "ast_hash": "95bb6032fd8b7e3fa42cce7b26386243",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/presentacion/Para_el_asesor/Sustentacion_ECG.html": {
+    "mtime": 1794008684.725177,
+    "seen": 1794016408.479357,
+    "ast_hash": "21f5ddcbf042b0b221c0a1324dda65f5",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/presentacion/Sustentacion_ECG.html": {
+    "mtime": 1794008477.3833692,
+    "seen": 1794016408.479357,
+    "ast_hash": "21f5ddcbf042b0b221c0a1324dda65f5",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Anexo9_certificado_1.jpeg": {
+    "mtime": 1793923212.081425,
+    "seen": 1793939422.525118,
+    "ast_hash": "e2f18a3b2270a829ea1ab0da631c3ad9",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Anexo9_certificado_2.png": {
+    "mtime": 1793923212.0839303,
+    "seen": 1793939422.525118,
+    "ast_hash": "9739ed2a46a5714a3538966d76bbd70f",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Anexo9_certificado_3.png": {
+    "mtime": 1793923212.0889413,
+    "seen": 1793939422.525118,
+    "ast_hash": "f8fa18ded9a04b90116ef12e6690025f",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Anexo9_certificado_4.png": {
+    "mtime": 1793923212.091943,
+    "seen": 1793939422.525118,
+    "ast_hash": "3fce85c7b850acca1faeeb6cb49d2bf9",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Anexo9_certificado_5.png": {
+    "mtime": 1793923212.1059508,
+    "seen": 1793939422.525118,
+    "ast_hash": "4d9ddf5554c742e9bc39cb9ea5645dc4",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Anexo9_certificado_6.png": {
+    "mtime": 1793923212.1129522,
+    "seen": 1793939422.525118,
+    "ast_hash": "2fc4a2916aca77e9833536119fa4216e",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Anexo9_certificado_7.png": {
+    "mtime": 1793923212.1159625,
+    "seen": 1793939422.525118,
+    "ast_hash": "d92781c6b060f8d20d69895f5cb90445",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Anexo9_certificado_8.png": {
+    "mtime": 1793923212.119549,
+    "seen": 1793939422.525118,
+    "ast_hash": "d99f7695ac558e43c63817bbec50bde4",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig01_elementos_del_electrocardiograma.png": {
+    "mtime": 1793923211.9280157,
+    "seen": 1793939422.525118,
+    "ast_hash": "98f1a8a60f8c6af506a40802e4016473",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig02_derivaciones_perifericas_del_electrocardiograma_de.png": {
+    "mtime": 1793923211.949023,
+    "seen": 1793939422.525118,
+    "ast_hash": "eb6ca2dcd6da79d31624f2779727505d",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig03_derivaciones_precordiales.png": {
+    "mtime": 1793923211.962133,
+    "seen": 1793939422.525118,
+    "ast_hash": "e1fb32c1919316f2a080871f5f38df0e",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig04_anatomia_del_corazon.png": {
+    "mtime": 1793923211.9671438,
+    "seen": 1793939422.525118,
+    "ast_hash": "bc8ac58cf5b93c934fba18f3c3cd7d79",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig05_comparacion_entre_neurona_biologica_y_neurona_arti.png": {
+    "mtime": 1793923211.977139,
+    "seen": 1793939422.525118,
+    "ast_hash": "7773e3abc2161fa795c9f8b4d41a1f46",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig06_arquitectura_basica_de_rnn.png": {
+    "mtime": 1793923211.981464,
+    "seen": 1793939422.525118,
+    "ast_hash": "a94ea88bf56c445048c53a8455b27e2b",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig07_estructura_de_celda_memoria_lstm_con_compuertas_de.png": {
+    "mtime": 1793923211.9834657,
+    "seen": 1793939422.525118,
+    "ast_hash": "b74e45fd0fe7672ffeb91ef7f7d16936",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig08_diagrama_de_la_celda_gru_mostrando_puertas_de_rese.png": {
+    "mtime": 1793923211.9859753,
+    "seen": 1793939422.525118,
+    "ast_hash": "9db0633844604081753e262fd7df90a8",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig09_la_arquitectura_de_la_cnn_1d_para_clasificacion.png": {
+    "mtime": 1793923211.9879851,
+    "seen": 1793939422.525118,
+    "ast_hash": "dea69318fcbd45acac846085d1ab49c8",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig10_representacion_del_error_cuadratico_medio.png": {
+    "mtime": 1793923211.9899843,
+    "seen": 1793939422.525118,
+    "ast_hash": "a8954dfd933813dd5dd94af7915d7220",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig11_interpretacion_del_coeficiente_de_determinacion.png": {
+    "mtime": 1793923211.9929852,
+    "seen": 1793939422.525118,
+    "ast_hash": "f80b91d1b385eee12d40963b2cb5e5ed",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig12_algoritmo_dtw_para_las_senales_a_y_b_marcadas_con.png": {
+    "mtime": 1793923211.994985,
+    "seen": 1793939422.525118,
+    "ast_hash": "76eb68b2a8a80189383a21465c7bfeb0",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig13_busqueda_en_cuadricula_izquierda_y_busqueda_aleato.png": {
+    "mtime": 1793923211.995985,
+    "seen": 1793939422.525118,
+    "ast_hash": "5b2d31f5f90cc2d27369d316abf03b36",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig14_senal_ecg_con_el_area_de_interes_del_complejo_qrs.png": {
+    "mtime": 1793923211.9979854,
+    "seen": 1793939422.525118,
+    "ast_hash": "61ee651d78da05860599110be9458dd3",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig15_calculo_del_mse_y_de_la_dtw_entre_dos_latidos_cons.png": {
+    "mtime": 1793923212.0009944,
+    "seen": 1793939422.525118,
+    "ast_hash": "40ca0a7925bdcb2e460a804fb1bea1fa",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig16_componentes_e_intervalos_basicos_de_un_electrocard.png": {
+    "mtime": 1793923212.0029962,
+    "seen": 1793939422.525118,
+    "ast_hash": "f821dfdbb9e962a34ad3dc23b56ef8b5",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig17_normalizacion_z_score_de_un_latido_de_256_muestras.png": {
+    "mtime": 1793923212.006996,
+    "seen": 1793939422.525118,
+    "ast_hash": "a5a498468fcd004181f1be75eb738994",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig18_segmentacion_de_la_senal_en_latidos_de_256_muestra.png": {
+    "mtime": 1793923212.0089953,
+    "seen": 1793939422.525118,
+    "ast_hash": "88f53e9a0575a97f9a987dc353721f20",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig19_a_arquitectura_del_modelo_cnn_lstm_b_arquitectura.png": {
+    "mtime": 1793923212.01,
+    "seen": 1793939422.525118,
+    "ast_hash": "6b4273552190faa37f58eb07c1cd3269",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig20_arquitectura_general_del_sistema_de_prediccion_de.png": {
+    "mtime": 1793923212.0129952,
+    "seen": 1793939422.525118,
+    "ast_hash": "9283d218f3000f138e632262cbd46ca7",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig21_metodologia_crisp_dm_aplicada_al_proyecto_de_inves.png": {
+    "mtime": 1793923212.0149975,
+    "seen": 1793939422.525118,
+    "ast_hash": "98c1d18d943ff13e33fc5db7c4d13e8a",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig22_protocolo_de_busqueda_y_seleccion_de_la_literatura.png": {
+    "mtime": 1793923212.020842,
+    "seen": 1793939422.525118,
+    "ast_hash": "48ca31a577f903080cdc96df5fcffc7f",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig23_comparacion_grafica_entre_la_ventana_temporal_fija.png": {
+    "mtime": 1793923212.028365,
+    "seen": 1793939422.525118,
+    "ast_hash": "c877016e8ffbcd6d75aa0f0fb4b412bd",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig24_entorno_tecnologico_del_proyecto_capas_del_stack.png": {
+    "mtime": 1793923212.030357,
+    "seen": 1793939422.525118,
+    "ast_hash": "8823548376a11f987a43e3e76b65aef0",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig25_diagramas_de_caja_del_coeficiente_de_determinacion.png": {
+    "mtime": 1793923212.0333571,
+    "seen": 1793939422.525118,
+    "ast_hash": "2d58d13403c95e9e004c3cf35f341108",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig26_mapa_de_calor_del_coeficiente_de_determinacion_med.png": {
+    "mtime": 1793923212.0353582,
+    "seen": 1793939422.525118,
+    "ast_hash": "edc615e34ac345f36a5bf41a857c38f4",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig27_comparacion_global_entre_modelos_tradicionales_y_a.png": {
+    "mtime": 1793923212.039363,
+    "seen": 1793939422.525118,
+    "ast_hash": "70b2ffb67b860616311f81c41e783689",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig28_mapa_de_calor_del_coeficiente_de_determinacion_en.gif": {
+    "mtime": 1793923212.0423627,
+    "seen": 1793939422.525118,
+    "ast_hash": "ac2889bd4ceb31508fefb9fb99b473b8",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig29_diagrama_de_arquitectura_de_la_red_neuronal_convol.png": {
+    "mtime": 1793923212.0443635,
+    "seen": 1793939422.525118,
+    "ast_hash": "47350c57ca3c4d2fc3581e523177defe",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig30_senal_electrocardiografica_del_registro_100_de_mit.gif": {
+    "mtime": 1793923212.0463655,
+    "seen": 1793939422.525118,
+    "ast_hash": "e01c209d159a938eb2f009f0d94676dd",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig31_coeficiente_de_determinacion_por_paciente_del_mode.png": {
+    "mtime": 1793923212.0503619,
+    "seen": 1793939422.525118,
+    "ast_hash": "78bec2095a9fcf9e7180ff1409e83f6f",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig32_ejemplo_de_prediccion_multi_step_del_modelo_cnn_gr.png": {
+    "mtime": 1793923212.0538743,
+    "seen": 1793939422.525118,
+    "ast_hash": "e9e14f7ad5e96644b552db16feda203c",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig33_diagramas_de_caja_del_error_cuadratico_medio_izqui.png": {
+    "mtime": 1793923212.0558765,
+    "seen": 1793939422.525118,
+    "ast_hash": "ac5e16f3288e24bd74749f5a029add93",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig34_curva_de_precision_exhaustividad_del_error_de_pred.png": {
+    "mtime": 1793923212.0588741,
+    "seen": 1793939422.525118,
+    "ast_hash": "ab17f9001ccdb1eb1113f4fb3cbe3cd4",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/figuras_tesis/Fig35_vista_de_prediccion_lopo_del_prototipo_desplegado.png": {
+    "mtime": 1793923212.069885,
+    "seen": 1793939422.525118,
+    "ast_hash": "c3d56244931ac28f02f7d751702b7c4e",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/graficas_nuevas/G1_evolucion_r2_por_fase.png": {
+    "mtime": 1793923384.926192,
+    "seen": 1793939422.525118,
+    "ast_hash": "8da97ee94dd898b1e40898a37b3b550a",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/graficas_nuevas/G2_formulacion_ventana_vs_latido.png": {
+    "mtime": 1793923385.1337452,
+    "seen": 1793939422.525118,
+    "ast_hash": "a99144f54b4567992261d89e43b586aa",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/graficas_nuevas/G3_filtro_mediana_persistencia.png": {
+    "mtime": 1793923385.3397512,
+    "seen": 1793939422.525118,
+    "ast_hash": "92cc918d6f049f085d496cfaa0a6d4a0",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/graficas_nuevas/G4_colapso_intra_paciente.png": {
+    "mtime": 1793923385.5452201,
+    "seen": 1793939422.525118,
+    "ast_hash": "26aa57cefa2861e5bd016c2dbc72c02e",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/graficas_nuevas/G5_modelo_final_por_base.png": {
+    "mtime": 1793923385.7444358,
+    "seen": 1793939422.525118,
+    "ast_hash": "125fb33e8a7d70d368d0f753ea6b5a81",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/graficas_nuevas/G6_error_por_clase_aami.png": {
+    "mtime": 1793923385.975277,
+    "seen": 1793939422.525118,
+    "ast_hash": "c30b35e3cbe146e86d04e3e2ef814af9",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/graficas_nuevas/G7_protocolo_lopo.png": {
+    "mtime": 1793923386.1475537,
+    "seen": 1793939422.525118,
+    "ast_hash": "6698c285f964929e9d828c9930272d70",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/graficas_nuevas/G8_cadena_modelo_final.png": {
+    "mtime": 1793923386.2996497,
+    "seen": 1793939422.525118,
+    "ast_hash": "19b0e4ca92fdf406e66d0a9ae22490b9",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/graficas_nuevas/G9_persistencia_vs_modelo_lopo.png": {
+    "mtime": 1793925614.1504345,
+    "seen": 1793939422.525118,
+    "ast_hash": "250cd04262a1fa0923abf306f7a8810d",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/presentacion/assets/cert1.jpg": {
+    "mtime": 1793931144.2787952,
+    "seen": 1793939422.525118,
+    "ast_hash": "c0fa0775ae70961febf19f20bc44919a",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/presentacion/assets/cert2.jpg": {
+    "mtime": 1793931144.286795,
+    "seen": 1793939422.525118,
+    "ast_hash": "980fd0acb9c7947e869439bc6fb5a251",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/presentacion/assets/cert3.jpg": {
+    "mtime": 1793931144.2949345,
+    "seen": 1793939422.525118,
+    "ast_hash": "4a702a41e4a4c121a7619f19ca6df2e7",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/presentacion/assets/cert4.jpg": {
+    "mtime": 1793931144.3029344,
+    "seen": 1793939422.525118,
+    "ast_hash": "2586f5f30079479511eb152a1e5692b2",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/presentacion/assets/cert5.jpg": {
+    "mtime": 1793931144.3327613,
+    "seen": 1793939422.525118,
+    "ast_hash": "b02daadd916a40c55fd942b0d0f58a2d",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/presentacion/assets/cert6.jpg": {
+    "mtime": 1793931144.3681786,
+    "seen": 1793939422.525118,
+    "ast_hash": "138f1747ca1d70f015de31c4da77587f",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/presentacion/assets/cert7.jpg": {
+    "mtime": 1793931144.3794858,
+    "seen": 1793939422.525118,
+    "ast_hash": "97b9262d4332d835fef7e78c4d019523",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/presentacion/assets/cert8.jpg": {
+    "mtime": 1793931144.3897347,
+    "seen": 1793939422.525118,
+    "ast_hash": "b3a237bf9e8e081996331509a7efda09",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/presentacion/assets/cesmag.png": {
+    "mtime": 1793931144.1640248,
+    "seen": 1793939422.525118,
+    "ast_hash": "7610b4c4c277a2edb7a58820ad02a450",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/presentacion/assets/foto_dario.jpg": {
+    "mtime": 1793937685.2035725,
+    "seen": 1793939422.525118,
+    "ast_hash": "8d854a001da537cd12db198c67a66288",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/presentacion/assets/foto_darwin.jpg": {
+    "mtime": 1793937685.1754012,
+    "seen": 1793939422.525118,
+    "ast_hash": "6e8f7051ec8a840ae7ad1881dde5428c",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/presentacion/assets/foto_hector.jpg": {
+    "mtime": 1793934941.8575401,
+    "seen": 1793939422.525118,
+    "ast_hash": "305804c8bae81be38311eac9b233f18f",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/presentacion/assets/prototipo.jpg": {
+    "mtime": 1793931144.234678,
+    "seen": 1793939422.525118,
+    "ast_hash": "a618455270a68b1b6f01911a0208c2e5",
+    "semantic_hash": ""
+  },
+  "SUSTENTACION/historico/graphify_labels_es_2026-11-06.json": {
+    "mtime": 1794016390.8354013,
+    "seen": 1794016408.479357,
+    "ast_hash": "73d6ada900aac16f1a5f4c8607bf96eb",
     "semantic_hash": ""
   }
 }
