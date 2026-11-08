@@ -27,6 +27,7 @@
   <a href="#resultados"><b>Resultados</b></a> &nbsp;·&nbsp;
   <a href="#arquitectura"><b>Arquitectura</b></a> &nbsp;·&nbsp;
   <a href="#instalacion"><b>Instalación</b></a> &nbsp;·&nbsp;
+  <a href="#citar"><b>Cómo citar</b></a> &nbsp;·&nbsp;
   <a href="#licencia"><b>Licencia</b></a>
 </p>
 
@@ -359,6 +360,29 @@ pytest tests/
 ```
 
 Cubren el preprocesamiento de señal, la segmentación de latidos, la carga del modelo y las rutas del servicio.
+
+---
+
+<a id="citar"></a>
+
+## <img src="./assets/icons/citar.svg" width="20" align="top" alt=""> Cómo citar
+
+Si este trabajo le resulta útil en una investigación, cítelo con los datos siguientes. GitHub ofrece la misma cita en el botón **Cite this repository** de la columna lateral, generado a partir de [`CITATION.cff`](CITATION.cff).
+
+> Burbano Guerrero, D. D. y Gómez Ordóñez, D. E. (2026). *FORECASTING-ECG: previsión de la morfología de la señal de electrocardiograma con aprendizaje profundo* (versión 1.0) [Software]. Trabajo de grado, Universidad CESMAG. <https://github.com/EvoShell/FORECASTING-ECG>
+
+```bibtex
+@software{burbano_gomez_2026_forecasting_ecg,
+  author  = {Burbano Guerrero, Darwin David and Gómez Ordóñez, Darío Esteban},
+  title   = {{FORECASTING-ECG}: previsión de la morfología de la señal de electrocardiograma con aprendizaje profundo},
+  year    = {2026},
+  version = {1.0},
+  note    = {Trabajo de grado, Universidad CESMAG},
+  url     = {https://github.com/EvoShell/FORECASTING-ECG}
+}
+```
+
+Si usa las señales, cite también las fuentes de PhysioNet que se indican en el [apartado de licencia](#licencia).
 
 ---
 

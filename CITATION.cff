@@ -1,0 +1,52 @@
+cff-version: 1.2.0
+message: "Si usa este trabajo, cítelo con los datos de este archivo."
+type: software
+title: "FORECASTING-ECG: previsión de la morfología de la señal de electrocardiograma con aprendizaje profundo"
+abstract: >-
+  Sistema de investigación y tablero interactivo de un trabajo de grado que
+  aborda la previsión de la forma de onda de los latidos siguientes de un
+  electrocardiograma a partir del historial de cinco latidos y del intervalo RR,
+  con un modelo CNN-GRU con atención temporal validado dejando fuera un paciente
+  sobre 123 registros de las bases MIT-BIH e INCART.
+authors:
+  - family-names: "Burbano Guerrero"
+    given-names: "Darwin David"
+    affiliation: "Universidad CESMAG"
+  - family-names: "Gómez Ordóñez"
+    given-names: "Darío Esteban"
+    affiliation: "Universidad CESMAG"
+version: "1.0"
+date-released: 2026-09-17
+repository-code: "https://github.com/EvoShell/FORECASTING-ECG"
+url: "https://ecg-forecasting.vercel.app"
+keywords:
+  - electrocardiograma
+  - ECG
+  - previsión de series temporales
+  - aprendizaje profundo
+  - CNN-GRU
+  - atención temporal
+  - MIT-BIH
+  - INCART
+  - PhysioNet
+  - arritmias
+references:
+  - type: article
+    title: "The impact of the MIT-BIH Arrhythmia Database"
+    authors:
+      - family-names: "Moody"
+        given-names: "George B."
+      - family-names: "Mark"
+        given-names: "Roger G."
+    journal: "IEEE Engineering in Medicine and Biology"
+    volume: 20
+    issue: 3
+    start: 45
+    end: 50
+    year: 2001
+  - type: database
+    title: "MIT-BIH Arrhythmia Database"
+    authors:
+      - name: "PhysioNet"
+    doi: "10.13026/C2F305"
+    url: "https://physionet.org/content/mitdb/1.0.0/"
