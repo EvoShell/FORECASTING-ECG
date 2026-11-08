@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-label="Resultados de la validación LOPO sobre 123 registros, modelo base frente a calibrado: Coeficiente R² 0.6734 frente a 0.6797; Correlación de forma 0.8383 frente a 0.8429; Pliegues con R² ≥ 0.80 42.3% frente a 43.1%; RMSE 0.5139 frente a 0.5085; Deformación dinámica (DTW) 0.1355 frente a 0.1326. Residuo como indicador de evento: AUC-PR 0.3808 frente a una prevalencia de 0.1222, ganancia de 3.12 veces; precisión mediana entre pacientes 0.3123.">
+<defs>
+<linearGradient id="fondor" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#060914"/><stop offset="1" stop-color="#0E1430"/>
+</linearGradient>
+<linearGradient id="border" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1200" y2="0">
+  <stop offset="0" stop-color="#22D3EE"/><stop offset=".5" stop-color="#8B5CF6"/><stop offset="1" stop-color="#F43F5E"/>
+  <animateTransform attributeName="gradientTransform" type="rotate" values="0 600.0 220.0;360 600.0 220.0" dur="10s" repeatCount="indefinite"/>
+</linearGradient>
+<pattern id="puntosr" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#24305A"/></pattern>
+<linearGradient id="barraCal" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#22D3EE"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient>
+<linearGradient id="barraAuc" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#8B5CF6"/><stop offset="1" stop-color="#F43F5E"/></linearGradient></defs>
+
+<rect x="1" y="1" width="1198" height="438" rx="18" fill="url(#fondor)"/>
+<rect x="1" y="1" width="1198" height="438" rx="18" fill="url(#puntosr)" opacity=".55"/>
+<rect x="1" y="1" width="1198" height="438" rx="18" fill="none" stroke="url(#border)" stroke-width="1.5" opacity=".8"/>
+<text x="32" y="48" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="20" font-weight="800" fill="#E6EDF7">Validación dejando fuera un paciente</text>
+<text x="32" y="72" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12.5" fill="#94A3B8">123 registros · 48 MIT-BIH + 75 INCART · results/NB5/resultados_lopo.csv</text>
+<rect x="520" y="36" width="14" height="8" rx="2" fill="#475569"/><text x="542" y="44" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12" fill="#94A3B8">modelo base</text>
+<rect x="640" y="36" width="14" height="8" rx="2" fill="url(#barraCal)"/><text x="662" y="44" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12" fill="#E6EDF7">modelo calibrado</text>
+<text x="32" y="118" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14.5" font-weight="600" fill="#E6EDF7">Coeficiente R²</text>
+<text x="32" y="138" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="11" fill="#34D399">↑ mayor es mejor</text>
+<rect x="262" y="108" width="380" height="11" rx="5.5" fill="#111A3A"/>
+<rect x="262" y="108" width="0" height="11" rx="5.5" fill="#475569">
+  <animate attributeName="width" values="0;255.9" begin="0.30s" dur="1s" fill="freeze" calcMode="spline" keySplines=".2 .7 .2 1"/>
+</rect>
+<text x="654" y="118" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12" font-weight="400" fill="#94A3B8">0.6734</text>
+<rect x="262" y="124" width="380" height="11" rx="5.5" fill="#111A3A"/>
+<rect x="262" y="124" width="0" height="11" rx="5.5" fill="url(#barraCal)">
+  <animate attributeName="width" values="0;258.3" begin="0.40s" dur="1s" fill="freeze" calcMode="spline" keySplines=".2 .7 .2 1"/>
+</rect>
+<text x="654" y="134" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12" font-weight="700" fill="#E6EDF7">0.6797</text>
+<text x="32" y="180" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14.5" font-weight="600" fill="#E6EDF7">Correlación de forma</text>
+<text x="32" y="200" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="11" fill="#34D399">↑ mayor es mejor</text>
+<rect x="262" y="170" width="380" height="11" rx="5.5" fill="#111A3A"/>
+<rect x="262" y="170" width="0" height="11" rx="5.5" fill="#475569">
+  <animate attributeName="width" values="0;318.6" begin="0.42s" dur="1s" fill="freeze" calcMode="spline" keySplines=".2 .7 .2 1"/>
+</rect>
+<text x="654" y="180" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12" font-weight="400" fill="#94A3B8">0.8383</text>
+<rect x="262" y="186" width="380" height="11" rx="5.5" fill="#111A3A"/>
+<rect x="262" y="186" width="0" height="11" rx="5.5" fill="url(#barraCal)">
+  <animate attributeName="width" values="0;320.3" begin="0.52s" dur="1s" fill="freeze" calcMode="spline" keySplines=".2 .7 .2 1"/>
+</rect>
+<text x="654" y="196" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12" font-weight="700" fill="#E6EDF7">0.8429</text>
+<text x="32" y="242" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14.5" font-weight="600" fill="#E6EDF7">Pliegues con R² ≥ 0.80</text>
+<text x="32" y="262" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="11" fill="#34D399">↑ mayor es mejor</text>
+<rect x="262" y="232" width="380" height="11" rx="5.5" fill="#111A3A"/>
+<rect x="262" y="232" width="0" height="11" rx="5.5" fill="#475569">
+  <animate attributeName="width" values="0;160.7" begin="0.54s" dur="1s" fill="freeze" calcMode="spline" keySplines=".2 .7 .2 1"/>
+</rect>
+<text x="654" y="242" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12" font-weight="400" fill="#94A3B8">42.3 %</text>
+<rect x="262" y="248" width="380" height="11" rx="5.5" fill="#111A3A"/>
+<rect x="262" y="248" width="0" height="11" rx="5.5" fill="url(#barraCal)">
+  <animate attributeName="width" values="0;163.8" begin="0.64s" dur="1s" fill="freeze" calcMode="spline" keySplines=".2 .7 .2 1"/>
+</rect>
+<text x="654" y="258" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12" font-weight="700" fill="#E6EDF7">43.1 %</text>
+<text x="32" y="304" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14.5" font-weight="600" fill="#E6EDF7">RMSE</text>
+<text x="32" y="324" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="11" fill="#FBBF24">↓ menor es mejor</text>
+<rect x="262" y="294" width="380" height="11" rx="5.5" fill="#111A3A"/>
+<rect x="262" y="294" width="0" height="11" rx="5.5" fill="#475569">
+  <animate attributeName="width" values="0;195.3" begin="0.66s" dur="1s" fill="freeze" calcMode="spline" keySplines=".2 .7 .2 1"/>
+</rect>
+<text x="654" y="304" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12" font-weight="400" fill="#94A3B8">0.5139</text>
+<rect x="262" y="310" width="380" height="11" rx="5.5" fill="#111A3A"/>
+<rect x="262" y="310" width="0" height="11" rx="5.5" fill="url(#barraCal)">
+  <animate attributeName="width" values="0;193.2" begin="0.76s" dur="1s" fill="freeze" calcMode="spline" keySplines=".2 .7 .2 1"/>
+</rect>
+<text x="654" y="320" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12" font-weight="700" fill="#E6EDF7">0.5085</text>
+<text x="32" y="366" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14.5" font-weight="600" fill="#E6EDF7">Deformación dinámica (DTW)</text>
+<text x="32" y="386" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="11" fill="#FBBF24">↓ menor es mejor</text>
+<rect x="262" y="356" width="380" height="11" rx="5.5" fill="#111A3A"/>
+<rect x="262" y="356" width="0" height="11" rx="5.5" fill="#475569">
+  <animate attributeName="width" values="0;51.5" begin="0.78s" dur="1s" fill="freeze" calcMode="spline" keySplines=".2 .7 .2 1"/>
+</rect>
+<text x="654" y="366" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12" font-weight="400" fill="#94A3B8">0.1355</text>
+<rect x="262" y="372" width="380" height="11" rx="5.5" fill="#111A3A"/>
+<rect x="262" y="372" width="0" height="11" rx="5.5" fill="url(#barraCal)">
+  <animate attributeName="width" values="0;50.4" begin="0.88s" dur="1s" fill="freeze" calcMode="spline" keySplines=".2 .7 .2 1"/>
+</rect>
+<text x="654" y="382" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12" font-weight="700" fill="#E6EDF7">0.1326</text>
+<line x1="770" y1="32" x2="770" y2="408" stroke="#1E2945"/>
+<text x="790" y="48" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="20" font-weight="800" fill="#E6EDF7">El residuo como indicador</text>
+<text x="790" y="72" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12.5" fill="#94A3B8">316 740 latidos · 38 712 ectópicos</text>
+<rect x="800" y="130" width="70" height="230" rx="10" fill="#111A3A"/>
+<rect x="800" y="360" width="70" height="0" rx="10" fill="#475569">
+  <animate attributeName="y" values="360;289.7" begin="0.6s" dur="1.1s" fill="freeze" calcMode="spline" keySplines=".2 .7 .2 1"/>
+  <animate attributeName="height" values="0;70.3" begin="0.6s" dur="1.1s" fill="freeze" calcMode="spline" keySplines=".2 .7 .2 1"/>
+</rect>
+<g opacity="0"><text x="835" y="279.7" text-anchor="middle" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="13" font-weight="700" fill="#E6EDF7">0.1222</text><animate attributeName="opacity" from="0" to="1" begin="1.6s" dur="0.5s" fill="freeze"/></g>
+<text x="835" y="384" text-anchor="middle" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12" fill="#94A3B8">prevalencia</text>
+<rect x="904" y="130" width="70" height="230" rx="10" fill="#111A3A"/>
+<rect x="904" y="360" width="70" height="0" rx="10" fill="url(#barraAuc)">
+  <animate attributeName="y" values="360;141.0" begin="0.85s" dur="1.1s" fill="freeze" calcMode="spline" keySplines=".2 .7 .2 1"/>
+  <animate attributeName="height" values="0;219.0" begin="0.85s" dur="1.1s" fill="freeze" calcMode="spline" keySplines=".2 .7 .2 1"/>
+</rect>
+<g opacity="0"><text x="939" y="131.0" text-anchor="middle" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="13" font-weight="700" fill="#E6EDF7">0.3808</text><animate attributeName="opacity" from="0" to="1" begin="1.85s" dur="0.5s" fill="freeze"/></g>
+<text x="939" y="384" text-anchor="middle" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12" fill="#94A3B8">AUC-PR</text>
+<g opacity="0">
+  <text x="1092" y="200" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="46" font-weight="800" fill="#F43F5E">3.12×</text>
+  <text x="1092" y="226" text-anchor="middle" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12" fill="#E6EDF7">ganancia sobre</text>
+  <text x="1092" y="243" text-anchor="middle" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12" fill="#E6EDF7">el azar</text>
+  <animate attributeName="opacity" from="0" to="1" begin="2.1s" dur="0.5s" fill="freeze"/>
+</g>
+<text x="790" y="394" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12" fill="#94A3B8">precisión mediana entre pacientes: <tspan fill="#FBBF24">0.3123</tspan></text>
+<text x="790" y="413" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12" fill="#94A3B8">por eso no se presenta como detector clínico</text>
+</svg>

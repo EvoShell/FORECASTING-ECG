@@ -1,21 +1,17 @@
 <p align="center">
-  <img src="./assets/header_banner.svg" alt="Predicción de arritmias cardíacas a partir de señales de electrocardiograma. Trabajo de grado, Universidad CESMAG, Ingeniería de Sistemas, 2025-2026." width="100%" style="max-width: 980px;">
+  <img src="./assets/readme/portada.svg" width="100%" alt="Predicción de arritmias cardíacas a partir de señales de electrocardiograma. Trabajo de grado, Universidad CESMAG, Ingeniería de Sistemas, 2025-2026. Monitor con señal real: el historial de cinco latidos y el intervalo RR entra al modelo CNN-GRU con atención, que prevé los tres latidos siguientes, superpuestos a la señal real.">
 </p>
 
 <p align="center">
-  <img src="./assets/ecg_animation.svg" alt="Animación: barrido de un electrocardiograma desde el historial de cinco latidos y el intervalo RR, a través del modelo CNN-GRU con atención, hacia la previsión de los tres latidos siguientes." width="100%" style="max-width: 950px;">
-</p>
-
-<p align="center">
-  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.11"></a>
-  <a href="https://www.tensorflow.org/"><img src="https://img.shields.io/badge/TensorFlow-2.15.0-FF6F00?style=flat-square&logo=tensorflow&logoColor=white" alt="TensorFlow 2.15.0"></a>
-  <a href="https://fastapi.tiangolo.com/"><img src="https://img.shields.io/badge/FastAPI-0.109.0-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI 0.109.0"></a>
-  <a href="https://react.dev/"><img src="https://img.shields.io/badge/React-19.2-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React 19.2"></a>
-  <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript 5.9"></a>
-  <a href="https://vite.dev/"><img src="https://img.shields.io/badge/Vite-8.0-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite 8.0"></a>
-  <a href="https://www.docker.com/"><img src="https://img.shields.io/badge/Docker-Compose-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker Compose"></a>
-  <a href="https://physionet.org/"><img src="https://img.shields.io/badge/PhysioNet-MIT--BIH%20%7C%20INCART-8B0000?style=flat-square" alt="PhysioNet: MIT-BIH e INCART"></a>
-  <a href="#licencia"><img src="https://img.shields.io/badge/Datos-ODC--BY%201.0-blue?style=flat-square" alt="Datos bajo ODC-BY 1.0"></a>
+  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python_3.11-0E1430?style=for-the-badge&logo=python&logoColor=4B8BBE" alt="Python 3.11"></a>
+  <a href="https://www.tensorflow.org/"><img src="https://img.shields.io/badge/TensorFlow_2.15.0-0E1430?style=for-the-badge&logo=tensorflow&logoColor=FF6F00" alt="TensorFlow 2.15.0"></a>
+  <a href="https://fastapi.tiangolo.com/"><img src="https://img.shields.io/badge/FastAPI_0.109.0-0E1430?style=for-the-badge&logo=fastapi&logoColor=05A898" alt="FastAPI 0.109.0"></a>
+  <a href="https://react.dev/"><img src="https://img.shields.io/badge/React_19.2-0E1430?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React 19.2"></a>
+  <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript_5.9-0E1430?style=for-the-badge&logo=typescript&logoColor=3178C6" alt="TypeScript 5.9"></a>
+  <a href="https://vite.dev/"><img src="https://img.shields.io/badge/Vite_8.0-0E1430?style=for-the-badge&logo=vite&logoColor=8B92FF" alt="Vite 8.0"></a>
+  <a href="https://www.docker.com/"><img src="https://img.shields.io/badge/Docker_Compose-0E1430?style=for-the-badge&logo=docker&logoColor=2496ED" alt="Docker Compose"></a>
+  <a href="https://physionet.org/"><img src="https://img.shields.io/badge/PhysioNet_%C2%B7_MIT--BIH_%2B_INCART-0E1430?style=for-the-badge" alt="PhysioNet: MIT-BIH e INCART"></a>
+  <a href="#licencia"><img src="https://img.shields.io/badge/Datos_ODC--BY_1.0-0E1430?style=for-the-badge" alt="Datos bajo ODC-BY 1.0"></a>
 </p>
 
 <p align="center">
@@ -37,10 +33,13 @@
 
 ## <img src="./assets/icons/demo.svg" width="20" align="top" alt=""> Demostración en vivo
 
-| | |
-| :--- | :--- |
-| **Tablero interactivo** | **[ecg-forecasting.vercel.app](https://ecg-forecasting.vercel.app)** |
-| **Servicio de inferencia** | [Estado del servicio](https://evoshell-api-ecg-forecasting.hf.space/api/health) · [Documentación de la API](https://evoshell-api-ecg-forecasting.hf.space/docs) |
+<p align="center">
+  <a href="https://ecg-forecasting.vercel.app"><img src="./assets/readme/btn-tablero.svg" width="32%" alt="Tablero interactivo: ecg-forecasting.vercel.app"></a>
+  <a href="https://evoshell-api-ecg-forecasting.hf.space/docs"><img src="./assets/readme/btn-api.svg" width="32%" alt="Servicio de inferencia: documentación de la API"></a>
+  <a href="https://evoshell-api-ecg-forecasting.hf.space/api/health"><img src="./assets/readme/btn-estado.svg" width="32%" alt="Servicio de inferencia: estado del servicio"></a>
+</p>
+
+<p align="center"><sub><b>Tablero interactivo:</b> <a href="https://ecg-forecasting.vercel.app">ecg-forecasting.vercel.app</a> &nbsp;·&nbsp; <b>Servicio de inferencia:</b> <a href="https://evoshell-api-ecg-forecasting.hf.space/api/health">estado del servicio</a> · <a href="https://evoshell-api-ecg-forecasting.hf.space/docs">documentación de la API</a></sub></p>
 
 El tablero recorre las ocho fases experimentales y ejecuta el modelo final sobre registros reales, latido a latido. El módulo **Predicción LOPO** pide la previsión al servicio y la superpone sobre la señal que efectivamente ocurre.
 
@@ -90,6 +89,10 @@ El tablero recorre las ocho fases experimentales y ejecuta el modelo final sobre
 Este repositorio contiene el sistema de investigación y la plataforma interactiva de un trabajo de grado sobre **previsión de la morfología de la señal de electrocardiograma**.
 
 El problema no se aborda como una clasificación posterior al evento, sino como una **tarea de previsión temporal y morfológica**: a partir del historial de $L = 5$ latidos y de la dinámica de los intervalos RR, el modelo estima la forma de onda completa de los $H \in \\{1, 2, 3\\}$ latidos siguientes.
+
+<p align="center">
+  <img src="./assets/readme/cifras.svg" width="100%" alt="Cifras principales: R² 0.6797 en validación LOPO (IC95 0.6306 – 0.7288); correlación de forma 0.8429; 123 registros evaluados (48 MIT-BIH y 75 INCART); el residuo concentra la ectopia con una ganancia de 3.12 veces sobre el azar.">
+</p>
 
 > [!IMPORTANT]
 > **Qué hace el sistema, y qué no.** El modelo **predice la morfología de la señal futura; no clasifica el evento arrítmico** ni emite diagnóstico. Su salida es la forma de onda prevista y el error entre esa previsión y la señal real.
@@ -202,6 +205,10 @@ Ambas son de acceso público en PhysioNet y se emplean **como datos de entrada**
 
 El trabajo se estructura en ocho cuadernos, en `notebooks/`:
 
+<p align="center">
+  <img src="./assets/readme/fases.svg" width="100%" alt="Línea de tiempo de las ocho fases: 1 ML clásico y persistencia, 2 arquitecturas profundas, 3 protocolo de evaluación, 4 multi-sujeto y filtrado, 5 validación LOPO, 6 modelo final CNN-GRU con atención, 7 búsqueda de hiperparámetros, 8 residuo como indicador de evento.">
+</p>
+
 | | Archivo | Enfoque |
 | :---: | :--- | :--- |
 | **1** | `01_tradicionales.ipynb` | Aprendizaje automático clásico: regresión lineal, árboles, Random Forest, SVR, MLP, ARIMA y la línea base de persistencia. |
@@ -220,6 +227,10 @@ El trabajo se estructura en ocho cuadernos, en `notebooks/`:
 ## <img src="./assets/icons/resultados.svg" width="20" align="top" alt=""> Resultados
 
 Modelo final **CNN-GRU con atención**, validado dejando fuera un paciente sobre **123 registros** (48 de MIT-BIH y 75 de INCART). Cada cifra procede de `results/NB5/resultados_lopo.csv`.
+
+<p align="center">
+  <img src="./assets/readme/resultados.svg" width="100%" alt="Gráfica de resultados: el modelo calibrado mejora al base en R² (0.6797 frente a 0.6734), correlación de forma (0.8429 frente a 0.8383), pliegues con R² de al menos 0.80 (43.1 % frente a 42.3 %), RMSE (0.5085 frente a 0.5139) y DTW (0.1326 frente a 0.1355). El residuo alcanza un AUC-PR de 0.3808 frente a una prevalencia de 0.1222, una ganancia de 3.12 veces; precisión mediana entre pacientes 0.3123.">
+</p>
 
 | Métrica | Modelo base | Modelo calibrado |
 | :--- | :---: | :---: |

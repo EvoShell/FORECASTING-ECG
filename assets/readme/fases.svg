@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="270" viewBox="0 0 1200 270" role="img" aria-label="Fases experimentales: 1. ML clásico y persistencia (01_tradicionales); 2. Arquitecturas profundas (02_deep_learning); 3. Protocolo de evaluación (03_evaluation); 4. Multi-sujeto y filtrado (04_compuesta); 5. Validación LOPO (05_cross_patient); 6. Modelo final CNN-GRU + atención (06_multistep); 7. Búsqueda de hiperparámetros (07_hiperparametros); 8. Residuo como indicador de evento (08_deteccion_evento)">
+<defs>
+<linearGradient id="fondof" x1="0" y1="0" x2="1" y2="1">
+  <stop offset="0" stop-color="#060914"/><stop offset="1" stop-color="#0E1430"/>
+</linearGradient>
+<linearGradient id="bordef" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1200" y2="0">
+  <stop offset="0" stop-color="#22D3EE"/><stop offset=".5" stop-color="#8B5CF6"/><stop offset="1" stop-color="#F43F5E"/>
+  <animateTransform attributeName="gradientTransform" type="rotate" values="0 600.0 135.0;360 600.0 135.0" dur="10s" repeatCount="indefinite"/>
+</linearGradient>
+<pattern id="puntosf" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#24305A"/></pattern><linearGradient id="gradF" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#22D3EE"/><stop offset="1" stop-color="#F43F5E"/></linearGradient></defs>
+
+<rect x="1" y="1" width="1198" height="268" rx="18" fill="url(#fondof)"/>
+<rect x="1" y="1" width="1198" height="268" rx="18" fill="url(#puntosf)" opacity=".55"/>
+<rect x="1" y="1" width="1198" height="268" rx="18" fill="none" stroke="url(#bordef)" stroke-width="1.5" opacity=".8"/>
+<text x="32" y="40" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="13" fill="#94A3B8"><tspan fill="#22D3EE">notebooks/</tspan>  ·  ocho cuadernos, de la línea base al modelo final</text>
+<line x1="96" y1="112" x2="1104" y2="112" stroke="#2A3866" stroke-width="3" stroke-linecap="round"/>
+<rect x="96" y="110.5" height="3" rx="1.5" width="0" fill="url(#gradF)">
+  <animate attributeName="width" values="0;1008;1008;0" keyTimes="0;0.55;.95;1" dur="9.0s" repeatCount="indefinite"/>
+</rect>
+<circle cx="96.0" cy="112" r="23" fill="#0B1230" stroke="#2A3866" stroke-width="2"/>
+<circle cx="96.0" cy="112" r="23" fill="#22D3EE" fill-opacity=".16" stroke="#22D3EE" stroke-width="2" opacity="0">
+  <animate attributeName="opacity" values="1;1;0" keyTimes="0;.95;1" dur="9.0s" repeatCount="indefinite"/>
+</circle>
+<text x="96.0" y="118" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="17" font-weight="800" fill="#E6EDF7">1</text>
+<text x="96.0" y="170" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#E6EDF7">ML clásico</text>
+<text x="96.0" y="189" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#E6EDF7">y persistencia</text>
+<text x="96.0" y="214" text-anchor="middle" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="10.5" fill="#94A3B8">01_tradicionales</text>
+<circle cx="240.0" cy="112" r="23" fill="#0B1230" stroke="#2A3866" stroke-width="2"/>
+<circle cx="240.0" cy="112" r="23" fill="#22D3EE" fill-opacity=".16" stroke="#22D3EE" stroke-width="2" opacity="0">
+  <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.0776;0.0986;.95;1" dur="9.0s" repeatCount="indefinite"/>
+</circle>
+<text x="240.0" y="118" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="17" font-weight="800" fill="#E6EDF7">2</text>
+<text x="240.0" y="170" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#E6EDF7">Arquitecturas</text>
+<text x="240.0" y="189" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#E6EDF7">profundas</text>
+<text x="240.0" y="214" text-anchor="middle" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="10.5" fill="#94A3B8">02_deep_learning</text>
+<circle cx="384.0" cy="112" r="23" fill="#0B1230" stroke="#2A3866" stroke-width="2"/>
+<circle cx="384.0" cy="112" r="23" fill="#22D3EE" fill-opacity=".16" stroke="#22D3EE" stroke-width="2" opacity="0">
+  <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.1561;0.1771;.95;1" dur="9.0s" repeatCount="indefinite"/>
+</circle>
+<text x="384.0" y="118" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="17" font-weight="800" fill="#E6EDF7">3</text>
+<text x="384.0" y="170" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#E6EDF7">Protocolo de</text>
+<text x="384.0" y="189" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#E6EDF7">evaluación</text>
+<text x="384.0" y="214" text-anchor="middle" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="10.5" fill="#94A3B8">03_evaluation</text>
+<circle cx="528.0" cy="112" r="23" fill="#0B1230" stroke="#2A3866" stroke-width="2"/>
+<circle cx="528.0" cy="112" r="23" fill="#22D3EE" fill-opacity=".16" stroke="#22D3EE" stroke-width="2" opacity="0">
+  <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.2347;0.2557;.95;1" dur="9.0s" repeatCount="indefinite"/>
+</circle>
+<text x="528.0" y="118" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="17" font-weight="800" fill="#E6EDF7">4</text>
+<text x="528.0" y="170" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#E6EDF7">Multi-sujeto</text>
+<text x="528.0" y="189" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#E6EDF7">y filtrado</text>
+<text x="528.0" y="214" text-anchor="middle" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="10.5" fill="#94A3B8">04_compuesta</text>
+<circle cx="672.0" cy="112" r="23" fill="#0B1230" stroke="#2A3866" stroke-width="2"/>
+<circle cx="672.0" cy="112" r="23" fill="#22D3EE" fill-opacity=".16" stroke="#22D3EE" stroke-width="2" opacity="0">
+  <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.3133;0.3343;.95;1" dur="9.0s" repeatCount="indefinite"/>
+</circle>
+<text x="672.0" y="118" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="17" font-weight="800" fill="#E6EDF7">5</text>
+<text x="672.0" y="170" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#E6EDF7">Validación</text>
+<text x="672.0" y="189" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#E6EDF7">LOPO</text>
+<text x="672.0" y="214" text-anchor="middle" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="10.5" fill="#94A3B8">05_cross_patient</text>
+<circle cx="816.0" cy="112" r="23" fill="#0B1230" stroke="#2A3866" stroke-width="2"/>
+<circle cx="816.0" cy="112" r="23" fill="#F43F5E" fill-opacity=".16" stroke="#F43F5E" stroke-width="2" opacity="0">
+  <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.3919;0.4129;.95;1" dur="9.0s" repeatCount="indefinite"/>
+</circle>
+<text x="816.0" y="118" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="17" font-weight="800" fill="#E6EDF7">6</text>
+<text x="816.0" y="170" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#E6EDF7">Modelo final</text>
+<text x="816.0" y="189" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#E6EDF7">CNN-GRU + atención</text>
+<text x="816.0" y="214" text-anchor="middle" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="10.5" fill="#94A3B8">06_multistep</text>
+<rect x="756.5" y="48" width="119.0" height="26" rx="13" fill="#F43F5E" fill-opacity=".1" stroke="#F43F5E" stroke-opacity=".5"/><text x="769.5" y="65.5" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="11.5" font-weight="700" letter-spacing=".8" fill="#F43F5E">MODELO FINAL</text>
+<circle cx="816.0" cy="112" r="23" fill="none" stroke="#F43F5E">
+  <animate attributeName="r" values="23;36" dur="1.8s" repeatCount="indefinite"/><animate attributeName="opacity" values=".7;0" dur="1.8s" repeatCount="indefinite"/>
+</circle>
+<circle cx="960.0" cy="112" r="23" fill="#0B1230" stroke="#2A3866" stroke-width="2"/>
+<circle cx="960.0" cy="112" r="23" fill="#22D3EE" fill-opacity=".16" stroke="#22D3EE" stroke-width="2" opacity="0">
+  <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.4704;0.4914;.95;1" dur="9.0s" repeatCount="indefinite"/>
+</circle>
+<text x="960.0" y="118" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="17" font-weight="800" fill="#E6EDF7">7</text>
+<text x="960.0" y="170" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#E6EDF7">Búsqueda de</text>
+<text x="960.0" y="189" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#E6EDF7">hiperparámetros</text>
+<text x="960.0" y="214" text-anchor="middle" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="10.5" fill="#94A3B8">07_hiperparametros</text>
+<circle cx="1104.0" cy="112" r="23" fill="#0B1230" stroke="#2A3866" stroke-width="2"/>
+<circle cx="1104.0" cy="112" r="23" fill="#22D3EE" fill-opacity=".16" stroke="#22D3EE" stroke-width="2" opacity="0">
+  <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5490;0.5700;.95;1" dur="9.0s" repeatCount="indefinite"/>
+</circle>
+<text x="1104.0" y="118" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="17" font-weight="800" fill="#E6EDF7">8</text>
+<text x="1104.0" y="170" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#E6EDF7">Residuo como</text>
+<text x="1104.0" y="189" text-anchor="middle" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="14" font-weight="700" fill="#E6EDF7">indicador de evento</text>
+<text x="1104.0" y="214" text-anchor="middle" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="10.5" fill="#94A3B8">08_deteccion_evento</text>
+</svg>

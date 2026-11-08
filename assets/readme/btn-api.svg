@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="270" height="76" viewBox="0 0 270 76" role="img" aria-label="API de inferencia: documentación · /docs">
+<defs>
+<linearGradient id="bb" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="270" y2="0">
+  <stop offset="0" stop-color="#05A898"/><stop offset=".5" stop-color="#8B5CF6"/><stop offset="1" stop-color="#22D3EE"/>
+  <animateTransform attributeName="gradientTransform" type="rotate" values="0 135.0 38.0;360 135.0 38.0" dur="6s" repeatCount="indefinite"/>
+</linearGradient></defs>
+
+<rect x="1.5" y="1.5" width="267" height="73" rx="18" fill="#0B1230"/>
+<rect x="1.5" y="1.5" width="267" height="73" rx="18" fill="#05A898" opacity=".06"/>
+<rect x="1.5" y="1.5" width="267" height="73" rx="18" fill="none" stroke="url(#bb)" stroke-width="2">
+  <animate attributeName="stroke-opacity" values=".55;1;.55" dur="2.4s" repeatCount="indefinite"/>
+</rect>
+<circle cx="36" cy="38" r="24" fill="#05A898" opacity=".12"/>
+<path transform="translate(22.0 24.0) scale(1.1667)" d="M12 .0387C5.3729.0384.0003 5.3931 0 11.9988c-.001 6.6066 5.372 11.9628 12 11.9625 6.628.0003 12.001-5.3559 12-11.9625-.0003-6.6057-5.3729-11.9604-12-11.96m-.829 5.4153h7.55l-7.5805 5.3284h5.1828L5.279 18.5436q2.9466-6.5444 5.892-13.0896" fill="#05A898"/>
+<text x="72" y="35" font-family="'Segoe UI Variable Display','Segoe UI','Inter',system-ui,-apple-system,Helvetica,Arial,sans-serif" font-size="18" font-weight="700" fill="#E6EDF7">API de inferencia</text>
+<text x="72" y="56" font-family="'Cascadia Code','JetBrains Mono','Fira Code',Consolas,'SF Mono',Menlo,monospace" font-size="12" fill="#94A3B8">documentación · /docs</text>
+</svg>
