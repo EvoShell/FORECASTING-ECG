@@ -56,8 +56,8 @@ export function PresentacionPage() {
       </h1>
       <p style={{ color: 'var(--text-sub)', maxWidth: '70ch', lineHeight: 1.6, marginBottom: '20px' }}>
         {t(
-          'Presentación animada con los datos reales del proyecto: 25 diapositivas y 4 de respaldo. Se abre en pantalla completa; se avanza con las flechas, la barra espaciadora o el puntero inalámbrico, y se sale con Esc. La presentación está en español.',
-          'Animated presentation built from the project\'s real data: 25 slides plus 4 backup slides. It opens full screen; advance with the arrow keys, the space bar or a wireless presenter, and exit with Esc. The presentation is in Spanish.',
+          'Presentación animada con los datos reales del proyecto: 27 diapositivas y 4 de respaldo. Se abre en pantalla completa; se avanza con las flechas, la barra espaciadora o el puntero inalámbrico, y se sale con Esc. La presentación está en español.',
+          'Animated presentation built from the project\'s real data: 27 slides plus 4 backup slides. It opens full screen; advance with the arrow keys, the space bar or a wireless presenter, and exit with Esc. The presentation is in Spanish.',
         )}
       </p>
 
